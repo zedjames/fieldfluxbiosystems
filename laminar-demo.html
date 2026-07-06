@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Laminarity imaging — Fieldflux Biosystems</title>
+<style>
+html,body{margin:0}
+
+  :root{
+    --bg:#0a1620; --panel:#0f2130; --panel2:#13293a; --line:#1d3446;
+    --cream:#ECE3D2; --text:#c3d0da; --muted:#8fa1ae; --faint:#5a6e7c;
+    --gold:#E7B45C; --cyan:#6FB6CE; --warn:#d98a4a;
+    --mono:ui-monospace,"SF Mono","DejaVu Sans Mono",Menlo,monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(1200px 700px at 72% -8%, #12283a 0%, rgba(18,40,58,0) 60%),
+      var(--bg);
+    color:var(--text);font-family:var(--mono);
+    -webkit-font-smoothing:antialiased;line-height:1.5;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(22px,4vw,52px) clamp(16px,4vw,40px) 64px;}
+
+  /* ---------- back bar ---------- */
+  .demo-topbar{border-bottom:1px solid var(--line);background:rgba(8,19,28,0.7);
+    position:sticky;top:0;z-index:5;backdrop-filter:blur(6px);}
+  .demo-topbar__inner{max-width:var(--maxw);margin:0 auto;padding:12px clamp(16px,4vw,40px);
+    display:flex;align-items:center;gap:12px;}
+  .demo-back{display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    color:var(--muted);font-size:.8rem;letter-spacing:.04em;transition:color .15s ease;}
+  .demo-back:hover{color:var(--cream);}
+  .demo-back svg{width:15px;height:15px;color:var(--gold);flex:0 0 auto;}
+  .demo-back b{color:var(--text);font-weight:600;}
+
+
+  /* ---------- header ---------- */
+  .eyebrow{font-size:.72rem;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin:0 0 14px;}
+  h1{font-size:clamp(1.5rem,3.4vw,2.35rem);line-height:1.12;color:var(--cream);font-weight:600;
+     letter-spacing:.01em;margin:0 0 16px;max-width:20ch;text-wrap:balance;}
+  .sub{max-width:66ch;color:var(--muted);font-size:.98rem;margin:0 0 14px;}
+  .prov{font-size:.74rem;color:var(--faint);letter-spacing:.04em;margin:0;
+    border-top:1px solid var(--line);padding-top:14px;}
+  .prov b{color:var(--muted);font-weight:600;}
+
+  /* ---------- stage ---------- */
+  .stage{display:grid;grid-template-columns:minmax(300px,0.9fr) 1.35fr;gap:clamp(16px,2.4vw,30px);
+    margin-top:clamp(26px,4vw,44px);align-items:start;}
+  @media(max-width:840px){.stage{grid-template-columns:1fr;}}
+
+  .card{background:linear-gradient(180deg,var(--panel) 0%, #0c1d2b 100%);
+    border:1px solid var(--line);border-radius:14px;padding:clamp(16px,2vw,22px);}
+  .card h2{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    margin:0 0 4px;font-weight:600;}
+  .card .hint{font-size:.73rem;color:var(--faint);margin:0 0 14px;}
+
+  #atlas{width:100%;height:auto;display:block;overflow:visible;}
+  .node{cursor:pointer;transition:transform .18s ease;}
+  .node:hover{transform:translateY(-1px);}
+  .node circle{transition:stroke .15s ease, stroke-width .15s ease;}
+  .node:focus{outline:none}
+  .node:focus circle.hit{stroke:var(--cream);stroke-width:2.2;}
+  .node.sel circle.hit{stroke:var(--cream);stroke-width:2.4;}
+  .limbLabel{fill:var(--faint);font-size:9px;letter-spacing:.18em;text-transform:uppercase;}
+  .digitLabel{fill:#0a1620;font-size:8.5px;font-weight:700;pointer-events:none;}
+  #atlas text,#spec text,#field text,#radial text{font-family:var(--mono);}
+
+  /* ---------- detail ---------- */
+  .detail{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(14px,2vw,22px);}
+  @media(max-width:560px){.detail{grid-template-columns:1fr;}}
+  .siteName{color:var(--cream);font-size:1.05rem;letter-spacing:.02em;margin:0 0 2px;text-transform:capitalize;}
+  .siteSub{font-size:.74rem;color:var(--faint);margin:0 0 16px;letter-spacing:.04em;}
+  #field{width:100%;height:auto;display:block;overflow:visible;}
+  .fieldCap{font-size:.68rem;color:var(--faint);text-align:center;margin:12px 0 0;letter-spacing:.03em;}
+
+  .stat{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    padding:9px 0;border-bottom:1px solid var(--line);}
+  .stat:last-of-type{border-bottom:0;}
+  .stat .k{font-size:.72rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;}
+  .stat .v{font-size:1rem;color:var(--cream);font-variant-numeric:tabular-nums;letter-spacing:.02em;}
+  .stat .v small{color:var(--faint);font-size:.7rem;}
+
+  .radialWrap{display:flex;gap:14px;align-items:center;margin:6px 0 18px;}
+  #radial{flex:0 0 auto;}
+  .radialLegend{font-size:.7rem;color:var(--muted);line-height:1.7;}
+  .radialLegend b{color:var(--cream);font-variant-numeric:tabular-nums;}
+  .verdict{margin-top:16px;padding:13px 15px;border-radius:10px;border:1px solid var(--line);
+    background:#0c1d2b;font-size:.9rem;line-height:1.5;}
+  .verdict .tag{display:inline-block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+    padding:2px 8px;border-radius:999px;margin-bottom:8px;font-weight:600;}
+
+  /* ---------- spectrum ---------- */
+  .spectrum{margin-top:clamp(24px,3.5vw,38px);}
+  .spectrum h2{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;}
+  .spectrum .hint{font-size:.73rem;color:var(--faint);margin:0 0 16px;}
+  #spec{width:100%;height:auto;display:block;overflow:visible;}
+
+  /* ---------- legend ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin-top:26px;
+    font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;}
+  .ramp{height:12px;width:190px;border-radius:6px;
+    background:linear-gradient(90deg,#2B4763,#3A6E8C,#4F94A6,#B98A44,#E7B45C);}
+  .legend .lg{display:flex;align-items:center;gap:8px;}
+  .foot{margin-top:22px;font-size:.7rem;color:var(--faint);line-height:1.6;max-width:70ch;}
+
+
+  /* ---------- single-site flow ---------- */
+  .singles{margin-top:clamp(24px,3.5vw,40px);}
+  .singles h2{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;}
+  .singles .hint{font-size:.73rem;color:var(--faint);margin:0 0 16px;max-width:78ch;line-height:1.5;}
+  .singleGrid{display:grid;grid-template-columns:1fr 1.22fr 1fr;gap:clamp(12px,2vw,22px);align-items:start;}
+  @media(max-width:820px){.singleGrid{grid-template-columns:1fr;}}
+  .singleCard{margin:0;}
+  .slotTag{margin:0 0 8px;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
+  .bridgeTag{margin:0 0 8px;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+  .bridgeCard canvas{border-color:#2f5468;}
+  .bridgeCard figcaption b{color:var(--gold);}
+
+  /* ---------- longitudinal day strip ---------- */
+  .longitudinal{margin-top:clamp(26px,4vw,44px);}
+  .longHead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+  .longHead h2{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0;}
+  .longToggle{display:inline-flex;gap:3px;border:1px solid var(--line);border-radius:999px;padding:3px;}
+  .longToggle button{background:none;border:0;color:var(--muted);font-family:inherit;font-size:.7rem;letter-spacing:.03em;padding:5px 13px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s;}
+  .longToggle button.on{background:var(--gold);color:#0a1620;font-weight:600;}
+  .longSub{font-size:.82rem;color:var(--muted);margin:10px 0 16px;line-height:1.5;}
+  .longSub b{color:var(--cream);text-transform:capitalize;}
+  .dayGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(12px,2vw,22px);align-items:start;}
+  @media(max-width:760px){.dayGrid{grid-template-columns:1fr;}}
+  .dayCard{margin:0;}
+  .dayTag{margin:0 0 8px;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);}
+  .dayCard canvas{display:block;width:100%;aspect-ratio:1/1;height:auto;border:1px solid var(--line);border-radius:14px;background:#07121b;}
+  .dayCard figcaption{margin-top:10px;font-size:.72rem;color:var(--muted);line-height:1.5;}
+  .dayCard figcaption b{color:var(--cream);font-weight:600;text-transform:capitalize;}
+  .longitudinal.mode-rel .daySite{display:none;}
+  .longitudinal.mode-site .dayBridge{display:none;}
+  .singleCard canvas{display:block;width:100%;aspect-ratio:1/1;height:auto;
+    border:1px solid var(--line);border-radius:14px;background:#07121b;}
+  .singleCard.flash canvas{animation:slotpulse .8s ease;}
+  @keyframes slotpulse{
+    0%{box-shadow:0 0 0 2px var(--gold),0 0 26px rgba(231,180,92,.42);}
+    100%{box-shadow:0 0 0 1px rgba(231,180,92,0);}}
+  .singleCard figcaption{margin-top:10px;font-size:.75rem;color:var(--muted);letter-spacing:.02em;line-height:1.5;}
+  .singleCard figcaption b{color:var(--cream);font-weight:600;text-transform:capitalize;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+</style>
+</head>
+<body>
+<nav class="demo-topbar" aria-label="Back to site">
+  <div class="demo-topbar__inner">
+    <a class="demo-back" href="science.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      <span><b>Fieldflux Biosystems</b> · The Science</span>
+    </a>
+  </div>
+</nav>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">DRTT · Laminarity imaging</p>
+    <p class="sub">One optical capture, read at twenty sites across the hands and feet. Each site is read as a small field of cells; laminarity asks how cleanly that field keeps its order from the center out to the edge. Pick any two sites to read them against each other — and the flow between them — then compare across three days.</p>
+    <p class="prov"><b>Day&nbsp;101</b> · 2026-07-05 · one capture · 20 sites · dorsal digit surfaces &nbsp;—&nbsp; illustrative measurement output, not a diagnosis</p>
+  </header>
+
+  <section class="singles">
+    <h2>Two sites, and the flow between them</h2>
+    <p class="hint">Click any site — a circle on the body map or a bar in the spectrum. It becomes your latest pick on the left; the one before slides right. The <b>middle</b> is the relationship between the two: a laminar flow whose color runs from one site's order to the other's, whose weave is how well their timing agrees, and whose arc is how far apart they sit on the shell. Where the two are a directly measured pair it also carries the real seam; otherwise it reads their fields against each other.</p>
+    <div class="singleGrid">
+      <figure class="singleCard" id="card-a">
+        <p class="slotTag">latest pick</p>
+        <canvas class="siteflow" id="sf-a"></canvas>
+        <figcaption id="sf-a-cap">—</figcaption>
+      </figure>
+      <figure class="singleCard bridgeCard" id="card-bridge">
+        <p class="bridgeTag">the relationship</p>
+        <canvas class="siteflow" id="bridge"></canvas>
+        <figcaption id="bridge-cap">—</figcaption>
+      </figure>
+      <figure class="singleCard" id="card-b">
+        <p class="slotTag">previous pick</p>
+        <canvas class="siteflow" id="sf-b"></canvas>
+        <figcaption id="sf-b-cap">—</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="longitudinal mode-rel" id="longStrip">
+    <div class="longHead">
+      <h2>Across three days</h2>
+      <div class="longToggle">
+        <button type="button" data-mode="rel" class="on">the relationship</button>
+        <button type="button" data-mode="siteA">latest site</button>
+        <button type="button" data-mode="siteB">previous site</button>
+      </div>
+    </div>
+    <p class="longSub" id="longSub">—</p>
+    <div class="dayGrid">
+      <figure class="dayCard"><p class="dayTag">Day 99</p><canvas class="daySite" id="site-d0"></canvas><canvas class="dayBridge" id="bridge-d0"></canvas><figcaption id="cap-d0">—</figcaption></figure>
+      <figure class="dayCard"><p class="dayTag">Day 100</p><canvas class="daySite" id="site-d1"></canvas><canvas class="dayBridge" id="bridge-d1"></canvas><figcaption id="cap-d1">—</figcaption></figure>
+      <figure class="dayCard"><p class="dayTag">Day 101 · today</p><canvas class="daySite" id="site-d2"></canvas><canvas class="dayBridge" id="bridge-d2"></canvas><figcaption id="cap-d2">—</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="card">
+      <h2>The body</h2>
+      <p class="hint">Each digit, colored by how far its field's order holds to the edge. Select one.</p>
+      <svg id="atlas" viewBox="0 0 460 430" role="group" aria-label="Body atlas of twenty digit sites"></svg>
+    </div>
+
+    <div class="card">
+      <h2>The field at one site</h2>
+      <p class="hint">Nine cells. Fill = laminar order · ring = response phase · line = direction, length = strength · dimmer = less support.</p>
+      <p class="siteName" id="siteName">—</p>
+      <p class="siteSub" id="siteSub">—</p>
+      <div class="detail">
+        <div>
+          <svg id="field" viewBox="0 0 300 300" role="img" aria-label="Three by three laminar field"></svg>
+          <p class="fieldCap">the response, cell by cell</p>
+        </div>
+        <div>
+          <div class="radialWrap">
+            <svg id="radial" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"></svg>
+            <div class="radialLegend" id="radialLegend"></div>
+          </div>
+          <div class="stat"><span class="k">Dominant axis</span><span class="v" id="s-axis">—</span></div>
+          <div class="stat"><span class="k">Field strength</span><span class="v" id="s-mag">—</span></div>
+          <div class="stat"><span class="k">Response phase</span><span class="v" id="s-phase">—</span></div>
+          <div class="stat"><span class="k">Center order</span><span class="v" id="s-center">—</span></div>
+          <div class="stat"><span class="k">Edge order</span><span class="v" id="s-outer">—</span></div>
+          <div class="stat"><span class="k">Recovery</span><span class="v" id="s-rec">—</span></div>
+          <div class="stat"><span class="k">Weakest support</span><span class="v" id="s-sup">—</span></div>
+        </div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+  </section>
+
+  <section class="spectrum">
+    <h2>Twenty sites, ordered</h2>
+    <p class="hint">The drop in laminar order from center to edge — a clean field on the left, a fracturing one on the right.</p>
+    <svg id="spec" viewBox="0 0 1120 150" role="img" aria-label="Fracture spectrum across twenty sites"></svg>
+  </section>
+
+  <div class="legend">
+    <span class="lg"><span class="ramp"></span></span>
+    <span class="lg" style="color:var(--gold)">order&nbsp;≈&nbsp;1.0</span>
+    <span class="lg">→</span>
+    <span class="lg" style="color:#4F94A6">loosening</span>
+    <span class="lg">→</span>
+    <span class="lg" style="color:#5c86a6">fracture&nbsp;≈&nbsp;0.4</span>
+    <span class="lg" style="margin-left:auto">line = direction · length = strength · ring = response phase · faint = low support</span>
+  </div>
+
+  <p class="foot">Each cell carries the full measured dimensionality at once: its laminar order (fill color), the direction of its response (line angle) and the strength of that response (line length), the response's phase (ring color), and how much support backed it (dimness). A site holding clean order reads as gold cells with long directors and rings in agreement; a fracturing one reads as cool cells with broken directors and rings scattered out of phase. Every value is read directly from the Day-101 packet — outputs of the measurement, not a diagnosis.</p>
+</div>
+
+<script>
+const DATA = [{"side":"left","limb":"foot","digit":"big","axis":"horizontal","c":0.9996,"i":0.9994,"o":0.9992,"gain":0.5,"rec":0.9989,"minSup":0.212,"meanSup":0.763,"closure":0.763,"maxMag":5513.6,"minMag":606.7,"meanPhase":168.1,"cells":[[0.9994,1,0.566,0.434,5513.6,167.2],[0.9992,1,0.706,0.294,3325.0,170.0],[0.9993,1,0.622,0.377,5218.4,167.3],[0.9996,0.532,0.289,0.711,1520.2,166.9],[0.9996,0.664,0.383,0.616,1896.9,169.8],[0.9997,0.212,0.303,0.696,606.7,168.1],[0.9994,0.875,0.571,0.429,2499.3,167.2],[0.9991,1,0.675,0.325,3443.9,169.8],[0.9988,0.586,0.664,0.335,1674.5,166.6]]},{"side":"left","limb":"foot","digit":"fourth","axis":"vertical","c":0.7717,"i":0.7136,"o":0.6983,"gain":0.339,"rec":0.6771,"minSup":0.147,"meanSup":0.628,"closure":0.458,"maxMag":888.0,"minMag":45.7,"meanPhase":76.1,"cells":[[0.8561,0.428,0.657,0.342,132.7,-153.3],[0.5399,1,0.485,0.515,567.3,177.6],[0.4057,1,0,0.999,421.2,1.4],[0.9506,0.36,0.258,0.741,111.6,172.1],[0.7717,0.339,0.279,0.72,105.2,169.4],[0.7922,0.373,0,0.999,115.8,-3.4],[0.9868,1,0.45,0.549,888.0,170.3],[0.5716,0.147,0.7,0.298,45.7,156.7],[0.5444,1,0,0.999,402.0,-5.8]]},{"side":"left","limb":"foot","digit":"little","axis":"antiDiagonal","c":0.6185,"i":0.4664,"o":0.3808,"gain":0.248,"rec":0.4945,"minSup":0.158,"meanSup":0.631,"closure":0.391,"maxMag":1488.7,"minMag":87.6,"meanPhase":65.6,"cells":[[0.121,0.158,0,0.99,87.6,-76.5],[0.3877,1,0,0.999,978.1,174.5],[0.369,1,0,0.998,927.1,-0.9],[0.4,0.285,0,0.998,158.1,-12.4],[0.6185,1,0,1.0,661.2,173.9],[0.3843,0.182,0,0.998,100.7,-7.4],[0.3495,0.544,0,0.998,301.4,-12.1],[0.6935,1,0.429,0.57,1488.7,173.5],[0.6836,0.51,0.999,0,282.5,178.1]]},{"side":"left","limb":"foot","digit":"second","axis":"horizontal","c":0.7809,"i":0.5788,"o":0.4894,"gain":0.296,"rec":0.5909,"minSup":0.108,"meanSup":0.522,"closure":0.333,"maxMag":780.7,"minMag":24.6,"meanPhase":126.7,"cells":[[0.9882,1,0.569,0.43,780.7,173.9],[0.5499,1,0.711,0.288,284.7,174.1],[0,1,0,0,593.2,-5.4],[0.9523,0.552,0.186,0.814,125.4,160.6],[0.7809,0.108,0.431,0.568,24.6,131.0],[0.1232,0.219,0.992,0,49.7,175.2],[0.9694,0.482,0.392,0.607,109.5,147.6],[0.6897,0.195,0.716,0.282,44.3,163.4],[0,0.14,0,0,31.8,20.0]]},{"side":"left","limb":"foot","digit":"third","axis":"vertical","c":0.7083,"i":0.6461,"o":0.6698,"gain":0.35,"rec":0.6988,"minSup":0.123,"meanSup":0.685,"closure":0.523,"maxMag":539.1,"minMag":33.0,"meanPhase":96.7,"cells":[[0.9918,1,0.503,0.497,522.3,177.2],[0.5757,1,0.672,0.327,539.1,173.6],[0.376,1,0,0.998,471.2,-4.7],[0.9618,1,0.222,0.778,284.3,167.5],[0.7083,0.154,0.494,0.505,41.1,141.0],[0.8664,0.209,0,0.999,55.9,-1.1],[0.6774,0.681,0.022,0.977,182.6,155.9],[0.1803,0.123,0.786,0.209,33.0,68.5],[0.6342,1,0.187,0.812,282.0,-7.2]]},{"side":"left","limb":"hand","digit":"index","axis":"vertical","c":0.809,"i":0.7463,"o":0.6902,"gain":0.347,"rec":0.6933,"minSup":0.249,"meanSup":0.79,"closure":0.574,"maxMag":1417.1,"minMag":207.4,"meanPhase":109.5,"cells":[[0.9919,1,0.615,0.385,1116.4,165.7],[0.6511,1,0.526,0.474,840.7,173.5],[0.3879,1,0,0.998,1414.1,-8.9],[0.9887,0.249,0.306,0.694,207.4,159.2],[0.809,0.786,0.22,0.779,655.7,171.9],[0.706,0.269,0,0.999,224.7,-6.6],[0.9929,0.805,0.63,0.369,671.2,164.6],[0.6395,1,0.5,0.499,1417.1,172.2],[0.3882,1,0,0.998,958.4,-6.0]]},{"side":"left","limb":"hand","digit":"middle","axis":"vertical","c":0.8184,"i":0.7524,"o":0.6892,"gain":0.351,"rec":0.7018,"minSup":0.251,"meanSup":0.801,"closure":0.584,"maxMag":1350.8,"minMag":194.1,"meanPhase":110.1,"cells":[[0.9934,1,0.61,0.389,1067.0,166.0],[0.6453,1,0.541,0.459,801.5,173.3],[0.3844,1,0,0.998,1350.8,-8.8],[0.991,0.273,0.27,0.73,210.9,160.6],[0.8184,0.684,0.218,0.782,529.4,172.3],[0.7275,0.251,0,0.999,194.1,-6.1],[0.9943,1,0.61,0.389,787.0,166.1],[0.6459,1,0.541,0.458,1190.0,172.6],[0.3847,1,0,0.998,831.3,-5.3]]},{"side":"left","limb":"hand","digit":"pinky","axis":"horizontal","c":0.9996,"i":0.9995,"o":0.9994,"gain":0.5,"rec":0.9989,"minSup":0.186,"meanSup":0.758,"closure":0.758,"maxMag":5194.9,"minMag":491.8,"meanPhase":165.2,"cells":[[0.999,1,0.567,0.433,4421.2,162.9],[0.9994,1,0.704,0.295,2907.8,166.2],[1.0,1,0.627,0.372,5194.9,166.2],[0.9995,0.525,0.284,0.715,1390.3,163.5],[0.9996,0.675,0.38,0.619,1789.5,166.8],[0.9999,0.186,0.318,0.682,491.8,165.6],[0.999,0.964,0.568,0.431,2555.0,163.7],[0.9991,1,0.672,0.328,3843.6,167.1],[0.9994,0.476,0.69,0.309,1261.3,164.8]]},{"side":"left","limb":"hand","digit":"ring","axis":"vertical","c":0.8222,"i":0.7503,"o":0.6901,"gain":0.351,"rec":0.7019,"minSup":0.253,"meanSup":0.804,"closure":0.588,"maxMag":1382.3,"minMag":187.2,"meanPhase":110.7,"cells":[[0.9947,1,0.583,0.417,839.0,165.8],[0.6478,1,0.533,0.466,744.7,173.5],[0.3848,1,0,0.998,1257.4,-7.8],[0.997,0.418,0.299,0.701,309.7,165.0],[0.8222,0.731,0.247,0.752,542.0,172.9],[0.7178,0.253,0,0.999,187.2,-5.7],[0.9959,0.835,0.592,0.407,619.0,166.4],[0.6385,1,0.513,0.487,1382.3,173.0],[0.3851,1,0,0.998,789.4,-6.4]]},{"side":"left","limb":"hand","digit":"thumb","axis":"horizontal","c":0.9996,"i":0.9992,"o":0.9987,"gain":0.5,"rec":0.9988,"minSup":0.139,"meanSup":0.752,"closure":0.751,"maxMag":4768.9,"minMag":381.6,"meanPhase":167.8,"cells":[[0.9988,1,0.555,0.445,4768.9,166.0],[0.9992,1,0.703,0.297,3348.6,169.8],[0.9998,1,0.637,0.363,4296.8,169.4],[0.9996,0.599,0.287,0.713,1642.4,166.5],[0.9996,0.689,0.385,0.615,1888.0,169.6],[0.9993,0.139,0.338,0.661,381.6,167.4],[0.9994,1,0.555,0.444,3099.8,167.0],[0.9985,1,0.663,0.336,4322.1,169.7],[0.9969,0.339,0.736,0.263,928.1,164.7]]},{"side":"right","limb":"foot","digit":"big","axis":"vertical","c":0.8569,"i":0.7619,"o":0.6608,"gain":0.37,"rec":0.7382,"minSup":0.119,"meanSup":0.749,"closure":0.584,"maxMag":1844.1,"minMag":105.6,"meanPhase":117.2,"cells":[[0.9995,1,0.562,0.438,1309.4,177.3],[0.6429,1,0.554,0.445,1007.0,176.4],[0.3558,1,0,0.998,1844.1,-2.0],[0.9995,0.561,0.274,0.725,498.1,174.8],[0.8569,0.61,0.267,0.733,541.4,172.8],[0.6981,0.119,0,0.999,105.6,5.3],[0.9999,0.971,0.562,0.437,861.8,174.7],[0.7072,1,0.55,0.449,1396.0,173.7],[0.2878,0.482,0,0.997,427.6,1.6]]},{"side":"right","limb":"foot","digit":"fourth","axis":"horizontal","c":0.9998,"i":0.9997,"o":0.9996,"gain":0.5,"rec":0.999,"minSup":0.242,"meanSup":0.786,"closure":0.785,"maxMag":5688.6,"minMag":704.5,"meanPhase":168.6,"cells":[[0.9996,1,0.566,0.433,5688.6,166.5],[0.9997,0.964,0.723,0.277,2807.5,168.5],[0.9999,1,0.612,0.387,5679.3,168.8],[0.9998,0.504,0.267,0.733,1466.3,166.7],[0.9998,0.541,0.375,0.625,1574.7,169.1],[0.9998,0.242,0.243,0.757,704.5,169.8],[0.9996,0.863,0.576,0.423,2512.9,167.0],[0.9995,1,0.712,0.288,2983.7,169.2],[0.9994,0.956,0.62,0.38,2783.9,171.4]]},{"side":"right","limb":"foot","digit":"little","axis":"vertical","c":0.8101,"i":0.7517,"o":0.713,"gain":0.356,"rec":0.7116,"minSup":0.324,"meanSup":0.737,"closure":0.569,"maxMag":1833.1,"minMag":249.3,"meanPhase":116.3,"cells":[[0.9996,1,0.582,0.418,1833.1,172.9],[0.6354,1,0.573,0.426,782.1,173.7],[0.3983,1,0,0.998,1441.0,-2.8],[0.9996,0.437,0.257,0.742,336.2,175.4],[0.8101,0.489,0.266,0.734,376.4,176.1],[0.765,0.324,0,0.999,249.3,-1.9],[0.9987,0.802,0.527,0.473,617.0,175.4],[0.6069,0.583,0.563,0.436,448.1,179.5],[0.4555,1,0,0.998,839.3,-2.0]]},{"side":"right","limb":"foot","digit":"second","axis":"horizontal","c":0.9996,"i":0.9995,"o":0.9995,"gain":0.5,"rec":0.999,"minSup":0.266,"meanSup":0.76,"closure":0.76,"maxMag":6123.3,"minMag":777.1,"meanPhase":169.3,"cells":[[0.9998,1,0.57,0.429,5345.1,168.2],[0.9999,0.949,0.718,0.281,2774.0,169.5],[0.9998,1,0.606,0.393,6123.3,169.6],[0.9995,0.466,0.279,0.72,1361.9,167.0],[0.9996,0.577,0.378,0.622,1686.9,170.0],[0.9997,0.266,0.263,0.736,777.1,171.4],[0.9984,0.755,0.589,0.411,2205.0,166.4],[0.999,1,0.694,0.306,3602.4,170.6],[1.0,0.83,0.625,0.374,2424.1,171.1]]},{"side":"right","limb":"foot","digit":"third","axis":"horizontal","c":0.9998,"i":0.9998,"o":0.9998,"gain":0.5,"rec":0.999,"minSup":0.27,"meanSup":0.79,"closure":0.79,"maxMag":5643.3,"minMag":774.0,"meanPhase":168.8,"cells":[[0.9999,1,0.55,0.449,5497.4,167.4],[0.9999,0.94,0.725,0.275,2692.9,168.6],[0.9997,1,0.604,0.395,5643.3,168.9],[0.9999,0.584,0.264,0.735,1672.8,167.2],[0.9998,0.532,0.391,0.609,1524.0,168.8],[0.9996,0.27,0.25,0.75,774.0,170.9],[0.9997,0.937,0.557,0.442,2685.3,167.5],[0.9997,0.982,0.713,0.286,2815.0,169.3],[0.9998,0.869,0.619,0.381,2489.6,170.9]]},{"side":"right","limb":"hand","digit":"index","axis":"horizontal","c":0.9995,"i":0.9995,"o":0.9995,"gain":0.5,"rec":0.999,"minSup":0.217,"meanSup":0.765,"closure":0.764,"maxMag":5469.0,"minMag":563.5,"meanPhase":168.5,"cells":[[0.9989,1,0.573,0.426,4188.6,165.9],[0.9993,1,0.706,0.293,2783.7,169.4],[1.0,1,0.621,0.378,5469.0,169.9],[0.9993,0.484,0.285,0.714,1258.6,166.0],[0.9995,0.659,0.378,0.622,1713.4,169.8],[1.0,0.217,0.297,0.702,563.5,169.6],[0.999,0.888,0.578,0.421,2310.1,166.5],[0.9994,1,0.679,0.32,3475.6,169.8],[1.0,0.634,0.657,0.342,1649.8,169.5]]},{"side":"right","limb":"hand","digit":"middle","axis":"horizontal","c":0.9995,"i":0.9994,"o":0.9992,"gain":0.5,"rec":0.9989,"minSup":0.197,"meanSup":0.741,"closure":0.74,"maxMag":5548.1,"minMag":488.6,"meanPhase":166.7,"cells":[[0.999,1,0.577,0.422,4044.2,164.4],[0.9993,1,0.703,0.297,2711.3,167.8],[0.9998,1,0.625,0.374,5548.1,168.9],[0.9993,0.459,0.29,0.709,1138.2,164.1],[0.9995,0.689,0.375,0.624,1707.7,168.2],[0.9998,0.197,0.325,0.674,488.6,168.1],[0.9987,0.877,0.583,0.416,2174.3,164.6],[0.999,1,0.662,0.337,3399.7,168.4],[0.9994,0.445,0.692,0.307,1104.4,166.3]]},{"side":"right","limb":"hand","digit":"pinky","axis":"vertical","c":0.7991,"i":0.7458,"o":0.6909,"gain":0.349,"rec":0.6965,"minSup":0.138,"meanSup":0.797,"closure":0.582,"maxMag":1257.9,"minMag":116.6,"meanPhase":110.2,"cells":[[0.986,1,0.64,0.36,928.7,167.3],[0.6478,1,0.533,0.467,844.3,175.4],[0.3941,1,0,0.998,1257.9,-7.4],[0.9707,0.138,0.271,0.728,116.6,155.4],[0.7991,0.736,0.193,0.806,619.9,173.6],[0.7149,0.301,0,0.999,253.5,-6.4],[0.9895,1,0.641,0.359,1201.8,167.3],[0.6498,1,0.534,0.465,1139.5,172.7],[0.3941,1,0,0.998,1217.4,-5.9]]},{"side":"right","limb":"hand","digit":"ring","axis":"horizontal","c":0.9992,"i":0.9992,"o":0.999,"gain":0.5,"rec":0.9989,"minSup":0.195,"meanSup":0.744,"closure":0.744,"maxMag":4660.3,"minMag":434.5,"meanPhase":166.6,"cells":[[0.9986,1,0.587,0.413,3544.8,164.2],[0.9991,1,0.697,0.303,2719.3,168.2],[0.9999,1,0.626,0.374,4660.3,168.3],[0.9989,0.404,0.308,0.691,900.0,163.8],[0.9992,0.734,0.373,0.627,1635.6,168.5],[0.9999,0.195,0.315,0.684,434.5,167.2],[0.9978,0.737,0.602,0.397,1642.5,163.5],[0.9987,1,0.659,0.341,3117.5,168.4],[0.9999,0.625,0.664,0.335,1392.9,167.2]]},{"side":"right","limb":"hand","digit":"thumb","axis":"horizontal","c":0.9996,"i":0.9992,"o":0.9989,"gain":0.5,"rec":0.9989,"minSup":0.15,"meanSup":0.741,"closure":0.74,"maxMag":4839.8,"minMag":385.2,"meanPhase":169.2,"cells":[[0.9991,1,0.569,0.43,4337.6,167.6],[0.9994,1,0.706,0.293,2943.3,170.9],[0.9997,1,0.635,0.365,4839.8,171.4],[0.9995,0.511,0.279,0.721,1312.4,167.6],[0.9996,0.659,0.373,0.627,1692.3,170.9],[0.9992,0.15,0.329,0.67,385.2,169.1],[0.9994,1,0.569,0.43,2954.1,168.5],[0.9987,1,0.668,0.332,3769.4,171.0],[0.9973,0.347,0.729,0.27,892.6,166.3]]}];
+
+/* per-site polar layout (angle°, shell radius) + the measured pairwise seams — anonymized, no atlas/family labels */
+const POLAR={"left.big":[299.2,0.618],"left.fourth":[298.2,0.696],"left.index":[89.2,0.498],"left.little":[348.9,0.697],"left.middle":[243.9,0.528],"left.pinky":[170.8,0.53],"left.ring":[244.8,0.531],"left.second":[102.3,0.662],"left.third":[298.0,0.684],"left.thumb":[88.2,0.453],"right.big":[299.2,0.618],"right.fourth":[298.2,0.696],"right.index":[89.2,0.498],"right.little":[348.9,0.697],"right.middle":[243.9,0.528],"right.pinky":[170.8,0.53],"right.ring":[244.8,0.531],"right.second":[102.3,0.662],"right.third":[298.0,0.684],"right.thumb":[88.2,0.453]};
+const SEAM={"left.third|right.third":{"o":0.651,"s":0.001,"d":0.271,"c":0.448,"src":"right.third"},"left.pinky|right.pinky":{"o":0.879,"s":0.001,"d":0.113,"c":0.41,"src":"right.pinky"},"left.second|right.second":{"o":0.88,"s":0.001,"d":0.094,"c":0.563,"src":"left.second"},"left.middle|right.middle":{"o":0.87,"s":0.01,"d":0.114,"c":0.461,"src":"left.middle"},"left.thumb|right.thumb":{"o":0.875,"s":0.46,"d":0.123,"c":0.472,"src":"right.thumb"},"left.fourth|right.fourth":{"o":0.892,"s":0.46,"d":0.091,"c":0.36,"src":"left.fourth"},"left.ring|right.ring":{"o":0.871,"s":0.46,"d":0.099,"c":0.338,"src":"left.ring"},"left.index|right.index":{"o":0.688,"s":0.46,"d":0.298,"c":0.336,"src":"right.index"},"left.big|right.big":{"o":0.881,"s":0.46,"d":0.105,"c":0.322,"src":"right.big"},"left.little|right.little":{"o":0.683,"s":0.46,"d":0.32,"c":0.26,"src":"left.little"}};
+
+/* ---- days 99 & 100 (day 101 = the DATA/POLAR/SEAM above) — same extraction, anonymized ---- */
+const DATA99=[{"side":"left","limb":"foot","digit":"big","axis":"vertical","c":0.8216,"i":0.7443,"o":0.687,"gain":0.34,"rec":0.6791,"minSup":0.2,"meanSup":0.754,"closure":0.534,"maxMag":1593.7,"minMag":177.3,"meanPhase":112.2,"cells":[[0.9994,1,0.609,0.391,1201.6,170.0],[0.6574,1,0.52,0.48,1372.1,172.5],[0.375,1,0,0.998,1593.7,-6.1],[0.9994,0.283,0.356,0.644,250.6,169.4],[0.8216,0.843,0.234,0.766,747.1,172.4],[0.6961,0.2,0,0.999,177.3,-6.6],[0.9996,0.468,0.661,0.338,414.6,171.0],[0.6245,1,0.443,0.556,1345.1,172.6],[0.374,0.989,0,0.998,877.1,-5.1]]},{"side":"left","limb":"foot","digit":"fourth","axis":"horizontal","c":0.9998,"i":0.9997,"o":0.9997,"gain":0.5,"rec":0.999,"minSup":0.241,"meanSup":0.757,"closure":0.757,"maxMag":9342.8,"minMag":880.4,"meanPhase":168.3,"cells":[[0.9995,1,0.577,0.422,5926.1,166.2],[0.9995,0.992,0.725,0.275,3619.9,168.5],[0.9997,1,0.616,0.384,9342.8,170.2],[0.9998,0.456,0.254,0.746,1664.8,166.2],[0.9998,0.517,0.372,0.628,1884.9,168.6],[0.9999,0.241,0.252,0.747,880.4,169.9],[0.9997,0.945,0.568,0.432,3446.6,166.8],[0.9997,0.898,0.712,0.287,3274.0,168.4],[0.9997,0.765,0.622,0.377,2789.2,170.1]]},{"side":"left","limb":"foot","digit":"little","axis":"vertical","c":0.6405,"i":0.4882,"o":0.4958,"gain":0.289,"rec":0.5765,"minSup":0.12,"meanSup":0.649,"closure":0.441,"maxMag":1233.0,"minMag":65.5,"meanPhase":56.0,"cells":[[0.656,0.794,0.999,0,434.0,166.0],[0.6523,1,0.471,0.529,983.3,173.3],[0.3583,1,0,0.998,1119.9,-6.8],[0.187,0.125,0,0.996,68.2,11.8],[0.6405,1,0,1.0,579.2,172.7],[0.3983,0.12,0,0.998,65.5,-10.2],[0.2578,0.352,0,0.996,192.3,3.3],[0.7153,1,0.417,0.582,1233.0,172.8],[0.7113,0.447,0.999,0,244.4,-179.1]]},{"side":"left","limb":"foot","digit":"second","axis":"horizontal","c":0.9564,"i":0.5796,"o":0.4951,"gain":0.296,"rec":0.59,"minSup":0.038,"meanSup":0.489,"closure":0.319,"maxMag":1295.5,"minMag":13.2,"meanPhase":55.5,"cells":[[0.9983,1,0.6,0.399,1295.5,170.8],[0.5931,1,0.667,0.332,407.9,174.5],[0,1,0,0,964.7,-4.8],[0.9858,0.329,0.148,0.851,115.4,168.2],[0.9564,0.038,0.222,0.777,13.2,-168.4],[0.0811,0.075,0.983,0,26.5,-173.9],[0.9821,0.278,0.572,0.427,97.7,164.3],[0.6585,0.558,0.583,0.416,195.8,178.1],[0,0.123,0,0,43.2,-9.3]]},{"side":"left","limb":"foot","digit":"third","axis":"horizontal","c":0.9998,"i":0.9997,"o":0.9996,"gain":0.5,"rec":0.999,"minSup":0.254,"meanSup":0.753,"closure":0.753,"maxMag":8864.3,"minMag":906.9,"meanPhase":168.4,"cells":[[0.9994,1,0.571,0.429,6064.8,166.2],[0.9996,1,0.73,0.269,3720.6,168.9],[0.9999,1,0.614,0.385,8864.3,169.9],[0.9998,0.502,0.261,0.739,1791.0,166.4],[0.9998,0.474,0.371,0.629,1693.3,168.6],[0.9999,0.254,0.236,0.763,906.9,170.2],[0.9995,0.763,0.573,0.426,2722.7,166.3],[0.9995,0.938,0.711,0.288,3350.3,168.7],[0.9997,0.845,0.618,0.381,3016.9,170.4]]},{"side":"left","limb":"hand","digit":"index","axis":"horizontal","c":0.9996,"i":0.9994,"o":0.9992,"gain":0.5,"rec":0.9989,"minSup":0.147,"meanSup":0.733,"closure":0.732,"maxMag":6221.8,"minMag":423.4,"meanPhase":168.2,"cells":[[0.9992,1,0.561,0.438,5632.1,166.3],[0.9994,1,0.712,0.288,2954.7,169.4],[0.9997,1,0.635,0.364,6221.8,170.8],[0.9996,0.558,0.273,0.727,1604.7,166.2],[0.9996,0.614,0.374,0.625,1765.2,169.4],[0.9996,0.147,0.326,0.673,423.4,169.4],[0.9991,1,0.561,0.438,2905.7,166.1],[0.999,1,0.669,0.33,3591.9,169.4],[0.9988,0.275,0.75,0.249,792.3,166.6]]},{"side":"left","limb":"hand","digit":"middle","axis":"vertical","c":0.77,"i":0.7431,"o":0.728,"gain":0.363,"rec":0.7259,"minSup":0.183,"meanSup":0.692,"closure":0.529,"maxMag":1204.6,"minMag":108.6,"meanPhase":68.6,"cells":[[0.9741,1,0.464,0.535,1184.8,165.5],[0.5698,0.183,0.688,0.311,108.6,-178.0],[0.5365,1,0,0.999,800.5,-12.2],[0.9871,0.324,0.199,0.801,192.2,156.4],[0.77,0.343,0.259,0.74,203.6,169.3],[0.7918,0.376,0,0.999,223.0,-8.4],[0.994,1,0.602,0.398,734.2,163.2],[0.6237,1,0.597,0.403,684.1,169.1],[0.4075,1,0,0.999,1204.6,-7.5]]},{"side":"left","limb":"hand","digit":"pinky","axis":"vertical","c":0.8004,"i":0.7512,"o":0.713,"gain":0.359,"rec":0.717,"minSup":0.323,"meanSup":0.742,"closure":0.574,"maxMag":1350.0,"minMag":241.3,"meanPhase":110.2,"cells":[[0.9908,1,0.513,0.486,1235.8,165.8],[0.6192,0.493,0.594,0.405,368.7,176.1],[0.4687,1,0,0.998,1052.4,-10.2],[0.9953,0.396,0.246,0.754,296.0,162.5],[0.8004,0.51,0.262,0.737,381.4,172.5],[0.7596,0.323,0,0.999,241.3,-6.4],[0.9943,0.952,0.589,0.41,711.3,164.5],[0.6306,1,0.561,0.438,1089.5,172.2],[0.3981,1,0,0.998,1350.0,-5.5]]},{"side":"left","limb":"hand","digit":"ring","axis":"vertical","c":0.823,"i":0.7515,"o":0.6918,"gain":0.346,"rec":0.6915,"minSup":0.255,"meanSup":0.765,"closure":0.552,"maxMag":1687.8,"minMag":233.7,"meanPhase":108.1,"cells":[[0.9955,1,0.6,0.399,1660.6,165.6],[0.6405,0.952,0.555,0.444,871.6,171.2],[0.3909,1,0,0.998,1687.8,-10.5],[0.9946,0.297,0.273,0.727,272.1,160.5],[0.823,0.602,0.219,0.78,551.2,169.8],[0.745,0.255,0,0.999,233.7,-7.9],[0.9952,0.778,0.621,0.378,711.9,162.7],[0.6259,1,0.524,0.476,1292.9,169.6],[0.3856,1,0,0.998,955.2,-7.6]]},{"side":"left","limb":"hand","digit":"thumb","axis":"vertical","c":0.8148,"i":0.7571,"o":0.712,"gain":0.361,"rec":0.7204,"minSup":0.375,"meanSup":0.776,"closure":0.596,"maxMag":1671.7,"minMag":405.2,"meanPhase":109.3,"cells":[[0.997,1,0.53,0.469,1671.7,165.9],[0.6195,0.712,0.607,0.392,769.9,171.7],[0.4449,1,0,0.999,1640.6,-10.3],[0.9984,0.506,0.228,0.771,547.2,164.2],[0.8148,0.388,0.263,0.736,419.4,169.9],[0.7824,0.375,0,0.999,405.2,-7.7],[0.9987,1,0.57,0.429,1172.2,166.8],[0.6283,1,0.59,0.41,1470.8,169.9],[0.4073,1,0,0.999,1631.2,-6.8]]},{"side":"right","limb":"foot","digit":"big","axis":"vertical","c":0.8532,"i":0.7628,"o":0.6781,"gain":0.36,"rec":0.7191,"minSup":0.206,"meanSup":0.738,"closure":0.558,"maxMag":1981.5,"minMag":199.9,"meanPhase":112.7,"cells":[[0.9987,1,0.565,0.434,1666.9,170.2],[0.6335,1,0.576,0.424,1066.3,174.0],[0.3761,1,0,0.998,1981.5,-5.9],[0.9993,0.532,0.258,0.741,516.9,169.5],[0.8532,0.469,0.254,0.746,455.5,173.6],[0.7514,0.206,0,0.999,199.9,-4.8],[0.9989,0.804,0.574,0.426,780.7,169.3],[0.667,1,0.55,0.449,1465.6,172.9],[0.3387,0.628,0,0.998,610.1,-4.4]]},{"side":"right","limb":"foot","digit":"fourth","axis":"vertical","c":0.7404,"i":0.7612,"o":0.7739,"gain":0.396,"rec":0.7908,"minSup":0.183,"meanSup":0.585,"closure":0.533,"maxMag":1373.0,"minMag":78.1,"meanPhase":93.8,"cells":[[0.9976,1,0.45,0.549,1373.0,169.7],[0.6047,0.183,0.646,0.353,78.1,175.4],[0.5542,1,0,0.999,1077.1,-5.6],[0.9983,0.438,0.264,0.736,187.2,168.1],[0.7404,0.459,0.334,0.665,196.4,173.9],[0.4459,0.471,0,0.999,201.3,-4.6],[0.9974,0.616,0.549,0.45,263.4,169.8],[0.9958,0.675,0.677,0.323,288.5,175.2],[0.5465,0.426,0.998,0,182.2,-177.5]]},{"side":"right","limb":"foot","digit":"little","axis":"vertical","c":0.8246,"i":0.7514,"o":0.7061,"gain":0.352,"rec":0.7035,"minSup":0.316,"meanSup":0.749,"closure":0.561,"maxMag":1508.4,"minMag":210.7,"meanPhase":114.9,"cells":[[0.9996,1,0.566,0.434,1508.4,172.6],[0.6337,1,0.577,0.423,722.4,174.7],[0.3969,1,0,0.998,1259.0,-3.5],[0.9996,0.532,0.266,0.733,354.8,172.2],[0.8246,0.464,0.271,0.729,309.2,175.3],[0.7714,0.316,0,0.999,210.7,-3.4],[0.999,0.678,0.541,0.458,451.6,172.7],[0.601,0.753,0.54,0.46,501.7,176.1],[0.4288,1,0,0.998,680.7,-2.8]]},{"side":"right","limb":"foot","digit":"second","axis":"diagonal","c":0.9833,"i":0.6341,"o":0.4909,"gain":0.298,"rec":0.5959,"minSup":0.046,"meanSup":0.545,"closure":0.355,"maxMag":1462.3,"minMag":25.6,"meanPhase":56.2,"cells":[[0.9938,1,0.607,0.392,1462.3,171.4],[0.6401,0.604,0.562,0.438,337.6,171.9],[0,1,0,0,1375.8,-5.1],[0.7924,0.052,0.397,0.602,29.1,161.3],[0.9833,0.646,0.313,0.687,361.3,172.8],[0.439,0.046,0.731,0.267,25.6,-163.7],[0,0.368,0,0,205.9,-2.8],[0.6648,1,0.411,0.589,1131.5,172.7],[0.9697,0.188,0.831,0.168,105.3,-172.3]]},{"side":"right","limb":"foot","digit":"third","axis":"balanced","c":0.9968,"i":0.7638,"o":0.7486,"gain":0.39,"rec":0.7786,"minSup":0.05,"meanSup":0.638,"closure":0.527,"maxMag":1532.3,"minMag":28.9,"meanPhase":114.5,"cells":[[0.9995,1,0.497,0.503,1532.3,171.1],[0.6183,0.612,0.616,0.383,357.1,173.1],[0,1,0,0,1481.8,-5.0],[0.9996,0.63,0.238,0.762,367.6,169.8],[0.9968,0.39,0.408,0.591,227.2,172.5],[0.4394,0.05,0.515,0.482,28.9,-175.5],[0.9988,1,0.511,0.489,635.1,170.6],[0.9978,0.706,0.715,0.284,412.0,174.4],[0.9962,0.354,0.723,0.275,206.5,179.4]]},{"side":"right","limb":"hand","digit":"index","axis":"vertical","c":0.8387,"i":0.7617,"o":0.6924,"gain":0.362,"rec":0.7235,"minSup":0.232,"meanSup":0.754,"closure":0.584,"maxMag":1867.6,"minMag":212.2,"meanPhase":109.8,"cells":[[0.9973,1,0.542,0.457,1867.6,166.8],[0.6283,0.78,0.586,0.414,713.1,172.3],[0.4088,1,0,0.998,1813.4,-8.9],[0.9985,0.496,0.243,0.756,453.7,165.2],[0.8387,0.472,0.261,0.738,431.4,170.9],[0.7633,0.232,0,0.999,212.2,-7.1],[0.9984,1,0.571,0.428,1018.3,166.5],[0.6565,1,0.575,0.424,979.7,170.6],[0.3652,0.809,0,0.998,739.3,-7.8]]},{"side":"right","limb":"hand","digit":"middle","axis":"vertical","c":0.8296,"i":0.7549,"o":0.6989,"gain":0.354,"rec":0.7067,"minSup":0.238,"meanSup":0.754,"closure":0.57,"maxMag":1959.4,"minMag":236.7,"meanPhase":108.6,"cells":[[0.9976,1,0.539,0.46,1959.4,166.1],[0.6313,0.714,0.579,0.42,710.6,170.9],[0.4191,1,0,0.998,1821.6,-10.3],[0.998,0.459,0.261,0.739,456.7,163.4],[0.8296,0.524,0.261,0.738,521.7,169.7],[0.7644,0.238,0,0.999,236.7,-8.4],[0.9967,0.851,0.584,0.415,846.4,163.6],[0.626,1,0.547,0.453,1302.4,169.7],[0.3823,1,0,0.998,1100.4,-7.5]]},{"side":"right","limb":"hand","digit":"pinky","axis":"vertical","c":0.8126,"i":0.7555,"o":0.7057,"gain":0.358,"rec":0.7148,"minSup":0.315,"meanSup":0.774,"closure":0.593,"maxMag":1761.3,"minMag":313.7,"meanPhase":110.0,"cells":[[0.9962,1,0.553,0.446,1761.3,167.3],[0.6317,0.738,0.576,0.423,735.5,173.3],[0.4302,1,0,0.998,1548.2,-9.4],[0.9972,0.397,0.248,0.751,395.4,164.1],[0.8126,0.533,0.248,0.751,531.2,171.2],[0.7557,0.315,0,0.999,313.7,-6.7],[0.9983,1,0.586,0.413,1179.0,166.4],[0.6375,0.987,0.566,0.434,983.0,170.2],[0.3982,1,0,0.998,1519.1,-6.0]]},{"side":"right","limb":"hand","digit":"ring","axis":"horizontal","c":0.9995,"i":0.9994,"o":0.9992,"gain":0.5,"rec":0.9989,"minSup":0.164,"meanSup":0.711,"closure":0.711,"maxMag":5480.2,"minMag":429.6,"meanPhase":166.4,"cells":[[0.9992,1,0.577,0.422,5480.2,164.8],[0.9995,1,0.704,0.296,3119.2,167.8],[0.9999,1,0.632,0.368,4949.4,168.4],[0.9993,0.461,0.309,0.691,1208.0,164.0],[0.9995,0.683,0.371,0.628,1789.1,167.8],[0.9999,0.164,0.321,0.678,429.6,167.2],[0.9982,0.634,0.598,0.402,1660.6,163.5],[0.9989,1,0.647,0.353,3757.0,167.9],[0.9997,0.457,0.7,0.299,1198.2,166.3]]},{"side":"right","limb":"hand","digit":"thumb","axis":"horizontal","c":0.9997,"i":0.9996,"o":0.9995,"gain":0.5,"rec":0.999,"minSup":0.128,"meanSup":0.74,"closure":0.739,"maxMag":6153.7,"minMag":377.2,"meanPhase":169.8,"cells":[[0.9993,1,0.556,0.443,6153.7,168.1],[0.9995,1,0.714,0.286,3364.5,170.9],[0.9998,1,0.639,0.36,5070.6,172.0],[0.9996,0.593,0.272,0.727,1745.4,168.0],[0.9997,0.6,0.375,0.625,1766.1,170.9],[0.9998,0.128,0.314,0.685,377.2,170.6],[0.9995,1,0.556,0.443,3221.0,168.4],[0.9994,1,0.675,0.324,3798.2,170.9],[0.9994,0.336,0.741,0.258,988.3,168.8]]}];
+const POLAR99={"left.big":[299.2,0.618],"left.fourth":[298.2,0.696],"left.index":[89.2,0.498],"left.little":[348.9,0.697],"left.middle":[243.9,0.528],"left.pinky":[170.8,0.53],"left.ring":[244.8,0.531],"left.second":[102.3,0.662],"left.third":[298.0,0.684],"left.thumb":[88.2,0.453],"right.big":[299.2,0.618],"right.fourth":[298.2,0.696],"right.index":[89.2,0.498],"right.little":[348.9,0.697],"right.middle":[243.9,0.528],"right.pinky":[170.8,0.53],"right.ring":[244.8,0.531],"right.second":[102.3,0.662],"right.third":[298.0,0.684],"right.thumb":[88.2,0.453]};
+const SEAM99={"left.index|right.index":{"o":0.866,"s":0.001,"d":0.128,"c":0.462,"src":"right.index"},"left.second|right.second":{"o":0.523,"s":0.002,"d":0.526,"c":0.391,"src":"left.second"},"left.thumb|right.thumb":{"o":0.703,"s":0.005,"d":0.308,"c":0.447,"src":"right.thumb"},"left.third|right.third":{"o":0.876,"s":0.46,"d":0.094,"c":0.374,"src":"right.third"},"left.ring|right.ring":{"o":0.855,"s":0.46,"d":0.108,"c":0.336,"src":"left.ring"},"left.fourth|right.fourth":{"o":0.878,"s":0.46,"d":0.095,"c":0.319,"src":"right.fourth"},"left.middle|right.middle":{"o":0.684,"s":0.46,"d":0.29,"c":0.208,"src":"left.middle"},"left.pinky|right.pinky":{"o":0.699,"s":0.46,"d":0.339,"c":0.203,"src":"left.pinky"},"left.big|right.big":{"o":0.661,"s":0.46,"d":0.316,"c":0.195,"src":"right.big"},"left.little|right.little":{"o":0.679,"s":0.46,"d":0.299,"c":0.194,"src":"left.little"}};
+const DATA100=[{"side":"left","limb":"foot","digit":"big","axis":"vertical","c":0.8337,"i":0.7454,"o":0.6681,"gain":0.35,"rec":0.6995,"minSup":0.104,"meanSup":0.73,"closure":0.535,"maxMag":1608.8,"minMag":86.3,"meanPhase":113.6,"cells":[[0.9986,1,0.595,0.404,1025.5,170.8],[0.6603,1,0.512,0.488,1178.1,174.7],[0.3557,1,0,0.998,1608.8,-4.8],[0.9991,0.354,0.36,0.64,292.6,170.4],[0.8337,0.901,0.248,0.752,744.2,174.3],[0.6531,0.104,0,0.999,86.3,-6.1],[0.9992,0.519,0.634,0.365,428.8,171.3],[0.669,1,0.444,0.556,1497.8,174.2],[0.3191,0.69,0,0.997,569.4,-2.6]]},{"side":"left","limb":"foot","digit":"fourth","axis":"vertical","c":0.7847,"i":0.6884,"o":0.6188,"gain":0.312,"rec":0.624,"minSup":0.258,"meanSup":0.621,"closure":0.433,"maxMag":838.9,"minMag":75.8,"meanPhase":97.8,"cells":[[0.6049,0.258,0.597,0.402,75.8,111.7],[0.4385,1,0.317,0.682,581.0,170.6],[0.3959,1,0,0.998,413.1,-15.4],[0.9247,0.278,0.283,0.716,81.4,147.1],[0.7847,0.405,0.235,0.764,118.8,164.1],[0.7831,0.318,0,0.999,93.1,-10.8],[0.9765,1,0.52,0.479,838.9,164.6],[0.6073,0.326,0.644,0.355,95.5,161.4],[0.498,1,0,0.998,340.3,-13.2]]},{"side":"left","limb":"foot","digit":"little","axis":"antiDiagonal","c":0.6044,"i":0.4666,"o":0.4161,"gain":0.25,"rec":0.4993,"minSup":0.064,"meanSup":0.586,"closure":0.368,"maxMag":1154.5,"minMag":28.2,"meanPhase":49.5,"cells":[[0.2907,0.064,0.995,0,28.2,106.3],[0.4793,1,0.176,0.823,862.6,172.6],[0.3893,1,0,0.998,756.3,-7.1],[0.2999,0.341,0,0.997,151.2,-2.4],[0.6044,1,0,1.0,646.3,172.5],[0.423,0.276,0,0.998,122.3,-8.9],[0.3469,0.408,0,0.997,180.8,0.7],[0.6641,1,0.344,0.655,1154.5,172.1],[0.6376,0.187,0.998,0,82.7,-160.3]]},{"side":"left","limb":"foot","digit":"second","axis":"horizontal","c":0.9999,"i":0.9998,"o":0.9998,"gain":0.5,"rec":0.999,"minSup":0.279,"meanSup":0.78,"closure":0.78,"maxMag":7258.2,"minMag":892.9,"meanPhase":169.1,"cells":[[0.9998,1,0.56,0.44,5378.8,167.6],[0.9999,0.952,0.729,0.271,3051.0,169.0],[0.9999,1,0.604,0.396,7258.2,169.7],[0.9999,0.533,0.259,0.741,1707.6,168.0],[0.9999,0.5,0.38,0.62,1602.3,169.2],[0.9998,0.279,0.243,0.757,892.9,170.9],[0.9997,0.888,0.57,0.429,2847.1,167.7],[0.9997,1,0.714,0.285,3328.3,169.6],[0.9999,0.87,0.619,0.38,2787.7,170.6]]},{"side":"left","limb":"foot","digit":"third","axis":"vertical","c":0.8738,"i":0.7685,"o":0.6802,"gain":0.368,"rec":0.7346,"minSup":0.156,"meanSup":0.693,"closure":0.562,"maxMag":627.1,"minMag":47.3,"meanPhase":107.9,"cells":[[0.9984,1,0.526,0.473,500.7,169.2],[0.6243,1,0.599,0.401,623.7,171.8],[0.3654,1,0,0.998,627.1,-7.4],[0.9985,0.801,0.255,0.745,243.5,165.3],[0.8738,0.342,0.327,0.672,104.0,166.8],[0.7849,0.156,0,0.999,47.3,-11.0],[0.9954,0.746,0.476,0.523,226.8,162.3],[0.6663,0.67,0.581,0.418,203.9,169.7],[0.3617,0.526,0,0.997,160.1,-15.8]]},{"side":"left","limb":"hand","digit":"index","axis":"horizontal","c":0.9996,"i":0.9995,"o":0.9993,"gain":0.5,"rec":0.9989,"minSup":0.168,"meanSup":0.751,"closure":0.751,"maxMag":4954.8,"minMag":437.8,"meanPhase":169.2,"cells":[[0.9991,1,0.567,0.432,4503.6,167.2],[0.9994,1,0.699,0.3,3037.0,170.3],[0.9999,1,0.631,0.368,4954.8,171.1],[0.9995,0.521,0.293,0.706,1359.7,167.2],[0.9996,0.716,0.382,0.618,1870.1,170.5],[0.9998,0.168,0.335,0.664,437.8,170.0],[0.999,0.935,0.57,0.43,2441.3,167.2],[0.9991,1,0.661,0.339,3796.2,170.6],[0.9993,0.419,0.707,0.292,1092.9,168.3]]},{"side":"left","limb":"hand","digit":"middle","axis":"diagonal","c":0.7746,"i":0.7115,"o":0.6768,"gain":0.326,"rec":0.6508,"minSup":0.103,"meanSup":0.736,"closure":0.502,"maxMag":1512.0,"minMag":71.0,"meanPhase":105.6,"cells":[[0.9635,1,0.663,0.337,748.8,165.0],[0.658,1,0.511,0.489,757.7,172.5],[0.3965,1,0,0.998,1025.7,-10.1],[0.904,0.103,0.38,0.619,71.0,140.9],[0.7746,0.899,0.185,0.814,617.9,171.4],[0.6834,0.319,0,0.999,219.0,-6.4],[0.95,0.306,0.752,0.247,210.3,151.5],[0.6006,1,0.392,0.607,1512.0,171.5],[0.3973,1,0,0.998,1023.1,-5.7]]},{"side":"left","limb":"hand","digit":"pinky","axis":"horizontal","c":0.9995,"i":0.9993,"o":0.9991,"gain":0.5,"rec":0.9989,"minSup":0.19,"meanSup":0.743,"closure":0.743,"maxMag":5394.9,"minMag":495.7,"meanPhase":167.3,"cells":[[0.9992,1,0.575,0.425,4243.2,165.4],[0.9995,1,0.701,0.298,2907.6,168.5],[0.9999,1,0.627,0.373,5394.9,169.0],[0.9994,0.476,0.295,0.705,1242.0,165.5],[0.9995,0.699,0.377,0.622,1823.0,169.0],[0.9997,0.19,0.325,0.675,495.7,168.0],[0.9987,0.854,0.581,0.418,2226.4,165.4],[0.9987,1,0.661,0.339,3921.2,169.2],[0.9987,0.468,0.69,0.309,1220.8,165.9]]},{"side":"left","limb":"hand","digit":"ring","axis":"horizontal","c":0.9994,"i":0.9993,"o":0.9991,"gain":0.5,"rec":0.9988,"minSup":0.184,"meanSup":0.739,"closure":0.738,"maxMag":5103.0,"minMag":479.9,"meanPhase":166.4,"cells":[[0.999,1,0.579,0.421,4530.7,164.7],[0.9994,1,0.701,0.298,3072.8,168.0],[0.9999,1,0.628,0.372,5103.0,167.6],[0.9992,0.45,0.299,0.7,1174.4,164.1],[0.9994,0.701,0.374,0.626,1827.8,168.2],[0.9998,0.184,0.319,0.681,479.9,166.5],[0.9982,0.79,0.59,0.41,2060.3,163.8],[0.9986,1,0.66,0.34,3852.5,168.4],[0.9993,0.523,0.682,0.317,1364.1,165.9]]},{"side":"left","limb":"hand","digit":"thumb","axis":"horizontal","c":0.9994,"i":0.9993,"o":0.9991,"gain":0.5,"rec":0.9989,"minSup":0.151,"meanSup":0.749,"closure":0.748,"maxMag":5089.9,"minMag":432.0,"meanPhase":168.7,"cells":[[0.9985,1,0.572,0.427,4648.9,166.1],[0.9991,1,0.704,0.295,3312.5,170.2],[0.9999,1,0.634,0.365,5089.9,170.7],[0.9992,0.489,0.28,0.719,1398.8,166.2],[0.9994,0.675,0.372,0.627,1930.4,170.3],[0.9997,0.151,0.324,0.676,432.0,169.2],[0.999,1,0.573,0.427,3340.6,167.4],[0.9991,1,0.671,0.329,4373.8,170.5],[0.9991,0.423,0.712,0.287,1208.2,167.8]]},{"side":"right","limb":"foot","digit":"big","axis":"vertical","c":0.8595,"i":0.7669,"o":0.6704,"gain":0.369,"rec":0.7372,"minSup":0.169,"meanSup":0.754,"closure":0.586,"maxMag":1928.7,"minMag":158.4,"meanPhase":114.2,"cells":[[0.9996,1,0.557,0.443,1473.9,172.9],[0.636,1,0.571,0.428,1082.0,174.4],[0.3684,1,0,0.998,1928.7,-4.7],[0.9997,0.592,0.255,0.745,555.9,171.2],[0.8595,0.498,0.266,0.733,467.8,173.0],[0.7365,0.169,0,0.999,158.4,-2.0],[0.9998,1,0.556,0.443,1061.2,171.2],[0.6954,1,0.571,0.428,1229.5,172.6],[0.3136,0.531,0,0.997,499.2,-0.7]]},{"side":"right","limb":"foot","digit":"fourth","axis":"balanced","c":0.8748,"i":0.7659,"o":0.749,"gain":0.391,"rec":0.78,"minSup":0.018,"meanSup":0.638,"closure":0.543,"maxMag":1872.9,"minMag":12.6,"meanPhase":131.4,"cells":[[0.998,1,0.56,0.44,1872.9,169.3],[0.6272,0.803,0.59,0.409,561.9,173.8],[0.3375,1,0,0.998,1807.2,-5.5],[0.9995,0.414,0.252,0.747,289.4,171.5],[0.8748,0.442,0.265,0.734,309.3,173.7],[0.4381,0.018,0,0.998,12.6,-26.2],[0.9988,0.706,0.553,0.447,494.4,172.3],[0.9989,0.683,0.709,0.29,477.7,176.0],[0.6615,0.677,0.999,0,473.9,177.3]]},{"side":"right","limb":"foot","digit":"little","axis":"vertical","c":0.8189,"i":0.7532,"o":0.7058,"gain":0.355,"rec":0.7099,"minSup":0.29,"meanSup":0.724,"closure":0.562,"maxMag":1798.9,"minMag":229.1,"meanPhase":115.5,"cells":[[0.9993,1,0.58,0.419,1798.9,172.6],[0.6359,1,0.571,0.429,983.4,175.4],[0.392,1,0,0.998,1553.2,-2.9],[0.9994,0.445,0.264,0.736,351.8,173.1],[0.8189,0.501,0.263,0.737,396.5,176.9],[0.7581,0.29,0,0.999,229.1,-3.5],[0.9972,0.741,0.537,0.462,586.0,172.7],[0.6194,0.645,0.546,0.454,510.5,178.5],[0.4349,0.899,0,0.998,710.9,-3.4]]},{"side":"right","limb":"foot","digit":"second","axis":"horizontal","c":0.9996,"i":0.9994,"o":0.9993,"gain":0.5,"rec":0.9989,"minSup":0.266,"meanSup":0.757,"closure":0.757,"maxMag":6242.9,"minMag":812.3,"meanPhase":168.9,"cells":[[0.9998,1,0.569,0.43,5744.9,167.3],[0.9999,0.933,0.72,0.28,2850.7,168.6],[0.9996,1,0.604,0.395,6242.9,169.0],[0.9995,0.459,0.28,0.72,1403.6,166.6],[0.9996,0.568,0.377,0.622,1737.6,169.6],[0.9995,0.266,0.258,0.742,812.3,171.5],[0.9981,0.722,0.592,0.407,2207.4,165.6],[0.9989,1,0.695,0.304,3861.8,170.1],[0.9998,0.867,0.622,0.377,2650.8,171.5]]},{"side":"right","limb":"foot","digit":"third","axis":"vertical","c":0.8691,"i":0.7722,"o":0.7651,"gain":0.409,"rec":0.8172,"minSup":0.011,"meanSup":0.644,"closure":0.572,"maxMag":1849.5,"minMag":8.1,"meanPhase":130.7,"cells":[[0.9994,1,0.484,0.515,1833.2,170.9],[0.6252,0.561,0.598,0.401,414.6,173.5],[0.354,1,0,0.998,1849.5,-4.9],[0.9994,0.661,0.256,0.743,488.8,169.9],[0.8691,0.486,0.344,0.655,359.0,173.3],[0.4669,0.011,0,0.998,8.1,-30.7],[0.9975,1,0.497,0.503,901.0,171.1],[0.9974,0.649,0.706,0.294,479.5,176.8],[0.7095,0.431,0.998,0,318.8,176.6]]},{"side":"right","limb":"hand","digit":"index","axis":"horizontal","c":0.9997,"i":0.9997,"o":0.9997,"gain":0.5,"rec":0.999,"minSup":0.195,"meanSup":0.762,"closure":0.762,"maxMag":5457.6,"minMag":530.0,"meanPhase":167.9,"cells":[[0.9995,1,0.57,0.43,4763.2,166.2],[0.9996,1,0.709,0.291,2912.0,168.7],[0.9999,1,0.626,0.374,5457.6,169.2],[0.9997,0.508,0.279,0.721,1382.2,166.2],[0.9997,0.642,0.377,0.623,1745.9,169.0],[0.9999,0.195,0.3,0.7,530.0,168.6],[0.9994,0.952,0.571,0.428,2589.8,166.5],[0.9995,1,0.681,0.318,3567.0,169.2],[0.9998,0.564,0.673,0.326,1534.4,167.9]]},{"side":"right","limb":"hand","digit":"middle","axis":"vertical","c":0.8117,"i":0.746,"o":0.6907,"gain":0.345,"rec":0.6891,"minSup":0.243,"meanSup":0.771,"closure":0.561,"maxMag":1324.5,"minMag":180.5,"meanPhase":108.5,"cells":[[0.9955,1,0.61,0.389,993.1,165.5],[0.6536,0.95,0.525,0.475,704.2,171.1],[0.389,1,0,0.998,1211.1,-10.2],[0.9931,0.244,0.321,0.678,180.7,160.3],[0.8117,0.806,0.225,0.775,598.1,170.3],[0.7028,0.243,0,0.999,180.5,-7.5],[0.9948,0.7,0.641,0.358,519.1,163.5],[0.6345,1,0.483,0.517,1324.5,170.4],[0.3834,1,0,0.998,963.4,-7.1]]},{"side":"right","limb":"hand","digit":"pinky","axis":"horizontal","c":0.9995,"i":0.9993,"o":0.999,"gain":0.5,"rec":0.9988,"minSup":0.164,"meanSup":0.744,"closure":0.743,"maxMag":5176.3,"minMag":413.1,"meanPhase":166.8,"cells":[[0.9991,1,0.572,0.427,4226.1,165.0],[0.9994,1,0.703,0.297,2890.9,168.3],[0.9999,1,0.632,0.368,5176.3,168.5],[0.9994,0.489,0.283,0.717,1234.0,164.9],[0.9995,0.689,0.375,0.625,1738.1,168.5],[0.9996,0.164,0.337,0.662,413.1,167.5],[0.9992,1,0.573,0.427,2683.9,165.4],[0.9988,1,0.664,0.335,3447.8,168.4],[0.9978,0.351,0.723,0.276,884.7,164.4]]},{"side":"right","limb":"hand","digit":"ring","axis":"horizontal","c":0.9995,"i":0.9994,"o":0.9993,"gain":0.5,"rec":0.9989,"minSup":0.185,"meanSup":0.735,"closure":0.735,"maxMag":4995.0,"minMag":439.6,"meanPhase":166.9,"cells":[[0.9991,1,0.584,0.416,3748.3,164.9],[0.9994,1,0.697,0.303,3018.5,168.1],[0.9999,1,0.628,0.372,4995.0,168.7],[0.9993,0.422,0.307,0.692,1001.4,164.6],[0.9995,0.739,0.374,0.625,1753.6,168.4],[0.9998,0.185,0.33,0.669,439.6,167.6],[0.9989,0.768,0.597,0.402,1822.5,165.0],[0.9991,1,0.652,0.347,3394.8,168.5],[0.9994,0.504,0.685,0.314,1196.9,166.3]]},{"side":"right","limb":"hand","digit":"thumb","axis":"horizontal","c":0.9997,"i":0.9993,"o":0.9988,"gain":0.5,"rec":0.9988,"minSup":0.158,"meanSup":0.744,"closure":0.744,"maxMag":4910.5,"minMag":420.1,"meanPhase":167.6,"cells":[[0.9992,1,0.562,0.437,4713.2,166.1],[0.9995,1,0.71,0.289,3099.5,169.2],[0.9998,1,0.633,0.366,4910.5,169.3],[0.9997,0.555,0.275,0.724,1478.2,166.5],[0.9997,0.629,0.376,0.623,1674.9,169.1],[0.9993,0.158,0.319,0.68,420.1,167.7],[0.9995,1,0.562,0.437,3033.6,167.0],[0.9986,1,0.673,0.327,3694.8,169.3],[0.9965,0.359,0.723,0.276,958.0,164.1]]}];
+const POLAR100={"left.big":[299.2,0.618],"left.fourth":[298.2,0.696],"left.index":[89.2,0.498],"left.little":[348.9,0.697],"left.middle":[243.9,0.528],"left.pinky":[170.8,0.53],"left.ring":[244.8,0.531],"left.second":[102.3,0.662],"left.third":[298.0,0.684],"left.thumb":[88.2,0.453],"right.big":[299.2,0.618],"right.fourth":[298.2,0.696],"right.index":[89.2,0.498],"right.little":[348.9,0.697],"right.middle":[243.9,0.528],"right.pinky":[170.8,0.53],"right.ring":[244.8,0.531],"right.second":[102.3,0.662],"right.third":[298.0,0.684],"right.thumb":[88.2,0.453]};
+const SEAM100={"left.pinky|right.pinky":{"o":0.871,"s":0.0,"d":0.123,"c":0.551,"src":"left.pinky"},"left.second|right.second":{"o":0.878,"s":0.0,"d":0.097,"c":0.584,"src":"left.second"},"left.fourth|right.fourth":{"o":0.685,"s":0.0,"d":0.174,"c":0.34,"src":"left.fourth"},"left.thumb|right.thumb":{"o":0.872,"s":0.001,"d":0.122,"c":0.559,"src":"left.thumb"},"left.third|right.third":{"o":0.713,"s":0.004,"d":0.262,"c":0.269,"src":"left.third"},"left.middle|right.middle":{"o":0.678,"s":0.004,"d":0.303,"c":0.33,"src":"left.middle"},"left.index|right.index":{"o":0.881,"s":0.005,"d":0.107,"c":0.587,"src":"left.index"},"left.ring|right.ring":{"o":0.869,"s":0.46,"d":0.107,"c":0.476,"src":"right.ring"},"left.little|right.little":{"o":0.677,"s":0.46,"d":0.295,"c":0.265,"src":"left.little"},"left.big|right.big":{"o":0.666,"s":0.46,"d":0.305,"c":0.185,"src":"right.big"}};
+const DAYS=[{label:'Day 99',data:DATA99,polar:POLAR99,seam:SEAM99},{label:'Day 100',data:DATA100,polar:POLAR100,seam:SEAM100},{label:'Day 101',data:DATA,polar:POLAR,seam:SEAM}];
+
+/* ---------- color ---------- */
+const STOPS=[[0.38,[43,71,99]],[0.55,[58,110,140]],[0.68,[79,148,166]],[0.82,[185,138,68]],[1.0,[231,180,92]]];
+function lerp(a,b,t){return a+(b-a)*t;}
+function lamColor(x){
+  x=Math.max(0.38,Math.min(1,x));
+  for(let i=0;i<STOPS.length-1;i++){
+    const [x0,c0]=STOPS[i],[x1,c1]=STOPS[i+1];
+    if(x<=x1){const t=(x-x0)/(x1-x0);
+      return `rgb(${Math.round(lerp(c0[0],c1[0],t))},${Math.round(lerp(c0[1],c1[1],t))},${Math.round(lerp(c0[2],c1[2],t))})`;}
+  }
+  return 'rgb(231,180,92)';
+}
+function lamRGB(x){x=Math.max(0.38,Math.min(1,x));for(let i=0;i<STOPS.length-1;i++){const [a,c0]=STOPS[i],[b,c1]=STOPS[i+1];
+  if(x<=b){const t=(x-a)/(b-a);return [Math.round(lerp(c0[0],c1[0],t)),Math.round(lerp(c0[1],c1[1],t)),Math.round(lerp(c0[2],c1[2],t))];}}return [231,180,92];}
+const lamRGBA=(x,al)=>{const c=lamRGB(x);return `rgba(${c[0]},${c[1]},${c[2]},${al})`;};
+const supOpacity=s=>0.42+0.58*Math.max(0,Math.min(1,(s-0.1)/0.9));
+const phaseColor=ph=>`hsl(${(((ph%360)+360)%360).toFixed(0)},58%,62%)`;
+const AXIS_SCREEN={horizontal:0,vertical:90,antiDiagonal:45};
+function circSpread(phs){let sx=0,sy=0;for(const p of phs){sx+=Math.cos(p*Math.PI/180);sy+=Math.sin(p*Math.PI/180);}return 1-Math.hypot(sx,sy)/phs.length;}
+const DIGITS={thumb:'T',index:'I',middle:'M',ring:'R',pinky:'P',big:'B',second:'2',third:'3',fourth:'4',little:'L'};
+const ORDER={hand:['thumb','index','middle','ring','pinky'],foot:['big','second','third','fourth','little']};
+const SVGNS='http://www.w3.org/2000/svg';
+const el=(t,a={})=>{const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+/* ---------- atlas ---------- */
+const atlas=document.getElementById('atlas');
+const limbs=[
+  {key:['left','hand'], label:'left hand',  x:120,y:96,  dir:-1,fan:true},
+  {key:['right','hand'],label:'right hand', x:340,y:96,  dir:1, fan:true},
+  {key:['left','foot'], label:'left foot',  x:120,y:320, dir:-1,fan:false},
+  {key:['right','foot'],label:'right foot', x:340,y:320, dir:1, fan:false},
+];
+const nodeIndex={};
+limbs.forEach(L=>{
+  const t=el('text',{class:'limbLabel',x:L.x,y:L.dir<0?L.y-72:L.y-72,'text-anchor':'middle'});
+  t.textContent=L.label.toUpperCase(); atlas.appendChild(t);
+  const digits=ORDER[L.key[1]];
+  digits.forEach((dg,i)=>{
+    const site=DATA.find(s=>s.side===L.key[0]&&s.limb===L.key[1]&&s.digit===dg);
+    if(!site)return;
+    // fan for hands, row for feet
+    let nx,ny;
+    if(L.fan){const a=(-58+i*29)*Math.PI/180; const R=64; nx=L.x+Math.sin(a)*R*L.dir; ny=L.y-Math.cos(a)*R+22;}
+    else {nx=L.x+(i-2)*30*L.dir; ny=L.y;}
+    const g=el('g',{class:'node',tabindex:0,role:'button','aria-label':`${L.label} ${dg}`});
+    g.appendChild(el('circle',{class:'hit',cx:nx,cy:ny,r:15,fill:'none',stroke:'#24384a','stroke-width':1.4}));
+    g.appendChild(el('circle',{cx:nx,cy:ny,r:12.5,fill:lamColor(site.o),stroke:'#0a1620','stroke-width':1.5}));
+    const dl=el('text',{class:'digitLabel',x:nx,y:ny+3,'text-anchor':'middle'});
+    dl.textContent=DIGITS[dg]; g.appendChild(dl);
+    const id=site.side+'.'+site.limb+'.'+site.digit;
+    g.dataset.id=id; nodeIndex[id]=g;
+    g.addEventListener('click',()=>pick(site));
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(site);}});
+    atlas.appendChild(g);
+  });
+});
+
+/* ---------- field 3x3 ---------- */
+const field=document.getElementById('field');
+function drawField(site){
+  field.innerHTML='';
+  const pad=16, gap=9, n=3, W=300-pad*2, cs=(W-gap*(n-1))/n;
+  const maxMag=Math.max(1,site.maxMag||1);
+  // dominant-axis spine across the whole grid (site-level orientation, incl. anti-diagonal)
+  const sa=(AXIS_SCREEN[site.axis]||0)*Math.PI/180, sr=138;
+  field.appendChild(el('line',{x1:150-Math.cos(sa)*sr,y1:150+Math.sin(sa)*sr,
+     x2:150+Math.cos(sa)*sr,y2:150-Math.sin(sa)*sr,
+     stroke:'#E7B45C','stroke-width':1.4,'stroke-opacity':.26,'stroke-dasharray':'2 7'}));
+  for(let idx=0;idx<9;idx++){
+    const r=Math.floor(idx/3), c=idx%3;
+    const [lam,sup,h,v,mag,phase]=site.cells[idx];
+    const x=pad+c*(cs+gap), y=pad+r*(cs+gap), cx=x+cs/2, cy=y+cs/2;
+    // fill = laminar order, opacity = support
+    field.appendChild(el('rect',{x,y,width:cs,height:cs,rx:8,fill:lamColor(lam),
+       'fill-opacity':supOpacity(sup),stroke:'#0a1620','stroke-width':2}));
+    // ring = response phase (timing) — agreement across cells reads at a glance
+    field.appendChild(el('rect',{x:x+2.4,y:y+2.4,width:cs-4.8,height:cs-4.8,rx:6,fill:'none',
+       stroke:phaseColor(phase),'stroke-width':2.6,'stroke-opacity':0.9}));
+    // director: angle from horizontal/vertical weights, LENGTH from phasor magnitude
+    const ang=Math.atan2(v,h), len=cs*(0.14+0.30*Math.min(1,mag/maxMag));
+    const dx=Math.cos(ang)*len, dy=Math.sin(ang)*len; // screen y is down → vertical(v) points up
+    field.appendChild(el('line',{x1:cx-dx,y1:cy+dy,x2:cx+dx,y2:cy-dy,
+       stroke:'#F4ECDB','stroke-width':2.4,'stroke-linecap':'round','stroke-opacity':0.92*supOpacity(sup)}));
+    if(sup<0.3) field.appendChild(el('rect',{x:x+1,y:y+1,width:cs-2,height:cs-2,rx:7,fill:'none',
+       stroke:'#0a1620','stroke-width':1,'stroke-dasharray':'2 4','stroke-opacity':.6}));
+  }
+}
+
+/* ---------- radial center->inner->outer ---------- */
+const radial=document.getElementById('radial');
+function drawRadial(site){
+  radial.innerHTML='';
+  const cx=48,cy=48;
+  [[34,site.o],[23,site.i]].forEach(([r,val])=>{
+    radial.appendChild(el('circle',{cx,cy,r,fill:'none',stroke:lamColor(val),'stroke-width':6,'stroke-opacity':.9}));
+  });
+  radial.appendChild(el('circle',{cx,cy,r:11,fill:lamColor(site.c)}));
+  radial.appendChild(el('circle',{cx,cy,r:34,fill:'none',stroke:'#1d3446','stroke-width':1}));
+}
+
+/* ---------- spectrum ---------- */
+const spec=document.getElementById('spec');
+function drawSpec(selId){
+  spec.innerHTML='';
+  const items=[...DATA].map(s=>({s,drop:s.c-s.o})).sort((a,b)=>a.drop-b.drop);
+  const W=1120,H=150, x0=8,x1=W-8, y=64, bw=(x1-x0)/items.length;
+  spec.appendChild(el('line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'#1d3446','stroke-width':1}));
+  items.forEach((it,i)=>{
+    const cx=x0+bw*i+bw/2;
+    const id=it.s.side+'.'+it.s.limb+'.'+it.s.digit;
+    const sel=id===selId;
+    const h=6+it.drop*280; // taller = more fracture
+    spec.appendChild(el('rect',{x:cx-bw*0.32,y:y-h,width:bw*0.64,height:h,rx:2,
+       fill:lamColor(it.s.o),'fill-opacity':sel?1:0.82,
+       stroke:sel?'#ECE3D2':'none','stroke-width':sel?1.6:0}));
+    const g=el('g',{class:'node',tabindex:0,role:'button','aria-label':id});
+    g.appendChild(el('rect',{x:cx-bw/2,y:0,width:bw,height:H,fill:'transparent'}));
+    g.addEventListener('click',()=>pick(it.s));
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(it.s);}});
+    spec.appendChild(g);
+    if(sel){
+      spec.appendChild(el('path',{d:`M${cx-4.5},${y+15} L${cx+4.5},${y+15} L${cx},${y+8.5} Z`,fill:'#ECE3D2'}));
+      const lab=el('text',{x:cx,y:y+30,'text-anchor':'middle',fill:'#ECE3D2','font-size':10.5,'letter-spacing':'.04em'});
+      lab.textContent=it.s.side+' '+it.s.limb; spec.appendChild(lab);
+      const lab2=el('text',{x:cx,y:y+44,'text-anchor':'middle',fill:'#8fa1ae','font-size':9.5,'letter-spacing':'.03em'});
+      lab2.textContent=it.s.digit; spec.appendChild(lab2);
+    }
+  });
+  // end captions
+  const cap=(x,txt,anc)=>{const t=el('text',{x,y:y+50,'text-anchor':anc,fill:'#5a6e7c','font-size':10,'font-family':'var(--mono)','letter-spacing':'.14em'});t.textContent=txt;spec.appendChild(t);};
+  cap(x0+4,'CLEAN','start'); cap(x1-4,'FRACTURING','end');
+}
+
+/* ---------- verdict ---------- */
+function verdict(site){
+  const drop=site.c-site.o;
+  if(site.o>0.99 && drop<0.01)
+    return {tag:'clean sheets',col:'var(--gold)',
+      text:`The field holds its order the whole way out — center to rim, the response stays organized. This is a boundary holding its order in clean laminar sheets.`};
+  if(drop>0.15 || site.o<0.62)
+    return {tag:'fracturing',col:'#6fa6c4',
+      text:`The order falls apart toward the edge — from ${site.c.toFixed(2)} at the center to ${site.o.toFixed(2)} at the rim — breaking along the ${site.axis==='antiDiagonal'?'anti-diagonal':site.axis} axis. This is the field beginning to fracture.`};
+  return {tag:'loosening',col:'#c99a52',
+    text:`The order mostly holds, and loosens toward the edge — ${site.c.toFixed(2)} at the center easing to ${site.o.toFixed(2)} at the rim, along the ${site.axis} axis.`};
+}
+
+/* ---------- select ---------- */
+let curId=null;
+function select(site){
+  const id=site.side+'.'+site.limb+'.'+site.digit;
+  curId=id;
+  Object.values(nodeIndex).forEach(g=>g.classList.remove('sel'));
+  if(nodeIndex[id])nodeIndex[id].classList.add('sel');
+  document.getElementById('siteName').textContent=`${site.side} ${site.limb} · ${site.digit}`;
+  document.getElementById('siteSub').textContent=`dorsal surface · dominant axis ${site.axis} · a 3×3 field of cells`;
+  document.getElementById('s-axis').textContent=site.axis;
+  document.getElementById('s-mag').innerHTML=Math.round(site.minMag)+'–'+Math.round(site.maxMag)+' <small>rel.</small>';
+  const spread=circSpread(site.cells.map(c=>c[5]));
+  document.getElementById('s-phase').innerHTML=Math.round(site.meanPhase)+'° <small>'+(spread<0.15?'aligned':spread<0.4?'loosening':'scattered')+'</small>';
+  document.getElementById('s-center').innerHTML=site.c.toFixed(3);
+  document.getElementById('s-outer').innerHTML=site.o.toFixed(3);
+  document.getElementById('s-rec').innerHTML=site.rec.toFixed(3);
+  document.getElementById('s-sup').innerHTML=site.minSup.toFixed(2)+' <small>weakest cell</small>';
+  document.getElementById('radialLegend').innerHTML=
+    `center &nbsp;<b>${site.c.toFixed(3)}</b><br>inner ring &nbsp;<b>${site.i.toFixed(3)}</b><br>edge ring &nbsp;<b>${site.o.toFixed(3)}</b>`;
+  const v=verdict(site);
+  const vd=document.getElementById('verdict');
+  vd.innerHTML=`<span class="tag" style="color:${v.col};border:1px solid ${v.col}">${v.tag}</span><br>${v.text}`;
+  drawField(site); drawRadial(site); drawSpec(id);
+}
+
+/* default: open on a fracturing site to show the signal immediately */
+const start=DATA.find(s=>s.side==='left'&&s.limb==='foot'&&s.digit==='second')||DATA[0];
+select(start);
+
+/* ---------- single-site flow: the laminar river scoped to one site's 3x3 (reusable controller) ---------- */
+function makeSiteFlow(cv){
+  if(!cv||!cv.getContext) return {setSite(){}, get site(){return null;}};
+  const ctx=cv.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let IMP=[], maxMag=1, curSite=null, W,H,DPR;
+  const SX=u=>u*W, SY=v=>(1-v)*H, RAD=0.21;
+  function setSite(site){ if(!site)return; curSite=site; maxMag=Math.max(1,site.maxMag||1);
+    // nine impulses, one per cell, each pointing along its measured direction (atan2 of the v,h weights)
+    IMP=site.cells.map((c,idx)=>{const row=(idx/3)|0,col=idx%3;const [lam,sup,h,v,mag,phase]=c;
+      return {x:(col+0.5)/3,y:1-(row+0.5)/3,ang:Math.atan2(v,h),coh:lam,
+        frag:Math.max(0,1-lam),str:Math.min(1,mag/maxMag),phase:phase*Math.PI/180};});
+    if(reduced) drawStatic();
+  }
+  function vel(u,v,t){ if(!IMP.length)return [0,0,0.9,0,0];
+    let vx=0,vy=0,lam=0,str=0,ps=0,pc=0,w=1e-4;
+    for(const im of IMP){const dx=u-im.x,dy=v-im.y,wt=Math.exp(-(dx*dx+dy*dy)/(RAD*RAD));
+      const tx=Math.cos(im.ang),ty=Math.sin(im.ang);
+      const drift=Math.sin(t*(0.5+im.frag*2.6)+im.x*17+im.y*11)*im.frag*0.9;
+      vx+=(tx-ty*drift)*wt; vy+=(ty+tx*drift)*wt;
+      lam+=im.coh*wt; str+=im.str*wt; ps+=Math.sin(im.phase)*wt; pc+=Math.cos(im.phase)*wt; w+=wt;}
+    return [vx/w,vy/w,lam/w,str/w,Math.atan2(ps,pc)];}
+  function grid(){ctx.save();ctx.strokeStyle='rgba(120,150,170,0.05)';ctx.lineWidth=1;
+    for(let i=1;i<3;i++){ctx.beginPath();ctx.moveTo(i/3*W,0);ctx.lineTo(i/3*W,H);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(0,i/3*H);ctx.lineTo(W,i/3*H);ctx.stroke();}ctx.restore();}
+  function drawStatic(){ if(!W||!IMP.length)return; ctx.fillStyle='#07121b';ctx.fillRect(0,0,W,H);grid();
+    for(let i=0;i<1500;i++){let x=Math.random(),y=Math.random(),ord=0.9,str=0.3;ctx.beginPath();ctx.moveTo(SX(x),SY(y));
+      for(let k=0;k<9;k++){const f=vel(x,y,0);x+=f[0]*0.02;y+=f[1]*0.02;ord=f[2];str=f[3];if(x<0||x>1||y<0||y>1)break;ctx.lineTo(SX(x),SY(y));}
+      ctx.strokeStyle=lamRGBA(ord,0.44);ctx.lineWidth=0.5+1.5*str;ctx.stroke();}}
+  function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.fillStyle='#07121b';ctx.fillRect(0,0,W,H); if(reduced) drawStatic();}
+  resize(); window.addEventListener('resize',resize);
+  if(!reduced){
+    const spawn=(p,seed)=>{p.x=Math.random();p.y=Math.random();p.px=p.x;p.py=p.y;p.life=38+Math.random()*95;p.age=seed?Math.random()*p.life:0;};
+    const N=Math.round(Math.min(760,Math.max(340,W*1.7))),P=[];
+    for(let i=0;i<N;i++){const p={};spawn(p,true);P.push(p);}
+    let t=0;
+    (function step(){
+      if(cv.dataset.vis==='0'||!IMP.length){requestAnimationFrame(step);return;}   // idle when off-screen
+      t+=0.016;ctx.globalAlpha=1;ctx.fillStyle='rgba(7,18,27,0.085)';ctx.fillRect(0,0,W,H);grid();ctx.lineCap='round';
+      for(const p of P){const f=vel(p.x,p.y,t);p.px=p.x;p.py=p.y;p.x+=f[0]*0.02;p.y+=f[1]*0.02;p.age++;
+        if(p.age>p.life||p.x<-0.02||p.x>1.02||p.y<-0.02||p.y>1.02){spawn(p,false);continue;}
+        const a=Math.min(1,p.age/12)*Math.min(1,(p.life-p.age)/22);
+        const shim=0.72+0.28*Math.sin(t*2.2-f[4]);
+        ctx.strokeStyle=lamRGBA(f[2],0.62*a*shim);ctx.lineWidth=0.5+2.0*f[3];
+        ctx.beginPath();ctx.moveTo(SX(p.px),SY(p.py));ctx.lineTo(SX(p.x),SY(p.y));ctx.stroke();}
+      requestAnimationFrame(step);})();
+  }
+  return { setSite, get site(){return curSite;} };
+}
+
+/* ---------- the relationship: a full-canvas laminar field BETWEEN two picks ----------
+   Fills the frame like the site panels. Color runs the order gradient A→B, the field weaves where
+   timing disagrees, churns where order is low, and curves gently by shell-angle / shell-depth. A
+   directly measured pair adds the real seam fracture + a source→target arrow. Each channel = one real quantity. */
+function makeBridgeFlow(cv, polarMap, seamMap){
+  if(!cv||!cv.getContext) return {update(){}};
+  polarMap=polarMap||POLAR; seamMap=seamMap||SEAM;
+  const ctx=cv.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const idOf=s=>s.side+'.'+s.digit;
+  const cdiff=(a,b)=>{let d=Math.abs((a||0)-(b||0))%360;return d>180?360-d:d;};
+  const L=(a,b,t)=>a+(b-a)*t, cl=(x)=>Math.max(0,Math.min(1,x));
+  let W,H,DPR,R=null,dirty=false;
+  const SX=x=>x*W, SY=y=>y*H;
+  const ordAt=x=>R?L(R.oa,R.ob,cl(x)):0.9;
+  const strAt=x=>R?L(R.strA,R.strB,cl(x)):0.4;
+  function seamDip(x){ if(!R||!R.measured||R.seam<0.4) return 1;
+    const d=Math.abs(x-0.5); return d<0.05?0.16+(d/0.05)*0.84:1; }   // the fracture band at the join
+  function vel(x,y,t){ if(!R) return [1,0];
+    const turb=1-ordAt(x);
+    // the flow DIRECTION rotates off the A→B axis: arc = overall curvature, curl = swirl where timing/order
+    // break. Capped so the field still always progresses toward B (fills the frame) while curving richly.
+    const arc=(R.dDeg/180)*0.65*(R.dDepth>=0?-1:1)*Math.sin(x*Math.PI);
+    const tilt=Math.max(-0.5,Math.min(0.5,R.dDepth*1.3))*0.55;
+    const curlAmp=0.95*(R.phase/180)*(R.axisAlign?1:1.35)+0.75*turb;
+    const curl=curlAmp*(Math.sin(x*5.0+y*4.6+t*1.4)+0.5*Math.sin(x*9.3-y*6.1+t*2.05));
+    const ang=Math.max(-1.4,Math.min(1.4, arc+tilt+curl));
+    return [Math.cos(ang), Math.sin(ang)]; }
+  function update(a,b){ if(!a||!b){R=null;return;}
+    const ia=idOf(a),ib=idOf(b),pa=polarMap[ia]||[0,.5],pb=polarMap[ib]||[0,.5],sm=seamMap[[ia,ib].sort().join('|')];
+    R={oa:a.o,ob:b.o,axisAlign:a.axis===b.axis,dDeg:cdiff(pa[0],pb[0]),dDepth:pb[1]-pa[1],
+       phase:cdiff(a.meanPhase,b.meanPhase),measured:!!sm,seam:sm?sm.s:0,drift:sm?sm.d:0,dir:sm?sm.c:0,
+       src:sm?sm.src:null,ia,ib,strA:Math.min(1,(a.maxMag||1)/6200),strB:Math.min(1,(b.maxMag||1)/6200)};
+    dirty=true; if(reduced) drawStatic(); }
+  function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.fillStyle='#07121b';ctx.fillRect(0,0,W,H); if(reduced) drawStatic();}
+  resize(); window.addEventListener('resize',resize);
+  function ends(){ if(!R) return;
+    [[0.05,R.oa],[0.95,R.ob]].forEach(([x,o])=>{const px=SX(x),py=SY(0.5),c=lamRGB(o),cs=`${c[0]},${c[1]},${c[2]}`;
+      const g=ctx.createRadialGradient(px,py,0,px,py,15);g.addColorStop(0,`rgba(${cs},0.5)`);g.addColorStop(1,`rgba(${cs},0)`);
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,15,0,7);ctx.fill();
+      ctx.beginPath();ctx.arc(px,py,4,0,7);ctx.fillStyle=`rgb(${cs})`;ctx.fill();
+      ctx.lineWidth=1;ctx.strokeStyle='rgba(7,18,27,0.8)';ctx.stroke();});
+    if(R.measured&&R.seam>=0.4){const px=SX(0.5);ctx.save();ctx.strokeStyle='rgba(111,166,196,0.5)';ctx.lineWidth=1.4;
+      ctx.beginPath();for(let k=0;k<=10;k++){const yy=SY(k/10),xx=px+(k%2?5:-5);k?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();ctx.restore();}
+    if(R.measured&&R.dir>0){const fwd=(R.src===R.ia),x0=fwd?0.36:0.64,x1=fwd?0.64:0.36,ax0=SX(x0),ay0=SY(0.5),ax1=SX(x1),ay1=SY(0.5);
+      ctx.save();ctx.globalAlpha=0.35+0.5*R.dir;ctx.strokeStyle='rgba(236,227,210,0.85)';ctx.fillStyle='rgba(236,227,210,0.85)';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(ax0,ay0);ctx.lineTo(ax1,ay1);ctx.stroke();const an=Math.atan2(ay1-ay0,ax1-ax0);
+      ctx.beginPath();ctx.moveTo(ax1,ay1);ctx.lineTo(ax1-9*Math.cos(an-0.4),ay1-9*Math.sin(an-0.4));ctx.lineTo(ax1-9*Math.cos(an+0.4),ay1-9*Math.sin(an+0.4));ctx.closePath();ctx.fill();ctx.restore();} }
+  function drawStatic(){ if(!W||!R) return; ctx.fillStyle='#07121b';ctx.fillRect(0,0,W,H);
+    for(let i=0;i<1700;i++){let x=Math.random(),y=Math.random();ctx.beginPath();ctx.moveTo(SX(x),SY(y));
+      for(let k=0;k<12;k++){const f=vel(x,y,0);x+=f[0]*0.02;y+=f[1]*0.02;if(x<0||x>1||y<0||y>1)break;ctx.lineTo(SX(x),SY(y));}
+      ctx.strokeStyle=lamRGBA(ordAt(x)*seamDip(x),0.42);ctx.lineWidth=0.6+1.4*strAt(x);ctx.stroke();}
+    ends();}
+  if(!reduced){
+    const N=Math.round(Math.min(1200,Math.max(520,W*2.3))),P=[];
+    const spawn=(p,seed)=>{p.x=Math.random();p.y=Math.random();p.px=p.x;p.py=p.y;p.life=40+Math.random()*95;p.age=seed?Math.random()*p.life:0;};
+    for(let i=0;i<N;i++){const p={};spawn(p,true);P.push(p);}
+    let t=0;
+    (function step(){
+      if(cv.dataset.vis==='0'||!R){requestAnimationFrame(step);return;}
+      t+=0.016;ctx.globalAlpha=1;
+      if(dirty){ctx.fillStyle='#07121b';ctx.fillRect(0,0,W,H);for(const p of P)spawn(p,true);dirty=false;}
+      else{ctx.fillStyle='rgba(7,18,27,0.09)';ctx.fillRect(0,0,W,H);}
+      ctx.lineCap='round';
+      for(const p of P){const f=vel(p.x,p.y,t);p.px=p.x;p.py=p.y;p.x+=f[0]*0.02;p.y+=f[1]*0.02;p.age++;
+        if(p.age>p.life||p.x<-0.02||p.x>1.02||p.y<-0.02||p.y>1.02){spawn(p,false);continue;}
+        const a=Math.min(1,p.age/12)*Math.min(1,(p.life-p.age)/20);
+        const shim=0.7+0.3*Math.sin(t*2.2-(R.phase/180)*6+p.y*4);
+        ctx.strokeStyle=lamRGBA(ordAt(p.x)*(0.4+0.6*seamDip(p.x)),0.55*a*shim*seamDip(p.x));
+        ctx.lineWidth=0.5+1.7*strAt(p.x);
+        ctx.beginPath();ctx.moveTo(SX(p.px),SY(p.py));ctx.lineTo(SX(p.x),SY(p.y));ctx.stroke();}
+      ends();requestAnimationFrame(step);})();
+  }
+  return { update };
+}
+
+function bridgeCap(a,b,POL,SM){ POL=POL||POLAR; SM=SM||SEAM;
+  const ia=a.side+'.'+a.digit, ib=b.side+'.'+b.digit, pa=POL[ia]||[0,.5], pb=POL[ib]||[0,.5];
+  const cd=(x,y)=>{let d=Math.abs(x-y)%360;return d>180?360-d:d;};
+  const dDeg=Math.round(cd(pa[0],pb[0])), dDepth=pb[1]-pa[1], phase=Math.round(cd(a.meanPhase,b.meanPhase));
+  const sm=SM[[ia,ib].sort().join('|')];
+  const geom=`Δangle ${dDeg}° · Δshell ${dDepth>=0?'+':''}${dDepth.toFixed(2)} · phase ${phase}° · axes ${a.axis===b.axis?'aligned':'cross'}`;
+  return sm ? `${geom} · <b>directly measured</b> · org ${sm.o.toFixed(2)} · seam ${sm.s.toFixed(3)}` : `${geom} · relational`;
+}
+
+/* two comparison slots: latest pick → A, the one before → B */
+const slotA=makeSiteFlow(document.getElementById('sf-a'));
+const slotB=makeSiteFlow(document.getElementById('sf-b'));
+const bridge=makeBridgeFlow(document.getElementById('bridge'));
+function refreshBridge(){const a=slotA.site,b=slotB.site;
+  if(a&&b){bridge.update(a,b);const el=document.getElementById('bridge-cap');if(el)el.innerHTML=bridgeCap(a,b);slotFlash('card-bridge');}}
+function slotCap(s){const drop=s.c-s.o;
+  const word=(s.o>0.99&&drop<0.01)?'order holds':(drop>0.15||s.o<0.62)?'fracturing':'loosening';
+  const ax=s.axis==='antiDiagonal'?'anti-diagonal':s.axis;
+  return `<b>${s.side} ${s.limb} · ${s.digit}</b> — ${word} · ${s.c.toFixed(2)} center → ${s.o.toFixed(2)} edge · ${ax}`;}
+function slotFlash(id){const el=document.getElementById(id);if(!el)return;el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}
+function loadSiteFlow(site){
+  const prev=slotA.site;
+  if(prev && prev!==site){slotB.setSite(prev);document.getElementById('sf-b-cap').innerHTML=slotCap(prev);slotFlash('card-b');}
+  slotA.setSite(site);document.getElementById('sf-a-cap').innerHTML=slotCap(site);slotFlash('card-a');
+  refreshBridge(); refreshStrip();
+}
+function pick(site){ select(site); loadSiteFlow(site); }
+
+/* ---------- longitudinal strip: same site OR relationship, across Day 99 / 100 / 101 ---------- */
+const stripSite=[0,1,2].map(i=>makeSiteFlow(document.getElementById('site-d'+i)));
+const stripBridge=[0,1,2].map(i=>makeBridgeFlow(document.getElementById('bridge-d'+i), DAYS[i].polar, DAYS[i].seam));
+let stripMode='rel', stripWhich='A';
+const dayVersion=(i,ref)=>ref?DAYS[i].data.find(s=>s.side===ref.side&&s.digit===ref.digit):null;
+const cdf=(x,y)=>{let d=Math.abs((x||0)-(y||0))%360;return d>180?360-d:d;};
+const dCol=(v,worseIfNeg)=>{const worse=worseIfNeg?v<-0.005:v>5, better=worseIfNeg?v>0.005:v<-5; return worse?'#d98a4a':better?'#6fb6ce':'var(--faint)';};
+function refreshStrip(){
+  const a=slotA.site,b=slotB.site,sub=document.getElementById('longSub'); if(!a) return;
+  if(stripMode==='site'){
+    const pk = stripWhich==='B' ? b : a; if(!pk) return;
+    if(sub)sub.innerHTML=`How <b>${pk.side} ${pk.limb} · ${pk.digit}</b> reads across three days — Day 99 to today.`;
+    DAYS.forEach((d,i)=>{const da=dayVersion(i,pk); if(!da) return; stripSite[i].setSite(da);
+      let ex='';
+      if(i>0){const pr=dayVersion(i-1,pk), dd=da.o-pr.o; ex=`<br><span style="color:${dCol(dd,true)}">edge ${dd>=0?'+':'−'}${Math.abs(dd).toFixed(2)} vs ${DAYS[i-1].label}</span>`;}
+      const c=document.getElementById('cap-d'+i); if(c)c.innerHTML=slotCap(da)+ex;});
+  }else if(b){
+    if(sub)sub.innerHTML=`How the flow between <b>${a.side} ${a.digit}</b> and <b>${b.side} ${b.digit}</b> reads across three days — Day 99 to today.`;
+    DAYS.forEach((d,i)=>{const da=dayVersion(i,a),db=dayVersion(i,b); if(!da||!db) return; stripBridge[i].update(da,db);
+      let ex='';
+      if(i>0){const pa=dayVersion(i-1,a),pb=dayVersion(i-1,b), dd=cdf(da.meanPhase,db.meanPhase)-cdf(pa.meanPhase,pb.meanPhase);
+        ex=`<br><span style="color:${dCol(dd,false)}">phase ${dd>=0?'+':'−'}${Math.abs(Math.round(dd))}° vs ${DAYS[i-1].label}</span>`;}
+      const c=document.getElementById('cap-d'+i); if(c)c.innerHTML=bridgeCap(da,db,d.polar,d.seam)+ex;});
+  }
+}
+document.querySelectorAll('#longStrip .longToggle button').forEach(btn=>btn.addEventListener('click',()=>{
+  const m=btn.dataset.mode;
+  if(m==='rel'){stripMode='rel';}else{stripMode='site';stripWhich=(m==='siteB')?'B':'A';}
+  const ls=document.getElementById('longStrip');
+  ls.classList.toggle('mode-site',stripMode==='site');ls.classList.toggle('mode-rel',stripMode==='rel');
+  document.querySelectorAll('#longStrip .longToggle button').forEach(x=>x.classList.toggle('on',x===btn));
+  window.dispatchEvent(new Event('resize')); refreshStrip();
+}));
+
+/* seed: latest = the default detail site, previous = a clean gold site, so the compare reads on load */
+(function(){
+  const gold=DATA.find(s=>s.side==='right'&&s.limb==='foot'&&s.digit==='third')||DATA[0];
+  slotA.setSite(start);document.getElementById('sf-a-cap').innerHTML=slotCap(start);
+  slotB.setSite(gold);document.getElementById('sf-b-cap').innerHTML=slotCap(gold);
+  refreshBridge(); refreshStrip();
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{for(const e of es)e.target.dataset.vis=e.isIntersecting?'1':'0';},{threshold:0.01});
+    ['sf-a','sf-b','bridge','site-d0','site-d1','site-d2','bridge-d0','bridge-d1','bridge-d2'].forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el);});
+  }
+})();
+</script>
+</body>
+</html>

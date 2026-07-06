@@ -1,0 +1,44 @@
+Fieldflux Biosystems — Formal artifact verification
+====================================================
+
+We publish a cryptographic digest of our machine-checked formal corpus so
+that its existence and integrity can be verified independently, without
+disclosing the proprietary source.
+
+  Corpus         The Fieldflux formal ontology of health (Lean 4)
+  Files          721 Lean source files
+  Lines          560,265
+  Digest method  SHA-256 of each source file, sorted by path (LC_ALL=C),
+                 written as a manifest of "<sha256>  <path>" lines; the
+                 corpus digest is the SHA-256 of that manifest.
+  Corpus digest  61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75
+                 (SHA-256)
+  As of          2026-07-03
+
+
+How to verify
+-------------
+The per-file manifest and the source are shared with qualified reviewers
+under NDA. A reviewer with that access recomputes the manifest and the
+corpus digest by the method above and confirms it matches the value
+published here. The commit that publishes this file provides a public,
+dated record of the digest; the underlying invention additionally carries
+a June 2025 patent priority date, an independent timestamp.
+
+
+What this attests — and what it does not
+----------------------------------------
+This digest attests to the existence and integrity of the formal artifacts
+at the date shown. It is not, by itself, evidence of physiological validity.
+Formal verification establishes properties of the definition and its
+mathematics (determinism, internal consistency, convergence, invariance,
+exhaustiveness, conservation, scale-invariance). Whether the definition
+tracks biological health is a separate, empirical question, addressed
+through measurement and study.
+
+
+Independent review
+------------------
+We welcome independent review of the formal artifacts by qualified
+formal-methods groups under NDA, culminating in a limited public
+attestation. Enquiries: contact@fieldfluxbiosystems.com

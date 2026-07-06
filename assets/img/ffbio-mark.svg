@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Fieldflux Biosystems">
+  <!-- Unified coherence mark: four vajra arms → distributed sites, a drive at the centre,
+       inside a measurement aperture. Adapts to light/dark browser tabs. -->
+  <style>
+    .arm  { fill: #1E4065; }
+    .ring { fill: none; stroke: #1E4065; }
+    .node { fill: #9A6A12; }
+    .core { fill: #9A6A12; }
+    .pip  { fill: #FBF5EC; }
+    @media (prefers-color-scheme: dark) {
+      .arm  { fill: #EADFC6; }
+      .ring { stroke: #EADFC6; }
+      .node { fill: #F4C267; }
+      .core { fill: #F4C267; }
+      .pip  { fill: #162C46; }
+    }
+  </style>
+  <circle class="ring" cx="50" cy="50" r="46" stroke-width="1.6" opacity="0.34"/>
+  <circle class="ring" cx="50" cy="50" r="30" stroke-width="1.4" opacity="0.5"/>
+  <path class="arm" d="M50 50 Q71 43 91 50 Q71 57 50 50 Z"/>
+  <path class="arm" d="M50 50 Q29 43 9 50 Q29 57 50 50 Z"/>
+  <path class="arm" d="M50 50 Q43 29 50 9 Q57 29 50 50 Z"/>
+  <path class="arm" d="M50 50 Q43 71 50 91 Q57 71 50 50 Z"/>
+  <circle class="node" cx="91" cy="50" r="3"/><circle class="node" cx="9" cy="50" r="3"/>
+  <circle class="node" cx="50" cy="91" r="3"/><circle class="node" cx="50" cy="9" r="3"/>
+  <circle class="core" cx="50" cy="50" r="6"/>
+  <circle class="pip"  cx="50" cy="50" r="2.2"/>
+</svg>

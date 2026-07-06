@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algebra before AI — Fieldflux Biosystems</title>
+  <meta name="description" content="There is no trained AI model in our technology. Why, for a genuinely new measurement, the algebra that defines what is being measured must come before any model that would learn from it.">
+  <meta name="theme-color" content="#F6F1E7">
+  <link rel="canonical" href="https://fieldfluxbiosystems.com/algebra-before-ai.html">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Fieldflux Biosystems">
+  <meta property="og:title" content="Algebra before AI — Fieldflux Biosystems">
+  <meta property="og:description" content="There is no trained AI model in our technology. Why the algebra that defines what is measured must come before any model that would learn from it.">
+  <meta property="og:url" content="https://fieldfluxbiosystems.com/algebra-before-ai.html">
+  <meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Fieldflux Biosystems — Health, formally defined.">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Algebra before AI — Fieldflux Biosystems">
+  <meta name="twitter:description" content="There is no trained AI model in our technology. Why the algebra that defines what is measured must come before any model that would learn from it.">
+  <meta name="twitter:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/svg+xml" href="assets/img/ffbio-mark.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+  <style>
+    .note { max-width: 700px; margin: 0 auto; }
+    .note p { color: var(--ink-soft); line-height: 1.8; margin: 0 0 20px; font-size: 1.06rem; }
+    .note p em { font-style: italic; color: var(--ink); }
+    .epigraph {
+      max-width: 600px; margin: 0 auto clamp(40px,6vw,64px); text-align: center;
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(1.28rem, 2.7vw, 1.62rem); line-height: 1.4; color: var(--navy);
+      padding-bottom: clamp(28px,4vw,42px); border-bottom: 1px solid var(--line-soft);
+    }
+    .note__foot { max-width:700px; margin: 34px auto 0; font-size:.9rem; color:var(--muted); font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home">
+        <svg class="brand__mark" viewBox="0 0 100 100" style="color:var(--navy)" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.32"/>
+          <path fill="currentColor" d="M50 50 Q71 43 91 50 Q71 57 50 50 Z"/>
+          <path fill="currentColor" d="M50 50 Q29 43 9 50 Q29 57 50 50 Z"/>
+          <path fill="currentColor" d="M50 50 Q43 29 50 9 Q57 29 50 50 Z"/>
+          <path fill="currentColor" d="M50 50 Q43 71 50 91 Q57 71 50 50 Z"/>
+          <circle cx="91" cy="50" r="3" fill="currentColor"/><circle cx="9" cy="50" r="3" fill="currentColor"/>
+          <circle cx="50" cy="91" r="3" fill="currentColor"/><circle cx="50" cy="9" r="3" fill="currentColor"/>
+          <circle cx="50" cy="50" r="6" fill="currentColor"/>
+        </svg>
+        <span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="science.html" style="color:var(--ink)">The Science</a>
+        <a href="platform.html">Platform</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="investors.html">Investors</a>
+        <a href="careers.html">Careers</a>
+        <a href="https://github.com/zedjames/fieldfluxbiosystems/discussions" target="_blank" rel="noopener">Community</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PAGE HERO ===================== -->
+  <section class="page-hero">
+    <div class="page-hero__field" aria-hidden="true"></div>
+    <div class="page-hero__fade" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="page-hero__inner reveal" style="max-width:820px;">
+        <p class="eyebrow">The Science · A reflection</p>
+        <h1 class="display">Algebra before AI</h1>
+        <p class="lede">Why there is no trained AI model in our technology, and why it matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BODY ===================== -->
+  <section class="section">
+    <div class="wrap">
+      <article class="note reveal">
+
+        <p>Healthcare is moving quickly toward artificial intelligence, likely with some genuine positive impact: an AI model well-trained on enough images, records, and waveforms can likely find patterns a person might miss. But I need to be crystal clear, we have taken a different route and it&rsquo;s important for us to be explicit about what and why.</p>
+
+        <p>There is no trained or learned AI model anywhere in this technology. Every result the system produces is a declared, deterministic function of what it measured — a quantity that can be replayed from the raw record and checked by hand. The reason for this lies in the nature of what we are measuring and potential impact of what those measurements are going to mean.</p>
+
+        <p>A learned frontier AI model in 2026 works by example: shown enough labeled cases, it settles on the pattern that separates them. It&rsquo;s a real power, but its position is usually implicit, because every training set carries an ontology inside it. The data was gathered by some instrument, labeled in some vocabulary, sampled from some population, and sorted into categories that were already recognized — disease labels, coded diagnoses, conventional biomarkers, charted outcomes, the interpretations a clinician had language for. An AI model can learn the correlations across all of that with great skill. What it does not do is state the position from which its answer is given. It doesn&rsquo;t declare its ontology. Nor can it work outside that ontology to recognize patterns that it was never trained on.</p>
+
+        <p>That inheritance becomes decisive when the thing being measured is new. Boundary exchange is a new measurement object. There is no dataset of it, no prior labeled examples, no predicate device, and no established category for a model to learn from. A model trained on existing medical data would do the only thing it can: read the new measurement through the old ontology, and attempt to return disease labels, biomarkers, and risk classes — the categories its training already contained. The pattern it found might be new; the category it spoke in would be old. To build on a learned model, in this setting, is to accept the existing ontology as the foundation — and we are absolutely not re-committing to the ontology of separate, distinct, autonomous parts for all the reasons we&rsquo;ve written about in other places already.</p>
+
+        <p>A formal algebra proceeds the other way, by making the position explicit before anything is claimed. It names what it is looking at — a boundary, a source, a witness, a response, a residue, a residual — and it states, for every reading, the grade of claim that reading has earned: admissible or set aside, source-underclosed or physically witnessed, forward-consistent or not yet, a permitted claim or a feature that may not yet mean anything. Each result carries its own passage on its face: from the source delivered, through the witness recorded, through admissibility, through forward consistency, to a claim grade and a declared limit. Nothing is asserted that cannot be traced back through that passage.</p>
+
+        <p>This matters most in high-consequence domains. A measurement offered to medicine has to know what it is allowed to say. It has to hold apart a signal from a claim, a feature from a diagnosis, a correlation from a measurement, and a measurement from an inference, and to mark, at each step, which of these it has reached. A learned AI model can return a class or a score. A formal algebra returns a traceable permission: this was witnessed, this was admissible, this residue persisted, this laminarity held or fractured, this far-side account is forward-consistent, this claim is relative and not yet of bodily origin, this feature is not yet open to clinical reading.</p>
+
+        <p>This posture sits before AI, and it makes room for AI in its place. A learned model can find patterns only within a measurement space that already exists; the algebra is what defines that space, and what decides when a reading in it may be trusted. Once boundary-exchange measurements are standardized and their evidence has accumulated, a model may well have real work to do downstream — as an interpreter, a discovery engine, a reader of cohorts. Placed there, after the measurement is defined, AI model analysis may very well facilitate and expedite discoveries, associations, patterns and potentials. Placed first, it would quietly become the ontology, and the new category would dissolve back into the old one before it was ever measured.</p>
+
+        <p>Much of healthcare AI is being built as a sequence of accumulation: a data lake, a trained model, a clinical prediction. We think this path can improve prediction inside the categories medicine already has. But our invention is being built as an explicit measurement sequence: an instrument, a witness chain, a formal algebra, an admissible measurement object, and a claim-qualified interpretation. This path creates the necessities required for a new category to speak without being absorbed by the old one. Our bespoke algebra wasn&rsquo;t written and machine-checked to be an academic ornament around the instrument. It is the structure that takes what the instrument measured and then translates that measurement into a view of the human body that we&rsquo;ve never actually seen before and how a living boundary may enter medicine without losing the precision of its own terms. From an investment point of view it is the moat, it is the safety architecture, the regulatory posture, and the scientific identity of Fieldflux Biosystems.</p>
+
+        <p class="note__foot">On the ontology of separate, autonomous parts this stance declines to return to, see <a href="boundary-comes-first.html">The boundary comes first</a>. On the algebra that makes the position explicit, see <a href="certification-algebra.html">A boundary-observable certification algebra</a>. On how a reading is screened before it is trusted, see <a href="make-the-signal-fail.html">How we try to make the signal fail</a>.</p>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Fieldflux Biosystems">
+            <svg class="brand__mark" viewBox="0 0 100 100" style="color:var(--gold-on-deep)" aria-hidden="true">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" opacity="0.32"/>
+              <path fill="currentColor" d="M50 50 Q71 43 91 50 Q71 57 50 50 Z"/>
+              <path fill="currentColor" d="M50 50 Q29 43 9 50 Q29 57 50 50 Z"/>
+              <path fill="currentColor" d="M50 50 Q43 29 50 9 Q57 29 50 50 Z"/>
+              <path fill="currentColor" d="M50 50 Q43 71 50 91 Q57 71 50 50 Z"/>
+              <circle cx="91" cy="50" r="3" fill="currentColor"/><circle cx="9" cy="50" r="3" fill="currentColor"/>
+              <circle cx="50" cy="91" r="3" fill="currentColor"/><circle cx="50" cy="9" r="3" fill="currentColor"/>
+              <circle cx="50" cy="50" r="6" fill="currentColor"/>
+            </svg>
+            <span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span>
+          </a>
+          <p>We build the measurement layer for health — a formal definition, and the instruments that read it.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="science.html">The Science</a></li>
+            <li><a href="ethics.html">Ethical Standards</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="investors.html">Investors</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="platform.html">QPCI</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="https://membrane-health.com" target="_blank" rel="noopener">Membrane Health</a></li>
+            <li><a href="contact.html">Pilots &amp; demos</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="https://github.com/zedjames/fieldfluxbiosystems/discussions" target="_blank" rel="noopener">Community &amp; forums</a></li>
+            <li><a href="mailto:contact@fieldfluxbiosystems.com">contact@fieldfluxbiosystems.com</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Fieldflux Biosystems, Inc. · 850 New Burton Rd. Suite 201, Dover, DE 19904</p>
+        <p>Measurement, not diagnosis.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/fieldflux.js?v=2" defer></script>
+  <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e78769d459a24af2a342e0c96c669b73"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

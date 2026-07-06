@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 802" font-family="'SF Mono','DejaVu Sans Mono','Roboto Mono',ui-monospace,Menlo,monospace">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6b7b8a"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1400" height="802" fill="#0c1a28"/>
+
+  <!-- title -->
+  <text x="60" y="80" fill="#ece3d2" font-size="34" font-weight="700" letter-spacing="3">THE FORMAL GATE</text>
+  <text x="60" y="116" fill="#7c8b9a" font-size="18">the packet yields effective-action coefficients — the evaluator releases each only when its readiness predicates pass</text>
+
+  <!-- released-coefficient relation (generic indicator form) -->
+  <text x="1360" y="82" text-anchor="end" fill="#e0a94e" font-size="27" font-style="italic">c<tspan font-size="0.6em" dy="9">released</tspan><tspan dy="-9"> = c</tspan><tspan font-size="0.6em" dy="9">raw</tspan><tspan dy="-9"> · 𝟙[gates pass]</tspan></text>
+
+  <!-- column headers -->
+  <text x="60" y="182" fill="#7c8b9a" font-size="18">source coefficient</text>
+  <text x="300" y="182" fill="#7c8b9a" font-size="18">raw candidate  →  released</text>
+
+  <!-- ============ ROWS ============ -->
+  <!-- row 1 -->
+  <text x="92" y="264" text-anchor="middle" fill="#e0a94e" font-size="44" font-style="italic">c<tspan font-size="0.5em" dy="11">1</tspan></text>
+  <text x="150" y="257" fill="#8b9aa8" font-size="18">c1</text>
+  <rect x="300" y="224" width="259" height="52" rx="8" fill="none" stroke="#5fb0c9" stroke-width="2.5"/>
+  <text x="579" y="258" fill="#cdd7e0" font-size="22">3.633</text>
+  <line x1="810" y1="250" x2="875" y2="250" stroke="#6b7b8a" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="888" y="220" width="78" height="60" rx="8" fill="#17222f"/>
+  <text x="927" y="261" text-anchor="middle" fill="#d98a3a" font-size="28">0</text>
+  <text x="978" y="257" fill="#d98a3a" font-size="19" font-weight="600">HELD</text>
+
+  <!-- row 2 -->
+  <text x="92" y="399" text-anchor="middle" fill="#e0a94e" font-size="44" font-style="italic">c<tspan font-size="0.5em" dy="11">2</tspan></text>
+  <text x="150" y="392" fill="#8b9aa8" font-size="18">c2</text>
+  <rect x="300" y="359" width="400" height="52" rx="8" fill="none" stroke="#5fb0c9" stroke-width="2.5"/>
+  <text x="720" y="393" fill="#cdd7e0" font-size="22">5.618</text>
+  <line x1="810" y1="385" x2="875" y2="385" stroke="#6b7b8a" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="888" y="355" width="78" height="60" rx="8" fill="#17222f"/>
+  <text x="927" y="396" text-anchor="middle" fill="#d98a3a" font-size="28">0</text>
+  <text x="978" y="392" fill="#d98a3a" font-size="19" font-weight="600">HELD</text>
+
+  <!-- row 3 -->
+  <text x="92" y="534" text-anchor="middle" fill="#e0a94e" font-size="44" font-style="italic">c<tspan font-size="0.5em" dy="11">3</tspan></text>
+  <text x="150" y="527" fill="#8b9aa8" font-size="18">c3</text>
+  <rect x="300" y="494" width="60" height="52" rx="8" fill="none" stroke="#5fb0c9" stroke-width="2.5"/>
+  <text x="380" y="528" fill="#cdd7e0" font-size="22">0.837</text>
+  <line x1="810" y1="520" x2="875" y2="520" stroke="#6b7b8a" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="888" y="490" width="78" height="60" rx="8" fill="#17222f"/>
+  <text x="927" y="531" text-anchor="middle" fill="#d98a3a" font-size="28">0</text>
+  <text x="978" y="527" fill="#d98a3a" font-size="19" font-weight="600">HELD</text>
+
+  <!-- row 4 -->
+  <text x="92" y="659" text-anchor="middle" fill="#e0a94e" font-size="44" font-style="italic">c<tspan font-size="0.5em" dy="11">4</tspan></text>
+  <text x="150" y="652" fill="#8b9aa8" font-size="18">c4</text>
+  <rect x="300" y="619" width="29" height="52" rx="8" fill="none" stroke="#5fb0c9" stroke-width="2.5"/>
+  <text x="349" y="653" fill="#cdd7e0" font-size="22">0.402</text>
+  <line x1="810" y1="645" x2="875" y2="645" stroke="#6b7b8a" stroke-width="2.5" marker-end="url(#ah)"/>
+  <rect x="888" y="615" width="78" height="60" rx="8" fill="#17222f"/>
+  <text x="927" y="656" text-anchor="middle" fill="#d98a3a" font-size="28">0</text>
+  <text x="978" y="652" fill="#d98a3a" font-size="19" font-weight="600">HELD</text>
+
+  <!-- ============ readiness-predicate panel ============ -->
+  <rect x="1050" y="205" width="310" height="487" rx="14" fill="#0e1d2c" stroke="#24384a" stroke-width="1.5"/>
+  <text x="1075" y="250" fill="#d7dfe8" font-size="21">readiness predicates</text>
+  <text x="1075" y="278" fill="#6b7b8a" font-size="15">single phone capture · DRTT</text>
+
+  <text x="1083" y="326" fill="#d9764a" font-size="20">✗</text><text x="1115" y="326" fill="#b9c4ce" font-size="17">predicate 1</text>
+  <text x="1083" y="364" fill="#d9764a" font-size="20">✗</text><text x="1115" y="364" fill="#b9c4ce" font-size="17">predicate 2</text>
+  <text x="1083" y="402" fill="#d9764a" font-size="20">✗</text><text x="1115" y="402" fill="#b9c4ce" font-size="17">predicate 3</text>
+  <text x="1083" y="440" fill="#d9764a" font-size="20">✗</text><text x="1115" y="440" fill="#b9c4ce" font-size="17">predicate 4</text>
+  <text x="1083" y="478" fill="#d9764a" font-size="20">✗</text><text x="1115" y="478" fill="#b9c4ce" font-size="17">predicate 5</text>
+  <text x="1083" y="516" fill="#d9764a" font-size="20">✗</text><text x="1115" y="516" fill="#b9c4ce" font-size="17">predicate 6</text>
+  <text x="1083" y="554" fill="#6bbf7a" font-size="20">✓</text><text x="1115" y="554" fill="#eef3f7" font-size="17">predicate 7</text>
+  <text x="1083" y="592" fill="#6bbf7a" font-size="20">✓</text><text x="1115" y="592" fill="#eef3f7" font-size="17">predicate 8</text>
+  <text x="1083" y="630" fill="#6bbf7a" font-size="20">✓</text><text x="1115" y="630" fill="#eef3f7" font-size="17">predicate 9</text>
+  <text x="1075" y="670" fill="#6b7b8a" font-size="16">3 of 9 predicates satisfied</text>
+
+  <!-- footer -->
+  <text x="660" y="742" text-anchor="middle" fill="#9aa7b3" font-size="18">Nothing is inflated — the coefficients exist, but stay at zero until the evidence is in.</text>
+  <text x="660" y="774" text-anchor="middle" fill="#6b7b8a" font-size="16">Coefficients that carry explicit residual evidence are released; a witnessed-source instrument clears the rest.</text>
+</svg>

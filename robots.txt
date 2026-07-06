@@ -1,0 +1,5 @@
+# Fieldflux Biosystems
+User-agent: *
+Allow: /
+
+Sitemap: https://fieldfluxbiosystems.com/sitemap.xml
