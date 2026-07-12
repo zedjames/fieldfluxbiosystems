@@ -78,27 +78,51 @@
     });
   }
 
-  /* Newsletter → POST to a configured endpoint (Cloudflare Worker + Buttondown),
-     with a graceful mailto fallback until one is deployed. */
+  /* Newsletter → POST to a Cloudflare Worker that subscribes via the Buttondown
+     API server-side (bypasses Buttondown's CAPTCHA, hides the key, returns JSON).
+     A signup lands on the list directly — it never routes to a human inbox. */
   function initNewsletter() {
     document.querySelectorAll("[data-newsletter-form]").forEach(function (f) {
+      var sent = false;
       f.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        /* Honeypot: a bot fills this; feign success and send nothing. */
+        var hp = f.querySelector("[name='hp_url']");
+        if (hp && hp.value) { note(f, "Thanks — check your inbox to confirm."); f.reset(); return; }
+
         var el = f.elements["email"];
         var email = el ? (el.value || "").trim() : "";
         if (!email) return;
+
         var endpoint = (f.getAttribute("data-endpoint") || "").trim();
-        if (endpoint) {
-          fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: "email=" + encodeURIComponent(email)
-          }).then(function () {
-            note(f, "Thanks — check your inbox to confirm."); f.reset();
-          }).catch(function () { subscribeFallback(email, f); });
-        } else {
-          subscribeFallback(email, f);
+        if (!endpoint) {
+          note(f, "Signups aren’t wired up yet — please write to contact@fieldfluxbiosystems.com.");
+          return;
         }
+        if (sent) return;
+        sent = true;
+
+        var btn = f.querySelector('button[type="submit"]');
+        var label = btn ? btn.textContent : "";
+        if (btn) { btn.disabled = true; btn.textContent = "Adding you…"; }
+        function reset() { sent = false; if (btn) { btn.disabled = false; btn.textContent = label; } }
+
+        /* form-encoded keeps this a "simple" request — no CORS preflight. */
+        fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ email: email })
+        })
+          .then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (data) {
+            if (data && data.ok) { note(f, "Thanks — check your inbox to confirm."); f.reset(); reset(); }
+            else { reset(); note(f, "Hmm — that didn’t go through. Try again, or a different email."); }
+          })
+          .catch(function () {
+            reset();
+            note(f, "Couldn’t reach the server — check your connection and try again.");
+          });
       });
     });
     /* "Follow the research" buttons elsewhere → jump to the signup. */
@@ -108,13 +132,6 @@
         window.location.href = "contact.html#follow";
       });
     });
-  }
-
-  function subscribeFallback(email, f) {
-    window.location.href = "mailto:support@fieldfluxbiosystems.com?subject=" +
-      encodeURIComponent("Subscribe — follow the research") +
-      "&body=" + encodeURIComponent("Please add me to research updates: " + email);
-    note(f, "Opening your email app to confirm…");
   }
 
   function note(f, msg) {

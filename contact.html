@@ -172,8 +172,10 @@
         <h2 class="h-section">Occasional notes on the research.</h2>
         <p class="lede">As the science opens up, we share the odd essay and milestone — no noise, easy to leave.</p>
       </div>
-      <form class="newsletter-form reveal" data-newsletter-form data-endpoint="" aria-label="Follow the research" novalidate>
+      <form class="newsletter-form reveal" data-newsletter-form data-endpoint="https://ffbio-research.fieldflux.workers.dev" aria-label="Follow the research" novalidate>
         <input name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address" required>
+        <!-- honeypot: a real person leaves this blank -->
+        <input name="hp_url" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <button class="btn btn--primary" type="submit">Follow the research</button>
       </form>
       <p class="form-note reveal" data-form-note hidden style="text-align:center;"></p>
@@ -250,7 +252,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/fieldflux.js?v=2" defer></script>
+  <script src="assets/js/fieldflux.js?v=3" defer></script>
   <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e78769d459a24af2a342e0c96c669b73"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
