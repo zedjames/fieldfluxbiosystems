@@ -1,0 +1,19 @@
+# Core theorems behind the public property claims.
+#
+# One theorem per line:   <ModulePath>   <Fully.Qualified.theoremName>
+# Lines starting with '#' and blank lines are ignored.
+#
+# The attestation workflow runs `#print axioms` on each of these after a green
+# build and records the axiom footprint (should be empty / only the kernel
+# built-ins propext, Classical.choice, Quot.sound). This maps each plain-language
+# claim on science.html to the theorem that discharges it — the "claim-to-theorem"
+# item in the scope-of-work. Populate it as the mapping firms up; until then the
+# attestation stands on the corpus-level facts (build, counts, 0 axioms, 0 sorries,
+# digest).
+#
+# Example (illustrative — replace with the real modules/names):
+#   Tier1                 Tier1.determinism_of_step
+#   Tier5.Complex         Tier5.Complex.d_comp_d
+#   Tier21.GRMatter.RG    Tier21.GRMatter.RG.flow_conserves
+#
+# --- designate below ---

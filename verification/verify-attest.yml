@@ -1,0 +1,67 @@
+name: Corpus Verification Attestation
+
+# Re-checks the corpus with the real Lean kernel on every push to main and emits
+# a signed, timestamped attestation (build ✓, counts, 0 axioms, 0 sorries, digest).
+# The green `lake build` IS the proof that every derivation type-checks; the
+# attestation just publishes the resulting facts. Nothing here discloses source.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+  # To attest a frozen audit commit, add:  tags: [ 'audit-*' ]
+
+permissions:
+  contents: read
+  id-token: write        # for build-provenance signing
+  attestations: write    # for actions/attest-build-provenance
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Installs the toolchain, fetches the mathlib cache, and runs
+      # `lake build QpciLean` — the kernel gate. (lean-action, the maintained one.)
+      - name: Build the shipping corpus (kernel gate)
+        uses: leanprover/lean-action@v1
+        with:
+          build-args: "QpciLean"
+          test: "false"
+          lint: "false"
+
+      - name: Put the Lean toolchain on PATH for later steps
+        run: echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Core-theorem axiom footprints (#print axioms)
+        run: python3 scripts/verify/print_core_axioms.py
+               --list docs/verification/core_theorems.txt
+               --out core_axioms.json
+
+      - name: Compute attestation (enforces 0 axioms / 0 sorries)
+        run: |
+          python3 scripts/verify/compute_attestation.py \
+            --root lean --out attestation.json \
+            --commit "$GITHUB_SHA" \
+            --timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --toolchain "$(cat lean-toolchain)" \
+            --build-status passed \
+            --core-axioms core_axioms.json \
+            --enforce
+
+      - name: Attach tamper-evident build provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: attestation.json
+
+      - name: Upload attestation as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: attestation
+          path: attestation.json
+
+      - name: Publish attestation to the public sites
+        env:
+          PAGES_DEPLOY_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        run: bash scripts/verify/publish_attestation.sh

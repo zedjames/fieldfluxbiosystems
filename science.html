@@ -33,6 +33,17 @@
     .proof-list li::before { content:"\203A"; position:absolute; left:3px; top:-1px; color:var(--gold); font-weight:700; }
     .proof-list strong { color:var(--ink); }
     .digest { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82em; word-break:break-all; color:var(--navy); }
+    .attest { max-width:820px; margin:18px auto 0; border:1px solid var(--line); border-radius:14px; padding:20px 22px; background:var(--paper-2); }
+    .attest__head { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+    .attest__dot { width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(154,106,18,.15); flex:none; }
+    .attest__title { font-weight:600; color:var(--navy); letter-spacing:.01em; }
+    .attest__build { margin-left:auto; font-size:.8em; color:var(--muted); }
+    .attest__build.is-ok { color:var(--navy); }
+    .attest__grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; text-align:center; }
+    @media (max-width:640px){ .attest__grid { grid-template-columns:repeat(3,1fr); } }
+    .attest__grid b { display:block; font-size:1.5rem; color:var(--navy); font-variant-numeric:tabular-nums; line-height:1.1; }
+    .attest__grid span { font-size:.68rem; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); }
+    .attest__foot { margin:16px 0 0; font-size:.82em; color:var(--muted); line-height:1.7; }
 
     /* ---- Reflections carousel ---- */
     .notes-rail-wrap { position:relative; }
@@ -184,13 +195,32 @@
         <p class="lede">Our science is a <em>deterministic analytic surrogate</em>, not a trained neural network. Every result is a defined function of its inputs — so it can be formally verified, replayed exactly from the raw record, and traced back to the mathematics behind it. No black box deciding your state; no drift; no guessing.</p>
       </div>
       <div class="stats reveal">
-        <div class="stat"><span class="stat__n">560K+</span><span class="stat__l">lines of machine-checked proof</span></div>
-        <div class="stat"><span class="stat__n">15,000+</span><span class="stat__l">theorems &amp; lemmas, proved</span></div>
-        <div class="stat"><span class="stat__n">0</span><span class="stat__l">unproven assumptions at the core</span></div>
+        <div class="stat"><span class="stat__n" data-attest="lines">560K+</span><span class="stat__l">lines of machine-checked proof</span></div>
+        <div class="stat"><span class="stat__n" data-attest="theorems">15,000+</span><span class="stat__l">theorems &amp; lemmas, proved</span></div>
+        <div class="stat"><span class="stat__n" data-attest="axioms">0</span><span class="stat__l">unproven assumptions at the core</span></div>
         <div class="stat"><span class="stat__n">0</span><span class="stat__l">trained models in the measurement path</span></div>
       </div>
       <p class="stats-note reveal">The proofs are machine-checked in <strong>Lean&nbsp;4</strong> — the same class of proof assistant used to verify aerospace and cryptographic software.</p>
-      <p class="stats-note reveal" style="margin-top:10px;">Corpus fingerprint (SHA-256): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">how to verify &rarr;</a></p>
+      <p class="stats-note reveal" style="margin-top:10px;">Corpus fingerprint (SHA-256): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">how to verify &rarr;</a> · <a href="https://github.com/zedjames/fieldfluxbiosystems/tree/main/verification">open verification harness &rarr;</a></p>
+
+      <div class="attest reveal" id="attest" hidden aria-live="polite">
+        <div class="attest__head">
+          <span class="attest__dot" aria-hidden="true"></span>
+          <span class="attest__title">Continuous verification</span>
+          <span class="attest__build" id="att-build"></span>
+        </div>
+        <div class="attest__grid">
+          <div><b id="att-files">&mdash;</b><span>files</span></div>
+          <div><b id="att-thms">&mdash;</b><span>theorems &amp; lemmas</span></div>
+          <div><b id="att-defs">&mdash;</b><span>definitions</span></div>
+          <div><b id="att-sorry">&mdash;</b><span>sorries</span></div>
+          <div><b id="att-axiom">&mdash;</b><span>project axioms</span></div>
+        </div>
+        <p class="attest__foot">
+          Digest <span class="digest" id="att-digest"></span><br>
+          Re-checked by the Lean&nbsp;4 kernel on every commit · verified <span id="att-commit"></span> at <span id="att-time"></span>.
+        </p>
+      </div>
       <div class="reveal" style="max-width:820px;margin:clamp(34px,5vw,60px) auto 0;">
         <figure class="figure figure--data">
           <img src="assets/img/data-spectrum.png" alt="Operator spectrum and mode character: the eight real eigenvalues of the self-adjoint packet Hamiltonian as an emission-line spectrum — a six-mode negative band, a wide spectral gap, and two isolated positive modes — with lanes tagging each mode's dynamical role: anchor-responsive, closure-stable, recovery-responsive, and a single residual-sensitive mode alone above the gap.">
@@ -511,6 +541,49 @@
         rail.scrollBy({ left: btn.classList.contains('rail-btn--prev') ? -step : step, behavior: 'smooth' });
       });
     });
+
+    /* Continuous-verification panel — renders the CI-published attestation.json.
+       Stays hidden if the file isn't there yet, so the page degrades gracefully. */
+    (function () {
+      var num = function (n) { return (n == null ? 0 : n).toLocaleString('en-US'); };
+      fetch('attestation.json', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (a) {
+          if (!a || !a.invariants || !a.corpus) return;
+          var $ = function (id) { return document.getElementById(id); };
+          var c = a.corpus, inv = a.invariants, dg = (a.digest && a.digest.root) || '';
+          /* auto-update any cited stat marked with data-attest (shared with membrane) */
+          var fmt = function (k) {
+            if (k === 'lines') return Math.floor(c.lines / 10000) * 10 + 'K+';
+            if (k === 'theorems') return (Math.floor(c.theorems_plus_lemmas / 1000) * 1000).toLocaleString('en-US') + '+';
+            if (k === 'theorems-plain') return (Math.floor(c.theorems_plus_lemmas / 1000) * 1000).toLocaleString('en-US');
+            if (k === 'files') return num(c.files);
+            if (k === 'axioms') return String(inv.project_axioms);
+            if (k === 'digest') return dg;
+            return null;
+          };
+          document.querySelectorAll('[data-attest]').forEach(function (el) {
+            var v = fmt(el.getAttribute('data-attest')); if (v != null) el.textContent = v;
+          });
+          $('att-files').textContent = num(c.files);
+          $('att-thms').textContent = num(c.theorems_plus_lemmas);
+          $('att-defs').textContent = num(c.definitions);
+          $('att-sorry').textContent = inv.sorries;
+          $('att-axiom').textContent = inv.project_axioms;
+          $('att-digest').textContent = dg;
+          $('att-commit').textContent = (a.commit || '').slice(0, 10);
+          $('att-time').textContent = (a.timestamp || '').replace('T', ' ').replace('Z', ' UTC');
+          var ok = a.build && a.build.status === 'passed' && inv.axiom_free && inv.sorry_free;
+          var badge = $('att-build');
+          badge.textContent = ok ? 'build ✓ · ' + (a.toolchain || 'Lean 4') : 'verification pending';
+          if (ok) badge.className = 'attest__build is-ok';
+          /* keep the shown fingerprint current with the live-verified digest */
+          var stat = document.querySelector('.stats-note .digest');
+          if (stat && dg) stat.textContent = dg;
+          $('attest').hidden = false;
+        })
+        .catch(function () { /* no attestation published yet — leave panel hidden */ });
+    })();
   </script>
   <!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e78769d459a24af2a342e0c96c669b73"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
