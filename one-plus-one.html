@@ -44,10 +44,12 @@
     }
     .note-eq em { font-style: italic; color: var(--gold); }
     .note__foot { max-width:700px; margin: 34px auto 0; font-size:.9rem; color:var(--muted); font-style: italic; }
-    .note-demo { max-width:700px; margin: clamp(30px,4vw,44px) auto; padding: clamp(20px,2.6vw,26px) clamp(22px,3vw,30px); border:1px solid var(--line-soft); border-left:3px solid var(--gold); border-radius:12px; background:var(--paper-alt); }
-    .note-demo .k { margin:0 0 8px; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; }
-    .note-demo p { margin:0 0 14px; color:var(--ink-soft); line-height:1.65; font-size:1rem; }
-    .note-demo a.link-arrow { font-size:1rem; }
+    .note-quote {
+      max-width: 660px; margin: clamp(30px,4vw,46px) auto;
+      padding-left: clamp(20px,3vw,28px); border-left: 3px solid var(--gold);
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(1.14rem, 2.2vw, 1.4rem); line-height: 1.5; color: var(--navy);
+    }
   </style>
 </head>
 <body>
@@ -127,11 +129,7 @@
 
         <p>Yet the proof assistant cannot accept the two merely because I can see them, or because their presence feels obvious from the way the construction was written. Each occurrence must be followed into the output; its support must remain intact; its identity must survive the surrounding transformations; and the two must remain distinguishable through every reduction permitted by the algebra. The conclusion becomes easy only after the proof has established that the world inside the expression really contains two valid things to count.</p>
 
-        <aside class="note-demo">
-          <p class="k">Machine-checked</p>
-          <p>The length-one proof described here is one of more than fifteen thousand theorems and lemmas in the corpus, re-checked by the Lean&nbsp;4 kernel on every commit — no unproven assumptions at the core.</p>
-          <a class="link-arrow" href="science.html">See how it is verified &rarr;</a>
-        </aside>
+        <blockquote class="note-quote">A relational measurement is never only a number. It is a claim about what happened between identifiable things, across an ordered route, under a particular interrogation, with a known boundary and a preserved history of composition.</blockquote>
 
         <p>As I worked through this, I began thinking about how often our ordinary understanding rests upon the same apparently childish certainty. We look at two people in a marriage and know that there are two bodies, two names, two histories, and two lives gathered inside the relationship, while the deeper health of that relationship depends upon whether two living centers of care remain present within it. The mathematical problem had become unexpectedly recognizable: before we can speak about what exists between two things, we must first establish that both remain real inside the relation.</p>
 
