@@ -113,17 +113,27 @@
     document.head.appendChild(l);
   }
 
+  function loadPass3() {
+    if (document.querySelector('script[data-fieldflux-pass3]')) return;
+    var p3 = document.createElement("script");
+    p3.src = "assets/js/fieldflux-pass3.js?v=1";
+    p3.async = false;
+    p3.dataset.fieldfluxPass3 = "true";
+    document.body.appendChild(p3);
+  }
+
   function loadPass2Overrides() {
-    if (document.querySelector('link[data-fieldflux-pass2-overrides]')) return;
+    if (document.querySelector('link[data-fieldflux-pass2-overrides]')) { loadPass3(); return; }
     var l = document.createElement("link");
     l.rel = "stylesheet";
     l.href = "assets/css/fieldflux-pass2-overrides.css?v=1";
     l.dataset.fieldfluxPass2Overrides = "true";
     document.head.appendChild(l);
+    loadPass3();
   }
 
   function loadPass2() {
-    if (document.querySelector('script[data-fieldflux-pass2]')) return;
+    if (document.querySelector('script[data-fieldflux-pass2]')) { loadPass2Overrides(); return; }
     var p = document.createElement("script");
     p.src = "assets/js/fieldflux-pass2.js?v=1";
     p.async = false;
