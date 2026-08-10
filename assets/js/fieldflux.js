@@ -113,12 +113,22 @@
     document.head.appendChild(l);
   }
 
+  function loadPass2Overrides() {
+    if (document.querySelector('link[data-fieldflux-pass2-overrides]')) return;
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "assets/css/fieldflux-pass2-overrides.css?v=1";
+    l.dataset.fieldfluxPass2Overrides = "true";
+    document.head.appendChild(l);
+  }
+
   function loadPass2() {
     if (document.querySelector('script[data-fieldflux-pass2]')) return;
     var p = document.createElement("script");
     p.src = "assets/js/fieldflux-pass2.js?v=1";
     p.async = false;
     p.dataset.fieldfluxPass2 = "true";
+    p.addEventListener("load", loadPass2Overrides, { once:true });
     document.body.appendChild(p);
   }
 
