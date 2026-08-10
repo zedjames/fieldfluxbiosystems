@@ -1,3 +1,5 @@
+@import url("fieldflux-cinema-theme.css?v=1");
+
 /* Fieldflux cinematic layer — volumetric measurement worlds. */
 .ffx-chain__stage.is-cinematic,.ffx-measurement__stage.is-cinematic{perspective:1200px;transform-style:preserve-3d}
 .ffx-chain__stage.is-cinematic>.ffx-chain__canvas,.ffx-chain__stage.is-cinematic>.ffx-pass2-canvas--home{opacity:0!important}
