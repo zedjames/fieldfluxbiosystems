@@ -113,12 +113,34 @@
     document.head.appendChild(l);
   }
 
+  function loadCinema() {
+    if (!document.querySelector('link[data-fieldflux-cinema]')) {
+      var l = document.createElement("link");
+      l.rel = "stylesheet";
+      l.href = "assets/css/fieldflux-cinema.css?v=1";
+      l.dataset.fieldfluxCinema = "true";
+      document.head.appendChild(l);
+    }
+    if (document.querySelector('script[data-fieldflux-cinema]')) return;
+    var c = document.createElement("script");
+    c.src = "assets/js/fieldflux-cinema.js?v=1";
+    c.async = false;
+    c.dataset.fieldfluxCinema = "true";
+    document.body.appendChild(c);
+  }
+
   function loadPass3() {
-    if (document.querySelector('script[data-fieldflux-pass3]')) return;
+    var existing = document.querySelector('script[data-fieldflux-pass3]');
+    if (existing) {
+      if (window.__fieldfluxPass3) loadCinema();
+      else existing.addEventListener("load", loadCinema, { once:true });
+      return;
+    }
     var p3 = document.createElement("script");
     p3.src = "assets/js/fieldflux-pass3.js?v=1";
     p3.async = false;
     p3.dataset.fieldfluxPass3 = "true";
+    p3.addEventListener("load", loadCinema, { once:true });
     document.body.appendChild(p3);
   }
 
