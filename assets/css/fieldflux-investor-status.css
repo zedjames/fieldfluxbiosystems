@@ -6,11 +6,13 @@
 .ffx-investor-status__intro .lede{max-width:68ch}
 .ffx-investor-status__legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .ffx-investor-status__legend span{padding:6px 9px;border:1px solid var(--line);font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;background:rgba(248,239,225,.62);color:var(--navy)}
-.ffx-investor-roadmap{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);background:rgba(248,239,225,.54);box-shadow:0 28px 80px rgba(23,59,90,.10);backdrop-filter:blur(10px)}
+.ffx-investor-roadmap{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:rgba(248,239,225,.54);box-shadow:0 28px 80px rgba(23,59,90,.10);backdrop-filter:blur(10px)}
 .ffx-investor-roadmap article{position:relative;min-height:300px;padding:26px 24px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent)}
-.ffx-investor-roadmap article:last-child{border-right:0}
+.ffx-investor-roadmap article:nth-child(-n+3){border-bottom:1px solid var(--line)}
+.ffx-investor-roadmap article:nth-child(3n){border-right:0}
 .ffx-investor-roadmap article:before{content:"";position:absolute;left:0;right:0;top:-1px;height:3px;background:var(--status-color,var(--gold))}
 .ffx-investor-roadmap article[data-state="built"]{--status-color:#597A67}
+.ffx-investor-roadmap article[data-state="release"]{--status-color:#8A7650;background:linear-gradient(180deg,rgba(184,117,66,.10),rgba(255,255,255,.08))}
 .ffx-investor-roadmap article[data-state="now"]{--status-color:#A56E20;background:linear-gradient(180deg,rgba(241,196,108,.12),rgba(255,255,255,.08))}
 .ffx-investor-roadmap article[data-state="next"]{--status-color:#70A6B6}
 .ffx-investor-roadmap article[data-state="long"]{--status-color:#6E6D91}
@@ -27,5 +29,5 @@
 .ffx-risk .sec-head .eyebrow{color:var(--navy)}
 .ffx-risktrack .ffx-riskstep .kicker{letter-spacing:.13em}
 
-@media(max-width:1050px){.ffx-investor-roadmap{grid-template-columns:repeat(2,1fr)}.ffx-investor-roadmap article{border-bottom:1px solid var(--line)}.ffx-investor-roadmap article:nth-child(2n){border-right:0}.ffx-investor-roadmap article:last-child{grid-column:1/-1;border-bottom:0}}
-@media(max-width:680px){.ffx-investor-roadmap{grid-template-columns:1fr}.ffx-investor-roadmap article,.ffx-investor-roadmap article:nth-child(2n){border-right:0}.ffx-investor-roadmap article:last-child{grid-column:auto}.ffx-investor-now{grid-template-columns:1fr}}
+@media(max-width:1050px){.ffx-investor-roadmap{grid-template-columns:repeat(2,1fr)}.ffx-investor-roadmap article,.ffx-investor-roadmap article:nth-child(-n+3){border-bottom:1px solid var(--line)}.ffx-investor-roadmap article:nth-child(3n){border-right:1px solid var(--line)}.ffx-investor-roadmap article:nth-child(2n){border-right:0}.ffx-investor-roadmap article:nth-last-child(-n+2){border-bottom:0}}
+@media(max-width:680px){.ffx-investor-roadmap{grid-template-columns:1fr}.ffx-investor-roadmap article,.ffx-investor-roadmap article:nth-child(2n),.ffx-investor-roadmap article:nth-child(3n){border-right:0;border-bottom:1px solid var(--line)}.ffx-investor-roadmap article:last-child{border-bottom:0}.ffx-investor-now{grid-template-columns:1fr}}
