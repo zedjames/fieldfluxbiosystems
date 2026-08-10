@@ -43,8 +43,8 @@
 
   function classify(el){
     if(!el)return"origin";
-    if(el.matches(".ffx-chain,.ffx-measurement-cinema,.ffx-measurement__stage"))return"observatory";
-    if(el.matches(".ffx-proofband,.ffx-formal,.ffx-evidence,.ffx-products-instruments,.ffx-capital,.ffx-final,.ffx-pagehero.deep,.band-deep,.footer"))return"deep";
+    if(el.matches(".ffx-chain,.ffx-measurement-cinema,.ffx-measurement__stage,.ffx-world-hero,.ffx-world-cinema,.ffx-world-live"))return"observatory";
+    if(el.matches(".ffx-proofband,.ffx-formal,.ffx-evidence,.ffx-products-instruments,.ffx-capital,.ffx-final,.ffx-pagehero.deep,.band-deep,.footer,.ffx-world-lenses"))return"deep";
     if(el.matches(".ffx-science-descent,.ffx-three-truths,.ffx-risk,.ffx-defensibility"))return"slate";
     if(el.matches(".ffx-research-preview,.ffx-research-page"))return"research";
     if(el.matches(".ffx-instruments,.ffx-instrument-scale,.ffx-products-apps,.ffx-product-branch,.ffx-pagehero,.page-hero,.section"))return"mineral";
@@ -54,6 +54,8 @@
   function relevantSections(){
     var modern=qa(".ffx-page>section");
     if(modern.length)return modern;
+    var world=qa("body>main>section");
+    if(world.length)return world.concat(qa("body>footer"));
     return qa("body>section").concat(qa("body>footer"));
   }
   var sections=[];
@@ -103,4 +105,12 @@
   investor.async=false;
   investor.dataset.fieldfluxInvestorStatus="true";
   document.body.appendChild(investor);
+
+  if(!window.__fieldfluxWorld&&!document.querySelector('script[data-fieldflux-world-runtime]')){
+    var world=document.createElement("script");
+    world.src="assets/js/fieldflux-world.js?v=1";
+    world.async=false;
+    world.dataset.fieldfluxWorldRuntime="true";
+    document.body.appendChild(world);
+  }
 })();
