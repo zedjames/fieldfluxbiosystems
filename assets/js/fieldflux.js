@@ -1,11 +1,7 @@
-/* Fieldflux Biosystems — site interactions. Minimal, dependency-free.
-   1) Light/dark toggle (light is the institutional default), persisted.
-   2) Reveal-on-scroll (honors prefers-reduced-motion). */
+/* Fieldflux Biosystems — site interactions. Minimal, dependency-free. */
 (function () {
   "use strict";
 
-  /* Light-only, institutional. Clear any stale dark-mode state from earlier builds
-     so a returning visitor never sees the crest on a dark ground. */
   try {
     document.documentElement.removeAttribute("data-theme");
     localStorage.removeItem("fieldflux-theme");
@@ -26,7 +22,6 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  /* Lightbox — click a data figure to view it larger. */
   function initLightbox() {
     var imgs = document.querySelectorAll(".figure--data img");
     if (!imgs.length) return;
@@ -56,7 +51,6 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
   }
 
-  /* Contact form → composes an email (works with no backend). */
   function initContactForm() {
     var f = document.querySelector("[data-contact-form]");
     if (!f) return;
@@ -65,72 +59,43 @@
       var to = f.getAttribute("data-to") || "support@fieldfluxbiosystems.com";
       var g = function (n) { var el = f.elements[n]; return el ? (el.value || "").trim() : ""; };
       var name = g("fullname"), email = g("email"), org = g("org"), topic = g("topic"), msg = g("message");
-      if (!name || !email || !msg) {
-        note(f, "Please add your name, email, and a message.");
-        return;
-      }
+      if (!name || !email || !msg) { note(f, "Please add your name, email, and a message."); return; }
       var subject = "Fieldflux enquiry — " + (topic || "General") + (name ? " — " + name : "");
-      var body = "Name: " + name + "\nEmail: " + email +
-        (org ? "\nOrganization: " + org : "") + "\nTopic: " + topic + "\n\n" + msg;
-      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
+      var body = "Name: " + name + "\nEmail: " + email + (org ? "\nOrganization: " + org : "") + "\nTopic: " + topic + "\n\n" + msg;
+      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       note(f, "Opening your email app… if nothing happens, write to " + to + ".");
     });
   }
 
-  /* Newsletter → POST to a Cloudflare Worker that subscribes via the Buttondown
-     API server-side (bypasses Buttondown's CAPTCHA, hides the key, returns JSON).
-     A signup lands on the list directly — it never routes to a human inbox. */
   function initNewsletter() {
     document.querySelectorAll("[data-newsletter-form]").forEach(function (f) {
       var sent = false;
       f.addEventListener("submit", function (e) {
         e.preventDefault();
-
-        /* Honeypot: a bot fills this; feign success and send nothing. */
         var hp = f.querySelector("[name='hp_url']");
         if (hp && hp.value) { note(f, "Thanks — check your inbox to confirm."); f.reset(); return; }
-
         var el = f.elements["email"];
         var email = el ? (el.value || "").trim() : "";
         if (!email) return;
-
         var endpoint = (f.getAttribute("data-endpoint") || "").trim();
-        if (!endpoint) {
-          note(f, "Signups aren’t wired up yet — please write to contact@fieldfluxbiosystems.com.");
-          return;
-        }
+        if (!endpoint) { note(f, "Signups aren’t wired up yet — please write to contact@fieldfluxbiosystems.com."); return; }
         if (sent) return;
         sent = true;
-
         var btn = f.querySelector('button[type="submit"]');
         var label = btn ? btn.textContent : "";
         if (btn) { btn.disabled = true; btn.textContent = "Adding you…"; }
         function reset() { sent = false; if (btn) { btn.disabled = false; btn.textContent = label; } }
-
-        /* form-encoded keeps this a "simple" request — no CORS preflight. */
-        fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ email: email })
-        })
+        fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ email: email }) })
           .then(function (r) { return r.json().catch(function () { return {}; }); })
           .then(function (data) {
             if (data && data.ok) { note(f, "Thanks — check your inbox to confirm."); f.reset(); reset(); }
             else { reset(); note(f, "Hmm — that didn’t go through. Try again, or a different email."); }
           })
-          .catch(function () {
-            reset();
-            note(f, "Couldn’t reach the server — check your connection and try again.");
-          });
+          .catch(function () { reset(); note(f, "Couldn’t reach the server — check your connection and try again."); });
       });
     });
-    /* "Follow the research" buttons elsewhere → jump to the signup. */
     document.querySelectorAll("[data-newsletter]").forEach(function (b) {
-      b.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "contact.html#follow";
-      });
+      b.addEventListener("click", function (e) { e.preventDefault(); window.location.href = "contact.html#follow"; });
     });
   }
 
@@ -139,10 +104,20 @@
     if (n) { n.textContent = msg; n.hidden = false; }
   }
 
+  function loadExperientialLayer() {
+    if (document.querySelector('script[data-fieldflux-next]')) return;
+    var s = document.createElement("script");
+    s.src = "assets/js/fieldflux-next.js?v=1";
+    s.defer = true;
+    s.dataset.fieldfluxNext = "true";
+    document.body.appendChild(s);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initLightbox();
     initContactForm();
     initNewsletter();
+    loadExperientialLayer();
   });
 })();
