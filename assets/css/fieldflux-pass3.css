@@ -1,0 +1,66 @@
+/* Fieldflux pass 3 — continuity, consequence, and empirical threshold. */
+
+/* Home: show that the object survives each transformation. */
+.ffx-continuity{position:absolute;z-index:8;left:50%;bottom:26px;transform:translateX(-50%);width:min(660px,48vw);padding:10px 14px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);display:grid;grid-template-columns:auto 1fr;gap:7px 18px;align-items:center;pointer-events:none}
+.ffx-continuity:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:calc(var(--continuity-progress,0)*100%);background:var(--gold);transition:width .6s ease}
+.ffx-continuity__label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ffx-continuity__invariants{display:flex;align-items:center;justify-content:flex-end;gap:7px;color:var(--navy)}
+.ffx-continuity__invariants i{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.ffx-continuity__invariants i.is-pulse{animation:ffxInvariant .6s ease both}
+.ffx-continuity__invariants b{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.ffx-continuity__carry{grid-column:1/-1;display:flex;justify-content:space-between;gap:18px;border-top:1px solid var(--line-soft);padding-top:7px}
+.ffx-continuity__carry span{font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.ffx-continuity__carry strong{font-size:.68rem;font-weight:500;color:var(--navy);text-align:right}
+@keyframes ffxInvariant{0%{transform:scale(.35);opacity:.2}100%{transform:scale(1);opacity:1}}
+
+/* Science: a persistent claim, a light interpretation transition, then the real empirical threshold. */
+.ffx-science-claim{width:min(900px,calc(100% - 40px));margin:0 auto clamp(46px,6vw,76px);padding:clamp(24px,3.5vw,38px);border:1px solid var(--line);background:linear-gradient(135deg,var(--paper-2),var(--paper));position:sticky;top:92px;z-index:8;box-shadow:0 18px 50px rgba(30,64,101,.06)}
+.ffx-science-claim:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:calc(var(--science-progress,0)*100%);background:var(--gold);transition:width .6s ease}
+.ffx-science-claim>span{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.ffx-science-claim blockquote{margin:10px 0 14px;font:300 clamp(1.25rem,2.3vw,1.9rem)/1.22 var(--serif);color:var(--navy);max-width:38ch}
+.ffx-science-claim__state{display:flex;align-items:center;gap:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted)}
+.ffx-science-claim__state b{color:var(--gold);font-weight:500}.ffx-science-claim__state i{width:36px;height:1px;background:var(--line)}.ffx-science-claim__state strong{font-weight:500;color:var(--ink-soft)}
+.ffx-science-step{transition:opacity .35s ease,border-color .35s ease,transform .35s ease}
+.ffx-science-step.is-claim-past{opacity:.64}.ffx-science-step.is-claim-current{border-color:rgba(154,106,18,.34);transform:translateX(6px)}
+.ffx-interpretive-bridge{margin:clamp(34px,5vw,58px) 0;padding:14px 18px;border-block:1px solid var(--line-soft);display:grid;grid-template-columns:auto 44px auto 1fr;align-items:center;gap:12px;color:var(--muted)}
+.ffx-interpretive-bridge span,.ffx-interpretive-bridge strong{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}.ffx-interpretive-bridge strong{color:var(--navy);font-weight:500}.ffx-interpretive-bridge i{height:1px;background:linear-gradient(90deg,var(--gold),var(--navy))}.ffx-interpretive-bridge small{font-size:.72rem;text-align:right}
+.ffx-truth-boundary--empirical{margin-top:clamp(70px,9vw,110px);margin-bottom:clamp(70px,9vw,110px);background:linear-gradient(90deg,rgba(30,64,101,.045),rgba(154,106,18,.065))}
+.ffx-truth-boundary--empirical .ffx-truth-boundary__gap b{color:var(--gold)}
+.ffx-truth-boundary--empirical .ffx-truth-boundary__gap span{background:linear-gradient(90deg,var(--navy) 0 42%,transparent 42% 58%,var(--gold) 58% 100%)}
+
+/* Platform: family semantics and an explicit evidence deletion experiment. */
+.ffx-family-readout{position:absolute;z-index:8;right:clamp(22px,3vw,40px);top:46%;transform:translateY(-50%) translateX(14px);width:min(340px,31vw);padding:16px 18px;border:1px solid rgba(234,240,247,.12);background:rgba(10,22,32,.56);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:.35s ease}
+.ffx-family-readout.is-visible{opacity:1;transform:translateY(-50%) translateX(0)}
+.ffx-family-readout>span{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#8fa5b5}.ffx-family-readout strong{display:block;margin-top:8px;font:300 1.55rem var(--serif);color:var(--gold-on-deep)}.ffx-family-readout b{display:block;margin-top:4px;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:#6fb6ce}.ffx-family-readout p{margin:10px 0 0;color:#a7b4c4;font-size:.78rem;line-height:1.45}
+.ffx-deletion-panel{position:absolute;z-index:9;left:max(var(--gutter),calc((100vw - var(--maxw))/2 + var(--gutter)));bottom:28px;width:min(560px,50vw);padding:16px;border:1px solid rgba(244,194,103,.18);background:rgba(8,20,30,.78);backdrop-filter:blur(14px);opacity:0;transform:translateY(12px);pointer-events:none;transition:.35s ease}
+.ffx-deletion-panel.is-visible{opacity:1;transform:none;pointer-events:auto}
+.ffx-deletion-panel__eyebrow{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-on-deep)}
+.ffx-deletion-panel__state{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:10px;background:rgba(234,240,247,.08)}
+.ffx-deletion-panel__state>div{padding:9px 11px;background:rgba(12,27,40,.92)}.ffx-deletion-panel__state small{display:block;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#7f96a6}.ffx-deletion-panel__state b{display:block;margin-top:3px;font-size:.72rem;letter-spacing:.08em;color:#6fb6ce}.ffx-deletion-panel[data-authority="withheld"] [data-pass3-authority]{color:#CB6149}.ffx-deletion-panel[data-authority="available"] [data-pass3-authority]{color:var(--gold-on-deep)}
+.ffx-deletion-panel__buttons{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.ffx-deletion-panel button{appearance:none;border:1px solid rgba(234,240,247,.12);background:transparent;color:#adc0ce;padding:7px 9px;font:500 .62rem var(--body);cursor:pointer}.ffx-deletion-panel button:hover,.ffx-deletion-panel button.is-active{border-color:var(--gold-on-deep);color:var(--gold-on-deep)}
+.ffx-deletion-panel>p{margin:10px 0 0;color:#a7b4c4;font-size:.72rem;line-height:1.45}
+.ffx-measurement__stage[data-pass3-delete="coverage"]:before,.ffx-measurement__stage[data-pass3-delete="source"]:before,.ffx-measurement__stage[data-pass3-delete="calibration"]:before{content:"AUTHORITY WITHHELD · NUMERICAL STATE RETAINED";position:absolute;z-index:8;right:clamp(22px,3vw,40px);top:94px;padding:7px 10px;border:1px solid rgba(203,97,73,.34);color:#e3917e;background:rgba(70,24,18,.32);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase}
+
+/* Products: branches can meet again, but only through a typed interface. */
+.ffx-product-convergence{position:relative;max-width:760px;margin:54px auto 0;padding:34px 42px 28px;text-align:center;border:1px solid var(--line);background:var(--paper-2);opacity:0;transform:translateY(12px);transition:.8s ease}
+.ffx-product-convergence.is-in{opacity:1;transform:none}
+.ffx-product-convergence__lines{position:absolute;left:12%;right:12%;top:-55px;height:55px}.ffx-product-convergence__lines i{position:absolute;top:0;width:38%;height:55px;border-bottom:1px solid var(--line)}.ffx-product-convergence__lines i:first-child{left:0;border-right:1px solid var(--line);transform:skewX(26deg)}.ffx-product-convergence__lines i:last-child{right:0;border-left:1px solid var(--line);transform:skewX(-26deg)}
+.ffx-product-convergence>span{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}.ffx-product-convergence>strong{display:block;margin:7px auto 0;font:300 clamp(1.3rem,2.3vw,1.8rem)/1.18 var(--serif);color:var(--navy);max-width:31ch}.ffx-product-convergence>p{margin:12px auto 0;max-width:62ch;color:var(--ink-soft);font-size:.86rem}
+
+/* Investors: make the frontier spatial and psychological. */
+.ffx-risk-frontier{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:1px;margin:0 0 34px;border:1px solid var(--line);background:var(--line);position:sticky;top:82px;z-index:8;box-shadow:0 12px 34px rgba(30,64,101,.05)}
+.ffx-risk-frontier>div{padding:14px 16px;background:var(--paper-2)}.ffx-risk-frontier>div.is-frontier{background:linear-gradient(180deg,rgba(154,106,18,.08),var(--paper-2))}.ffx-risk-frontier span{display:block;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}.ffx-risk-frontier b{display:block;margin-top:4px;font-size:.78rem;font-weight:500;color:var(--navy)}.ffx-risk-frontier .is-frontier b{color:var(--gold)}.ffx-risk-frontier>small{grid-column:1/-1;padding:8px 16px;background:var(--paper-alt);font-size:.66rem;color:var(--muted)}
+.ffx-riskstep.is-behind{opacity:.52;transform:translateX(-5px)}.ffx-riskstep.is-frontier{opacity:1!important;transform:translateX(8px)!important;border-color:rgba(154,106,18,.45)!important;box-shadow:0 14px 36px rgba(154,106,18,.08)}.ffx-riskstep.is-ahead{opacity:.86}
+
+/* Research: expose intellectual genealogy through selectable threads. */
+.ffx-research-threads{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:0 0 14px}.ffx-research-threads>span{font-size:.57rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-right:5px}.ffx-research-threads button{appearance:none;border:1px solid var(--line);background:var(--paper-2);color:var(--ink-soft);padding:7px 10px;font:500 .66rem var(--body);cursor:pointer}.ffx-research-threads button:hover,.ffx-research-threads button.is-active{border-color:var(--gold);color:var(--gold)}
+.ffx-research-node,.ffx-research-edge{transition:opacity .3s ease,filter .3s ease}.ffx-research-node.is-thread-muted{opacity:.12;filter:grayscale(1)}.ffx-research-node.is-thread-active{opacity:1}.ffx-research-edge.is-thread-muted{opacity:.07}
+
+@media(max-width:900px){
+  .ffx-continuity{width:calc(100% - 32px);bottom:16px}.ffx-continuity__invariants{justify-content:flex-start}.ffx-continuity__carry{display:none}
+  .ffx-science-claim{position:relative;top:auto}.ffx-interpretive-bridge{grid-template-columns:1fr 34px 1fr}.ffx-interpretive-bridge small{grid-column:1/-1;text-align:left}
+  .ffx-family-readout{right:16px;top:auto;bottom:155px;width:calc(100% - 32px);transform:translateY(10px)}.ffx-family-readout.is-visible{transform:none}
+  .ffx-deletion-panel{left:16px;right:16px;bottom:16px;width:auto}.ffx-deletion-panel__state{grid-template-columns:1fr}.ffx-measurement__stage[data-pass3-delete]:before{display:none}
+  .ffx-risk-frontier{position:relative;top:auto;grid-template-columns:1fr}.ffx-risk-frontier>small{grid-column:1}
+}
+@media(prefers-reduced-motion:reduce){.ffx-continuity:after,.ffx-science-claim:after,.ffx-product-convergence,.ffx-family-readout,.ffx-deletion-panel,.ffx-riskstep,.ffx-research-node,.ffx-research-edge{transition:none!important}.ffx-continuity__invariants i.is-pulse{animation:none}}
