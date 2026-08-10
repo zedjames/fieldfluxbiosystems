@@ -1,0 +1,40 @@
+/* Fieldflux pass-two integration refinements. Loaded after the pass-two layer. */
+.ffx-motion-verb{top:72px}
+.ffx-evidence-hud{top:118px;bottom:auto;pointer-events:none}
+
+.ffx-formal{position:relative;overflow:hidden}
+.ffx-formal::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;background-image:linear-gradient(rgba(244,194,103,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(111,182,206,.045) 1px,transparent 1px),radial-gradient(circle at 78% 45%,rgba(244,194,103,.08),transparent 26%);background-size:54px 54px,54px 54px,auto;mask-image:linear-gradient(90deg,transparent,black 24%,black 100%)}
+.ffx-formal>.wrap{position:relative;z-index:1}
+.ffx-formal-map span{position:relative;border:1px solid rgba(244,194,103,.16);padding:10px 14px;background:rgba(15,32,52,.34);backdrop-filter:blur(5px)}
+.ffx-formal-map span::after{content:"";position:absolute;inset:5px;border:1px solid rgba(111,182,206,.055);pointer-events:none}
+
+/* Science timeline: connectors belong to each step, not to the whole track.
+   This lets the empirical threshold actually interrupt the formal chain. */
+.ffx-science-track::before{display:none!important}
+.ffx-science-track>.ffx-science-step::before{content:"";position:absolute;left:56px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(154,106,18,.30),rgba(30,64,101,.34));z-index:0;pointer-events:none}
+.ffx-science-track>.ffx-science-step__index{position:relative;z-index:2}
+
+/* The empirical threshold is a crossing, not another timeline row. */
+.ffx-science-track .ffx-truth-boundary--empirical{margin:clamp(68px,8vw,104px) 0 clamp(68px,8vw,104px) 84px!important;padding:0!important;grid-template-columns:minmax(0,1fr) minmax(220px,.56fr) minmax(0,1fr)!important;gap:0!important;border:1px solid rgba(30,64,101,.16)!important;background:var(--paper-2)!important;box-shadow:0 22px 54px rgba(30,64,101,.07);overflow:hidden}
+.ffx-science-track .ffx-truth-boundary--empirical>div{min-height:250px!important;padding:clamp(28px,3.4vw,44px)!important}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__formal,
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__nature{background:linear-gradient(180deg,rgba(154,106,18,.018),transparent)}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__formal{border-right:1px solid var(--line-soft)}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__nature{border-left:1px solid var(--line-soft)}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap{background:linear-gradient(180deg,var(--deep),var(--deep-2));color:var(--on-deep);text-align:center;align-items:center;justify-content:center}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap b{color:var(--gold-on-deep)!important;font-size:.66rem;letter-spacing:.22em;line-height:1.5}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap span{width:88%;background:linear-gradient(90deg,rgba(111,182,206,.62) 0 42%,transparent 42% 58%,rgba(244,194,103,.78) 58% 100%)!important}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap span:after{background:var(--deep);border-color:var(--gold-on-deep);box-shadow:0 0 18px rgba(244,194,103,.24)}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap em{color:rgba(234,240,247,.58);font-size:.68rem}
+.ffx-science-track .ffx-truth-boundary--empirical strong{max-width:12ch}
+.ffx-science-track .ffx-truth-boundary--empirical small{max-width:30ch}
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__formal i,
+.ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__nature i{inset:28px;opacity:.45}
+
+@media(max-width:820px){
+  .ffx-motion-verb{top:58px}.ffx-evidence-hud{top:104px;bottom:auto}
+  .ffx-science-track>.ffx-science-step::before{left:25px}
+  .ffx-science-track .ffx-truth-boundary--empirical{margin-left:0!important;grid-template-columns:1fr!important}
+  .ffx-science-track .ffx-truth-boundary--empirical>div{min-height:auto!important}
+  .ffx-science-track .ffx-truth-boundary--empirical .ffx-truth-boundary__gap{min-height:170px!important;border-block:1px solid var(--line-soft)}
+}

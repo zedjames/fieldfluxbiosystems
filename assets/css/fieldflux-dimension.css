@@ -1,0 +1,132 @@
+/* Fieldflux dimensional system — persistent field, semantic palette, regime transitions. */
+html.ffx-dimensional{
+  --paper:#F0E3CF;
+  --paper-2:#F8EFE1;
+  --paper-alt:#DCE6E5;
+  --deep:#102638;
+  --deep-2:#071822;
+  --navy:#173B5A;
+  --navy-2:#102F49;
+  --gold:#A56E20;
+  --gold-2:#7D4F12;
+  --gold-on-deep:#F1C46C;
+  --on-deep:#ECF1F1;
+  --on-deep-soft:#A9BAC2;
+  --line:rgba(23,59,90,.15);
+  --line-soft:rgba(23,59,90,.085);
+  --line-on-deep:rgba(236,241,241,.15);
+  --ffx-mineral:#D4E1E2;
+  --ffx-slate:#B8CBD0;
+  --ffx-petrol:#103943;
+  --ffx-indigo:#182845;
+  --ffx-obsidian:#06131C;
+  --ffx-copper:#B87542;
+  --ffx-aqua:#70C8D8;
+}
+html.ffx-dimensional body{background:var(--paper);transition:background-color .7s ease,color .7s ease}
+
+/* One persistent field remains with the visitor while the section regime changes. */
+.ffx-world-field{position:fixed;inset:0;width:100vw;height:100vh;z-index:2;pointer-events:none;opacity:.34;mix-blend-mode:multiply;mask-image:linear-gradient(90deg,transparent 0 31%,rgba(0,0,0,.18) 43%,#000 60% 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0 31%,rgba(0,0,0,.18) 43%,#000 60% 100%);transition:opacity .65s ease,filter .65s ease,mix-blend-mode .65s ease}
+body[data-ffx-regime="observatory"] .ffx-world-field,body[data-ffx-regime="deep"] .ffx-world-field{mix-blend-mode:screen;opacity:.48;filter:saturate(1.15)}
+body[data-ffx-regime="research"] .ffx-world-field{opacity:.26;filter:saturate(.9)}
+body[data-ffx-regime="slate"] .ffx-world-field,body[data-ffx-regime="mineral"] .ffx-world-field{opacity:.30}
+.ffx-page>section>.wrap,.ffx-page>section>.ffx-chain__intro,.ffx-page>section>.ffx-chain__cinema,.ffx-page>section>.ffx-measurement__intro,.ffx-page>section>.ffx-measurement__cinema,.ffx-page>section>.ffx-science-track{position:relative;z-index:3}
+
+/* The palette progresses with epistemic depth instead of resetting to cream. */
+.ffx-homehero{background:
+  radial-gradient(ellipse at 78% 46%,rgba(112,200,216,.24),transparent 26%),
+  radial-gradient(ellipse at 61% 22%,rgba(184,117,66,.10),transparent 27%),
+  linear-gradient(120deg,#F3E3CC 0%,#E8DDCB 45%,#D1DFE0 100%)!important}
+.ffx-homehero:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,250,242,.46),transparent 45%),linear-gradient(180deg,transparent 72%,rgba(23,59,90,.06));box-shadow:inset 0 -60px 100px rgba(23,59,90,.035)}
+.ffx-homehero__inner{position:relative;z-index:4}
+
+/* Entering the living chain becomes a real descent from manuscript to observatory. */
+.ffx-chain{position:relative;background:linear-gradient(180deg,#E9DECC 0,#CBD9DA 7%,#12283A 16%,#071721 27%,#06131C 100%)!important;color:var(--on-deep)}
+.ffx-chain:before{content:"";position:absolute;left:0;right:0;top:0;height:20vh;min-height:180px;pointer-events:none;background:radial-gradient(ellipse at 68% 100%,rgba(112,200,216,.16),transparent 45%),linear-gradient(180deg,rgba(240,227,207,.95),rgba(184,203,208,.48) 46%,transparent 100%)}
+.ffx-chain__intro{padding:34px 28px 46px;border:1px solid rgba(23,59,90,.11);background:rgba(240,227,207,.78);backdrop-filter:blur(12px);box-shadow:0 24px 70px rgba(6,19,28,.10)}
+.ffx-chain__stage.is-cinematic{border-color:rgba(112,200,216,.15)!important;box-shadow:0 30px 90px rgba(0,0,0,.24),inset 0 0 150px rgba(0,0,0,.24)}
+
+.ffx-instruments{background:
+  radial-gradient(circle at 80% 18%,rgba(112,200,216,.18),transparent 28%),
+  linear-gradient(145deg,#C9DADB 0%,#DDE4DF 52%,#D9CDBB 100%)!important}
+.ffx-instrumentline{box-shadow:0 24px 70px rgba(23,59,90,.08)}
+.ffx-instrumentline article{background:rgba(248,239,225,.72);backdrop-filter:blur(8px)}
+.ffx-instrumentline article:first-child{background:linear-gradient(180deg,rgba(241,196,108,.13),rgba(248,239,225,.72))}
+
+.ffx-proofband{background:
+  radial-gradient(circle at 76% 42%,rgba(112,200,216,.08),transparent 30%),
+  linear-gradient(145deg,#182845,#102438 62%,#0C1B2A)!important}
+.ffx-research-preview{background:
+  radial-gradient(ellipse at 82% 28%,rgba(112,200,216,.14),transparent 30%),
+  linear-gradient(140deg,#E7D9C6 0%,#DCE5E2 52%,#C8D8DC 100%)!important}
+.ffx-final{background:linear-gradient(145deg,#0A1924,#123541 62%,#172746)!important}
+
+/* Core page surfaces */
+.ffx-pagehero:not(.deep){background:
+  radial-gradient(ellipse at 84% 36%,rgba(112,200,216,.24),transparent 30%),
+  radial-gradient(ellipse at 56% 0%,rgba(184,117,66,.09),transparent 25%),
+  linear-gradient(135deg,#D8E4E4 0%,#E9E1D4 48%,#C8D8DE 100%)}
+.ffx-pagehero.deep{background:radial-gradient(ellipse at 80% 40%,rgba(112,200,216,.10),transparent 30%),linear-gradient(145deg,#172846,#0D2635 66%,#071923)!important}
+
+.ffx-science-descent{background:
+  radial-gradient(circle at 80% 32%,rgba(112,200,216,.10),transparent 26%),
+  linear-gradient(180deg,#E8DFD1,#DDE4E1 72%,#CDDADD)}
+.ffx-science-claim{background:linear-gradient(135deg,rgba(248,239,225,.96),rgba(216,228,228,.94))!important;box-shadow:0 22px 60px rgba(23,59,90,.10)!important}
+.ffx-truth-boundary--empirical{box-shadow:0 26px 80px rgba(23,59,90,.12)}
+.ffx-formal{background:radial-gradient(circle at 78% 44%,rgba(112,200,216,.11),transparent 28%),linear-gradient(145deg,#172A49,#10283B 64%,#091925)!important}
+.ffx-three-truths{background:linear-gradient(150deg,#C3D3D6 0%,#D7DFDB 48%,#DECDBB 100%)}
+
+.ffx-products-apps{background:linear-gradient(145deg,#E7DDD0,#DCE4E0 55%,#C7D8DC)}
+.ffx-product-branch{background:linear-gradient(135deg,#C9DADC,#E2E2D8 48%,#DCCEBB)!important}
+.ffx-products-instruments{background:radial-gradient(circle at 76% 30%,rgba(112,200,216,.12),transparent 29%),linear-gradient(145deg,#103943,#0C2734 62%,#081923)!important}
+
+.ffx-risk{background:linear-gradient(150deg,#E5DCCF,#DCE3E0 58%,#C8D8DB)}
+.ffx-capital{background:radial-gradient(circle at 76% 38%,rgba(112,200,216,.09),transparent 29%),linear-gradient(145deg,#182845,#10283A 68%,#0B1B28)!important}
+.ffx-defensibility{background:linear-gradient(145deg,#C6D6D9,#E2DFD6 52%,#DDCDBA)}
+.ffx-research-page{background:radial-gradient(circle at 82% 24%,rgba(112,200,216,.16),transparent 29%),linear-gradient(145deg,#D3E0E1,#E8DFD1 55%,#C4D5D9)!important}
+
+/* Sections gain depth planes instead of reading as flat color blocks. */
+.ffx-instruments,.ffx-research-preview,.ffx-science-descent,.ffx-three-truths,.ffx-products-apps,.ffx-product-branch,.ffx-risk,.ffx-defensibility,.ffx-research-page{position:relative;isolation:isolate;box-shadow:inset 0 1px rgba(255,255,255,.30),inset 0 -1px rgba(23,59,90,.08)}
+.ffx-instruments:after,.ffx-research-preview:after,.ffx-science-descent:after,.ffx-three-truths:after,.ffx-products-apps:after,.ffx-risk:after,.ffx-defensibility:after,.ffx-research-page:after{content:"";position:absolute;z-index:0;inset:0;pointer-events:none;background-image:linear-gradient(rgba(23,59,90,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(23,59,90,.027) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(90deg,transparent 0,#000 56%,transparent 100%);opacity:.48}
+
+/* Sticky nav changes material with the field regime. */
+.nav{transition:background-color .55s ease,border-color .55s ease,box-shadow .55s ease}
+body[data-ffx-regime="observatory"] .nav,body[data-ffx-regime="deep"] .nav{background:rgba(7,20,29,.84)!important;border-color:rgba(236,241,241,.10)!important;box-shadow:0 12px 40px rgba(0,0,0,.10)}
+body[data-ffx-regime="observatory"] .nav .brand__word,body[data-ffx-regime="deep"] .nav .brand__word{color:#E8EEE9}
+body[data-ffx-regime="observatory"] .nav .brand__mark,body[data-ffx-regime="deep"] .nav .brand__mark{color:var(--gold-on-deep)!important}
+body[data-ffx-regime="observatory"] .nav__links a,body[data-ffx-regime="deep"] .nav__links a{color:#A9BAC2}
+body[data-ffx-regime="observatory"] .nav__links a:hover,body[data-ffx-regime="deep"] .nav__links a:hover,body[data-ffx-regime="observatory"] .nav__links a.is-active,body[data-ffx-regime="deep"] .nav__links a.is-active{color:#ECF1F1}
+body[data-ffx-regime="observatory"] .nav .btn--ghost,body[data-ffx-regime="deep"] .nav .btn--ghost{color:#ECF1F1;border-color:rgba(236,241,241,.18)}
+
+/* Dimensional hover: surfaces move in z instead of merely changing border color. */
+.ffx-research-card,.ffx-instrumentline article,.ffx-scale article,.ffx-three article,.ffx-riskstep{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,background-color .35s ease,border-color .35s ease}
+@media (hover:hover){
+  .ffx-research-card:hover,.ffx-instrumentline article:hover,.ffx-scale article:hover,.ffx-three article:hover{transform:translateY(-5px);box-shadow:0 24px 56px rgba(23,59,90,.12)}
+}
+
+@media(max-width:900px){
+  .ffx-world-field{opacity:.17;mask-image:linear-gradient(180deg,transparent 0 26%,#000 56% 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0 26%,#000 56% 100%)}
+  .ffx-chain{background:linear-gradient(180deg,#E9DECC 0,#BFD1D4 5%,#10283A 12%,#06131C 20%,#06131C 100%)!important}
+  .ffx-chain__intro{margin-inline:14px;width:auto}
+}
+@media(prefers-reduced-motion:reduce){.ffx-world-field{opacity:.18}.nav{transition:none}}
+
+/* Legacy/company pages inherit the same dimensional material language. */
+body>section>.wrap,.page-hero>.wrap,.hero>.wrap,.footer>.wrap{position:relative;z-index:3}
+.page-hero{position:relative;background:radial-gradient(ellipse at 82% 34%,rgba(112,200,216,.19),transparent 28%),linear-gradient(135deg,#D6E2E2,#E9DFD2 52%,#C7D7DC)!important;box-shadow:inset 0 -1px rgba(23,59,90,.08)}
+.band-deep{background:radial-gradient(circle at 78% 35%,rgba(112,200,216,.08),transparent 28%),linear-gradient(145deg,#172845,#102839 65%,#081A25)!important}
+.footer{position:relative;z-index:3;background:linear-gradient(145deg,#07151F,#102A39 62%,#172642)!important}
+.figure,.attest,.gated{box-shadow:0 24px 70px rgba(23,59,90,.08)}
+
+/* Existing explanatory objects gain spatial materiality. */
+.ffx-product-orbit{background:radial-gradient(circle at 50% 48%,rgba(241,196,108,.13),transparent 17%),radial-gradient(circle at 50% 50%,rgba(112,200,216,.11),transparent 46%),rgba(248,239,225,.48);box-shadow:inset 0 0 90px rgba(23,59,90,.07),0 28px 80px rgba(23,59,90,.10);transform:perspective(900px) rotateX(2deg)}
+.ffx-product-orbit span{box-shadow:0 10px 32px rgba(23,59,90,.08);backdrop-filter:blur(8px)}
+.ffx-formal-map{perspective:900px}
+.ffx-formal-map span:nth-of-type(odd){transform:translateZ(18px)}
+.ffx-formal-map span:nth-of-type(even){transform:translateZ(6px)}
+.ffx-risk-frontier{background:rgba(248,239,225,.72)!important;backdrop-filter:blur(14px);box-shadow:0 18px 55px rgba(23,59,90,.09)!important}
+.ffx-research-map__field{box-shadow:0 30px 90px rgba(23,59,90,.11);transform:perspective(1400px) rotateX(.7deg);transform-origin:50% 20%}
+.ffx-research-map svg{filter:drop-shadow(0 18px 22px rgba(23,59,90,.07))}
+.ffx-product-convergence{box-shadow:0 24px 70px rgba(23,59,90,.10)}
+
+@media(max-width:900px){.ffx-product-orbit,.ffx-research-map__field{transform:none}}

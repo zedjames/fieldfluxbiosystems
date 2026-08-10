@@ -1,0 +1,12 @@
+/* Laminar navigation hardening. */
+@media(max-width:760px){
+  .nav__links.ffx-nav-map{display:flex!important;align-items:center!important;padding:0!important;margin-left:auto!important}
+  .ffx-nav-primary,.ffx-nav-flow,.ffx-nav-carrier{display:none!important}
+  .ffx-fieldmap-toggle{display:flex!important;color:inherit;padding:8px 2px!important}
+  .ffx-fieldmap-toggle__text{display:flex!important}
+  .ffx-fieldmap-toggle__text small{display:none}
+  .ffx-fieldmap-toggle__text b{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase}
+  .nav__actions{margin-left:10px}
+}
+.ffx-field-compass{display:none!important}
+.nav__links>a[href="world.html"],.nav__links>a[data-world-link]{display:none!important}

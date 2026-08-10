@@ -1,0 +1,33 @@
+/* Investor development-status layer — explicit present state and horizon. */
+.ffx-investor-status{padding:clamp(72px,9vw,118px) 0;background:linear-gradient(145deg,#D5E1E2 0%,#E5DED1 52%,#C8D7DA 100%);position:relative;isolation:isolate;border-bottom:1px solid var(--line)}
+.ffx-investor-status:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 80% 24%,rgba(112,200,216,.18),transparent 27%),linear-gradient(rgba(23,59,90,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(23,59,90,.022) 1px,transparent 1px);background-size:auto,72px 72px,72px 72px;mask-image:linear-gradient(90deg,transparent,#000 44%,#000 100%)}
+.ffx-investor-status .wrap{position:relative;z-index:2}
+.ffx-investor-status__intro{max-width:800px;margin-bottom:38px}
+.ffx-investor-status__intro .lede{max-width:68ch}
+.ffx-investor-status__legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.ffx-investor-status__legend span{padding:6px 9px;border:1px solid var(--line);font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;background:rgba(248,239,225,.62);color:var(--navy)}
+.ffx-investor-roadmap{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:rgba(248,239,225,.54);box-shadow:0 28px 80px rgba(23,59,90,.10);backdrop-filter:blur(10px)}
+.ffx-investor-roadmap article{position:relative;min-height:300px;padding:26px 24px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent)}
+.ffx-investor-roadmap article:nth-child(-n+3){border-bottom:1px solid var(--line)}
+.ffx-investor-roadmap article:nth-child(3n){border-right:0}
+.ffx-investor-roadmap article:before{content:"";position:absolute;left:0;right:0;top:-1px;height:3px;background:var(--status-color,var(--gold))}
+.ffx-investor-roadmap article[data-state="built"]{--status-color:#597A67}
+.ffx-investor-roadmap article[data-state="release"]{--status-color:#8A7650;background:linear-gradient(180deg,rgba(184,117,66,.10),rgba(255,255,255,.08))}
+.ffx-investor-roadmap article[data-state="now"]{--status-color:#A56E20;background:linear-gradient(180deg,rgba(241,196,108,.12),rgba(255,255,255,.08))}
+.ffx-investor-roadmap article[data-state="next"]{--status-color:#70A6B6}
+.ffx-investor-roadmap article[data-state="long"]{--status-color:#6E6D91}
+.ffx-investor-roadmap__state{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--status-color,var(--gold));font-weight:600}
+.ffx-investor-roadmap h3{font:300 clamp(1.28rem,1.8vw,1.65rem)/1.08 var(--serif);color:var(--navy);margin:14px 0 12px}
+.ffx-investor-roadmap p{color:var(--ink-soft);font-size:.88rem;line-height:1.5}
+.ffx-investor-roadmap strong{display:block;margin-top:auto;padding-top:18px;border-top:1px solid var(--line-soft);font-size:.68rem;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);font-weight:600}
+.ffx-investor-now{margin-top:38px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:linear-gradient(135deg,#10283A,#0B1E2B);color:var(--on-deep);box-shadow:0 24px 70px rgba(6,19,28,.18)}
+.ffx-investor-now span{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-on-deep)}
+.ffx-investor-now strong{font:300 clamp(1.2rem,2vw,1.65rem)/1.25 var(--serif);font-weight:300;color:var(--on-deep)}
+.ffx-investor-now b{color:var(--gold-on-deep);font-weight:500}
+
+/* Existing risk track now reads as deeper context, not a competing status timeline. */
+.ffx-risk .sec-head .eyebrow{color:var(--navy)}
+.ffx-risktrack .ffx-riskstep .kicker{letter-spacing:.13em}
+
+@media(max-width:1050px){.ffx-investor-roadmap{grid-template-columns:repeat(2,1fr)}.ffx-investor-roadmap article,.ffx-investor-roadmap article:nth-child(-n+3){border-bottom:1px solid var(--line)}.ffx-investor-roadmap article:nth-child(3n){border-right:1px solid var(--line)}.ffx-investor-roadmap article:nth-child(2n){border-right:0}.ffx-investor-roadmap article:nth-last-child(-n+2){border-bottom:0}}
+@media(max-width:680px){.ffx-investor-roadmap{grid-template-columns:1fr}.ffx-investor-roadmap article,.ffx-investor-roadmap article:nth-child(2n),.ffx-investor-roadmap article:nth-child(3n){border-right:0;border-bottom:1px solid var(--line)}.ffx-investor-roadmap article:last-child{border-bottom:0}.ffx-investor-now{grid-template-columns:1fr}}
