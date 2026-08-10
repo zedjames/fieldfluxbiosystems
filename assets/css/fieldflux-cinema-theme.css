@@ -1,0 +1,121 @@
+/* Fieldflux cinematic environment pass — manuscript outside, observatory inside. */
+
+/* The living Home sequence is now a true instrument chamber rather than a pale overlay. */
+.ffx-chain__cinema{
+  background:
+    linear-gradient(180deg,var(--paper) 0%,#102331 3%,#08151f 12%,#07131d 88%,#102331 97%,var(--paper-alt) 100%);
+}
+
+.ffx-chain__stage.is-cinematic{
+  border-color:rgba(244,194,103,.12);
+  background:
+    radial-gradient(ellipse at 70% 52%,rgba(111,182,206,.16),transparent 24%),
+    radial-gradient(ellipse at 72% 48%,rgba(244,194,103,.10),transparent 38%),
+    radial-gradient(ellipse at 66% 55%,rgba(27,72,97,.34),transparent 56%),
+    linear-gradient(180deg,#102838 0%,#091923 54%,#06111a 100%);
+  box-shadow:inset 0 0 130px rgba(0,0,0,.30),0 30px 90px rgba(5,15,23,.22);
+}
+
+.ffx-chain__stage.is-cinematic:before{
+  background:
+    linear-gradient(90deg,rgba(6,17,26,.97) 0%,rgba(7,20,30,.91) 28%,rgba(7,20,30,.62) 43%,rgba(7,20,30,.13) 62%,rgba(7,20,30,.02) 78%),
+    radial-gradient(ellipse at 69% 52%,transparent 0 25%,rgba(5,14,22,.03) 46%,rgba(3,10,16,.30) 100%);
+}
+
+.ffx-chain__stage.is-cinematic:after{
+  box-shadow:inset 0 0 160px rgba(0,0,0,.34),inset 0 -90px 130px rgba(0,0,0,.24);
+  background:
+    linear-gradient(180deg,rgba(154,215,231,.025),transparent 17% 78%,rgba(244,194,103,.025));
+}
+
+/* Lift the volumetric renderer optically against the darker chamber. */
+.ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{
+  opacity:1!important;
+  mix-blend-mode:screen;
+  filter:brightness(2.05) saturate(1.38) contrast(1.10);
+}
+
+/* Copy becomes parchment-light inside the instrument environment. */
+.ffx-chain__stage.is-cinematic .ffx-chain__kicker{
+  color:var(--gold-on-deep);
+}
+.ffx-chain__stage.is-cinematic .ffx-chain__copy h3{
+  color:#F1E8D8;
+  text-shadow:0 6px 28px rgba(0,0,0,.24);
+}
+.ffx-chain__stage.is-cinematic .ffx-chain__copy>p:last-child{
+  color:#AEBECA;
+  text-shadow:0 2px 16px rgba(0,0,0,.28);
+}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter,
+.ffx-chain__stage.is-cinematic .ffx-chain__label{
+  color:#78909F;
+}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter span:first-child{
+  color:var(--gold-on-deep);
+}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter i{
+  background:rgba(234,240,247,.14);
+}
+
+.ffx-chain__stage.is-cinematic .ffx-motion-verb__label,
+.ffx-chain__stage.is-cinematic .ffx-motion-verb small{
+  color:#78909F;
+}
+.ffx-chain__stage.is-cinematic .ffx-motion-verb strong{
+  color:var(--gold-on-deep);
+}
+
+/* Continuity becomes an instrument readout rather than a paper card. */
+.ffx-chain__stage.is-cinematic .ffx-continuity{
+  border-color:rgba(244,194,103,.16);
+  background:rgba(6,18,28,.68);
+  backdrop-filter:blur(14px);
+  box-shadow:0 16px 46px rgba(0,0,0,.20);
+}
+.ffx-chain__stage.is-cinematic .ffx-continuity__label,
+.ffx-chain__stage.is-cinematic .ffx-continuity__carry span{
+  color:#78909F;
+}
+.ffx-chain__stage.is-cinematic .ffx-continuity__invariants b,
+.ffx-chain__stage.is-cinematic .ffx-continuity__carry strong{
+  color:#B8CAD6;
+}
+.ffx-chain__stage.is-cinematic .ffx-continuity__invariants i{
+  background:var(--gold-on-deep);
+  box-shadow:0 0 12px rgba(244,194,103,.36);
+}
+.ffx-chain__stage.is-cinematic .ffx-continuity__carry{
+  border-color:rgba(234,240,247,.08);
+}
+.ffx-chain__stage.is-cinematic .ffx-continuity:after{
+  background:var(--gold-on-deep);
+  box-shadow:0 0 18px rgba(244,194,103,.28);
+}
+
+/* Give the main aperture a visible optical floor without turning it into a card. */
+.ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home:after{content:""}
+
+/* Platform gains a little more chromatic depth too. */
+.ffx-measurement__stage.is-cinematic{
+  background:
+    radial-gradient(ellipse at 67% 52%,rgba(111,182,206,.18),transparent 22%),
+    radial-gradient(ellipse at 72% 44%,rgba(244,194,103,.095),transparent 34%),
+    radial-gradient(ellipse at 61% 60%,rgba(31,87,111,.20),transparent 48%),
+    linear-gradient(180deg,#0E2A3C 0%,#081A27 58%,#06131D 100%);
+}
+.ffx-measurement__stage.is-cinematic .ffx-cinema-canvas--platform{
+  filter:brightness(1.16) saturate(1.18) contrast(1.06);
+}
+
+@media(max-width:900px){
+  .ffx-chain__cinema{background:#07131d}
+  .ffx-chain__stage.is-cinematic:before{
+    background:linear-gradient(180deg,rgba(6,17,26,.97) 0%,rgba(6,17,26,.90) 31%,rgba(6,17,26,.35) 54%,rgba(6,17,26,.05) 73%,rgba(6,17,26,.20) 100%);
+  }
+  .ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{filter:brightness(1.85) saturate(1.32) contrast(1.08)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{filter:brightness(1.75) saturate(1.22)}
+}
