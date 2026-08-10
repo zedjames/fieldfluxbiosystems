@@ -104,6 +104,15 @@
     if (n) { n.textContent = msg; n.hidden = false; }
   }
 
+  function loadPolishStyle() {
+    if (document.querySelector('link[data-fieldflux-legacy-polish]')) return;
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "assets/css/fieldflux-legacy-polish.css?v=1";
+    l.dataset.fieldfluxLegacyPolish = "true";
+    document.head.appendChild(l);
+  }
+
   function loadExperientialLayer() {
     if (document.querySelector('script[data-fieldflux-next]')) return;
     var s = document.createElement("script");
@@ -114,6 +123,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    loadPolishStyle();
     initReveal();
     initLightbox();
     initContactForm();
