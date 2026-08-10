@@ -49,7 +49,7 @@
 
 .ffx-risktrack{position:relative;padding-left:18px}
 .ffx-risk-rail{position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--line);overflow:hidden}
-.ffx-risk-rail:after{content:"";position:absolute;left:0;top:0;width:1px;height:calc(var(--risk-progress,0)*100%);background:var(--gold);box-shadow:0 0 12px rgba(154,106,18,.35);transition:height .8s cubic-bezier(.2,.7,.2,1)}
+.ffx-risk-rail:after{content:"";position:absolute;left:0;top:0;width:1px;height:100%;transform:scaleY(var(--risk-progress,0));transform-origin:top;background:var(--gold);box-shadow:0 0 12px rgba(154,106,18,.35);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .ffx-riskstep{transition:border-color .45s ease,background .45s ease,transform .45s ease}
 .ffx-riskstep.is-locked{border-color:rgba(154,106,18,.32);background:linear-gradient(90deg,rgba(154,106,18,.035),transparent);transform:translateX(4px)}
 .ffx-riskstep.is-locked .ffx-riskstep__n{color:var(--gold)}
