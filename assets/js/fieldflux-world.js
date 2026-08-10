@@ -3,6 +3,14 @@
   if(window.__fieldfluxWorld)return;
   window.__fieldfluxWorld=true;
 
+  if(!document.querySelector('link[data-fieldflux-nav-world-fixes]')){
+    var fix=document.createElement("link");
+    fix.rel="stylesheet";
+    fix.href="assets/css/fieldflux-nav-world-fixes.css?v=1";
+    fix.dataset.fieldfluxNavWorldFixes="true";
+    document.head.appendChild(fix);
+  }
+
   function hideLegacyWorldLinks(){
     document.querySelectorAll('.nav__links > a[href="world.html"],.nav__links a[data-world-link]').forEach(function(a){
       a.style.display="none";
