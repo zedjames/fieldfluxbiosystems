@@ -110,3 +110,23 @@ body[data-ffx-regime="observatory"] .nav .btn--ghost,body[data-ffx-regime="deep"
   .ffx-chain__intro{margin-inline:14px;width:auto}
 }
 @media(prefers-reduced-motion:reduce){.ffx-world-field{opacity:.18}.nav{transition:none}}
+
+/* Legacy/company pages inherit the same dimensional material language. */
+body>section>.wrap,.page-hero>.wrap,.hero>.wrap,.footer>.wrap{position:relative;z-index:3}
+.page-hero{position:relative;background:radial-gradient(ellipse at 82% 34%,rgba(112,200,216,.19),transparent 28%),linear-gradient(135deg,#D6E2E2,#E9DFD2 52%,#C7D7DC)!important;box-shadow:inset 0 -1px rgba(23,59,90,.08)}
+.band-deep{background:radial-gradient(circle at 78% 35%,rgba(112,200,216,.08),transparent 28%),linear-gradient(145deg,#172845,#102839 65%,#081A25)!important}
+.footer{position:relative;z-index:3;background:linear-gradient(145deg,#07151F,#102A39 62%,#172642)!important}
+.figure,.attest,.gated{box-shadow:0 24px 70px rgba(23,59,90,.08)}
+
+/* Existing explanatory objects gain spatial materiality. */
+.ffx-product-orbit{background:radial-gradient(circle at 50% 48%,rgba(241,196,108,.13),transparent 17%),radial-gradient(circle at 50% 50%,rgba(112,200,216,.11),transparent 46%),rgba(248,239,225,.48);box-shadow:inset 0 0 90px rgba(23,59,90,.07),0 28px 80px rgba(23,59,90,.10);transform:perspective(900px) rotateX(2deg)}
+.ffx-product-orbit span{box-shadow:0 10px 32px rgba(23,59,90,.08);backdrop-filter:blur(8px)}
+.ffx-formal-map{perspective:900px}
+.ffx-formal-map span:nth-of-type(odd){transform:translateZ(18px)}
+.ffx-formal-map span:nth-of-type(even){transform:translateZ(6px)}
+.ffx-risk-frontier{background:rgba(248,239,225,.72)!important;backdrop-filter:blur(14px);box-shadow:0 18px 55px rgba(23,59,90,.09)!important}
+.ffx-research-map__field{box-shadow:0 30px 90px rgba(23,59,90,.11);transform:perspective(1400px) rotateX(.7deg);transform-origin:50% 20%}
+.ffx-research-map svg{filter:drop-shadow(0 18px 22px rgba(23,59,90,.07))}
+.ffx-product-convergence{box-shadow:0 24px 70px rgba(23,59,90,.10)}
+
+@media(max-width:900px){.ffx-product-orbit,.ffx-research-map__field{transform:none}}
