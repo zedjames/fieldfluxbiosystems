@@ -113,6 +113,22 @@
     document.head.appendChild(l);
   }
 
+  function loadDimension() {
+    if (!document.querySelector('link[data-fieldflux-dimension]')) {
+      var l = document.createElement("link");
+      l.rel = "stylesheet";
+      l.href = "assets/css/fieldflux-dimension.css?v=1";
+      l.dataset.fieldfluxDimension = "true";
+      document.head.appendChild(l);
+    }
+    if (document.querySelector('script[data-fieldflux-dimension]')) return;
+    var d = document.createElement("script");
+    d.src = "assets/js/fieldflux-dimension.js?v=1";
+    d.async = false;
+    d.dataset.fieldfluxDimension = "true";
+    document.body.appendChild(d);
+  }
+
   function loadCinema() {
     if (!document.querySelector('link[data-fieldflux-cinema]')) {
       var l = document.createElement("link");
@@ -121,11 +137,17 @@
       l.dataset.fieldfluxCinema = "true";
       document.head.appendChild(l);
     }
-    if (document.querySelector('script[data-fieldflux-cinema]')) return;
+    var existing = document.querySelector('script[data-fieldflux-cinema]');
+    if (existing) {
+      if (window.__fieldfluxCinema) loadDimension();
+      else existing.addEventListener("load", loadDimension, { once:true });
+      return;
+    }
     var c = document.createElement("script");
     c.src = "assets/js/fieldflux-cinema.js?v=1";
     c.async = false;
     c.dataset.fieldfluxCinema = "true";
+    c.addEventListener("load", loadDimension, { once:true });
     document.body.appendChild(c);
   }
 
