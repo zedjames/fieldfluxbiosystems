@@ -91,4 +91,10 @@
   }
   function frame(now){var dt=Math.min(50,now-last);last=now;if(!reduce)clock+=dt;draw();}
   requestAnimationFrame(frame);
+
+  var copy=document.createElement("script");
+  copy.src="assets/js/fieldflux-copy-polish.js?v=1";
+  copy.async=false;
+  copy.dataset.fieldfluxCopyPolish="true";
+  document.body.appendChild(copy);
 })();
