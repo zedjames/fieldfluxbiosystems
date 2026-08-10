@@ -44,14 +44,18 @@
   function classify(el){
     if(!el)return"origin";
     if(el.matches(".ffx-chain,.ffx-measurement-cinema,.ffx-measurement__stage"))return"observatory";
-    if(el.matches(".ffx-proofband,.ffx-formal,.ffx-evidence,.ffx-products-instruments,.ffx-capital,.ffx-final,.ffx-pagehero.deep"))return"deep";
+    if(el.matches(".ffx-proofband,.ffx-formal,.ffx-evidence,.ffx-products-instruments,.ffx-capital,.ffx-final,.ffx-pagehero.deep,.band-deep,.footer"))return"deep";
     if(el.matches(".ffx-science-descent,.ffx-three-truths,.ffx-risk,.ffx-defensibility"))return"slate";
     if(el.matches(".ffx-research-preview,.ffx-research-page"))return"research";
-    if(el.matches(".ffx-instruments,.ffx-instrument-scale,.ffx-products-apps,.ffx-product-branch,.ffx-pagehero"))return"mineral";
-    if(el.matches(".ffx-homehero"))return"origin";
+    if(el.matches(".ffx-instruments,.ffx-instrument-scale,.ffx-products-apps,.ffx-product-branch,.ffx-pagehero,.page-hero,.section"))return"mineral";
+    if(el.matches(".ffx-homehero,.hero"))return"origin";
     return"mineral";
   }
-  function relevantSections(){return qa(".ffx-page>section");}
+  function relevantSections(){
+    var modern=qa(".ffx-page>section");
+    if(modern.length)return modern;
+    return qa("body>section").concat(qa("body>footer"));
+  }
   var sections=[];
   function refreshSections(){sections=relevantSections();}
   refreshSections();
