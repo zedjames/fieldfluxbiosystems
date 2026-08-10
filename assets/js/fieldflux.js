@@ -113,12 +113,27 @@
     document.head.appendChild(l);
   }
 
+  function loadPass2() {
+    if (document.querySelector('script[data-fieldflux-pass2]')) return;
+    var p = document.createElement("script");
+    p.src = "assets/js/fieldflux-pass2.js?v=1";
+    p.async = false;
+    p.dataset.fieldfluxPass2 = "true";
+    document.body.appendChild(p);
+  }
+
   function loadExperientialLayer() {
-    if (document.querySelector('script[data-fieldflux-next]')) return;
+    var existing = document.querySelector('script[data-fieldflux-next]');
+    if (existing) {
+      if (window.__fieldfluxExperientialNext) loadPass2();
+      else existing.addEventListener("load", loadPass2, { once:true });
+      return;
+    }
     var s = document.createElement("script");
     s.src = "assets/js/fieldflux-next.js?v=1";
-    s.defer = true;
+    s.async = false;
     s.dataset.fieldfluxNext = "true";
+    s.addEventListener("load", loadPass2, { once:true });
     document.body.appendChild(s);
   }
 
