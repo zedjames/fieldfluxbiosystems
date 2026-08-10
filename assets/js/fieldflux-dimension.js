@@ -97,4 +97,10 @@
   copy.async=false;
   copy.dataset.fieldfluxCopyPolish="true";
   document.body.appendChild(copy);
+
+  var investor=document.createElement("script");
+  investor.src="assets/js/fieldflux-investor-status.js?v=1";
+  investor.async=false;
+  investor.dataset.fieldfluxInvestorStatus="true";
+  document.body.appendChild(investor);
 })();
