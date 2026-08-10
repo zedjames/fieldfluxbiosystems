@@ -113,4 +113,14 @@
     world.dataset.fieldfluxWorldRuntime="true";
     document.body.appendChild(world);
   }
+
+  function ensureWorldNav(){
+    var currentPage=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+    qa(".nav__links").forEach(function(nav){
+      var existing=nav.querySelector('a[href="world.html"]');
+      if(!existing){existing=document.createElement("a");existing.href="world.html";existing.textContent="World";existing.dataset.worldLink="true";nav.insertBefore(existing,nav.firstChild);}
+      if(currentPage==="world.html"){qa("a",nav).forEach(function(a){a.classList.remove("is-active");a.removeAttribute("aria-current");});existing.classList.add("is-active");existing.setAttribute("aria-current","page");}
+    });
+  }
+  ensureWorldNav();setTimeout(ensureWorldNav,250);setTimeout(ensureWorldNav,900);
 })();
