@@ -8,33 +8,52 @@
 .ffx-chain__stage.is-cinematic .ffx-chain__copy,.ffx-chain__stage.is-cinematic .ffx-chain__meter,.ffx-chain__stage.is-cinematic .ffx-chain__label,.ffx-chain__stage.is-cinematic .ffx-continuity,.ffx-chain__stage.is-cinematic .ffx-motion-verb{z-index:8!important}
 .ffx-measurement__stage.is-cinematic .ffx-measurement__copy,.ffx-measurement__stage.is-cinematic .ffx-measurement__counter,.ffx-measurement__stage.is-cinematic .ffx-measurement__substrate,.ffx-measurement__stage.is-cinematic .ffx-familyring,.ffx-measurement__stage.is-cinematic .ffx-motion-verb,.ffx-measurement__stage.is-cinematic .ffx-evidence-hud,.ffx-measurement__stage.is-cinematic .ffx-family-readout,.ffx-measurement__stage.is-cinematic .ffx-deletion-panel{z-index:8!important}
 
-/* Home: manuscript surface opening into a volumetric scientific object. */
-.ffx-chain__stage.is-cinematic{background:
-  radial-gradient(ellipse at 69% 52%,rgba(30,64,101,.095),transparent 21%),
-  radial-gradient(ellipse at 72% 49%,rgba(154,106,18,.055),transparent 38%),
-  linear-gradient(90deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 95%,transparent) 34%,color-mix(in srgb,var(--paper-alt) 58%,var(--paper)) 100%)}
+/* Home base. */
+.ffx-chain__stage.is-cinematic{background:radial-gradient(ellipse at 69% 52%,rgba(30,64,101,.095),transparent 21%),radial-gradient(ellipse at 72% 49%,rgba(154,106,18,.055),transparent 38%),linear-gradient(90deg,var(--paper) 0%,color-mix(in srgb,var(--paper) 95%,transparent) 34%,color-mix(in srgb,var(--paper-alt) 58%,var(--paper)) 100%)}
 .ffx-chain__stage.is-cinematic:before{content:"";position:absolute;z-index:4;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(251,245,236,.98) 0%,rgba(251,245,236,.88) 31%,rgba(251,245,236,.24) 53%,transparent 74%),radial-gradient(ellipse at 67% 50%,transparent 0 31%,rgba(251,245,236,.22) 61%,rgba(251,245,236,.58) 100%)}
 .ffx-chain__stage.is-cinematic:after{content:"";position:absolute;z-index:5;inset:0;pointer-events:none;box-shadow:inset 0 0 110px rgba(30,64,101,.045);background:linear-gradient(180deg,rgba(255,255,255,.15),transparent 16% 84%,rgba(30,64,101,.025))}
-.ffx-chain__stage.is-cinematic .ffx-chain__copy{text-shadow:0 1px 0 rgba(255,255,255,.5)}
 
-/* Platform: the navy field becomes an instrument chamber, not a flat diagram. */
-.ffx-measurement__stage.is-cinematic{background:
-  radial-gradient(ellipse at 68% 52%,rgba(111,182,206,.13),transparent 24%),
-  radial-gradient(ellipse at 70% 46%,rgba(244,194,103,.075),transparent 37%),
-  linear-gradient(180deg,#10283b 0%,#091824 64%,#07131d 100%)}
+/* Platform base. */
+.ffx-measurement__stage.is-cinematic{background:radial-gradient(ellipse at 68% 52%,rgba(111,182,206,.13),transparent 24%),radial-gradient(ellipse at 70% 46%,rgba(244,194,103,.075),transparent 37%),linear-gradient(180deg,#10283b 0%,#091824 64%,#07131d 100%)}
 .ffx-measurement__stage.is-cinematic:after{background:linear-gradient(90deg,rgba(7,19,29,.93) 0%,rgba(7,19,29,.72) 30%,rgba(7,19,29,.18) 52%,rgba(7,19,29,.03) 77%,rgba(7,19,29,.34) 100%)!important;z-index:4!important}
 .ffx-measurement__stage.is-cinematic:before{content:"";position:absolute;z-index:5;inset:0;pointer-events:none;box-shadow:inset 0 0 140px rgba(0,0,0,.34),inset 0 -90px 120px rgba(0,0,0,.22);background:linear-gradient(180deg,rgba(154,215,231,.018),transparent 18% 78%,rgba(244,194,103,.018))}
 .ffx-measurement__stage.is-cinematic .ffx-familyring span{background:rgba(7,19,29,.72);box-shadow:0 8px 28px rgba(0,0,0,.12)}
 .ffx-measurement__stage.is-cinematic .ffx-evidence-hud,.ffx-measurement__stage.is-cinematic .ffx-family-readout,.ffx-measurement__stage.is-cinematic .ffx-deletion-panel{box-shadow:0 18px 55px rgba(0,0,0,.24)}
 
-/* Empirical threshold: add living depth behind the crossing without competing with text. */
+/* Empirical threshold. */
 .ffx-truth-boundary--empirical.is-cinematic-threshold{position:relative;isolation:isolate;overflow:hidden}
 .ffx-threshold-cinema{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.95}
 .ffx-truth-boundary--empirical.is-cinematic-threshold>div{position:relative;z-index:2}
 .ffx-truth-boundary--empirical.is-cinematic-threshold:after{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(251,245,236,.82),rgba(251,245,236,.56) 35%,rgba(15,32,52,.04) 50%,rgba(251,245,236,.52) 65%,rgba(251,245,236,.84))}
 
+/* FINAL ENVIRONMENT OVERRIDES — living features enter the observatory. */
+.ffx-chain__cinema{background:linear-gradient(180deg,var(--paper) 0%,#102331 3%,#08151f 12%,#07131d 88%,#102331 97%,var(--paper-alt) 100%)}
+.ffx-chain__stage.is-cinematic{border-color:rgba(244,194,103,.12);background:radial-gradient(ellipse at 70% 52%,rgba(111,182,206,.16),transparent 24%),radial-gradient(ellipse at 72% 48%,rgba(244,194,103,.10),transparent 38%),radial-gradient(ellipse at 66% 55%,rgba(27,72,97,.34),transparent 56%),linear-gradient(180deg,#102838 0%,#091923 54%,#06111a 100%);box-shadow:inset 0 0 130px rgba(0,0,0,.30),0 30px 90px rgba(5,15,23,.22)}
+.ffx-chain__stage.is-cinematic:before{background:linear-gradient(90deg,rgba(6,17,26,.97) 0%,rgba(7,20,30,.91) 28%,rgba(7,20,30,.62) 43%,rgba(7,20,30,.13) 62%,rgba(7,20,30,.02) 78%),radial-gradient(ellipse at 69% 52%,transparent 0 25%,rgba(5,14,22,.03) 46%,rgba(3,10,16,.30) 100%)}
+.ffx-chain__stage.is-cinematic:after{box-shadow:inset 0 0 160px rgba(0,0,0,.34),inset 0 -90px 130px rgba(0,0,0,.24);background:linear-gradient(180deg,rgba(154,215,231,.025),transparent 17% 78%,rgba(244,194,103,.025))}
+.ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{opacity:1!important;mix-blend-mode:screen;filter:brightness(2.05) saturate(1.38) contrast(1.10)}
+.ffx-chain__stage.is-cinematic .ffx-chain__kicker{color:var(--gold-on-deep)}
+.ffx-chain__stage.is-cinematic .ffx-chain__copy h3{color:#F1E8D8;text-shadow:0 6px 28px rgba(0,0,0,.24)}
+.ffx-chain__stage.is-cinematic .ffx-chain__copy>p:last-child{color:#AEBECA;text-shadow:0 2px 16px rgba(0,0,0,.28)}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter,.ffx-chain__stage.is-cinematic .ffx-chain__label{color:#78909F}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter span:first-child{color:var(--gold-on-deep)}
+.ffx-chain__stage.is-cinematic .ffx-chain__meter i{background:rgba(234,240,247,.14)}
+.ffx-chain__stage.is-cinematic .ffx-motion-verb__label,.ffx-chain__stage.is-cinematic .ffx-motion-verb small{color:#78909F}
+.ffx-chain__stage.is-cinematic .ffx-motion-verb strong{color:var(--gold-on-deep)}
+.ffx-chain__stage.is-cinematic .ffx-continuity{border-color:rgba(244,194,103,.16);background:rgba(6,18,28,.68);backdrop-filter:blur(14px);box-shadow:0 16px 46px rgba(0,0,0,.20)}
+.ffx-chain__stage.is-cinematic .ffx-continuity__label,.ffx-chain__stage.is-cinematic .ffx-continuity__carry span{color:#78909F}
+.ffx-chain__stage.is-cinematic .ffx-continuity__invariants b,.ffx-chain__stage.is-cinematic .ffx-continuity__carry strong{color:#B8CAD6}
+.ffx-chain__stage.is-cinematic .ffx-continuity__invariants i{background:var(--gold-on-deep);box-shadow:0 0 12px rgba(244,194,103,.36)}
+.ffx-chain__stage.is-cinematic .ffx-continuity__carry{border-color:rgba(234,240,247,.08)}
+.ffx-chain__stage.is-cinematic .ffx-continuity:after{background:var(--gold-on-deep);box-shadow:0 0 18px rgba(244,194,103,.28)}
+
+.ffx-measurement__stage.is-cinematic{background:radial-gradient(ellipse at 67% 52%,rgba(111,182,206,.18),transparent 22%),radial-gradient(ellipse at 72% 44%,rgba(244,194,103,.095),transparent 34%),radial-gradient(ellipse at 61% 60%,rgba(31,87,111,.20),transparent 48%),linear-gradient(180deg,#0E2A3C 0%,#081A27 58%,#06131D 100%)}
+.ffx-measurement__stage.is-cinematic .ffx-cinema-canvas--platform{filter:brightness(1.16) saturate(1.18) contrast(1.06)}
+
 @media(max-width:900px){
-  .ffx-chain__stage.is-cinematic:before{background:linear-gradient(180deg,rgba(251,245,236,.94) 0%,rgba(251,245,236,.86) 34%,rgba(251,245,236,.10) 62%,transparent 100%)}
+  .ffx-chain__cinema{background:#07131d}
+  .ffx-chain__stage.is-cinematic:before{background:linear-gradient(180deg,rgba(6,17,26,.97) 0%,rgba(6,17,26,.90) 31%,rgba(6,17,26,.35) 54%,rgba(6,17,26,.05) 73%,rgba(6,17,26,.20) 100%)}
+  .ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{filter:brightness(1.85) saturate(1.32) contrast(1.08)}
   .ffx-measurement__stage.is-cinematic:after{background:linear-gradient(180deg,rgba(7,19,29,.94) 0%,rgba(7,19,29,.76) 34%,rgba(7,19,29,.16) 59%,rgba(7,19,29,.25) 100%)!important}
 }
-@media(prefers-reduced-motion:reduce){.ffx-cinema-canvas,.ffx-threshold-cinema{opacity:.76}}
+@media(prefers-reduced-motion:reduce){.ffx-cinema-canvas,.ffx-threshold-cinema{opacity:.76}.ffx-chain__stage.is-cinematic .ffx-cinema-canvas--home{filter:brightness(1.75) saturate(1.22)}}
