@@ -4,6 +4,14 @@
   window.__fieldfluxInvestorStatus=true;
   if((location.pathname.split("/").pop()||"index.html")!=="investors.html")return;
 
+  if(!document.querySelector('link[data-fieldflux-investor-status]')){
+    var style=document.createElement("link");
+    style.rel="stylesheet";
+    style.href="assets/css/fieldflux-investor-status.css?v=1";
+    style.dataset.fieldfluxInvestorStatus="true";
+    document.head.appendChild(style);
+  }
+
   function q(s,c){return(c||document).querySelector(s);}
   function qa(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));}
   function afterGenerated(selector,fn){var tries=0;(function wait(){var el=q(selector);if(el){fn(el);return;}if(++tries<160)setTimeout(wait,50);})();}
