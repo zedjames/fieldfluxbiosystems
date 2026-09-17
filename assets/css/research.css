@@ -1,0 +1,63 @@
+/* Fieldflux Biosystems — Research publication system
+   Shared by the research library and individual scholarly records. */
+
+.research-intro{max-width:840px;margin:0 auto 48px;text-align:center}
+.research-meta{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:18px;font-size:.92rem;color:var(--ink-soft)}
+.research-meta a{color:inherit}
+
+.research-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);margin:0 0 clamp(64px,8vw,104px)}
+.research-stat{padding:22px 26px;border-right:1px solid var(--line)}
+.research-stat:last-child{border-right:0}
+.research-stat__value{display:block;font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.35rem);font-weight:300;color:var(--navy);line-height:1}
+.research-stat__label{display:block;margin-top:7px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+.research-series{margin-top:clamp(64px,9vw,118px)}
+.research-series:first-of-type{margin-top:0}
+.research-series__head{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:clamp(30px,6vw,86px);align-items:start;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.research-series__number{font-family:var(--body);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.research-series__title{font-family:var(--serif);font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:300;color:var(--navy);line-height:1.08}
+.research-series__note{color:var(--ink-soft);max-width:62ch;margin:3px 0 0}
+.research-series__count{display:inline-block;margin-top:14px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+.publication-list{list-style:none;margin:0;padding:0}
+.publication-row{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(190px,260px);gap:clamp(20px,3vw,42px);align-items:start;padding:34px 0;border-bottom:1px solid var(--line)}
+.publication-row__index{font-family:var(--serif);font-size:1.45rem;font-weight:300;color:var(--gold);line-height:1}
+.publication-row__tag{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.publication-row__title{font-family:var(--serif);font-size:clamp(1.4rem,2.2vw,1.85rem);line-height:1.14;color:var(--navy);margin:0}
+.publication-row__subtitle{font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin:9px 0 0;line-height:1.45}
+.publication-row__summary{color:var(--ink-soft);font-size:.96rem;line-height:1.62;margin:15px 0 0;max-width:70ch}
+.publication-row__meta{padding-left:24px;border-left:1px solid var(--line-soft);font-size:.84rem;color:var(--ink-soft)}
+.publication-row__meta p{margin:0 0 10px}
+.publication-row__meta strong{font-weight:500;color:var(--ink)}
+.paper-doi{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.77rem;overflow-wrap:anywhere;color:var(--ink-soft)}
+.publication-row__links{display:flex;gap:14px;flex-wrap:wrap;margin-top:17px}
+
+.identity-band{margin-top:clamp(64px,9vw,108px);padding:28px;border:1px solid var(--line);background:var(--paper-2)}
+.identity-band p:last-child{margin-bottom:0}
+
+.paper-shell{max-width:920px;margin:0 auto}
+.paper-meta{display:flex;gap:10px 24px;flex-wrap:wrap;margin:18px 0 0;color:var(--ink-soft);font-size:.92rem}
+.paper-meta a{color:inherit}
+.paper-abstract{font-size:1.03rem;line-height:1.78}
+.paper-abstract p{margin-bottom:1.05em}
+.paper-cite{padding:24px;border:1px solid var(--line);background:var(--paper-2);margin-top:34px}
+.paper-cite code{white-space:normal;overflow-wrap:anywhere}
+.paper-actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px}
+.paper-series-nav{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
+.paper-series-nav .subtle{margin:0;font-size:.9rem}
+
+@media (max-width:820px){
+  .research-stats{grid-template-columns:1fr}
+  .research-stat{border-right:0;border-bottom:1px solid var(--line)}
+  .research-stat:last-child{border-bottom:0}
+  .research-series__head{grid-template-columns:1fr;gap:18px}
+  .publication-row{grid-template-columns:48px minmax(0,1fr)}
+  .publication-row__meta{grid-column:2;padding-left:0;border-left:0;padding-top:2px}
+}
+
+@media (max-width:560px){
+  .publication-row{grid-template-columns:1fr;padding:28px 0}
+  .publication-row__index{font-size:1rem}
+  .publication-row__meta{grid-column:1}
+  .paper-series-nav{align-items:flex-start;flex-direction:column}
+}
