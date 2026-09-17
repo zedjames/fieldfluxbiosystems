@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research Publications — Fieldflux Biosystems</title>
-  <meta name="description" content="Public mathematical and formal research by Zed James, with DOI-backed preprints, abstracts, citation metadata, and ORCID identity.">
+  <meta name="description" content="Public mathematical and formal research by Zed James, organized by research program with DOI-backed preprints, abstracts, citation metadata, and ORCID identity.">
   <meta name="theme-color" content="#F6F1E7">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fieldfluxbiosystems.com/research.html">
@@ -20,6 +20,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+  <link rel="stylesheet" href="assets/css/research.css?v=1">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -29,7 +30,8 @@
     "about":{
       "@type":"Person",
       "name":"Zed James",
-      "sameAs":["https://orcid.org/0009-0000-2120-0739"]
+      "sameAs":["https://orcid.org/0009-0000-2120-0739"],
+      "affiliation":{"@type":"Organization","name":"Fieldflux Biosystems, Inc."}
     },
     "hasPart":[
       {
@@ -39,6 +41,7 @@
         "datePublished":"2026-09-13",
         "identifier":"https://doi.org/10.5281/zenodo.22737977",
         "sameAs":"https://doi.org/10.5281/zenodo.22737977",
+        "url":"https://fieldfluxbiosystems.com/research-continuation-anatomy-navier-stokes.html",
         "author":{"@type":"Person","name":"Zed James","sameAs":"https://orcid.org/0009-0000-2120-0739"}
       },
       {
@@ -48,21 +51,32 @@
         "datePublished":"2026-09-14",
         "identifier":"https://doi.org/10.5281/zenodo.22754458",
         "sameAs":"https://doi.org/10.5281/zenodo.22754458",
+        "url":"https://fieldfluxbiosystems.com/research-critical-regularity-navier-stokes.html",
+        "author":{"@type":"Person","name":"Zed James","sameAs":"https://orcid.org/0009-0000-2120-0739"}
+      },
+      {
+        "@type":"ScholarlyArticle",
+        "name":"Critical Schwarzschild Scalar Dynamics",
+        "headline":"A machine-checked operator theory of terminal self-adjoint laws and Friedrichs selection",
+        "datePublished":"2026-09-16",
+        "identifier":"https://doi.org/10.5281/zenodo.22800860",
+        "sameAs":"https://doi.org/10.5281/zenodo.22800860",
+        "url":"https://fieldfluxbiosystems.com/research-critical-schwarzschild-scalar-dynamics.html",
+        "author":{"@type":"Person","name":"Zed James","sameAs":"https://orcid.org/0009-0000-2120-0739"}
+      },
+      {
+        "@type":"ScholarlyArticle",
+        "name":"Friedrichs-Selected Schwarzschild Quantum Dynamics",
+        "headline":"A machine-checked continuum Fock theory and physical Cauchy evolution",
+        "datePublished":"2026-09-17",
+        "identifier":"https://doi.org/10.5281/zenodo.22805014",
+        "sameAs":"https://doi.org/10.5281/zenodo.22805014",
+        "url":"https://fieldfluxbiosystems.com/research-friedrichs-selected-schwarzschild-quantum-dynamics.html",
         "author":{"@type":"Person","name":"Zed James","sameAs":"https://orcid.org/0009-0000-2120-0739"}
       }
     ]
   }
   </script>
-  <style>
-    .research-intro{max-width:820px;margin:0 auto 42px;text-align:center}
-    .research-meta{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:18px;font-size:.92rem;color:var(--ink-2)}
-    .research-meta a{color:inherit}
-    .paper-card{display:flex;flex-direction:column;min-height:100%}
-    .paper-card .card__foot{margin-top:auto;padding-top:20px;display:flex;gap:18px;flex-wrap:wrap}
-    .paper-doi{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;overflow-wrap:anywhere;color:var(--ink-2)}
-    .identity-band{margin-top:44px;padding:28px;border:1px solid var(--line);background:var(--paper-2)}
-    .identity-band p:last-child{margin-bottom:0}
-  </style>
 </head>
 <body>
   <header class="nav">
@@ -81,10 +95,10 @@
   </header>
 
   <section class="page-hero">
-    <div class="wrap"><div class="page-hero__inner reveal" style="max-width:900px;">
+    <div class="wrap"><div class="page-hero__inner reveal" style="max-width:920px;">
       <p class="eyebrow">Research Publications</p>
       <h1 class="display">Proofs, preprints, and public record.</h1>
-      <p class="lede">Public mathematical and formal research by Zed James. Each preprint below has a persistent DOI and a dedicated abstract page for citation and scholarly discovery.</p>
+      <p class="lede">Public mathematical and formal research by Zed James, organized by research program. Each preprint carries a persistent DOI and a dedicated scholarly record for abstracting, citation, and discovery.</p>
     </div></div>
   </section>
 
@@ -92,33 +106,105 @@
     <section class="section">
       <div class="wrap">
         <div class="research-intro reveal">
-          <p class="eyebrow">Navier–Stokes continuation series</p>
-          <p class="lede">A machine-checked program studying what finite-maximal periodic Navier–Stokes evolution must look like: first at the level of continuation geometry and multiscale regularity escape, then through spectral transfer and classical critical continuation controls.</p>
+          <p class="eyebrow">Research library</p>
+          <p class="lede">The publication record is organized as a growing library rather than a fixed set of feature cards. Each series collects papers that share a mathematical object and a common technical program while preserving each paper as its own citable result.</p>
           <div class="research-meta" style="justify-content:center;">
             <span>Author: <strong>Zed James</strong></span>
             <span><a href="https://orcid.org/0009-0000-2120-0739" target="_blank" rel="me noopener">ORCID 0009-0000-2120-0739</a></span>
           </div>
         </div>
 
-        <div class="grid grid-2">
-          <article class="card paper-card reveal">
-            <p class="card__tag">Paper I · Preprint · 2026</p>
-            <h2 class="h-card">Continuation Anatomy of Periodic Navier–Stokes Breakdown</h2>
-            <p class="subtle"><em>A machine-checked H<sup>2</sup> theory of finite-energy regularity escape.</em></p>
-            <p class="subtle">Finite maximality is resolved into bounded kinetic energy, eventual H<sup>2</sup> divergence, escape beyond every fixed Fourier cutoff, regularity at every fixed positive heat scale, and collapse of uniform continuation reserve.</p>
-            <p class="paper-doi">DOI 10.5281/zenodo.22737977</p>
-            <p class="card__foot"><a class="link-arrow" href="research-continuation-anatomy-navier-stokes.html">Abstract &amp; citation →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22737977" target="_blank" rel="noopener">Zenodo →</a></p>
-          </article>
-
-          <article class="card paper-card reveal">
-            <p class="card__tag">Paper II · Preprint · 2026</p>
-            <h2 class="h-card">Critical Regularity Anatomy of Periodic Navier–Stokes Breakdown</h2>
-            <p class="subtle"><em>Spectral transfer, terminal nonlinear H<sup>2</sup> work, and simultaneous failure of nonendpoint continuation controls.</em></p>
-            <p class="subtle">The continuation anatomy is sharpened through exact finite-annulus spectral budgets, unbounded terminal nonlinear H<sup>2</sup> work, and simultaneous failure of the physical gradient, vorticity, and nonendpoint Prodi–Serrin continuation regimes.</p>
-            <p class="paper-doi">DOI 10.5281/zenodo.22754458</p>
-            <p class="card__foot"><a class="link-arrow" href="research-critical-regularity-navier-stokes.html">Abstract &amp; citation →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22754458" target="_blank" rel="noopener">Zenodo →</a></p>
-          </article>
+        <div class="research-stats reveal" aria-label="Research library summary">
+          <div class="research-stat"><span class="research-stat__value">4</span><span class="research-stat__label">Public preprints</span></div>
+          <div class="research-stat"><span class="research-stat__value">2</span><span class="research-stat__label">Active series</span></div>
+          <div class="research-stat"><span class="research-stat__value">4</span><span class="research-stat__label">Persistent DOI records</span></div>
         </div>
+
+        <section class="research-series reveal" aria-labelledby="series-navier-stokes">
+          <div class="research-series__head">
+            <div>
+              <p class="research-series__number">Series 01</p>
+              <h2 class="research-series__title" id="series-navier-stokes">Navier–Stokes Continuation</h2>
+              <span class="research-series__count">2 papers · 2026</span>
+            </div>
+            <p class="research-series__note">A machine-checked program describing the structure of finite-maximal periodic Navier–Stokes evolution: first through continuation geometry and fine-scale regularity escape, then through spectral transfer and simultaneous failure of classical critical continuation controls.</p>
+          </div>
+
+          <ol class="publication-list">
+            <li class="publication-row">
+              <div class="publication-row__index">01</div>
+              <div>
+                <p class="publication-row__tag">Paper I · Preprint</p>
+                <h3 class="publication-row__title">Continuation Anatomy of Periodic Navier–Stokes Breakdown</h3>
+                <p class="publication-row__subtitle">A machine-checked H<sup>2</sup> theory of finite-energy regularity escape.</p>
+                <p class="publication-row__summary">Finite maximality is resolved into bounded kinetic energy, eventual H<sup>2</sup> divergence, escape beyond every fixed Fourier cutoff, regularity at every fixed positive heat scale, and collapse of uniform continuation reserve.</p>
+              </div>
+              <div class="publication-row__meta">
+                <p><strong>Published</strong><br>September 13, 2026</p>
+                <p class="paper-doi">10.5281/zenodo.22737977</p>
+                <div class="publication-row__links"><a class="link-arrow" href="research-continuation-anatomy-navier-stokes.html">Record →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22737977" target="_blank" rel="noopener">Zenodo →</a></div>
+              </div>
+            </li>
+
+            <li class="publication-row">
+              <div class="publication-row__index">02</div>
+              <div>
+                <p class="publication-row__tag">Paper II · Preprint</p>
+                <h3 class="publication-row__title">Critical Regularity Anatomy of Periodic Navier–Stokes Breakdown</h3>
+                <p class="publication-row__subtitle">Spectral transfer, terminal nonlinear H<sup>2</sup> work, and simultaneous failure of nonendpoint continuation controls.</p>
+                <p class="publication-row__summary">The continuation anatomy is sharpened through exact finite-annulus spectral budgets, unbounded terminal nonlinear H<sup>2</sup> work, and simultaneous failure of the physical gradient, vorticity, and nonendpoint Prodi–Serrin continuation regimes.</p>
+              </div>
+              <div class="publication-row__meta">
+                <p><strong>Published</strong><br>September 14, 2026</p>
+                <p class="paper-doi">10.5281/zenodo.22754458</p>
+                <div class="publication-row__links"><a class="link-arrow" href="research-critical-regularity-navier-stokes.html">Record →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22754458" target="_blank" rel="noopener">Zenodo →</a></div>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="research-series reveal" aria-labelledby="series-schwarzschild">
+          <div class="research-series__head">
+            <div>
+              <p class="research-series__number">Series 02</p>
+              <h2 class="research-series__title" id="series-schwarzschild">Schwarzschild Quantum Dynamics</h2>
+              <span class="research-series__count">2 papers · 2026</span>
+            </div>
+            <p class="research-series__note">A fixed-background quantum program for the Schwarzschild interior: first classifying the Hardy-critical radial scalar operator, its terminal self-adjoint laws, and canonical Friedrichs selection; then carrying that selected operator into continuum Fock theory and an independently derived physical Cauchy evolution.</p>
+          </div>
+
+          <ol class="publication-list">
+            <li class="publication-row">
+              <div class="publication-row__index">01</div>
+              <div>
+                <p class="publication-row__tag">Paper I · Preprint</p>
+                <h3 class="publication-row__title">Critical Schwarzschild Scalar Dynamics</h3>
+                <p class="publication-row__subtitle">A machine-checked operator theory of terminal self-adjoint laws and Friedrichs selection.</p>
+                <p class="publication-row__summary">The action-derived radial operator is shown to be Hardy-critical with deficiency indices (1,1) and a genuine U(1) family of self-adjoint terminal laws. A full-potential ground-state form selects the no-log boundary condition, and the selected realization is proved to be the Friedrichs extension.</p>
+              </div>
+              <div class="publication-row__meta">
+                <p><strong>Published</strong><br>September 16, 2026</p>
+                <p class="paper-doi">10.5281/zenodo.22800860</p>
+                <div class="publication-row__links"><a class="link-arrow" href="research-critical-schwarzschild-scalar-dynamics.html">Record →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22800860" target="_blank" rel="noopener">Zenodo →</a></div>
+              </div>
+            </li>
+
+            <li class="publication-row">
+              <div class="publication-row__index">02</div>
+              <div>
+                <p class="publication-row__tag">Paper II · Preprint</p>
+                <h3 class="publication-row__title">Friedrichs-Selected Schwarzschild Quantum Dynamics</h3>
+                <p class="publication-row__subtitle">A machine-checked continuum Fock theory and physical Cauchy evolution.</p>
+                <p class="publication-row__summary">The Friedrichs-selected scalar theory is propagated through positive one-particle frequency, continuum bosonic second quantization, self-adjoint Fock dynamics, and a separate all-spatial physical Cauchy construction with regulator removal, canonical commutator control, and owned interior-time evolution.</p>
+              </div>
+              <div class="publication-row__meta">
+                <p><strong>Published</strong><br>September 17, 2026</p>
+                <p class="paper-doi">10.5281/zenodo.22805014</p>
+                <div class="publication-row__links"><a class="link-arrow" href="research-friedrichs-selected-schwarzschild-quantum-dynamics.html">Record →</a><a class="link-arrow" href="https://doi.org/10.5281/zenodo.22805014" target="_blank" rel="noopener">Zenodo →</a></div>
+              </div>
+            </li>
+          </ol>
+        </section>
 
         <div class="identity-band reveal">
           <p class="eyebrow">Research identity</p>
