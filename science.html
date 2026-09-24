@@ -195,13 +195,13 @@
         <p class="lede">Our science is a <em>deterministic analytic surrogate</em>, not a trained neural network. Every result is a defined function of its inputs — so it can be formally verified, replayed exactly from the raw record, and traced back to the mathematics behind it. No black box deciding your state; no drift; no guessing.</p>
       </div>
       <div class="stats reveal">
-        <div class="stat"><span class="stat__n" data-attest="lines">560K+</span><span class="stat__l">lines of machine-checked proof</span></div>
-        <div class="stat"><span class="stat__n" data-attest="theorems">15,000+</span><span class="stat__l">theorems &amp; lemmas, proved</span></div>
-        <div class="stat"><span class="stat__n" data-attest="axioms">0</span><span class="stat__l">unproven assumptions at the core</span></div>
+        <div class="stat"><span class="stat__n">3.98M</span><span class="stat__l">Lean source lines</span></div>
+        <div class="stat"><span class="stat__n">118,343</span><span class="stat__l">theorem &amp; lemma declarations</span></div>
+        <div class="stat"><span class="stat__n">16,911</span><span class="stat__l">Lean source files</span></div>
         <div class="stat"><span class="stat__n">0</span><span class="stat__l">trained models in the measurement path</span></div>
       </div>
-      <p class="stats-note reveal">The proofs are machine-checked in <strong>Lean&nbsp;4</strong> — the same class of proof assistant used to verify aerospace and cryptographic software.</p>
-      <p class="stats-note reveal" style="margin-top:10px;">Corpus fingerprint (SHA-256): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">how to verify &rarr;</a> · <a href="https://github.com/zedjames/fieldfluxbiosystems/tree/main/verification">open verification harness &rarr;</a></p>
+      <p class="stats-note reveal">Current full-source inventory measured September 24, 2026 at <code>qpci-planetary</code> commit <code>aa0ea3fff5</code>: 3,982,645 physical lines, 113,630 theorem declarations, 4,713 lemma declarations, and 16,911 tracked Lean files. The inventory is a source-level census, not by itself a whole-repository build verdict. <a href="https://github.com/zedjames/qpci-planetary/blob/main/docs/LEAN_FULL_INVENTORY_2026-09-24.md" target="_blank" rel="noopener">Open the full inventory &rarr;</a></p>
+      <p class="stats-note reveal" style="margin-top:10px;">The formal proofs are written in <strong>Lean&nbsp;4</strong>. A separate scoped verification harness records kernel/build facts for the previously published verification surface. Verification receipt (SHA-256): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">verification scope &rarr;</a> · <a href="https://github.com/zedjames/fieldfluxbiosystems/tree/main/verification">open verification harness &rarr;</a></p>
 
       <div class="attest reveal" id="attest" hidden aria-live="polite">
         <div class="attest__head">
