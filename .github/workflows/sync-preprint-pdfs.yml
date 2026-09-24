@@ -1,0 +1,36 @@
+name: Sync Preprint PDFs
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "research/preprint-pdfs.json"
+      - "scripts/sync_preprint_pdfs.py"
+      - ".github/workflows/sync-preprint-pdfs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download and verify exact Zenodo PDFs
+        run: python3 scripts/sync_preprint_pdfs.py
+
+      - name: Commit local reader copies
+        run: |
+          git config user.name "fieldflux-preprint-sync"
+          git config user.email "contact@fieldfluxbiosystems.com"
+          git add 'research-*.pdf'
+          if git diff --cached --quiet; then
+            echo "No PDF changes."
+            exit 0
+          fi
+          git commit -m "Mirror preprint PDFs from Zenodo"
+          git push
