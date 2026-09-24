@@ -194,7 +194,7 @@
       return;
     }
     var s = document.createElement("script");
-    s.src = "assets/js/fieldflux-next.js?v=3";
+    s.src = "assets/js/fieldflux-next.js?v=4";
     s.async = false;
     s.dataset.fieldfluxNext = "true";
     s.addEventListener("load", loadPass2, { once:true });
