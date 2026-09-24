@@ -1,0 +1,104 @@
+{
+  "schema": "fieldflux-preprint-pdfs/v1",
+  "generated_from": "author-supplied PDFs received 2026-09-24",
+  "papers": [
+    {
+      "record_page": "research-continuation-anatomy-navier-stokes.html",
+      "pdf": "research-continuation-anatomy-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22737978",
+      "sha256": "faec272f294106fd8a380152cb45c5d8c7275df4eda9d58a66b313965f8b3ce1",
+      "pages": 20
+    },
+    {
+      "record_page": "research-critical-regularity-navier-stokes.html",
+      "pdf": "research-critical-regularity-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22754459",
+      "sha256": "6cc3ce7a02af413c175c6db0785c843b8aa980f40c9abb0dd85aa7264d7ac113",
+      "pages": 25
+    },
+    {
+      "record_page": "research-endpoint-rigidity-periodic-navier-stokes-flow.html",
+      "pdf": "research-endpoint-rigidity-periodic-navier-stokes-flow.pdf",
+      "doi": "10.5281/zenodo.22943388",
+      "sha256": "d5a3864cf1ff10035b4a1f6dd2e7806e01fdcea91b77fafa16dd85ad0e1c0e6e",
+      "pages": 32
+    },
+    {
+      "record_page": "research-critical-schwarzschild-scalar-dynamics.html",
+      "pdf": "research-critical-schwarzschild-scalar-dynamics.pdf",
+      "doi": "10.5281/zenodo.22800860",
+      "sha256": "c437bbaffd13b5837afbb5967c3945969b5b142e1d4253fbcaddc8051e27755c",
+      "pages": 22
+    },
+    {
+      "record_page": "research-friedrichs-selected-schwarzschild-quantum-dynamics.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-dynamics.pdf",
+      "doi": "10.5281/zenodo.22805014",
+      "sha256": "481d3c293a4e8077018d7e752dba7de8f5710fd97e60122ed066794bb30dfd0a",
+      "pages": 24
+    },
+    {
+      "record_page": "research-friedrichs-selected-schwarzschild-quantum-matter.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-matter.pdf",
+      "doi": "10.5281/zenodo.22819417",
+      "sha256": "dd315fe771525f86a803836d5046a72989e239081a371bcbcc8947734875486a",
+      "pages": 23
+    },
+    {
+      "record_page": "research-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22834305",
+      "sha256": "5c821faef1706e4d7e1cabaedbe8f42e09511aa842bfc53fbf689ecf6e9a68a7",
+      "pages": 21
+    },
+    {
+      "record_page": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22846743",
+      "sha256": "e5b17a569f7c130ab1ee69aaec3ab0a40ef9eb8527aea60691e588c6a3d7531c",
+      "pages": 28
+    },
+    {
+      "record_page": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22859436",
+      "sha256": "78a3fd9981720618ebbf33d6433e1d73fb263641c998b52dba1b12f87a0c2701",
+      "pages": 27
+    },
+    {
+      "record_page": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22904031",
+      "sha256": "2b6e63dca65d57dfb70d9ea85e884be8df3e663880326b1ca6448eccbe32a742",
+      "pages": 42
+    },
+    {
+      "record_page": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22939782",
+      "sha256": "a37d459aeb56143579cad20ece7fa63f1bde211266a8961d0d67274445fd7321",
+      "pages": 29
+    },
+    {
+      "record_page": "research-closed-matter-current-gaussian-physical-moduli.html",
+      "pdf": "research-closed-matter-current-gaussian-physical-moduli.pdf",
+      "doi": "10.5281/zenodo.22818292",
+      "sha256": "2a630d1a4bde9fdf0968d798a4f58697aa680393d2bb1659f8d8167089f48167",
+      "pages": 14
+    },
+    {
+      "record_page": "research-pair-generated-completion-gaussian-physical-states.html",
+      "pdf": "research-pair-generated-completion-gaussian-physical-states.pdf",
+      "doi": "10.5281/zenodo.22818924",
+      "sha256": "c4e243e844abb9abf3007e247f74e9c332bbd2f3bede1b6c8b060f58ed3673c9",
+      "pages": 15
+    },
+    {
+      "record_page": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.html",
+      "pdf": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.pdf",
+      "doi": "10.5281/zenodo.22820148",
+      "sha256": "2b105b309c33b6e9dd3484a48a2377852a2baa74eb93b13d4ab302467934d641",
+      "pages": 13
+    }
+  ]
+}
