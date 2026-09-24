@@ -201,24 +201,24 @@
         <div class="stat"><span class="stat__n">0</span><span class="stat__l">trained models in the measurement path</span></div>
       </div>
       <p class="stats-note reveal">Current full-source inventory measured September 24, 2026 at <code>qpci-planetary</code> commit <code>aa0ea3fff5</code>: 3,982,645 physical lines, 113,630 theorem declarations, 4,713 lemma declarations, and 16,911 tracked Lean files. The inventory is a source-level census, not by itself a whole-repository build verdict. <a href="https://github.com/zedjames/qpci-planetary/blob/main/docs/LEAN_FULL_INVENTORY_2026-09-24.md" target="_blank" rel="noopener">Open the full inventory &rarr;</a></p>
-      <p class="stats-note reveal" style="margin-top:10px;">The formal proofs are written in <strong>Lean&nbsp;4</strong>. A separate scoped verification harness records kernel/build facts for the previously published verification surface. Verification receipt (SHA-256): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">verification scope &rarr;</a> · <a href="https://github.com/zedjames/fieldfluxbiosystems/tree/main/verification">open verification harness &rarr;</a></p>
+      <p class="stats-note reveal" style="margin-top:10px;">The formal proofs are written in <strong>Lean&nbsp;4</strong>. Build and theorem verification are scoped to named targets and theorem surfaces; the full-source inventory above is a separate census. Historical July&nbsp;2026 fingerprint (721-file baseline; not the current corpus digest): <span class="digest">61f024933ade192222a6c8348429f4611c057e0a180c29d6807babbb07e07c75</span> · <a href="verification.txt">current verification scope &rarr;</a> · <a href="https://github.com/zedjames/fieldfluxbiosystems/tree/main/verification">open verification harness &rarr;</a></p>
 
       <div class="attest reveal" id="attest" hidden aria-live="polite">
         <div class="attest__head">
           <span class="attest__dot" aria-hidden="true"></span>
-          <span class="attest__title">Continuous verification</span>
+          <span class="attest__title">Scoped verification attestation</span>
           <span class="attest__build" id="att-build"></span>
         </div>
         <div class="attest__grid">
           <div><b id="att-files">&mdash;</b><span>files</span></div>
           <div><b id="att-thms">&mdash;</b><span>theorems &amp; lemmas</span></div>
           <div><b id="att-defs">&mdash;</b><span>definitions</span></div>
-          <div><b id="att-sorry">&mdash;</b><span>sorries</span></div>
-          <div><b id="att-axiom">&mdash;</b><span>project axioms</span></div>
+          <div><b id="att-sorry">&mdash;</b><span>source sorries</span></div>
+          <div><b id="att-axiom">&mdash;</b><span>source axiom declarations</span></div>
         </div>
         <p class="attest__foot">
           Digest <span class="digest" id="att-digest"></span><br>
-          Re-checked by the Lean&nbsp;4 kernel on every commit · verified <span id="att-commit"></span> at <span id="att-time"></span>.
+          Kernel/build status applies to the named attested target; the full-source inventory is reported separately · attested <span id="att-commit"></span> at <span id="att-time"></span>.
         </p>
       </div>
       <div class="reveal" style="max-width:820px;margin:clamp(34px,5vw,60px) auto 0;">
@@ -584,9 +584,6 @@
           var badge = $('att-build');
           badge.textContent = ok ? 'build ✓ · ' + (a.toolchain || 'Lean 4') : 'verification pending';
           if (ok) badge.className = 'attest__build is-ok';
-          /* keep the shown fingerprint current with the live-verified digest */
-          var stat = document.querySelector('.stats-note .digest');
-          if (stat && dg) stat.textContent = dg;
           $('attest').hidden = false;
         })
         .catch(function () { /* no attestation published yet — leave panel hidden */ });
