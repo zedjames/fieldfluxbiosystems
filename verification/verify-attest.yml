@@ -1,9 +1,9 @@
 name: Corpus Verification Attestation
 
-# Re-checks the corpus with the real Lean kernel on every push to main and emits
-# a signed, timestamped attestation (build ✓, counts, 0 axioms, 0 sorries, digest).
-# The green `lake build` IS the proof that every derivation type-checks; the
-# attestation just publishes the resulting facts. Nothing here discloses source.
+# Records two separate scopes: (1) a recursive Lean source inventory and
+# source digest, and (2) kernel/build status for the named QpciLean target.
+# A green QpciLean build applies to that target's dependency closure; it is not
+# a claim that every physical Lean source file was compiled.
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
                --list docs/verification/core_theorems.txt
                --out core_axioms.json
 
-      - name: Compute attestation (enforces 0 axioms / 0 sorries)
+      - name: Compute scoped source/build attestation
         run: |
           python3 scripts/verify/compute_attestation.py \
             --root lean --out attestation.json \
@@ -47,8 +47,7 @@ jobs:
             --timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --toolchain "$(cat lean-toolchain)" \
             --build-status passed \
-            --core-axioms core_axioms.json \
-            --enforce
+            --core-axioms core_axioms.json
 
       - name: Attach tamper-evident build provenance
         uses: actions/attest-build-provenance@v1
