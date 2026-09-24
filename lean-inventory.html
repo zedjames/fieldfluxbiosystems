@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lean Source Inventory — Fieldflux Biosystems</title>
+  <meta name="description" content="Public source-level inventory of the Fieldflux / Concordia Lean 4 formal corpus measured September 24, 2026.">
+  <meta name="theme-color" content="#102b43">
+  <link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+  <style>
+    body{background:#f5f0e7;color:#17324a}
+    .inv-hero{padding:clamp(96px,12vw,150px) 0 52px;background:linear-gradient(180deg,#102b43 0%,#173b5a 100%);color:#f6f2e9}
+    .inv-hero .wrap,.inv-main .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+    .inv-kicker{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#e5b85c;margin:0 0 18px}
+    .inv-hero h1{font-size:clamp(2.5rem,5vw,4.8rem);line-height:1.02;margin:0 0 22px;font-weight:500}
+    .inv-hero .lede{max-width:780px;font-size:1.15rem;line-height:1.7;color:#d7e0e7}
+    .inv-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .inv-actions a{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:11px 16px;text-decoration:none;color:#fff}
+    .inv-main{padding:56px 0 90px}
+    .inv-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:0 0 44px}
+    .inv-stat{padding:24px;border:1px solid rgba(23,50,74,.18);background:#fff}
+    .inv-stat b{display:block;font-size:2rem;font-weight:500;color:#b7791f;margin-bottom:8px}
+    .inv-stat span{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#50677a}
+    .inv-note{padding:22px 24px;border-left:3px solid #b7791f;background:#fff;margin:30px 0;line-height:1.65}
+    .inv-main h2{font-size:1.65rem;margin:48px 0 18px}
+    .inv-main p,.inv-main li{line-height:1.7;color:#415b6e}
+    .inv-table-wrap{overflow-x:auto;background:#fff;border:1px solid rgba(23,50,74,.16)}
+    table{width:100%;border-collapse:collapse;font-size:.93rem}
+    th,td{padding:11px 14px;border-bottom:1px solid rgba(23,50,74,.1);text-align:right;white-space:nowrap}
+    th:first-child,td:first-child{text-align:left}
+    th{background:#eef2f4;color:#17324a;font-weight:600}
+    tr:last-child td{border-bottom:0;font-weight:600}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+    .inv-foot{margin-top:46px;padding-top:24px;border-top:1px solid rgba(23,50,74,.18);font-size:.9rem}
+    @media(max-width:760px){.inv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="index.html" aria-label="Fieldflux Biosystems home"><span class="brand__word">FIELDFLUX BIOSYSTEMS</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="science.html">Science</a>
+        <a href="platform.html">Platform</a>
+        <a href="products.html">Products</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">Company</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="inv-hero">
+      <div class="wrap">
+        <p class="inv-kicker">Public formal-corpus inventory</p>
+        <h1>Lean source inventory.</h1>
+        <p class="lede">A source-level census of the complete measured <code>lean/</code> tree in the private Fieldflux / Concordia repository. This page reports what source existed at the frozen measurement snapshot. Build reachability, theorem authority, and empirical validity are separate scopes.</p>
+        <div class="inv-actions">
+          <a href="verification.txt">Formal verification →</a>
+          <a href="science.html">Return to the science →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="inv-main">
+      <div class="wrap">
+        <div class="inv-grid">
+          <div class="inv-stat"><b>16,911</b><span>tracked Lean files</span></div>
+          <div class="inv-stat"><b>3,982,645</b><span>physical source lines</span></div>
+          <div class="inv-stat"><b>113,630</b><span>theorem declarations</span></div>
+          <div class="inv-stat"><b>4,713</b><span>lemma declarations</span></div>
+        </div>
+
+        <div class="inv-note">
+          <strong>Measured:</strong> September 24, 2026, 13:15:11 CDT<br>
+          <strong>Repository branch:</strong> <code>main</code><br>
+          <strong>Measured commit:</strong> <code>aa0ea3fff50643708114f49980044ecde4bfe822</code><br>
+          <strong>Worktree:</strong> clean at measurement<br>
+          <strong>Combined theorem + lemma declarations:</strong> 118,343<br>
+          <strong>Nonblank source lines:</strong> 3,631,254<br>
+          <strong>Exact source bytes:</strong> 423,943,284 (404.304 MiB)
+        </div>
+
+        <h2>Scope and counting rules</h2>
+        <ul>
+          <li>Every physical <code>*.lean</code> file recursively under <code>lean/</code> was counted; all 16,911 files in the measured tree were Git-tracked.</li>
+          <li>Physical line counts include blank lines and comments. Nonblank lines contain at least one non-whitespace character.</li>
+          <li>Theorem and lemma counts recognize source declarations beginning with Lean <code>theorem</code> or <code>lemma</code> forms after permitted attributes/modifiers, while excluding declarations occurring inside nested block comments or line comments.</li>
+          <li><code>example</code>, <code>def</code>, <code>axiom</code>, <code>structure</code>, imported dependency declarations, and declarations merely mentioned in prose are not included in the theorem/lemma totals.</li>
+          <li>This is a source inventory. It is not a claim that all 16,911 files were compiled by one repository-wide build.</li>
+        </ul>
+
+        <h2>Complete top-level recursive inventory</h2>
+        <div class="inv-table-wrap">
+          <table>
+            <thead><tr><th>Branch</th><th>Files</th><th>Lines</th><th>Nonblank</th><th>Theorems</th><th>Lemmas</th></tr></thead>
+            <tbody>
+              <tr><td>Compat/</td><td>1</td><td>18</td><td>12</td><td>0</td><td>1</td></tr>
+              <tr><td>Concordia/</td><td>138</td><td>12,711</td><td>10,981</td><td>488</td><td>0</td></tr>
+              <tr><td>Continuation/</td><td>6</td><td>262</td><td>204</td><td>10</td><td>0</td></tr>
+              <tr><td>Geometry/</td><td>21</td><td>5,336</td><td>4,912</td><td>211</td><td>0</td></tr>
+              <tr><td>Health/</td><td>1</td><td>538</td><td>442</td><td>17</td><td>0</td></tr>
+              <tr><td>Market/</td><td>1</td><td>258</td><td>217</td><td>0</td><td>4</td></tr>
+              <tr><td>QGC03–QGC11/</td><td>90</td><td>9,296</td><td>7,964</td><td>396</td><td>0</td></tr>
+              <tr><td>QGC12/</td><td>1,353</td><td>227,055</td><td>205,141</td><td>10,541</td><td>0</td></tr>
+              <tr><td>QGContinuation/</td><td>21</td><td>1,349</td><td>1,154</td><td>24</td><td>0</td></tr>
+              <tr><td>RelationalCompletion/</td><td>25</td><td>1,391</td><td>1,133</td><td>52</td><td>0</td></tr>
+              <tr><td>Tier18/</td><td>121</td><td>57,218</td><td>49,853</td><td>1,046</td><td>43</td></tr>
+              <tr><td>Tier20/</td><td>63</td><td>58,566</td><td>50,209</td><td>1,859</td><td>349</td></tr>
+              <tr><td>Tier21/</td><td>616</td><td>787,542</td><td>744,657</td><td>10,927</td><td>558</td></tr>
+              <tr><td>Tier22/</td><td>303</td><td>85,101</td><td>74,927</td><td>2,891</td><td>0</td></tr>
+              <tr><td>Tier23/</td><td>61</td><td>13,596</td><td>12,017</td><td>498</td><td>0</td></tr>
+              <tr><td>Tier24/</td><td>156</td><td>43,326</td><td>38,893</td><td>2,073</td><td>0</td></tr>
+              <tr><td>Tier25/</td><td>108</td><td>18,133</td><td>15,947</td><td>506</td><td>0</td></tr>
+              <tr><td>Tier26/</td><td>18</td><td>3,223</td><td>2,828</td><td>147</td><td>0</td></tr>
+              <tr><td>Tier27/</td><td>57</td><td>19,814</td><td>17,986</td><td>728</td><td>0</td></tr>
+              <tr><td>Tier28/</td><td>14</td><td>1,822</td><td>1,587</td><td>56</td><td>0</td></tr>
+              <tr><td>Tier29/</td><td>74</td><td>24,877</td><td>22,633</td><td>842</td><td>0</td></tr>
+              <tr><td>Tier30/</td><td>11,268</td><td>2,196,702</td><td>1,999,681</td><td>69,925</td><td>125</td></tr>
+              <tr><td>Tier31/</td><td>450</td><td>65,681</td><td>58,001</td><td>2,822</td><td>0</td></tr>
+              <tr><td>Tier33/</td><td>667</td><td>50,226</td><td>42,155</td><td>1,919</td><td>0</td></tr>
+              <tr><td>Tower/</td><td>806</td><td>84,650</td><td>75,305</td><td>3,878</td><td>0</td></tr>
+              <tr><td>TowerLaw/</td><td>14</td><td>748</td><td>583</td><td>21</td><td>0</td></tr>
+              <tr><td>Toy/</td><td>33</td><td>11,204</td><td>9,708</td><td>21</td><td>7</td></tr>
+              <tr><td>Root-level standalone .lean files</td><td>400</td><td>198,114</td><td>179,083</td><td>1,717</td><td>3,265</td></tr>
+              <tr><td>Total (including smaller top-level branches not expanded above)</td><td>16,911</td><td>3,982,645</td><td>3,631,254</td><td>113,630</td><td>4,713</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Tier30 source tree</h2>
+        <p>Tier30 is the largest branch in the measured snapshot: 11,268 files and 2,196,702 physical lines. Its immediate recursive branches include Celestial Holography (1,686 files / 274,765 lines), H3 (694 / 206,056), Research (7,501 / 1,226,022), W4 (204 / 73,557), W6 (129 / 35,251), plus 992 direct Tier30 source files (371,075 lines).</p>
+
+        <h2>Reproducibility</h2>
+        <p>The measurement first established repository identity, active branch, exact Git commit, and clean-worktree status. Physical and tracked file populations were independently compared using recursive filesystem enumeration and Git tracked-file enumeration; both returned 16,911 Lean files. Line totals were accumulated per file. Declaration counting used a source scanner that maintains nested Lean block-comment depth, ignores declarations in comments, recognizes standard declaration modifiers, and aggregates mutually exclusive recursive directory groups.</p>
+
+        <div class="inv-note">
+          <strong>Verification boundary.</strong> Source presence, import reachability, membership in a canonical theorem surface, successful compilation of a named target, theorem-level axiom dependencies, scientific interpretation, and empirical realization are distinct statuses. See <a href="verification.txt">the formal verification scope</a> for the public statement of those distinctions.
+        </div>
+
+        <p class="inv-foot">Fieldflux Biosystems, Inc. · Public inventory snapshot · 2026-09-24 · enquiries: contact@fieldfluxbiosystems.com</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
