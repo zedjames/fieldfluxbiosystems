@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received 2026-09-24",
+  "generated_from": "author-supplied PDFs received through 2026-09-25",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -99,6 +99,16 @@
       "doi": "10.5281/zenodo.22820148",
       "sha256": "2b105b309c33b6e9dd3484a48a2377852a2baa74eb93b13d4ab302467934d641",
       "pages": 13
+    },
+    {
+      "record_page": "research-relational-anatomy-cell-fate.html",
+      "pdf": "research-relational-anatomy-cell-fate.pdf",
+      "doi": "10.5281/zenodo.22969066",
+      "concept_doi": "10.5281/zenodo.22969065",
+      "sha256": "8d59853775c24122fc39b885713e90d9e0b92d927d6d15d3f88d2ef7a71b7e39",
+      "pages": 39,
+      "publication_date": "2026-09-26",
+      "manuscript_date": "2026-09-25"
     }
   ]
 }
