@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-09-25",
+  "generated_from": "author-supplied PDFs received through 2026-09-28",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -103,12 +103,22 @@
     {
       "record_page": "research-relational-anatomy-cell-fate.html",
       "pdf": "research-relational-anatomy-cell-fate.pdf",
-      "doi": "10.5281/zenodo.22969066",
-      "concept_doi": "10.5281/zenodo.22969065",
-      "sha256": "8d59853775c24122fc39b885713e90d9e0b92d927d6d15d3f88d2ef7a71b7e39",
+      "doi": "10.5281/zenodo.23004119",
+      "sha256": "a1a7ed631fab234bbc5c20792df6fae154f017c81440b4fdfd8b1879ca5a1339",
       "pages": 39,
+      "publication_date": "2026-09-28",
+      "manuscript_date": "2026-09-27",
+      "version": "1.1"
+    },
+    {
+      "record_page": "research-gaussian-pair-geometry-physical-radiative-response.html",
+      "pdf": "research-gaussian-pair-geometry-physical-radiative-response.pdf",
+      "doi": "10.5281/zenodo.23001930",
+      "concept_doi": "10.5281/zenodo.23001929",
+      "sha256": "66ace20a60ccad47d0e4995ad3ec0e95eeea6d425e68696eb1708ee9c8c1b1a1",
+      "pages": 19,
       "publication_date": "2026-09-26",
-      "manuscript_date": "2026-09-25"
+      "manuscript_date": "2026-09-26"
     }
   ]
 }
