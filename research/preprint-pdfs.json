@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-09-28",
+  "generated_from": "author-supplied PDFs received through 2026-09-29",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -119,6 +119,16 @@
       "pages": 19,
       "publication_date": "2026-09-26",
       "manuscript_date": "2026-09-26"
+    },
+    {
+      "record_page": "research-source-aware-weyl-reduced-celestial-representation.html",
+      "pdf": "research-source-aware-weyl-reduced-celestial-representation.pdf",
+      "doi": "10.5281/zenodo.23029057",
+      "concept_doi": "10.5281/zenodo.23029056",
+      "sha256": "4bf27950d394b9a19ae996e040ff3b8ac39626630cbfd832ba77bcb0642e8e85",
+      "pages": 40,
+      "publication_date": "2026-09-29",
+      "manuscript_date": "2026-09-28"
     }
   ]
 }
