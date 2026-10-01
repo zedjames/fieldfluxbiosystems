@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-09-29",
+  "generated_from": "author-supplied PDFs received through 2026-10-01",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -129,6 +129,16 @@
       "pages": 40,
       "publication_date": "2026-09-29",
       "manuscript_date": "2026-09-28"
+    },
+    {
+      "record_page": "research-relational-organization-directional-stability-mouse-organogenesis.html",
+      "pdf": "research-relational-organization-directional-stability-mouse-organogenesis.pdf",
+      "doi": "10.5281/zenodo.23090479",
+      "concept_doi": "10.5281/zenodo.23090478",
+      "sha256": "ae56f6af9280e13a3851b6e5d31339619176764d03b9b400dbe12805eaf15c19",
+      "pages": 39,
+      "publication_date": "2026-10-01",
+      "manuscript_date": "2026-10-01"
     }
   ]
 }
