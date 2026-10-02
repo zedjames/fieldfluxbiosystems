@@ -189,7 +189,7 @@
   function loadResearchAtlas() {
     if (document.querySelector('script[data-research-atlas]')) return;
     var a = document.createElement("script");
-    a.src = "assets/js/research-atlas.js?v=2";
+    a.src = "assets/js/research-atlas.js?v=3";
     a.async = false;
     a.dataset.researchAtlas = "true";
     document.body.appendChild(a);
