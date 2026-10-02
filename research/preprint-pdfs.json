@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-10-01",
+  "generated_from": "author-supplied PDFs received through 2026-10-02",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -139,6 +139,15 @@
       "pages": 39,
       "publication_date": "2026-10-01",
       "manuscript_date": "2026-10-01"
+    },
+    {
+      "record_page": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.html",
+      "pdf": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.pdf",
+      "doi": "10.5281/zenodo.23108946",
+      "sha256": "e83ecbe03ff17c924ffd2f6ac0017dcbfed713f255a4c10138e7a2445adc3c1e",
+      "pages": 47,
+      "publication_date": "2026-10-02",
+      "manuscript_date": "2026-10-02"
     }
   ]
 }
