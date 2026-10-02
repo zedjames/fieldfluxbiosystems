@@ -72,15 +72,48 @@ def main()->int:
     atlas=ATLAS.read_text(encoding="utf-8")
     pubs=[i for i in items if i.get("collection")=="publications"]
     notes=[i for i in items if i.get("collection")=="notebook"]
-    for i in pubs:
-        if i["href"] not in research: fail(f"publication absent from research.html: {i['href']}",errors)
-    for i in notes:
-        if i["href"] not in notebook: fail(f"notebook item absent from notebook.html: {i['href']}",errors)
-    for i in items:
-        if i["href"] not in atlas: fail(f"catalog item absent from research-atlas.html: {i['href']}",errors)
 
-    # Public summary counts.
-    for expected,label in ((len(items),"research objects"),(len(pubs),"preprints"),(len(notes),"notebook pieces")):
+    # Complete archives own the individual works.
+    for i in pubs:
+        if i["href"] not in research:
+            fail(f"publication absent from research.html: {i['href']}",errors)
+    for i in notes:
+        if i["href"] not in notebook:
+            fail(f"notebook item absent from notebook.html: {i['href']}",errors)
+
+    if research.count("data-archive-card") != len(pubs):
+        fail(f"publication archive card count mismatch: expected {len(pubs)}",errors)
+    if notebook.count("data-archive-card") != len(notes):
+        fail(f"notebook archive card count mismatch: expected {len(notes)}",errors)
+
+    # The Atlas owns durable concepts, series, and curated routes rather than
+    # enumerating every research object.
+    for t in c.get("themes",[]):
+        if t["label"] not in atlas:
+            fail(f"theme absent from research-atlas.html: {t['label']}",errors)
+    for sid,smeta in series.items():
+        landing=smeta.get("landing_page")
+        if not landing:
+            fail(f"series {sid}: missing landing_page metadata",errors)
+            continue
+        if landing not in atlas:
+            fail(f"series landing absent from research-atlas.html: {landing}",errors)
+        page=(ROOT/landing).read_text(encoding="utf-8") if (ROOT/landing).exists() else ""
+        for i in pubs:
+            if i.get("series")==sid and i["href"] not in page:
+                fail(f"series {sid} landing missing published paper {i['href']}",errors)
+    for route in routes:
+        if route.get("title") and route["title"] not in atlas:
+            fail(f"route absent from research-atlas.html: {route['title']}",errors)
+
+    # Stable top-level counts.
+    expected_pairs=[
+        (len(c.get("themes",[])),"durable themes"),
+        (len(c.get("series",[])),"active series"),
+        (len(items),"public research objects"),
+        (len(relations),"cataloged relations"),
+    ]
+    for expected,label in expected_pairs:
         if not re.search(rf">\s*{expected}\s*<.*?>{re.escape(label)}",atlas,re.S|re.I):
             fail(f"atlas summary count mismatch for {label}: expected {expected}",errors)
 
