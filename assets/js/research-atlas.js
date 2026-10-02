@@ -39,18 +39,36 @@
     var counts={};
     var positions={};
 
+    if(scope==="notebook"){
+      svg.setAttribute("viewBox","0 0 900 620");
+    }else{
+      svg.setAttribute("viewBox","0 0 1020 650");
+    }
+
     items.forEach(function(i){
       var ti=(themes[i.primary_theme]||{index:0}).index;
       var key=i.collection+"|"+i.primary_theme;
       var n=counts[key]||0;counts[key]=n+1;
       var x,y;
-      if(scope==="notebook"||i.collection==="notebook"){
-        x=scope==="notebook"?170+(ti%4)*250:170+(n%3)*105;
-        y=scope==="notebook"?105+Math.floor(ti/4)*250+(n%3)*55:85+ti*78+(n%2)*22;
+
+      if(scope==="notebook"){
+        /* Four generous notebook columns; theme determines neighborhood,
+           local count prevents same-theme collisions. */
+        var col=ti%4;
+        var row=Math.floor(ti/4);
+        x=105+col*220+(n%2)*34;
+        y=115+row*245+Math.floor(n/2)*82;
+      }else if(i.collection==="notebook"){
+        /* Conceptual constellation on the left side of the full Atlas. */
+        var nbCol=ti%3;
+        var nbRow=Math.floor(ti/3);
+        x=105+nbCol*135+(n%2)*28;
+        y=95+nbRow*145+Math.floor(n/2)*54;
       }else{
+        /* One explicit vertical rail per publication series. */
         var si=(series[i.series]||{index:0}).index;
-        x=690+si*135+(n%2)*22;
-        y=80+ti*78+((i.order||1)-1)*13;
+        x=560+si*140;
+        y=105+((i.order||1)-1)*66;
       }
       positions[i.id]={x:x,y:y};
     });
@@ -59,7 +77,7 @@
       if(!allowed[r.from]||!allowed[r.to])return;
       var A=positions[r.from],B=positions[r.to];if(!A||!B)return;
       var p=document.createElementNS(NS,"path");
-      var mx=(A.x+B.x)/2,my=(A.y+B.y)/2-22;
+      var mx=(A.x+B.x)/2,my=(A.y+B.y)/2-18;
       p.setAttribute("d","M"+A.x+" "+A.y+" Q"+mx+" "+my+" "+B.x+" "+B.y);
       p.setAttribute("class","atlas-edge");
       p.dataset.type=r.type;p.dataset.from=r.from;p.dataset.to=r.to;
@@ -73,9 +91,10 @@
       g.setAttribute("tabindex","0");g.setAttribute("role","button");
       g.setAttribute("aria-label",i.title);
       g.dataset.id=i.id;g.dataset.themes=(i.themes||[]).join(" ");
-      var label=i.collection==="publications"?(series[i.series]?series[i.series].data.label.split(" ")[0]:"Paper")+" "+roman(i.order||1):short(i.title);
+      var seriesLabel={ "navier-stokes":"NS", "schwarzschild-qg":"SQG", "gaussian":"Gaussian", "relational-biology":"Biology" };
+      var label=i.collection==="publications"?(seriesLabel[i.series]||"Paper")+" "+roman(i.order||1):short(i.title);
       var kind=i.collection==="publications"?"preprint":(i.subtype==="founder_reflection"?"founder":"notebook");
-      g.innerHTML='<circle class="atlas-node__halo" r="20"></circle><circle class="atlas-node__core" r="11"></circle><text y="-19" text-anchor="middle">'+esc(label)+'</text><text class="atlas-node__kind" y="26" text-anchor="middle">'+esc(kind)+'</text><title>'+esc(i.title)+'</title>';
+      g.innerHTML='<circle class="atlas-node__halo" r="28"></circle><circle class="atlas-node__core" r="15"></circle><text y="-25" text-anchor="middle">'+esc(label)+'</text><text class="atlas-node__kind" y="34" text-anchor="middle">'+esc(kind)+'</text><title>'+esc(i.title)+'</title>';
       function select(){selectNode(host,i,C,byId,relTypes);qa(".atlas-node",host).forEach(function(n){n.classList.toggle("is-active",n.dataset.id===i.id);});}
       g.addEventListener("click",select);g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();select();}});
       svg.appendChild(g);
