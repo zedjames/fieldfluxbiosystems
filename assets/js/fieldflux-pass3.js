@@ -226,10 +226,12 @@
   }
 
   var THREADS={
-    Foundations:["Boundary","Fixedness","Living boundary","Temperament"],
-    Formalization:["Fixedness","Algebra before AI","Certification","Observable"],
+    Program:["The Question","Boundary","Fixedness","1 + 1 = 2"],
+    Foundations:["The Question","Boundary","Fixedness","Living boundary","Temperament"],
+    Formalization:["The Question","Fixedness","Algebra before AI","Certification","What is new","Observable"],
     Measurement:["Boundary","Living boundary","Observable","Residual"],
-    Evidence:["Certification","Observable","Residual","Failure"]
+    Evidence:["Certification","What is new","Observable","Residual","Failure"],
+    Relations:["The Question","Fixedness","Residual","1 + 1 = 2","Temperament"]
   };
   function initResearchGenealogy(){
     var map=q(".ffx-research-map");
@@ -253,7 +255,15 @@
         var detail=q(".ffx-research-map__detail",map);
         q("span",detail).textContent=name+" thread";
         q("strong",detail).textContent=wanted.join(" → ");
-        q("p",detail).textContent=name==="Evidence"?"This thread follows the movement from certification and observability into reconstruction, deletion, and claim authority.":name==="Measurement"?"This thread follows the boundary from a conceptual primitive into an observable and then into reconstructed structure.":name==="Formalization"?"This thread follows the work required to turn a declared ontology into machine-checkable and certifiable structure.":"This thread follows the ideas that make a changing system distinguishable enough to remain itself.";
+        var descriptions={
+          Program:"This thread follows the central research question from a scale-agnostic definition of health into invariance, relation, and measurement.",
+          Foundations:"This thread follows the ideas that make a changing system distinguishable enough to remain itself.",
+          Formalization:"This thread follows the work required to turn a declared ontology into machine-checkable and certifiable structure.",
+          Measurement:"This thread follows the boundary from a conceptual primitive into an observable and then into reconstructed structure.",
+          Evidence:"This thread follows the movement from certification and observability into reconstruction, deletion, and claim authority.",
+          Relations:"This thread follows identity, compression, residual structure, and the relations that can remain meaningful across transformations."
+        };
+        q("p",detail).textContent=descriptions[name]||"Follow this conceptual thread through the notebook.";
       }
     }
     qa("button",bar).forEach(function(b){b.addEventListener("click",function(){apply(b.dataset.thread);});});
@@ -267,7 +277,7 @@
     if(p==="platform.html")afterGenerated(".ffx-measurement__stage",initPlatformConsequence);
     if(p==="products.html")afterGenerated(".ffx-product-branch",initProductsConvergence);
     if(p==="investors.html")afterGenerated(".ffx-risktrack",initInvestorFrontier);
-    if(p==="research.html")afterGenerated(".ffx-research-map",initResearchGenealogy);
+    if(p==="notebook.html")afterGenerated(".ffx-research-map",initResearchGenealogy);
   }
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
