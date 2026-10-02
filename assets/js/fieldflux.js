@@ -159,7 +159,7 @@
       return;
     }
     var p3 = document.createElement("script");
-    p3.src = "assets/js/fieldflux-pass3.js?v=1";
+    p3.src = "assets/js/fieldflux-pass3.js?v=2";
     p3.async = false;
     p3.dataset.fieldfluxPass3 = "true";
     p3.addEventListener("load", loadCinema, { once:true });
@@ -179,7 +179,7 @@
   function loadPass2() {
     if (document.querySelector('script[data-fieldflux-pass2]')) { loadPass2Overrides(); return; }
     var p = document.createElement("script");
-    p.src = "assets/js/fieldflux-pass2.js?v=1";
+    p.src = "assets/js/fieldflux-pass2.js?v=2";
     p.async = false;
     p.dataset.fieldfluxPass2 = "true";
     p.addEventListener("load", loadPass2Overrides, { once:true });
@@ -194,7 +194,7 @@
       return;
     }
     var s = document.createElement("script");
-    s.src = "assets/js/fieldflux-next.js?v=4";
+    s.src = "assets/js/fieldflux-next.js?v=5";
     s.async = false;
     s.dataset.fieldfluxNext = "true";
     s.addEventListener("load", loadPass2, { once:true });
