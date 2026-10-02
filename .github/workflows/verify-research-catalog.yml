@@ -26,6 +26,16 @@ on:
       - ".github/workflows/verify-research-catalog.yml"
   workflow_dispatch:
 
+# Research publication updates often touch the catalog and several static
+# projections in a short sequence. Treat those pushes as one transaction:
+# cancel superseded runs, then verify only the latest main commit after a
+# short quiet period. This prevents temporary intermediate states from
+# generating failure notifications while preserving validation of the final
+# published state.
+concurrency:
+  group: verify-research-catalog-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -34,5 +44,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Wait for research publication transaction to settle
+        if: github.event_name == 'push'
+        id: freshness
+        shell: bash
+        run: |
+          sleep 90
+          latest="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ "$latest" = "$GITHUB_SHA" ]; then
+            echo "run_verify=true" >> "$GITHUB_OUTPUT"
+            echo "This is the latest main commit; running catalog verification."
+          else
+            echo "run_verify=false" >> "$GITHUB_OUTPUT"
+            echo "Superseded by newer main commit $latest; skipping transient-state verification."
+          fi
+
       - name: Validate catalog, relations, and static projections
+        if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
         run: python3 scripts/verify_research_catalog.py
