@@ -123,12 +123,11 @@
       "id": "gaussian",
       "label": "Gaussian Physical States and Celestial Representation",
       "domain": "Mathematical physics",
-      "description": "A six-paper sequence studying how physical information survives successive changes of mathematical representation, from constrained Gaussian gauge-field states through radiative multiparticle structure and source-aware celestial decomposition.",
+      "description": "An ongoing series studying how physical information survives successive changes of mathematical representation, from constrained Gaussian gauge-field states through radiative multiparticle structure, source-aware celestial decomposition, and the further spectral and dynamical questions opened by those constructions.",
       "landing_page": "research-series-gaussian.html",
-      "sequence_size": 6,
       "published_count": 6,
-      "current_status": "Papers I–VI published",
-      "paper6_current_result": "Paper VI proves all-label injectivity of the intrinsic cross-ratio and full signed principal-series transforms on the intrinsic physical source range, while retaining the explicit conditional status of the retained bounded completion."
+      "current_status": "Ongoing series; Papers I–VI published; further papers in development",
+      "paper6_current_result": "Paper VI proves all-label injectivity of the intrinsic cross-ratio and full signed principal-series transforms on the intrinsic physical source range, while retaining the explicit conditional status of the retained bounded completion. It closes this source-uniqueness stage and hands the resulting carrier forward to later papers in the series."
     },
     {
       "id": "relational-biology",
