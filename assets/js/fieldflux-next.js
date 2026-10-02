@@ -40,7 +40,7 @@
 
   function upgradeNav(){
     qsa(".nav__links").forEach(function(nav){
-      nav.innerHTML=[["science.html","Science"],["platform.html","Platform"],["products.html","Products"],["research.html","Research"],["about.html","Company"],["investors.html","Investors"]].map(function(x){
+      nav.innerHTML=[["science.html","Science"],["platform.html","Platform"],["products.html","Products"],["research-atlas.html","Research"],["about.html","Company"],["investors.html","Investors"]].map(function(x){
         var active=page()===x[0]?' class="is-active" aria-current="page"':"";
         return '<a href="'+x[0]+'"'+active+'>'+x[1]+'</a>';
       }).join("");
