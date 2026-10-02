@@ -55,3 +55,20 @@
 .atlas-graph__field{position:relative}
 .atlas-graph__field::before{content:"conceptual / notebook";position:absolute;left:22px;top:18px;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);opacity:.72;pointer-events:none}
 @media(min-width:901px){.atlas-graph__detail{min-width:265px}}
+
+/* Progressive-disclosure graph: quiet by default, relationships on selection. */
+.atlas-series-rail{stroke:rgba(30,64,101,.10);stroke-width:1;stroke-dasharray:2 7;vector-effect:non-scaling-stroke}
+.atlas-series-label{font:650 12px var(--body);fill:var(--navy);letter-spacing:.02em}
+.atlas-edge{opacity:.035;transition:opacity .18s ease,stroke .18s ease,stroke-width .18s ease}
+.atlas-edge.is-selected{opacity:.68;stroke:rgba(30,64,101,.42);stroke-width:1.8}
+.atlas-edge.is-selected[data-type="continues"]{stroke:rgba(154,106,18,.64);stroke-width:2.2}
+.atlas-edge.is-muted{opacity:.012}
+.atlas-node{transition:opacity .18s ease}
+.atlas-node.is-related .atlas-node__halo{fill:rgba(154,106,18,.07);stroke:rgba(154,106,18,.48)}
+.atlas-node.is-related .atlas-node__core{stroke:var(--gold)}
+.atlas-node__label{opacity:.72;transition:opacity .18s ease,font-size .18s ease}
+.atlas-node.publications .atlas-node__label{font-size:12px}
+.atlas-node.notebook .atlas-node__label{font-size:11px}
+.atlas-node.is-active .atlas-node__label,.atlas-node.is-related .atlas-node__label,.atlas-node:hover .atlas-node__label,.atlas-node:focus .atlas-node__label{opacity:1}
+.atlas-node__kind{opacity:.38}
+.atlas-node.is-active .atlas-node__kind,.atlas-node:hover .atlas-node__kind,.atlas-node:focus .atlas-node__kind{opacity:.85}
