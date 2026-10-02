@@ -126,9 +126,9 @@
       "description": "A six-paper sequence studying how physical information survives successive changes of mathematical representation, from constrained Gaussian gauge-field states through radiative multiparticle structure and source-aware celestial decomposition.",
       "landing_page": "research-series-gaussian.html",
       "sequence_size": 6,
-      "published_count": 5,
-      "current_status": "Paper VI in final preparation",
-      "paper6_current_result": "The current Paper VI manuscript establishes injectivity of the intrinsic shape/cross-ratio transform on the physical source range and injectivity of the full signed principal-series transform."
+      "published_count": 6,
+      "current_status": "Papers I–VI published",
+      "paper6_current_result": "Paper VI proves all-label injectivity of the intrinsic cross-ratio and full signed principal-series transforms on the intrinsic physical source range, while retaining the explicit conditional status of the retained bounded completion."
     },
     {
       "id": "relational-biology",
@@ -151,7 +151,8 @@
         "note-fixedness",
         "bio2",
         "gps4",
-        "gps5"
+        "gps5",
+        "gps6"
       ]
     },
     {
@@ -198,7 +199,8 @@
         "gps2",
         "gps3",
         "gps4",
-        "gps5"
+        "gps5",
+        "gps6"
       ]
     },
     {
@@ -827,6 +829,31 @@
       ]
     },
     {
+      "id": "gps6",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 6,
+      "date": "2026-10-02",
+      "title": "The Physical Celestial Clebsch–Gordan Transform of a Radiative Bose Pair",
+      "subtitle": "Direct-integral completion, source-Weyl geometry, and all-label uniqueness on the intrinsic physical source range.",
+      "href": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.html",
+      "pdf": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.pdf",
+      "doi": "10.5281/zenodo.23108946",
+      "summary": "On the intrinsic physical source range, the cross-ratio and full signed principal-series transforms are injective for every physical external-label pair, while the retained bounded completion remains conditional on one explicit uniform core estimate.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "invariance-identity",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Celestial holography",
+        "Formal methods"
+      ]
+    },
+    {
       "id": "bio1",
       "collection": "publications",
       "subtype": "preprint",
@@ -1102,6 +1129,11 @@
       "from": "note-failure",
       "to": "bio2",
       "type": "shared_question"
+    },
+    {
+      "from": "gps5",
+      "to": "gps6",
+      "type": "continues"
     }
   ]
 }
