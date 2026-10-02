@@ -1,0 +1,1082 @@
+{
+  "schema": "fieldflux-research-catalog/v1",
+  "updated": "2026-10-02",
+  "purpose": "Public relational index for Fieldflux preprints, founder reflections, and field notes. Relations are editorial/navigation metadata unless explicitly described otherwise.",
+  "collections": [
+    {
+      "id": "publications",
+      "label": "Preprints & Publications",
+      "href": "research.html",
+      "description": "Citable technical results organized by research series."
+    },
+    {
+      "id": "notebook",
+      "label": "Research Notebook",
+      "href": "notebook.html",
+      "description": "Founder reflections and field notes preserving questions, distinctions, methods, failures, and bridges between programs."
+    }
+  ],
+  "themes": [
+    {
+      "id": "health-foundations",
+      "label": "Health & foundations",
+      "description": "What health is, what makes a system itself, and what must be preserved across scale."
+    },
+    {
+      "id": "invariance-identity",
+      "label": "Invariance & identity",
+      "description": "What remains the same through change, quotient, transformation, or representation."
+    },
+    {
+      "id": "boundary-measurement",
+      "label": "Boundary & measurement",
+      "description": "How boundary exchange becomes observable, reconstructable, and physically meaningful."
+    },
+    {
+      "id": "formalization-proof",
+      "label": "Formalization & proof",
+      "description": "Machine-checkable structure, admissibility, closure, gauge structure, and proof authority."
+    },
+    {
+      "id": "evidence-validation",
+      "label": "Evidence & validation",
+      "description": "Failure tests, controls, calibration, empirical support, and the boundary of warranted claim."
+    },
+    {
+      "id": "relational-organization",
+      "label": "Relational organization",
+      "description": "Relations, multiplicity, compression, comparability, ownership, and organization across states."
+    },
+    {
+      "id": "continuation-stability",
+      "label": "Continuation & stability",
+      "description": "Persistence, regularity, restart, dynamic stability, and the anatomy of breakdown."
+    },
+    {
+      "id": "representation-reconstruction",
+      "label": "Representation & reconstruction",
+      "description": "What descriptions retain, discard, reconstruct, or obstruct when states move between representations."
+    }
+  ],
+  "relation_types": [
+    {
+      "id": "continues",
+      "label": "continues",
+      "description": "The later work continues the same declared series or technical program."
+    },
+    {
+      "id": "companion",
+      "label": "companion",
+      "description": "The works are explicitly framed as companion explanations or notes."
+    },
+    {
+      "id": "context",
+      "label": "context",
+      "description": "One work supplies conceptual or interpretive context for the other."
+    },
+    {
+      "id": "example",
+      "label": "explicit example",
+      "description": "A work is explicitly used as an example in the connected reflection."
+    },
+    {
+      "id": "shared_question",
+      "label": "shared question",
+      "description": "The works address a common question without implying formal dependence."
+    },
+    {
+      "id": "measurement_bridge",
+      "label": "measurement bridge",
+      "description": "The connection carries a formal or conceptual question toward observability, evidence, or engineering."
+    }
+  ],
+  "series": [
+    {
+      "id": "navier-stokes",
+      "label": "Navier–Stokes Continuation",
+      "domain": "Fluid dynamics",
+      "description": "Continuation geometry, regularity escape, spectral transfer, and endpoint rigidity."
+    },
+    {
+      "id": "schwarzschild-qg",
+      "label": "Schwarzschild Quantum Gravity",
+      "domain": "Quantum gravity",
+      "description": "A self-consistent Einstein–real-scalar quantum sector from operator selection through BV/BRST, regulated quantization, and relational gravity."
+    },
+    {
+      "id": "gaussian",
+      "label": "Gaussian Physical States",
+      "domain": "Mathematical physics",
+      "description": "Gaussian current-zero states, pair-generated Fock structure, radiative response, and source-aware celestial representation."
+    },
+    {
+      "id": "relational-biology",
+      "label": "Relational / Systems Biology",
+      "domain": "Systems biology",
+      "description": "Relational state, fate, comparability, developmental organization, and morphogenetic direction across biological carriers."
+    }
+  ],
+  "routes": [
+    {
+      "id": "health-question",
+      "title": "What can remain invariant across scale or representation?",
+      "description": "A cross-domain route from the health question into biological comparability and source-aware representation.",
+      "items": [
+        "note-question",
+        "note-fixedness",
+        "bio2",
+        "gps4",
+        "gps5"
+      ]
+    },
+    {
+      "id": "boundary-to-evidence",
+      "title": "How does a boundary become a warranted measurement?",
+      "description": "From the boundary primitive through observability, certification, reconstruction, and deliberate failure.",
+      "items": [
+        "note-boundary",
+        "note-living-boundary",
+        "note-observable",
+        "note-certification",
+        "note-residual",
+        "note-failure"
+      ]
+    },
+    {
+      "id": "relational-identity",
+      "title": "Where does identity live when relations carry the information?",
+      "description": "A route through relational measurement, cell fate, developmental organization, and quantum ownership.",
+      "items": [
+        "note-one-plus-one",
+        "bio1",
+        "bio2",
+        "sqg8"
+      ]
+    },
+    {
+      "id": "continuation",
+      "title": "What does persistence look like near breakdown?",
+      "description": "The fixedness question specialized into the Navier–Stokes continuation program.",
+      "items": [
+        "note-fixedness",
+        "ns1",
+        "ns2",
+        "ns3"
+      ]
+    },
+    {
+      "id": "gaussian-representation",
+      "title": "What survives as a physical state changes representation?",
+      "description": "The Gaussian series from current-zero completion to radiative and celestial representation.",
+      "items": [
+        "gps1",
+        "gps2",
+        "gps3",
+        "gps4",
+        "gps5"
+      ]
+    },
+    {
+      "id": "quantum-ownership",
+      "title": "How does a quantum sector own its dynamics, gauge structure, and geometry?",
+      "description": "The Schwarzschild program from self-consistent matter into master-action ownership, BRST, quantum obstruction, and relational gravity.",
+      "items": [
+        "sqg4",
+        "sqg5",
+        "sqg6",
+        "sqg7",
+        "sqg8"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "note-question",
+      "collection": "notebook",
+      "subtype": "founder_reflection",
+      "title": "The Question Behind Our Research",
+      "href": "question-behind-our-research.html",
+      "date": "2026-10-02",
+      "summary": "Why biology, fluid dynamics, mathematical physics, formal proof, and measurement engineering keep meeting inside one long-running question about a scale-agnostic definition of health.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "invariance-identity",
+        "relational-organization",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Foundations",
+        "Measurement science"
+      ],
+      "order": 1
+    },
+    {
+      "id": "note-boundary",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "The boundary comes first",
+      "href": "boundary-comes-first.html",
+      "summary": "Why measurement begins with the edge that makes an aggregate distinguishable, and how a maintained gradient connects boundary to health.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Foundations",
+        "Measurement science"
+      ],
+      "order": 2
+    },
+    {
+      "id": "note-fixedness",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "Fixedness",
+      "href": "fixedness.html",
+      "summary": "What must remain invariant for a changing system to remain itself, and how measurement keeps hold of identity through transformation.",
+      "primary_theme": "invariance-identity",
+      "themes": [
+        "invariance-identity",
+        "health-foundations",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Foundations",
+        "Measurement science"
+      ],
+      "order": 3
+    },
+    {
+      "id": "note-algebra-ai",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "Algebra before AI",
+      "href": "algebra-before-ai.html",
+      "summary": "Why formal structure, admissibility, and claim authority have to exist before learned inference is allowed to act.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "evidence-validation",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Formal methods",
+        "Measurement science"
+      ],
+      "order": 4
+    },
+    {
+      "id": "note-living-boundary",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "Reading the living boundary",
+      "href": "living-boundary.html",
+      "summary": "A relational account of gradients, exchange, laminarity, reconstruction, and what an instrument can learn from a living surface.",
+      "primary_theme": "boundary-measurement",
+      "themes": [
+        "boundary-measurement",
+        "representation-reconstruction",
+        "evidence-validation"
+      ],
+      "domains": [
+        "Measurement science"
+      ],
+      "order": 5
+    },
+    {
+      "id": "note-residual",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "Residue and residual",
+      "href": "residue-and-residual.html",
+      "summary": "Two different remainders: what a living boundary retains, and what remains after a model has been tested against a law.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "boundary-measurement",
+        "evidence-validation"
+      ],
+      "domains": [
+        "Measurement science"
+      ],
+      "order": 6
+    },
+    {
+      "id": "note-one-plus-one",
+      "collection": "notebook",
+      "subtype": "reflection",
+      "title": "1 + 1 = 2",
+      "href": "one-plus-one.html",
+      "summary": "A reflection on relational measurement, compression, identity, and what arithmetic hides when relationships carry the information.",
+      "primary_theme": "relational-organization",
+      "themes": [
+        "relational-organization",
+        "invariance-identity"
+      ],
+      "domains": [
+        "Foundations",
+        "Measurement science"
+      ],
+      "order": 7
+    },
+    {
+      "id": "note-what-new",
+      "collection": "notebook",
+      "subtype": "field_note",
+      "title": "What is genuinely new, precisely.",
+      "href": "what-is-new.html",
+      "summary": "A proof-checked living algebra of physical observables, situated carefully against the fields nearest to it.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Formal methods",
+        "Measurement science"
+      ],
+      "order": 8
+    },
+    {
+      "id": "note-certification",
+      "collection": "notebook",
+      "subtype": "field_note",
+      "title": "A boundary-observable certification algebra",
+      "href": "certification-algebra.html",
+      "summary": "How mathematical freedom is progressively admitted through physical consistency, closure, witness, and evidentiary maturity.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "evidence-validation",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Formal methods",
+        "Measurement science"
+      ],
+      "order": 9
+    },
+    {
+      "id": "note-temperament",
+      "collection": "notebook",
+      "subtype": "field_note",
+      "title": "The temperament of a bespoke algebra",
+      "href": "temperament.html",
+      "summary": "What repeated behavior under proof reveals about the character of a mathematical object built for measurement.",
+      "primary_theme": "invariance-identity",
+      "themes": [
+        "invariance-identity",
+        "formalization-proof",
+        "relational-organization"
+      ],
+      "domains": [
+        "Formal methods",
+        "Foundations"
+      ],
+      "order": 10
+    },
+    {
+      "id": "note-observable",
+      "collection": "notebook",
+      "subtype": "field_note",
+      "title": "The making of an observable",
+      "href": "making-of-an-observable.html",
+      "summary": "How calibration, reconstruction, residual analysis, transport preservation, and claim maturity turn a signal into an observable.",
+      "primary_theme": "boundary-measurement",
+      "themes": [
+        "boundary-measurement",
+        "evidence-validation",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Measurement science"
+      ],
+      "order": 11
+    },
+    {
+      "id": "note-failure",
+      "collection": "notebook",
+      "subtype": "field_note",
+      "title": "How we try to make the signal fail",
+      "href": "make-the-signal-fail.html",
+      "summary": "Why deliberate deletion, failure tests, and longitudinal challenge belong inside the evidence chain before a relationship is allowed to count.",
+      "primary_theme": "evidence-validation",
+      "themes": [
+        "evidence-validation",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Measurement science",
+        "Empirical validation"
+      ],
+      "order": 12
+    },
+    {
+      "id": "ns1",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "navier-stokes",
+      "order": 1,
+      "date": "2026-09-13",
+      "title": "Continuation Anatomy of Periodic Navier–Stokes Breakdown",
+      "subtitle": "A machine-checked H² theory of finite-energy regularity escape.",
+      "href": "research-continuation-anatomy-navier-stokes.html",
+      "pdf": "research-continuation-anatomy-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22737978",
+      "summary": "Finite maximality is resolved into bounded kinetic energy, eventual H² divergence, escape beyond every fixed Fourier cutoff, positive-scale regularity, and collapse of uniform continuation reserve.",
+      "primary_theme": "continuation-stability",
+      "themes": [
+        "continuation-stability",
+        "formalization-proof",
+        "invariance-identity"
+      ],
+      "domains": [
+        "Fluid dynamics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "ns2",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "navier-stokes",
+      "order": 2,
+      "date": "2026-09-14",
+      "title": "Critical Regularity Anatomy of Periodic Navier–Stokes Breakdown",
+      "subtitle": "Spectral transfer, terminal nonlinear H² work, and simultaneous failure of nonendpoint continuation controls.",
+      "href": "research-critical-regularity-navier-stokes.html",
+      "pdf": "research-critical-regularity-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22754459",
+      "summary": "The continuation anatomy is sharpened through finite-annulus spectral budgets, unbounded terminal nonlinear H² work, and simultaneous failure of nonendpoint continuation regimes.",
+      "primary_theme": "continuation-stability",
+      "themes": [
+        "continuation-stability",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Fluid dynamics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "ns3",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "navier-stokes",
+      "order": 3,
+      "date": "2026-09-24",
+      "title": "Endpoint Rigidity in Periodic Navier–Stokes Flow",
+      "subtitle": "Terminal magnification, intrinsic restart, and analytic rigidity at the L∞t L³x boundary.",
+      "href": "research-endpoint-rigidity-periodic-navier-stokes-flow.html",
+      "pdf": "research-endpoint-rigidity-periodic-navier-stokes-flow.pdf",
+      "doi": "10.5281/zenodo.22943388",
+      "summary": "Bounded terminal L³ forces global continuation, while finite maximal time forces infinite terminal L³ limsup through magnification, restart, backward identification, and rigidity.",
+      "primary_theme": "continuation-stability",
+      "themes": [
+        "continuation-stability",
+        "invariance-identity",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Fluid dynamics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg1",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 1,
+      "date": "2026-09-16",
+      "title": "Critical Schwarzschild Scalar Dynamics",
+      "subtitle": "A machine-checked operator theory of terminal self-adjoint laws and Friedrichs selection.",
+      "href": "research-critical-schwarzschild-scalar-dynamics.html",
+      "pdf": "research-critical-schwarzschild-scalar-dynamics.pdf",
+      "doi": "10.5281/zenodo.22800860",
+      "summary": "A Hardy-critical radial operator with a genuine family of self-adjoint terminal laws is reduced by a ground-state form to the Friedrichs-selected no-log realization.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "formalization-proof",
+        "continuation-stability"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg2",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 2,
+      "date": "2026-09-17",
+      "title": "Friedrichs-Selected Schwarzschild Quantum Dynamics",
+      "subtitle": "A machine-checked continuum Fock theory and real-scalar physical Cauchy evolution.",
+      "href": "research-friedrichs-selected-schwarzschild-quantum-dynamics.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-dynamics.pdf",
+      "doi": "10.5281/zenodo.22805014",
+      "summary": "Friedrichs selection is propagated into positive one-particle frequency, continuum bosonic Fock dynamics, and an independently action-derived physical Cauchy theory.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "formalization-proof",
+        "continuation-stability"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg3",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 3,
+      "date": "2026-09-17",
+      "title": "Friedrichs-Selected Schwarzschild Quantum Matter",
+      "subtitle": "A machine-checked real-scalar stress theory, physical-clock coherence, and regulator-independent sources.",
+      "href": "research-friedrichs-selected-schwarzschild-quantum-matter.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-matter.pdf",
+      "doi": "10.5281/zenodo.22819417",
+      "summary": "The selected scalar is promoted from quantum dynamics to local spacetime matter through action-derived stress, coherent Fock moments, regulator removal, and explicit quantum sources.",
+      "primary_theme": "boundary-measurement",
+      "themes": [
+        "boundary-measurement",
+        "representation-reconstruction",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg4",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 4,
+      "date": "2026-09-18",
+      "title": "A Self-Consistent Einstein–Scalar Quantum Sector",
+      "subtitle": "Friedrichs selection, native quantum evolution, and exact gravitational matter.",
+      "href": "research-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22834305",
+      "summary": "The changed nonlinear geometry owns its own selected quantum law, Fock/Cauchy dynamics, conserved stress, and exact quantum-source branches satisfying Einstein's equation on that same geometry.",
+      "primary_theme": "invariance-identity",
+      "themes": [
+        "invariance-identity",
+        "formalization-proof",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg5",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 5,
+      "date": "2026-09-18",
+      "title": "Master-Action Ownership of a Self-Consistent Einstein–Scalar Quantum Sector",
+      "subtitle": "Symmetric-projective BV closure, Palatini descent, and quantum Ward/source exchange.",
+      "href": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22846743",
+      "summary": "The completed Einstein–scalar sector is traced upstream to an intrinsic symmetric/projective Palatini BV theory whose classical projection binds back to the same native action, source, and clock.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "invariance-identity",
+        "relational-organization"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg6",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 6,
+      "date": "2026-09-20",
+      "title": "Quantum Gauge Structure of a Self-Consistent Einstein–Scalar Sector",
+      "subtitle": "Operator BRST representation, a retracted physical Hilbert sector, and projective gauge reduction.",
+      "href": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22859436",
+      "summary": "A square-zero BRST charge realizes physical cohomology, embeds the native scalar Fock space faithfully, descends native evolution, and removes the Palatini projective quartet cohomologically.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "invariance-identity",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg7",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 7,
+      "date": "2026-09-22",
+      "title": "Regulated Palatini BV Quantization of a Self-Consistent Einstein–Scalar Sector",
+      "subtitle": "Quantum-master obstructions, finite Gaussian BV pushforwards, and restricted physical cohomology.",
+      "href": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22904031",
+      "summary": "Finite BV regulators support genuine quantum complexes, while Gaussian refinement exposes a first-shell Hamiltonian descent obstruction and canonically leaves a greatest compatible restricted physical complex.",
+      "primary_theme": "formalization-proof",
+      "themes": [
+        "formalization-proof",
+        "evidence-validation",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "sqg8",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "schwarzschild-qg",
+      "order": 8,
+      "date": "2026-09-23",
+      "title": "Relational Quantum Gravity in a Self-Consistent Einstein–Scalar Sector",
+      "subtitle": "Independent physical and gravitational quotients, nonlinear Einstein realization, and intrinsic gauge rigidity.",
+      "href": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22939782",
+      "summary": "Physical-owner and gravity-visible equivalence relations are globally incomparable, while intrinsic curvature data rigidly recover the source parameter and represented geometry class on the fixed nonlinear family.",
+      "primary_theme": "relational-organization",
+      "themes": [
+        "relational-organization",
+        "invariance-identity",
+        "representation-reconstruction"
+      ],
+      "domains": [
+        "Quantum gravity",
+        "Mathematical physics"
+      ]
+    },
+    {
+      "id": "gps1",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 1,
+      "date": "2026-09-17",
+      "title": "Closed Matter-Current Constraints and Gaussian Physical Moduli",
+      "subtitle": "Bounded-particle exclusion and all-orders Fock structure in a machine-checked gauge-field model.",
+      "href": "research-closed-matter-current-gaussian-physical-moduli.html",
+      "pdf": "research-closed-matter-current-gaussian-physical-moduli.pdf",
+      "doi": "10.5281/zenodo.22818292",
+      "summary": "Every nonzero joint closed-current state extends beyond every finite particle cutoff while the same kernel contains an injectively parametrized positive-orthant Gaussian family.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "formalization-proof",
+        "invariance-identity"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "gps2",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 2,
+      "date": "2026-09-17",
+      "title": "Pair-Generated Completion of Gaussian Physical States",
+      "subtitle": "Closed quadratic generators, faithful two-particle seeds, and nontruncatable current physicality in a machine-checked gauge-field model.",
+      "href": "research-pair-generated-completion-gaussian-physical-states.html",
+      "pdf": "research-pair-generated-completion-gaussian-physical-states.pdf",
+      "doi": "10.5281/zenodo.22818924",
+      "summary": "A symmetric pair kernel and canonical quadratic creator reconstruct every even sector; the normalized two-particle seed faithfully recovers the Gaussian modulus.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "invariance-identity",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "gps3",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 3,
+      "date": "2026-09-17",
+      "title": "From Pair-Generated Fock Structure to Physical Particle Semantics",
+      "subtitle": "Completed Bose/Fock representations, analytic carrier realization, and the boundary of asymptotic particle identity in a machine-checked gauge-field model.",
+      "href": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.html",
+      "pdf": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.pdf",
+      "doi": "10.5281/zenodo.22820148",
+      "summary": "The Gaussian pair receives an exact completed Bose/Fock realization with intertwined Poincaré symmetry while asymptotic-particle identification remains a separate boundary.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "invariance-identity"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "gps4",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 4,
+      "date": "2026-09-26",
+      "title": "Gaussian Pair Geometry and Physical Radiative Response",
+      "subtitle": "Quadratic-sector variational stress, physical-helicity response, and exact information compression in a machine-checked gauge-field model.",
+      "href": "research-gaussian-pair-geometry-physical-radiative-response.html",
+      "pdf": "research-gaussian-pair-geometry-physical-radiative-response.pdf",
+      "doi": "10.5281/zenodo.23001929",
+      "summary": "A faithful three-parameter covariance passes through response maps that retain less information: zero variational stress, one-parameter radiative response, and finally a scale-independent normalized Bose pair.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "invariance-identity",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "gps5",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "gaussian",
+      "order": 5,
+      "date": "2026-09-29",
+      "title": "Source-Aware Weyl-Reduced Celestial Representation",
+      "subtitle": "Joint source-output symmetry and positive-measure obstruction to fixed-source isometry for radiative two-particle Clebsch–Gordan kernels.",
+      "href": "research-source-aware-weyl-reduced-celestial-representation.html",
+      "pdf": "research-source-aware-weyl-reduced-celestial-representation.pdf",
+      "doi": "10.5281/zenodo.23029056",
+      "summary": "Source-aware Weyl reflection admits an exact joint Hilbert reduction, while a positive-measure Gram defect rules out almost-everywhere fixed-source isometric realization of the normalized physical kernel.",
+      "primary_theme": "representation-reconstruction",
+      "themes": [
+        "representation-reconstruction",
+        "invariance-identity",
+        "relational-organization",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Mathematical physics",
+        "Celestial holography",
+        "Formal methods"
+      ]
+    },
+    {
+      "id": "bio1",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "relational-biology",
+      "order": 1,
+      "date": "2026-09-28",
+      "title": "Relational Anatomy of Cell Fate Across Lineage-Resolved Perturbation Experiments",
+      "subtitle": "A finite relational calculus for state, identity, history, and fate across biological systems.",
+      "href": "research-relational-anatomy-cell-fate.html",
+      "pdf": "research-relational-anatomy-cell-fate.pdf",
+      "doi": "10.5281/zenodo.23004119",
+      "summary": "Across lineage-resolved perturbation experiments, exact state–fate recovery concentrates near lineage identity while future-selective alignment remains measurable below exactness.",
+      "primary_theme": "relational-organization",
+      "themes": [
+        "relational-organization",
+        "invariance-identity",
+        "evidence-validation"
+      ],
+      "domains": [
+        "Systems biology",
+        "Single-cell biology"
+      ]
+    },
+    {
+      "id": "bio2",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "relational-biology",
+      "order": 2,
+      "date": "2026-10-01",
+      "title": "Relational Organization and Directional Stability Across Mouse Organogenesis",
+      "subtitle": "Relational comparability, developmental direction, and representation stability across the Mouse Organogenesis Spatiotemporal Transcriptomic Atlas.",
+      "href": "research-relational-organization-directional-stability-mouse-organogenesis.html",
+      "pdf": "research-relational-organization-directional-stability-mouse-organogenesis.pdf",
+      "doi": "10.5281/zenodo.23090479",
+      "summary": "A stage-blind spatial-relational carrier reveals recurrence and many-to-many organization; local directional resolution depends on comparison context while the aggregate directional sign persists across the tested representation family.",
+      "primary_theme": "relational-organization",
+      "themes": [
+        "relational-organization",
+        "invariance-identity",
+        "evidence-validation",
+        "continuation-stability"
+      ],
+      "domains": [
+        "Systems biology",
+        "Developmental biology",
+        "Spatial transcriptomics"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "ns1",
+      "to": "ns2",
+      "type": "continues"
+    },
+    {
+      "from": "ns2",
+      "to": "ns3",
+      "type": "continues"
+    },
+    {
+      "from": "sqg1",
+      "to": "sqg2",
+      "type": "continues"
+    },
+    {
+      "from": "sqg2",
+      "to": "sqg3",
+      "type": "continues"
+    },
+    {
+      "from": "sqg3",
+      "to": "sqg4",
+      "type": "continues"
+    },
+    {
+      "from": "sqg4",
+      "to": "sqg5",
+      "type": "continues"
+    },
+    {
+      "from": "sqg5",
+      "to": "sqg6",
+      "type": "continues"
+    },
+    {
+      "from": "sqg6",
+      "to": "sqg7",
+      "type": "continues"
+    },
+    {
+      "from": "sqg7",
+      "to": "sqg8",
+      "type": "continues"
+    },
+    {
+      "from": "gps1",
+      "to": "gps2",
+      "type": "continues"
+    },
+    {
+      "from": "gps2",
+      "to": "gps3",
+      "type": "continues"
+    },
+    {
+      "from": "gps3",
+      "to": "gps4",
+      "type": "continues"
+    },
+    {
+      "from": "gps4",
+      "to": "gps5",
+      "type": "continues"
+    },
+    {
+      "from": "bio1",
+      "to": "bio2",
+      "type": "continues"
+    },
+    {
+      "from": "note-boundary",
+      "to": "note-living-boundary",
+      "type": "companion"
+    },
+    {
+      "from": "note-boundary",
+      "to": "note-certification",
+      "type": "context"
+    },
+    {
+      "from": "note-boundary",
+      "to": "note-fixedness",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "note-living-boundary",
+      "type": "context"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "note-residual",
+      "type": "context"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "note-certification",
+      "type": "context"
+    },
+    {
+      "from": "note-algebra-ai",
+      "to": "note-boundary",
+      "type": "context"
+    },
+    {
+      "from": "note-algebra-ai",
+      "to": "note-certification",
+      "type": "context"
+    },
+    {
+      "from": "note-algebra-ai",
+      "to": "note-failure",
+      "type": "measurement_bridge"
+    },
+    {
+      "from": "note-what-new",
+      "to": "note-certification",
+      "type": "companion"
+    },
+    {
+      "from": "note-what-new",
+      "to": "note-observable",
+      "type": "companion"
+    },
+    {
+      "from": "note-certification",
+      "to": "note-temperament",
+      "type": "companion"
+    },
+    {
+      "from": "note-certification",
+      "to": "note-observable",
+      "type": "companion"
+    },
+    {
+      "from": "note-certification",
+      "to": "note-failure",
+      "type": "measurement_bridge"
+    },
+    {
+      "from": "note-living-boundary",
+      "to": "note-residual",
+      "type": "context"
+    },
+    {
+      "from": "note-residual",
+      "to": "note-certification",
+      "type": "measurement_bridge"
+    },
+    {
+      "from": "note-question",
+      "to": "bio2",
+      "type": "example"
+    },
+    {
+      "from": "note-question",
+      "to": "gps5",
+      "type": "example"
+    },
+    {
+      "from": "note-question",
+      "to": "note-fixedness",
+      "type": "context"
+    },
+    {
+      "from": "note-question",
+      "to": "note-boundary",
+      "type": "context"
+    },
+    {
+      "from": "note-question",
+      "to": "note-one-plus-one",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-question",
+      "to": "note-observable",
+      "type": "measurement_bridge"
+    },
+    {
+      "from": "note-one-plus-one",
+      "to": "bio1",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-one-plus-one",
+      "to": "bio2",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-one-plus-one",
+      "to": "sqg8",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "ns1",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "gps4",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "gps5",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-observable",
+      "to": "gps4",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-failure",
+      "to": "bio1",
+      "type": "shared_question"
+    },
+    {
+      "from": "note-failure",
+      "to": "bio2",
+      "type": "shared_question"
+    }
+  ]
+}
