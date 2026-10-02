@@ -105,9 +105,14 @@
     },
     {
       "id": "gaussian",
-      "label": "Gaussian Physical States",
+      "label": "Gaussian Physical States and Celestial Representation",
       "domain": "Mathematical physics",
-      "description": "Gaussian current-zero states, pair-generated Fock structure, radiative response, and source-aware celestial representation."
+      "description": "A six-paper sequence studying how physical information survives successive changes of mathematical representation, from constrained Gaussian gauge-field states through radiative multiparticle structure and source-aware celestial decomposition.",
+      "landing_page": "research-series-gaussian.html",
+      "sequence_size": 6,
+      "published_count": 5,
+      "current_status": "Paper VI in final preparation",
+      "paper6_current_result": "The current theorem surface establishes injectivity of the intrinsic shape/cross-ratio transform on the physical source range and injectivity of the full signed principal-series transform."
     },
     {
       "id": "relational-biology",
