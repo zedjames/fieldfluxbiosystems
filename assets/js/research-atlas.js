@@ -75,7 +75,7 @@
       g.dataset.id=i.id;g.dataset.themes=(i.themes||[]).join(" ");
       var label=i.collection==="publications"?(series[i.series]?series[i.series].data.label.split(" ")[0]:"Paper")+" "+roman(i.order||1):short(i.title);
       var kind=i.collection==="publications"?"preprint":(i.subtype==="founder_reflection"?"founder":"notebook");
-      g.innerHTML='<circle r="7"></circle><text y="-13" text-anchor="middle">'+esc(label)+'</text><text class="atlas-node__kind" y="19" text-anchor="middle">'+esc(kind)+'</text><title>'+esc(i.title)+'</title>';
+      g.innerHTML='<circle class="atlas-node__halo" r="20"></circle><circle class="atlas-node__core" r="11"></circle><text y="-19" text-anchor="middle">'+esc(label)+'</text><text class="atlas-node__kind" y="26" text-anchor="middle">'+esc(kind)+'</text><title>'+esc(i.title)+'</title>';
       function select(){selectNode(host,i,C,byId,relTypes);qa(".atlas-node",host).forEach(function(n){n.classList.toggle("is-active",n.dataset.id===i.id);});}
       g.addEventListener("click",select);g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();select();}});
       svg.appendChild(g);
