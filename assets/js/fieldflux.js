@@ -186,6 +186,15 @@
     document.body.appendChild(p);
   }
 
+  function loadResearchAtlas() {
+    if (document.querySelector('script[data-research-atlas]')) return;
+    var a = document.createElement("script");
+    a.src = "assets/js/research-atlas.js?v=1";
+    a.async = false;
+    a.dataset.researchAtlas = "true";
+    document.body.appendChild(a);
+  }
+
   function loadExperientialLayer() {
     var existing = document.querySelector('script[data-fieldflux-next]');
     if (existing) {
@@ -208,5 +217,6 @@
     initContactForm();
     initNewsletter();
     loadExperientialLayer();
+    loadResearchAtlas();
   });
 })();
