@@ -91,6 +91,18 @@ def main()->int:
     for t in c.get("themes",[]):
         if html.escape(t["label"]) not in atlas and t["label"] not in atlas:
             fail(f"theme absent from research-atlas.html: {t['label']}",errors)
+        landing=t.get("landing_page")
+        if not landing:
+            fail(f"theme {t['id']}: missing landing_page metadata",errors)
+        elif not (ROOT/landing).exists():
+            fail(f"theme {t['id']}: missing landing page {landing}",errors)
+        else:
+            if landing not in atlas:
+                fail(f"theme landing absent from research-atlas.html: {landing}",errors)
+            page=(ROOT/landing).read_text(encoding="utf-8")
+            for i in items:
+                if t["id"] in i.get("themes",[]) and i["href"] not in page:
+                    fail(f"theme {t['id']} landing missing work {i['href']}",errors)
     for sid,smeta in series.items():
         landing=smeta.get("landing_page")
         if not landing:
