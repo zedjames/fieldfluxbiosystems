@@ -13,7 +13,7 @@
     var search=q("[data-archive-search]",root);
     var type=q("[data-archive-type]",root);
     var series=q("[data-archive-series]",root);
-    var theme=q("[data-archive-theme]",root);
+    var themeSelect=q("[data-archive-theme]",root);
     var sort=q("[data-archive-sort]",root);
     var count=q("[data-archive-count]",root);
     var pager=q("[data-archive-pagination]",root);
@@ -25,7 +25,7 @@
       var term=(value(search,"")||"").trim().toLowerCase();
       var wantedType=value(type,"all");
       var wantedSeries=value(series,"all");
-      var wantedTheme=value(theme,"all");
+      var wantedTheme=value(themeSelect,theme);
       if(term && (card.dataset.search||"").indexOf(term)<0)return false;
       if(wantedType!=="all" && card.dataset.type!==wantedType)return false;
       if(wantedSeries!=="all" && card.dataset.series!==wantedSeries)return false;
@@ -76,7 +76,9 @@
       }
       drawPager(totalPages);
     }
-    [search,type,series,theme,sort].forEach(function(el){
+    if(themeSelect&&theme!=="all")themeSelect.value=theme;
+    if(search&&term)search.value=term;
+    [search,type,series,themeSelect,sort].forEach(function(el){
       if(!el)return;
       el.addEventListener(el===search?"input":"change",function(){currentPage=1;render();});
     });
