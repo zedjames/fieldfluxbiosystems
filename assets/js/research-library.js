@@ -19,6 +19,9 @@
     var pager=q("[data-archive-pagination]",root);
     var pageSize=parseInt(root.dataset.pageSize||"12",10);
     var currentPage=1;
+    var params=new URLSearchParams(location.search);
+    var theme=params.get("theme")||"all";
+    var term=(params.get("q")||"").trim().toLowerCase();
 
     function value(el,def){return el?el.value:def;}
     function matches(card){
