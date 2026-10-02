@@ -277,7 +277,7 @@
     if(p==="platform.html")afterGenerated(".ffx-measurement__stage",initPlatformConsequence);
     if(p==="products.html")afterGenerated(".ffx-product-branch",initProductsConvergence);
     if(p==="investors.html")afterGenerated(".ffx-risktrack",initInvestorFrontier);
-    if(p==="notebook.html")afterGenerated(".ffx-research-map",initResearchGenealogy);
+    
   }
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
