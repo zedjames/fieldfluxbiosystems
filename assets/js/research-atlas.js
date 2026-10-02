@@ -73,6 +73,23 @@
       positions[i.id]={x:x,y:y};
     });
 
+    if(scope!=="notebook"){
+      var railBottom=620;
+      C.series.forEach(function(s,si){
+        var x=560+si*140;
+        var line=document.createElementNS(NS,"line");
+        line.setAttribute("x1",x);line.setAttribute("x2",x);
+        line.setAttribute("y1","72");line.setAttribute("y2",railBottom);
+        line.setAttribute("class","atlas-series-rail");
+        svg.appendChild(line);
+        var t=document.createElementNS(NS,"text");
+        t.setAttribute("x",x);t.setAttribute("y","38");
+        t.setAttribute("text-anchor","middle");t.setAttribute("class","atlas-series-label");
+        t.textContent=s.id==="navier-stokes"?"Navier–Stokes":s.id==="schwarzschild-qg"?"Schwarzschild QG":s.id==="gaussian"?"Gaussian / Celestial":"Relational Biology";
+        svg.appendChild(t);
+      });
+    }
+
     C.relations.forEach(function(r){
       if(!allowed[r.from]||!allowed[r.to])return;
       var A=positions[r.from],B=positions[r.to];if(!A||!B)return;
@@ -91,11 +108,30 @@
       g.setAttribute("tabindex","0");g.setAttribute("role","button");
       g.setAttribute("aria-label",i.title);
       g.dataset.id=i.id;g.dataset.themes=(i.themes||[]).join(" ");
-      var seriesLabel={ "navier-stokes":"NS", "schwarzschild-qg":"SQG", "gaussian":"Gaussian", "relational-biology":"Biology" };
-      var label=i.collection==="publications"?(seriesLabel[i.series]||"Paper")+" "+roman(i.order||1):short(i.title);
-      var kind=i.collection==="publications"?"preprint":(i.subtype==="founder_reflection"?"founder":"notebook");
-      g.innerHTML='<circle class="atlas-node__halo" r="28"></circle><circle class="atlas-node__core" r="15"></circle><text y="-25" text-anchor="middle">'+esc(label)+'</text><text class="atlas-node__kind" y="34" text-anchor="middle">'+esc(kind)+'</text><title>'+esc(i.title)+'</title>';
-      function select(){selectNode(host,i,C,byId,relTypes);qa(".atlas-node",host).forEach(function(n){n.classList.toggle("is-active",n.dataset.id===i.id);});}
+      var shortLabels={
+        "note-question":"Question","note-boundary":"Boundary","note-fixedness":"Fixedness","note-algebra-ai":"Algebra / AI",
+        "note-living-boundary":"Living boundary","note-residual":"Residual","note-one-plus-one":"1 + 1 = 2","note-what-new":"What is new",
+        "note-certification":"Certification","note-temperament":"Temperament","note-observable":"Observable","note-failure":"Failure"
+      };
+      var label=i.collection==="publications"?roman(i.order||1):(shortLabels[i.id]||short(i.title));
+      var kind=i.collection==="publications"?"":(i.subtype==="founder_reflection"?"founder":"notebook");
+      g.innerHTML='<circle class="atlas-node__halo" r="28"></circle><circle class="atlas-node__core" r="15"></circle><text class="atlas-node__label" y="-25" text-anchor="middle">'+esc(label)+'</text>'+(kind?'<text class="atlas-node__kind" y="34" text-anchor="middle">'+esc(kind)+'</text>':'')+'<title>'+esc(i.title)+'</title>';
+      function select(){
+        selectNode(host,i,C,byId,relTypes);
+        qa(".atlas-node",host).forEach(function(n){
+          n.classList.toggle("is-active",n.dataset.id===i.id);
+          n.classList.remove("is-related");
+        });
+        qa(".atlas-edge",host).forEach(function(e){
+          var on=e.dataset.from===i.id||e.dataset.to===i.id;
+          e.classList.toggle("is-selected",on);
+          if(on){
+            var other=e.dataset.from===i.id?e.dataset.to:e.dataset.from;
+            var n=q('.atlas-node[data-id="'+other+'"]',host);
+            if(n)n.classList.add("is-related");
+          }
+        });
+      }
       g.addEventListener("click",select);g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();select();}});
       svg.appendChild(g);
     });
@@ -114,7 +150,11 @@
         });
       });
     }
-    if(items.length)selectNode(host,items[0],C,byId,relTypes);
+    if(items.length){
+      var first=q('.atlas-node[data-id="'+items[0].id+'"]',host);
+      if(first)first.dispatchEvent(new Event("click"));
+      else selectNode(host,items[0],C,byId,relTypes);
+    }
   }
 
   function selectNode(host,item,C,byId,relTypes){
