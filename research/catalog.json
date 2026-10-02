@@ -95,13 +95,21 @@
       "id": "navier-stokes",
       "label": "Navier–Stokes Continuation",
       "domain": "Fluid dynamics",
-      "description": "Continuation geometry, regularity escape, spectral transfer, and endpoint rigidity."
+      "description": "Continuation geometry, regularity escape, spectral transfer, and endpoint rigidity.",
+      "landing_page": "research-series-navier-stokes.html",
+      "sequence_size": 3,
+      "published_count": 3,
+      "current_status": "Current published sequence: 3 papers"
     },
     {
       "id": "schwarzschild-qg",
       "label": "Schwarzschild Quantum Gravity",
       "domain": "Quantum gravity",
-      "description": "A self-consistent Einstein–real-scalar quantum sector from operator selection through BV/BRST, regulated quantization, and relational gravity."
+      "description": "A self-consistent Einstein–real-scalar quantum sector from operator selection through BV/BRST, regulated quantization, and relational gravity.",
+      "landing_page": "research-series-schwarzschild-quantum-gravity.html",
+      "sequence_size": 8,
+      "published_count": 8,
+      "current_status": "Current published sequence: 8 papers"
     },
     {
       "id": "gaussian",
@@ -118,7 +126,11 @@
       "id": "relational-biology",
       "label": "Relational / Systems Biology",
       "domain": "Systems biology",
-      "description": "Relational state, fate, comparability, developmental organization, and morphogenetic direction across biological carriers."
+      "description": "Relational state, fate, comparability, developmental organization, and morphogenetic direction across biological carriers.",
+      "landing_page": "research-series-relational-systems-biology.html",
+      "sequence_size": 2,
+      "published_count": 2,
+      "current_status": "Ongoing series"
     }
   ],
   "routes": [
