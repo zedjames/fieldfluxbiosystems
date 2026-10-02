@@ -189,7 +189,7 @@
   function loadResearchAtlas() {
     if (document.querySelector('script[data-research-atlas]')) return;
     var a = document.createElement("script");
-    a.src = "assets/js/research-atlas.js?v=1";
+    a.src = "assets/js/research-atlas.js?v=2";
     a.async = false;
     a.dataset.researchAtlas = "true";
     document.body.appendChild(a);
@@ -203,7 +203,7 @@
       return;
     }
     var s = document.createElement("script");
-    s.src = "assets/js/fieldflux-next.js?v=5";
+    s.src = "assets/js/fieldflux-next.js?v=6";
     s.async = false;
     s.dataset.fieldfluxNext = "true";
     s.addEventListener("load", loadPass2, { once:true });
