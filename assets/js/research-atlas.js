@@ -12,7 +12,7 @@
   function page(){return location.pathname.split("/").pop()||"index.html";}
   function loadStyle(){
     if(q('link[data-research-atlas-style]')||q('link[href*="research-atlas.css"]'))return;
-    var l=document.createElement("link");l.rel="stylesheet";l.href="assets/css/research-atlas.css?v=1";l.dataset.researchAtlasStyle="true";document.head.appendChild(l);
+    var l=document.createElement("link");l.rel="stylesheet";l.href="assets/css/research-atlas.css?v=2";l.dataset.researchAtlasStyle="true";document.head.appendChild(l);
   }
   loadStyle();
 
