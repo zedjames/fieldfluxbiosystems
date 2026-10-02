@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate the public Fieldflux research catalog and its static projections."""
 from __future__ import annotations
-import json, re, sys
+import html, json, re, sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -89,7 +89,7 @@ def main()->int:
     # The Atlas owns durable concepts, series, and curated routes rather than
     # enumerating every research object.
     for t in c.get("themes",[]):
-        if t["label"] not in atlas:
+        if html.escape(t["label"]) not in atlas and t["label"] not in atlas:
             fail(f"theme absent from research-atlas.html: {t['label']}",errors)
     for sid,smeta in series.items():
         landing=smeta.get("landing_page")
