@@ -20,42 +20,50 @@
     {
       "id": "health-foundations",
       "label": "Health & foundations",
-      "description": "What health is, what makes a system itself, and what must be preserved across scale."
+      "description": "What health is, what makes a system itself, and what must be preserved across scale.",
+      "landing_page": "research-theme-health-foundations.html"
     },
     {
       "id": "invariance-identity",
       "label": "Invariance & identity",
-      "description": "What remains the same through change, quotient, transformation, or representation."
+      "description": "What remains the same through change, quotient, transformation, or representation.",
+      "landing_page": "research-theme-invariance-identity.html"
     },
     {
       "id": "boundary-measurement",
       "label": "Boundary & measurement",
-      "description": "How boundary exchange becomes observable, reconstructable, and physically meaningful."
+      "description": "How boundary exchange becomes observable, reconstructable, and physically meaningful.",
+      "landing_page": "research-theme-boundary-measurement.html"
     },
     {
       "id": "formalization-proof",
       "label": "Formalization & proof",
-      "description": "Machine-checkable structure, admissibility, closure, gauge structure, and proof authority."
+      "description": "Machine-checkable structure, admissibility, closure, gauge structure, and proof authority.",
+      "landing_page": "research-theme-formalization-proof.html"
     },
     {
       "id": "evidence-validation",
       "label": "Evidence & validation",
-      "description": "Failure tests, controls, calibration, empirical support, and the boundary of warranted claim."
+      "description": "Failure tests, controls, calibration, empirical support, and the boundary of warranted claim.",
+      "landing_page": "research-theme-evidence-validation.html"
     },
     {
       "id": "relational-organization",
       "label": "Relational organization",
-      "description": "Relations, multiplicity, compression, comparability, ownership, and organization across states."
+      "description": "Relations, multiplicity, compression, comparability, ownership, and organization across states.",
+      "landing_page": "research-theme-relational-organization.html"
     },
     {
       "id": "continuation-stability",
       "label": "Continuation & stability",
-      "description": "Persistence, regularity, restart, dynamic stability, and the anatomy of breakdown."
+      "description": "Persistence, regularity, restart, dynamic stability, and the anatomy of breakdown.",
+      "landing_page": "research-theme-continuation-stability.html"
     },
     {
       "id": "representation-reconstruction",
       "label": "Representation & reconstruction",
-      "description": "What descriptions retain, discard, reconstruct, or obstruct when states move between representations."
+      "description": "What descriptions retain, discard, reconstruct, or obstruct when states move between representations.",
+      "landing_page": "research-theme-representation-reconstruction.html"
     }
   ],
   "relation_types": [
