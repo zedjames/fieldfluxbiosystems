@@ -60,7 +60,9 @@ def main()->int:
         for ident in route.get("items",[]):
             if ident not in by_id: fail(f"route {route.get('id')} references missing {ident}",errors)
 
-    for sid in series:
+    for sid,smeta in series.items():
+        landing=smeta.get("landing_page")
+        if landing and not (ROOT/landing).exists(): fail(f"series {sid}: missing landing page {landing}",errors)
         orders=sorted(i["order"] for i in items if i.get("series")==sid)
         if orders and orders!=list(range(1,len(orders)+1)):
             fail(f"series {sid} has noncontiguous orders {orders}",errors)
