@@ -1,0 +1,38 @@
+name: Verify Research Catalog
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "research/catalog.json"
+      - "research.html"
+      - "notebook.html"
+      - "research-atlas.html"
+      - "research-*.html"
+      - "research-*.pdf"
+      - "question-behind-our-research.html"
+      - "boundary-comes-first.html"
+      - "fixedness.html"
+      - "algebra-before-ai.html"
+      - "living-boundary.html"
+      - "residue-and-residual.html"
+      - "one-plus-one.html"
+      - "what-is-new.html"
+      - "certification-algebra.html"
+      - "temperament.html"
+      - "making-of-an-observable.html"
+      - "make-the-signal-fail.html"
+      - "scripts/verify_research_catalog.py"
+      - ".github/workflows/verify-research-catalog.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate catalog, relations, and static projections
+        run: python3 scripts/verify_research_catalog.py
