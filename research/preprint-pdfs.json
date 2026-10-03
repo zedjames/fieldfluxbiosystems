@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-10-02",
+  "generated_from": "author-supplied PDFs received through 2026-10-03",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -148,6 +148,16 @@
       "pages": 47,
       "publication_date": "2026-10-02",
       "manuscript_date": "2026-10-02"
+    },
+    {
+      "record_page": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.html",
+      "pdf": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.pdf",
+      "doi": "10.5281/zenodo.23125762",
+      "concept_doi": "10.5281/zenodo.23125763",
+      "sha256": "216707a03c0abde7bf9e6f3cfd12598830b2d2d2fd0ec07d40c66a194bc33b92",
+      "pages": 35,
+      "publication_date": "2026-10-03",
+      "manuscript_date": "2026-10-03"
     }
   ]
 }
