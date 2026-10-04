@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "purpose": "Public relational index for Fieldflux preprints, founder reflections, and field notes. Relations are editorial/navigation metadata unless explicitly described otherwise.",
   "collections": [
     {
@@ -137,6 +137,15 @@
       "landing_page": "research-series-relational-systems-biology.html",
       "published_count": 3,
       "current_status": "Ongoing series; Papers I–III published; further papers in development"
+    },
+    {
+      "id": "health-formally-defined",
+      "label": "Health, Formally Defined",
+      "domain": "Foundations of health",
+      "description": "An ongoing formal and measurement program defining health prospectively through present realization and requirement-adequate continuation capacity, then developing the query, response, measurement, and empirical layers needed to make that definition scientifically usable.",
+      "landing_page": "research-series-health-formally-defined.html",
+      "published_count": 1,
+      "current_status": "Ongoing series; Paper I published; further papers in development"
     }
   ],
   "routes": [
@@ -212,6 +221,17 @@
         "sqg6",
         "sqg7",
         "sqg8"
+      ]
+    },
+    {
+      "id": "formal-health",
+      "title": "How can health be stated as a prospective mathematical property?",
+      "description": "From the motivating health question through invariance and into a machine-checked prospective-health definition and its measurement boundary.",
+      "items": [
+        "note-question",
+        "note-fixedness",
+        "hfd1",
+        "note-observable"
       ]
     }
   ],
@@ -928,6 +948,34 @@
         "Single-cell transcriptomics",
         "Lineage tracing"
       ]
+    },
+    {
+      "id": "hfd1",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 1,
+      "date": "2026-10-04",
+      "title": "Constitutive Continuation Capacity",
+      "subtitle": "A machine-checked framework for prospective health.",
+      "href": "research-constitutive-continuation-capacity.html",
+      "pdf": "research-constitutive-continuation-capacity.pdf",
+      "doi": "10.5281/zenodo.23131157",
+      "summary": "Prospective health is formalized as present realization together with requirement-adequate continuation capacity, with exact lawful/viable response semantics, a requirement-visible capacity quotient and universal property, explicit query relativity, qualified presentation invariance, and robustness and measurement-sufficiency boundaries.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "formalization-proof",
+        "continuation-stability",
+        "representation-reconstruction",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Formal methods",
+        "Measurement science",
+        "Dynamical systems"
+      ]
     }
   ],
   "relations": [
@@ -1175,6 +1223,21 @@
       "from": "note-failure",
       "to": "bio3",
       "type": "shared_question"
+    },
+    {
+      "from": "note-question",
+      "to": "hfd1",
+      "type": "context"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "hfd1",
+      "type": "shared_question"
+    },
+    {
+      "from": "hfd1",
+      "to": "note-observable",
+      "type": "measurement_bridge"
     }
   ]
 }
