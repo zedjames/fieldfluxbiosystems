@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-10-03",
+  "generated_from": "author-supplied PDFs received through 2026-10-04",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -158,6 +158,16 @@
       "pages": 35,
       "publication_date": "2026-10-03",
       "manuscript_date": "2026-10-03"
+    },
+    {
+      "record_page": "research-constitutive-continuation-capacity.html",
+      "pdf": "research-constitutive-continuation-capacity.pdf",
+      "doi": "10.5281/zenodo.23131157",
+      "concept_doi": "10.5281/zenodo.23131158",
+      "sha256": "722e86abef69526843aa50d806f042cd8d67aa098a4cc137e7777eb97fcbde37",
+      "pages": 20,
+      "publication_date": "2026-10-04",
+      "manuscript_date": "2026-10-04"
     }
   ]
 }
