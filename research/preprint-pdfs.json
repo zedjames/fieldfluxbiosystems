@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-10-04",
+  "generated_from": "author-supplied PDFs received through 2026-10-05",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -167,6 +167,16 @@
       "sha256": "722e86abef69526843aa50d806f042cd8d67aa098a4cc137e7777eb97fcbde37",
       "pages": 20,
       "publication_date": "2026-10-04",
+      "manuscript_date": "2026-10-04"
+    },
+    {
+      "record_page": "research-prospective-health-across-contexts.html",
+      "pdf": "research-prospective-health-across-contexts.pdf",
+      "doi": "10.5281/zenodo.23146280",
+      "concept_doi": "10.5281/zenodo.23146281",
+      "sha256": "a96c305e6ab9af6147e34fb941b444f24251c57e63edbdaff5e5e5a638f3bf2f",
+      "pages": 26,
+      "publication_date": "2026-10-05",
       "manuscript_date": "2026-10-04"
     }
   ]
