@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
   "purpose": "Public relational index for Fieldflux preprints, founder reflections, and field notes. Relations are editorial/navigation metadata unless explicitly described otherwise.",
   "collections": [
     {
@@ -142,10 +142,10 @@
       "id": "health-formally-defined",
       "label": "Health, Formally Defined",
       "domain": "Foundations of health",
-      "description": "An ongoing formal and measurement program defining health prospectively through present realization and requirement-adequate continuation capacity, then developing the query, response, measurement, and empirical layers needed to make that definition scientifically usable.",
+      "description": "An ongoing formal and measurement program defining health prospectively through present realization and requirement-adequate continuation capacity, then extending that definition across contextual licensing, developmental change, open-system support, and the later measurement and empirical layers needed to make it scientifically usable.",
       "landing_page": "research-series-health-formally-defined.html",
-      "published_count": 1,
-      "current_status": "Ongoing series; Paper I published; further papers in development"
+      "published_count": 2,
+      "current_status": "Ongoing series; Papers I–II published; further papers in development"
     }
   ],
   "routes": [
@@ -226,11 +226,12 @@
     {
       "id": "formal-health",
       "title": "How can health be stated as a prospective mathematical property?",
-      "description": "From the motivating health question through invariance and into a machine-checked prospective-health definition and its measurement boundary.",
+      "description": "From the motivating health question through invariance, the prospective-health definition, and its transport across changing contexts toward measurement.",
       "items": [
         "note-question",
         "note-fixedness",
         "hfd1",
+        "hfd2",
         "note-observable"
       ]
     }
@@ -976,6 +977,36 @@
         "Measurement science",
         "Dynamical systems"
       ]
+    },
+    {
+      "id": "hfd2",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 2,
+      "date": "2026-10-05",
+      "title": "Prospective Health Across Contexts",
+      "subtitle": "Contextual Licensing, Developmental Transport, and Open-System Support.",
+      "href": "research-prospective-health-across-contexts.html",
+      "pdf": "research-prospective-health-across-contexts.pdf",
+      "doi": "10.5281/zenodo.23146280",
+      "summary": "Paper II transports the prospective-health architecture across changing contexts, developmental stages, and open-system support by separating raw capacity transport, health-visible quotient transport, and full health truth, with exact determinacy, obstruction, branching, coalescence, and support-dependence results.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "representation-reconstruction",
+        "continuation-stability",
+        "relational-organization",
+        "formalization-proof",
+        "invariance-identity"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Formal methods",
+        "Measurement science",
+        "Developmental systems",
+        "Dynamical systems"
+      ]
     }
   ],
   "relations": [
@@ -1238,6 +1269,21 @@
       "from": "hfd1",
       "to": "note-observable",
       "type": "measurement_bridge"
+    },
+    {
+      "from": "hfd1",
+      "to": "hfd2",
+      "type": "continues"
+    },
+    {
+      "from": "note-fixedness",
+      "to": "hfd2",
+      "type": "shared_question"
+    },
+    {
+      "from": "bio2",
+      "to": "hfd2",
+      "type": "context"
     }
   ]
 }
