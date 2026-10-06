@@ -33,4 +33,19 @@ jobs:
             exit 0
           fi
           git commit -m "Mirror preprint PDFs from Zenodo"
-          git push
+
+          # The publication transaction can continue while this job downloads
+          # and verifies PDFs. Rebase the mirror commit onto the latest main
+          # immediately before push so a concurrent site/catalog commit does not
+          # turn an otherwise valid PDF sync into a non-fast-forward failure.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push raced with another main update (attempt $attempt); retrying."
+            sleep 2
+          done
+          echo "Failed to publish mirrored PDFs after 3 rebased attempts."
+          exit 1
