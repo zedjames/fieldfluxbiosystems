@@ -237,7 +237,7 @@
     var header=document.querySelector("header.nav");
     if(!header||document.querySelector(".research-provenance-link"))return;
     var css=document.createElement("link");css.rel="stylesheet";css.href="assets/css/institutional-bridge.css?v=1";document.head.appendChild(css);
-    var href=isSeries?base+series[path]:isPaper?base+"publication.html?id="+encodeURIComponent(historical[path].id):isNote?base+"notes.html":base+"research.html";
+    var href=isSeries?base+series[path]:isPaper?base+"publication.html?id="+encodeURIComponent(historical[path].id):isNote?base+"note.html?id="+encodeURIComponent(historical[path].id):base+"research.html";
     var section=document.createElement("aside");section.className="research-provenance-link";
     section.setAttribute("aria-label","Scientific research archive");
     var wrap=document.createElement("div");wrap.className="wrap";
