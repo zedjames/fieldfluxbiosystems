@@ -220,3 +220,40 @@
     loadResearchAtlas();
   });
 })();
+
+
+/* Retain historical records while showing the canonical ILC scholarly destination. */
+(function(){
+  var base="https://zedjames.github.io/institute-lux-consilio/";
+  var historical={"question-behind-our-research.html":{"id":"note-question","type":"notebook"},"boundary-comes-first.html":{"id":"note-boundary","type":"notebook"},"fixedness.html":{"id":"note-fixedness","type":"notebook"},"algebra-before-ai.html":{"id":"note-algebra-ai","type":"notebook"},"living-boundary.html":{"id":"note-living-boundary","type":"notebook"},"residue-and-residual.html":{"id":"note-residual","type":"notebook"},"one-plus-one.html":{"id":"note-one-plus-one","type":"notebook"},"what-is-new.html":{"id":"note-what-new","type":"notebook"},"certification-algebra.html":{"id":"note-certification","type":"notebook"},"temperament.html":{"id":"note-temperament","type":"notebook"},"making-of-an-observable.html":{"id":"note-observable","type":"notebook"},"make-the-signal-fail.html":{"id":"note-failure","type":"notebook"},"research-continuation-anatomy-navier-stokes.html":{"id":"ns1","type":"publications","series":"navier-stokes"},"research-critical-regularity-navier-stokes.html":{"id":"ns2","type":"publications","series":"navier-stokes"},"research-endpoint-rigidity-periodic-navier-stokes-flow.html":{"id":"ns3","type":"publications","series":"navier-stokes"},"research-critical-schwarzschild-scalar-dynamics.html":{"id":"sqg1","type":"publications","series":"schwarzschild-qg"},"research-friedrichs-selected-schwarzschild-quantum-dynamics.html":{"id":"sqg2","type":"publications","series":"schwarzschild-qg"},"research-friedrichs-selected-schwarzschild-quantum-matter.html":{"id":"sqg3","type":"publications","series":"schwarzschild-qg"},"research-self-consistent-einstein-scalar-quantum-sector.html":{"id":"sqg4","type":"publications","series":"schwarzschild-qg"},"research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.html":{"id":"sqg5","type":"publications","series":"schwarzschild-qg"},"research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.html":{"id":"sqg6","type":"publications","series":"schwarzschild-qg"},"research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.html":{"id":"sqg7","type":"publications","series":"schwarzschild-qg"},"research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.html":{"id":"sqg8","type":"publications","series":"schwarzschild-qg"},"research-closed-matter-current-gaussian-physical-moduli.html":{"id":"gps1","type":"publications","series":"gaussian"},"research-pair-generated-completion-gaussian-physical-states.html":{"id":"gps2","type":"publications","series":"gaussian"},"research-from-pair-generated-fock-structure-to-physical-particle-semantics.html":{"id":"gps3","type":"publications","series":"gaussian"},"research-gaussian-pair-geometry-physical-radiative-response.html":{"id":"gps4","type":"publications","series":"gaussian"},"research-source-aware-weyl-reduced-celestial-representation.html":{"id":"gps5","type":"publications","series":"gaussian"},"research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.html":{"id":"gps6","type":"publications","series":"gaussian"},"research-relational-anatomy-cell-fate.html":{"id":"bio1","type":"publications","series":"relational-biology"},"research-relational-organization-directional-stability-mouse-organogenesis.html":{"id":"bio2","type":"publications","series":"relational-biology"},"research-present-state-resolution-lineage-history-early-mouse-embryogenesis.html":{"id":"bio3","type":"publications","series":"relational-biology"},"research-constitutive-continuation-capacity.html":{"id":"hfd1","type":"publications","series":"health-formally-defined"},"research-prospective-health-across-contexts.html":{"id":"hfd2","type":"publications","series":"health-formally-defined"}};
+  var series={"research-series-health-formally-defined.html":"research-health-formally-defined.html","research-series-relational-systems-biology.html":"research-relational-morphogenesis.html","research-series-gaussian.html":"research-gaussian-celestial.html","research-series-schwarzschild-quantum-gravity.html":"research-relational-quantum-gravity.html","research-series-navier-stokes.html":"research-navier-stokes.html"};
+  function init(){
+    var path=(location.pathname.split("/").pop()||"").toLowerCase();
+    var isPaper=historical[path]&&historical[path].type==="publications";
+    var isNote=historical[path]&&historical[path].type==="notebook";
+    var isSeries=!!series[path];
+    var isTheme=/^research-theme-.*\.html$/.test(path);
+    if(!(isPaper||isNote||isSeries||isTheme))return;
+    var header=document.querySelector("header.nav");
+    if(!header||document.querySelector(".research-provenance-link"))return;
+    var css=document.createElement("link");css.rel="stylesheet";css.href="assets/css/institutional-bridge.css?v=1";document.head.appendChild(css);
+    var href=isSeries?base+series[path]:isPaper?base+"publication.html?id="+encodeURIComponent(historical[path].id):isNote?base+"notes.html":base+"research.html";
+    var section=document.createElement("aside");section.className="research-provenance-link";
+    section.setAttribute("aria-label","Scientific research archive");
+    var wrap=document.createElement("div");wrap.className="wrap";
+    var label=document.createElement("strong");label.textContent=isPaper?"Historical publication record":isNote?"Original research note":isSeries?"Research series": "Research theme";
+    var msg=document.createElement("span");msg.textContent=isPaper?"Explore its scientific program and surrounding publications at Institute Lux Consilio.":isNote?"Explore the complete institute research notebook.":"Explore the complete scientific program at Institute Lux Consilio.";
+    var link=document.createElement("a");link.href=href;link.textContent="View at ILC ↗";link.rel="noopener";
+    wrap.appendChild(label);wrap.appendChild(msg);wrap.appendChild(link);section.appendChild(wrap);
+    header.insertAdjacentElement("afterend",section);
+    var navs=document.querySelectorAll('a[href="research-atlas.html"],a[href="research.html"]');
+    navs.forEach(function(a){if(a.closest("nav.nav__links")&&a.textContent.trim()==="Research")a.textContent="Research foundations";});
+    document.querySelectorAll(".footer__col a").forEach(function(a){
+      if(a.getAttribute("href")==="research-atlas.html")a.textContent="Technology & science map";
+      if(a.getAttribute("href")==="research.html")a.textContent="Research foundations";
+      if(a.getAttribute("href")==="notebook.html")a.textContent="Engineering notebook";
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
+  else init();
+})();

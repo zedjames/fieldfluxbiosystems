@@ -1,7 +1,7 @@
 {
   "schema": "fieldflux-research-catalog/v1",
   "updated": "2026-10-05",
-  "purpose": "Public relational index for Fieldflux preprints, founder reflections, and field notes. Relations are editorial/navigation metadata unless explicitly described otherwise.",
+  "purpose": "Historical publication and note metadata retained for original Fieldflux URLs, citation continuity, and links to the canonical ILC scholarly index.",
   "collections": [
     {
       "id": "publications",
@@ -1285,5 +1285,8 @@
       "to": "hfd2",
       "type": "context"
     }
-  ]
+  ],
+  "canonical_scholarly_catalog": "https://zedjames.github.io/institute-lux-consilio/research/catalog.json",
+  "canonical_institute": "https://zedjames.github.io/institute-lux-consilio/",
+  "archive_role": "Historical public Fieldflux research and publication provenance; Institute Lux Consilio is the comprehensive scientific index."
 }
