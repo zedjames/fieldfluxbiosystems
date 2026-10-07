@@ -1,0 +1,24 @@
+/* Fieldflux / ILC institutional bridge — October 2026 */
+.institutional-hero{background:var(--paper-alt,#eee8dd);padding:76px 0 74px;border-bottom:1px solid var(--line-soft,#d4cdc0)}
+.institutional-hero h1{font-family:var(--serif,Georgia,serif);font-size:clamp(2.7rem,5vw,4.8rem);font-weight:400;letter-spacing:-.04em;line-height:1.04;margin:14px 0;max-width:16ch}
+.institutional-hero>div>p:not(.eyebrow){max-width:730px;font-size:1.13rem;line-height:1.7}
+.institutional-hero__actions{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.institutional-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px;margin-top:32px}
+.institutional-card{border:1px solid var(--line-soft,#d4cdc0);padding:26px;background:rgba(255,255,255,.28);min-height:240px;display:flex;flex-direction:column}
+.institutional-card h3{font-family:var(--serif,Georgia,serif);font-size:1.6rem;font-weight:400;margin:11px 0}
+.institutional-card p:not(.eyebrow){line-height:1.6;font-size:.96rem}
+.institutional-card .link-arrow{margin-top:auto;display:inline-block;padding-top:16px}
+.institutional-link-band{background:var(--navy,#1a2b39);color:#f5eee4;padding:65px 0}
+.institutional-link-band h2{font-family:var(--serif,Georgia,serif);font-size:clamp(2rem,3vw,3.4rem);font-weight:400;margin:10px 0}
+.institutional-link-band p:not(.eyebrow){font-size:1rem;color:#dae0dd;line-height:1.65;max-width:800px}
+.institutional-link-band .btn{margin:13px 12px 0 0}
+.institutional-selected{margin:45px 0 10px;padding:24px;border-top:1px solid var(--line-soft,#d4cdc0)}
+.institutional-selected h2{font-family:var(--serif,Georgia,serif);font-weight:400}
+.institutional-selected li{margin:12px 0}.institutional-selected a{color:var(--navy,#173247)}
+.institutional-footnote{font-size:.84rem;max-width:900px;color:var(--ink-soft,#59625f);margin-top:25px}
+.research-provenance-link{background:#f1eee5;border-block:1px solid #d4cdc0;color:#253934;font-size:14px;line-height:1.6;padding:12px 0}
+.research-provenance-link .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.research-provenance-link a{color:#285e67;font-weight:700;text-decoration:underline}
+.ffb-ilc-badge{color:#8f6b35!important}
+@media(max-width:920px){.institutional-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.institutional-hero{padding:52px 0}.institutional-grid{grid-template-columns:1fr}}
