@@ -9,6 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "investors.html"
 CSS = ROOT / "assets/css/investor-stable.css"
 HOME = ROOT / "index.html"
+SITE_CSS = ROOT / "assets/css/fieldflux.css"
+WORLD = ROOT / "assets/js/fieldflux-world.js"
 
 
 class Scan(HTMLParser):
@@ -49,6 +51,8 @@ def main():
     source = PAGE.read_text(encoding="utf-8")
     css = CSS.read_text(encoding="utf-8")
     home = HOME.read_text(encoding="utf-8")
+    site_css = SITE_CSS.read_text(encoding="utf-8")
+    world_script = WORLD.read_text(encoding="utf-8")
     scan = Scan()
     scan.feed(source)
 
@@ -70,10 +74,14 @@ def main():
     assert re.findall(r'<a[^>]*>([^<]+)</a>', home_nav.group(1)) == re.findall(r'<a[^>]*>([^<]+)</a>', primary.group(1))
     assert 'class="is-active" aria-current="page"' in primary.group(1)
     assert "ffx-fieldmap-ready" not in css and "ffx-nav-primary" not in css
+    assert 'toLowerCase()==="world.html"' in world_script, "Legacy field atlas must be isolated to its direct URL"
+    assert 'function ensureMobileNav()' in world_script
+    assert '.ffx-mobile-nav{display:block}' in site_css
+    assert 'class="ffx-mobile-nav"' in source
     assert "ffx-risktrack" not in source and "ffx-page" not in source
     assert len([1 for t, a in scan.elements if t == "article" and "inv-stage" in a.get("class", "").split()]) == 5
     assert len([1 for t, _ in scan.elements if t == "details"]) >= 1
-    assert 'class="inv-mobile-nav__links"' in source
+    assert 'class="ffx-mobile-nav__links"' in source
     assert "Membrane Health" in source and "DRTT 2.0" in source and "Rev B" in source and "Bedside QPCI" in source
     assert "Q2 2027" in source and "36-month" in source
     for href in scan.links + scan.styles:
@@ -85,10 +93,10 @@ def main():
             continue
         target = (ROOT / unquote(parsed.path)).resolve()
         assert target.is_relative_to(ROOT.resolve()) and target.is_file(), f"Broken local link: {href}"
-    for marker in (".inv-mobile-nav__links", "@media(max-width:640px)", ".inv-skip:focus", ".inv-page .nav__links a.is-active::after"):
+    for marker in ("@media(max-width:640px)", ".inv-skip:focus", ".inv-page .nav__links a.is-active::after"):
         assert marker in css, f"Missing responsive/accessibility rule: {marker}"
     assert css.count("{") == css.count("}"), "Investor CSS braces unbalanced"
-    print("Investor page checks passed: canonical five-link header, no legacy field-map, standalone content, mobile fallback, five status cards, and all local links.")
+    print("Investor page checks passed: canonical five-link header, no legacy field-map, standalone content, shared mobile menu, five status cards, and all local links.")
 
 
 if __name__ == "__main__":
