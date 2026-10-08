@@ -47,7 +47,7 @@
     });
   }
 
-  function stripCoreSections(){qsa("body > section").forEach(function(s){s.remove();});}
+  function stripCoreSections(){qsa("body > section, body > main:not(.ffx-page)").forEach(function(s){s.remove();});}
   function mount(html){var footer=qs("body > footer");var host=document.createElement("main");host.className="ffx-page";host.innerHTML=html;document.body.insertBefore(host,footer||null);initReveal(host);}
   function initReveal(host){var els=qsa(".ffx-reveal",host||document);if(reduce||!("IntersectionObserver" in window)){els.forEach(function(el){el.classList.add("is-in");});return;}var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target);}});},{threshold:.12,rootMargin:"0px 0px -8% 0px"});els.forEach(function(el){io.observe(el);});}
 
