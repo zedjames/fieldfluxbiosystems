@@ -113,12 +113,14 @@ def main()->int:
             if i.get("series")==sid and i["href"] not in page:
                 fail(f"series {sid} landing missing published paper {i['href']}",errors)
 
-    # Curated commercial pages must point to the ILC research destination
-    # and preserve the principal FFB instrument/application pathways.
+    # The FFB public pages now present focused measurement work; the full
+    # scholarly catalog and original publication assets remain intact.
+    # Keep the local research-to-technology navigation functional without
+    # requiring a cross-site promotional link.
     curated=[
-        ("research.html", research, ["institute-lux-consilio/research.html", "platform.html"]),
-        ("notebook.html", notebook, ["institute-lux-consilio/research.html", "platform.html"]),
-        ("research-atlas.html", atlas, ["institute-lux-consilio/research.html", "platform.html", "products.html"]),
+        ("research.html", research, ["research-constitutive-continuation-capacity.html", "platform.html"]),
+        ("notebook.html", notebook, ["research.html", "platform.html"]),
+        ("research-atlas.html", atlas, ["research-constitutive-continuation-capacity.html", "platform.html", "products.html"]),
     ]
     for name, content, links in curated:
         for link in links:
