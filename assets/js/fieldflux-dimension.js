@@ -108,7 +108,7 @@
 
   if(!window.__fieldfluxWorld&&!document.querySelector('script[data-fieldflux-world-runtime]')){
     var world=document.createElement("script");
-    world.src="assets/js/fieldflux-world.js?v=1";
+    world.src="assets/js/fieldflux-world.js?v=2";
     world.async=false;
     world.dataset.fieldfluxWorldRuntime="true";
     document.body.appendChild(world);
