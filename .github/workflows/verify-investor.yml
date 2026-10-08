@@ -5,6 +5,8 @@ on:
     paths:
       - investors.html
       - assets/css/investor-stable.css
+      - assets/css/fieldflux.css
+      - assets/js/fieldflux-world.js
       - assets/js/fieldflux-nav-world.js
       - assets/css/fieldflux-nav-world.css
       - assets/css/fieldflux-nav-world-fixes.css
@@ -14,6 +16,8 @@ on:
     paths:
       - investors.html
       - assets/css/investor-stable.css
+      - assets/css/fieldflux.css
+      - assets/js/fieldflux-world.js
       - assets/js/fieldflux-nav-world.js
       - assets/css/fieldflux-nav-world.css
       - assets/css/fieldflux-nav-world-fixes.css

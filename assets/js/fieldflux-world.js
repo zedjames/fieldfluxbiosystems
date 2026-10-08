@@ -18,11 +18,29 @@
       a.tabIndex=-1;
     });
   }
+
+  // One lightweight mobile navigation across the site. The investor page embeds
+  // the same native <details> markup so its menu also works with scripts disabled.
+  function ensureMobileNav(){
+    var inner=document.querySelector("header.nav .nav__inner");
+    if(!inner||inner.querySelector(".ffx-mobile-nav"))return;
+    var current=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+    var links=[["index.html","Home"],["platform.html","Technology"],["products.html","Products"],["research.html","Publications"],["about.html","About"],["investors.html","Investors"],["contact.html","Contact"]];
+    var details=document.createElement("details");
+    details.className="ffx-mobile-nav";
+    details.innerHTML='<summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation">'+links.map(function(item){
+      return '<a href="'+item[0]+'"'+(current===item[0]?' aria-current="page"':'')+'>'+item[1]+'</a>';
+    }).join("")+'</nav>';
+    inner.appendChild(details);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ensureMobileNav,{once:true});
+  else ensureMobileNav();
   hideLegacyWorldLinks();
   var mo=new MutationObserver(hideLegacyWorldLinks);
   if(document.body)mo.observe(document.body,{subtree:true,childList:true});
 
-  if(!document.querySelector('script[data-fieldflux-nav-world-runtime]')){
+  // Preserve the legacy field atlas only at its direct URL; do not replace sitewide navigation.
+  if((location.pathname.split("/").pop()||"index.html").toLowerCase()==="world.html"&&!document.querySelector('script[data-fieldflux-nav-world-runtime]')){
     var s=document.createElement("script");
     s.src="assets/js/fieldflux-nav-world.js?v=2";
     s.async=false;
