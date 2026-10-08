@@ -39,7 +39,7 @@ def main()->int:
             if t not in themes: fail(f"{ident}: invalid theme {t}",errors)
 
         if i.get("collection")=="publications":
-            for key in ("series","order","date","doi","pdf"):
+            for key in ("series","order","date","doi"):
                 if not i.get(key): fail(f"{ident}: publication missing {key}",errors)
             if i.get("series") not in series: fail(f"{ident}: invalid series {i.get('series')}",errors)
             pdf=i.get("pdf")
