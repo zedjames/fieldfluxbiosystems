@@ -75,7 +75,7 @@
 .inv-mobile-nav__links{position:absolute;top:calc(100% - 1px);left:0;right:0;display:grid;gap:0;padding:8px 24px 20px;background:#f6f1e7;box-shadow:0 18px 28px rgba(12,35,48,.18);z-index:50}
 .inv-mobile-nav__links a{display:block;padding:13px 5px;border-bottom:1px solid #d8ded9;color:#18394d;text-decoration:none}
 @media(max-width:960px){.inv-hero__grid{grid-template-columns:1fr}.inv-signal{max-width:700px}.inv-principles{grid-template-columns:repeat(2,minmax(0,1fr))}.inv-contact__inner{display:block}.inv-contact__inner>.inv-cta{margin-top:28px}}
-@media(max-width:900px){.inv-mobile-nav{display:block}.inv-page:not(.ffx-fieldmap-ready) .nav__actions{display:none}.inv-page:not(.ffx-fieldmap-ready) .nav__links{display:none}}
+@media(max-width:900px){.inv-mobile-nav{display:block}.inv-page .nav__actions{display:none}.inv-page .nav__links{display:none}}
 @media(max-width:640px){.inv-page .inv-wrap{width:calc(100% - 36px)}.inv-hero{padding:74px 0 84px}.inv-principles,.inv-roadmap,.inv-list,.inv-resource{grid-template-columns:1fr}.inv-stage--full{grid-column:auto}.inv-principle,.inv-stage{min-height:0}.inv-contact__inner{gap:18px}.inv-page .inv-actions{align-items:stretch}.inv-page .inv-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.inv-page *, .inv-page *::before,.inv-page *::after{transition:none!important;scroll-behavior:auto!important}}
 
@@ -85,20 +85,8 @@
 .inv-mobile-nav{position:relative}
 .inv-mobile-nav__links{left:auto;right:0;min-width:230px;width:min(80vw,340px)}
 .inv-page a:focus-visible,.inv-page summary:focus-visible{outline:2px solid #caa166;outline-offset:4px}
-.inv-page .nav__links a[aria-current="page"],.inv-page .inv-mobile-nav__links a[aria-current="page"]{font-weight:700;color:#173144}
+.inv-page .nav__links a.is-active{position:relative;color:var(--ink)}
+.inv-page .nav__links a.is-active::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:1px;background:var(--gold)}
+.inv-page .inv-mobile-nav__links a[aria-current="page"]{font-weight:700;color:#173144}
 .inv-page .inv-principle a,.inv-page .inv-stage a{color:#1c5773;text-decoration:underline;text-underline-offset:3px}
 
-/* Keep the investor overview script-independent while sharing the site's nav. */
-.inv-page.ffx-fieldmap-ready .inv-mobile-nav{display:none}
-.inv-page.ffx-fieldmap-ready .nav__links.ffx-nav-map{display:flex}
-.inv-page.ffx-fieldmap-ready .nav__actions{display:flex}
-@media(max-width:760px){
-  .inv-page.ffx-fieldmap-ready .nav__links.ffx-nav-map{display:flex!important;align-items:center!important}
-  .inv-page.ffx-fieldmap-ready .ffx-nav-primary,.inv-page.ffx-fieldmap-ready .ffx-nav-flow,.inv-page.ffx-fieldmap-ready .ffx-nav-carrier{display:none!important}
-  .inv-page.ffx-fieldmap-ready .ffx-fieldmap-toggle{display:flex!important}
-}
-@media(max-width:480px){
-  .inv-page.ffx-fieldmap-ready .nav__actions .btn{padding:.52rem .68rem;font-size:.76rem}
-  .inv-page.ffx-fieldmap-ready .brand__word{font-size:.68rem;letter-spacing:.1em}
-  .inv-page.ffx-fieldmap-ready .nav__inner{gap:10px}
-}
