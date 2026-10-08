@@ -127,7 +127,7 @@
 
   <section class="ffb-blackboard" id="formal-health" aria-labelledby="ffb-blackboard-title">
 <div class="ffb-blackboard__chalk" aria-hidden="true">
-<span class="ffb-blackboard__trace ffb-blackboard__trace--one">V<sub>d,t</sub>(x) = {(y, γ) | Lawful(γ) ∧ Continues(γ)}</span>
+<span class="ffb-blackboard__trace ffb-blackboard__trace--one">V<sub>d,t</sub>(x) = {(y, γ) | γ ∈ Hist(d,t,x,y) ∧ Lawful(γ) ∧ Continues(γ)}</span>
 <span class="ffb-blackboard__trace ffb-blackboard__trace--two">σ<sub>A</sub>(x)(q) = A(q, x)</span>
 <span class="ffb-blackboard__trace ffb-blackboard__trace--three">Capacity<sub>S</sub>(x; d,t) = collect{o(v) | v ∈ V<sub>d,t</sub>(x)}</span>
 <span class="ffb-blackboard__trace ffb-blackboard__trace--four">E ∈ Suff<sub>A</sub> ⇔ E ⪰ Q<sub>A</sub></span>
