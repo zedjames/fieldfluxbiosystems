@@ -21,7 +21,7 @@
     if(!page||!hero||!risk||q(".ffx-investor-status",page))return;
 
     var heroTitle=q("h1",hero),heroLede=q(".lede",hero);
-    if(heroTitle)heroTitle.innerHTML='Built foundations. Active products. A <em>long evidence horizon.</em>';
+    if(heroTitle)heroTitle.innerHTML='From scientific foundations to <em>commercial health measurement.</em>';
     if(heroLede)heroLede.textContent="ILC stewards the formal scientific foundation; Fieldflux has developed a measurement architecture and brought Membrane Health to the App Store. DRTT 2.0 is in-house alpha testing now, Rev B is the focus of the current capital raise, hospital bedside QPCI has a 36-month development horizon, and empirical authority accumulates through studies, pilots, and trials over the coming decade.";
 
     var section=document.createElement("section");
