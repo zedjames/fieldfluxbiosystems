@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-05",
+  "updated": "2026-10-08",
   "purpose": "Historical publication and note metadata retained for original Fieldflux URLs, citation continuity, and links to the canonical ILC scholarly index.",
   "collections": [
     {
@@ -142,10 +142,10 @@
       "id": "health-formally-defined",
       "label": "Health, Formally Defined",
       "domain": "Foundations of health",
-      "description": "An ongoing formal and measurement program defining health prospectively through present realization and requirement-adequate continuation capacity, then extending that definition across contextual licensing, developmental change, open-system support, and the later measurement and empirical layers needed to make it scientifically usable.",
+      "description": "An ongoing series defining prospective health through viable continuation capacity, contextual licensing and transport, and the information sufficient to answer declared health queries. Further work develops scale-specific observation, calibration, uncertainty, validation, and comparison.",
       "landing_page": "research-series-health-formally-defined.html",
-      "published_count": 2,
-      "current_status": "Ongoing series; Papers I–II published; further papers in development"
+      "published_count": 3,
+      "current_status": "Ongoing series; Papers I–III published; empirical measurement-science work ahead"
     }
   ],
   "routes": [
@@ -226,12 +226,13 @@
     {
       "id": "formal-health",
       "title": "How can health be stated as a prospective mathematical property?",
-      "description": "From the motivating health question through invariance, the prospective-health definition, and its transport across changing contexts toward measurement.",
+      "description": "From the motivating health question through present realization, prospective capacity, contextual transport, and query-relative representation sufficiency toward measurement.",
       "items": [
         "note-question",
         "note-fixedness",
         "hfd1",
         "hfd2",
+        "hfd3",
         "note-observable"
       ]
     }
@@ -1007,6 +1008,36 @@
         "Developmental systems",
         "Dynamical systems"
       ]
+    },
+    {
+      "id": "hfd3",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 3,
+      "date": "2026-10-07",
+      "title": "Representation Sufficiency in Prospective Health",
+      "subtitle": "Query-Visible Quotients, Transport, and Enriched Response Semantics.",
+      "href": "research-representation-sufficiency-prospective-health.html",
+      "doi": "10.5281/zenodo.23219588",
+      "concept_doi": "10.5281/zenodo.23219587",
+      "summary": "Paper III characterizes representation sufficiency for declared prospective-health queries. Sufficient representations refine the canonical query-visible quotient, which is the coarsest sufficient target for exact deterministic transport. The paper establishes the full-health observation criterion and response-grounded realizations for control, viable cost, probability, route structure, and failure-aware robustness.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "representation-reconstruction",
+        "formalization-proof",
+        "invariance-identity",
+        "evidence-validation",
+        "continuation-stability"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Formal methods",
+        "Measurement science",
+        "Representation theory",
+        "Dynamical systems"
+      ]
     }
   ],
   "relations": [
@@ -1284,6 +1315,11 @@
       "from": "bio2",
       "to": "hfd2",
       "type": "context"
+    },
+    {
+      "from": "hfd2",
+      "to": "hfd3",
+      "type": "continues"
     }
   ],
   "canonical_scholarly_catalog": "https://zedjames.github.io/institute-lux-consilio/research/catalog.json",
