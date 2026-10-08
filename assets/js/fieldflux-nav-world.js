@@ -10,13 +10,13 @@
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
 
   if(!q('link[data-fieldflux-nav-world]')){
-    var css=document.createElement("link");css.rel="stylesheet";css.href="assets/css/fieldflux-nav-world.css?v=1";css.dataset.fieldfluxNavWorld="true";document.head.appendChild(css);
+    var css=document.createElement("link");css.rel="stylesheet";css.href="assets/css/fieldflux-nav-world.css?v=2";css.dataset.fieldfluxNavWorld="true";document.head.appendChild(css);
   }
 
-  var PRIMARY=[["science.html","Science"],["platform.html","Platform"],["products.html","Products"],["research.html","Research"],["about.html","Company"],["investors.html","Investors"]];
+  var PRIMARY=[["platform.html","Technology"],["products.html","Products"],["research.html","Publications"],["about.html","About"],["investors.html","Investors"]];
   var PAGE_PRIMARY={
-    "index.html":0,"science.html":0,"platform.html":1,"products.html":2,"research.html":3,"about.html":4,"careers.html":4,"ethics.html":4,"contact.html":4,"investors.html":5,
-    "boundary-comes-first.html":3,"living-boundary.html":3,"one-plus-one.html":3,"fixedness.html":3,"residue-and-residual.html":3,"making-of-an-observable.html":3,"certification-algebra.html":3,"temperament.html":3,"algebra-before-ai.html":3,"make-the-signal-fail.html":3
+    "index.html":0,"science.html":0,"platform.html":0,"products.html":1,"research.html":2,"about.html":3,"careers.html":3,"ethics.html":3,"contact.html":3,"investors.html":4,
+    "boundary-comes-first.html":2,"living-boundary.html":2,"one-plus-one.html":2,"fixedness.html":2,"residue-and-residual.html":2,"making-of-an-observable.html":2,"certification-algebra.html":2,"temperament.html":2,"algebra-before-ai.html":2,"make-the-signal-fail.html":2
   };
   var PAGE_STAGE={
     "index.html":"health","science.html":"health","platform.html":"laminarity","products.html":"instrument","research.html":"observable","about.html":"health","careers.html":"health","ethics.html":"evidence","contact.html":"health","investors.html":"evidence",
@@ -80,7 +80,7 @@
   }
   var scrollQueued=false;function onScroll(){if(scrollQueued)return;scrollQueued=true;requestAnimationFrame(function(){scrollQueued=false;setStage(coreScrollStage());});}
 
-  function boot(){upgradeNav();ensureAtlas();body.dataset.ffxFieldStage=activeStage;addEventListener("resize",function(){qa(".nav__links.ffx-nav-map").forEach(function(nav){setCarrier(nav,activePrimary,true);});},{passive:true});addEventListener("scroll",onScroll,{passive:true});onScroll();
+  function boot(){upgradeNav();body.classList.add("ffx-fieldmap-ready");ensureAtlas();body.dataset.ffxFieldStage=activeStage;addEventListener("resize",function(){qa(".nav__links.ffx-nav-map").forEach(function(nav){setCarrier(nav,activePrimary,true);});},{passive:true});addEventListener("scroll",onScroll,{passive:true});onScroll();
     if(page==="world.html")setTimeout(function(){openAtlas((location.hash||"").replace("#","")||activeStage);},100);
     qa("a[href]").forEach(function(a){if(a.closest(".ffx-field-atlas"))return;a.addEventListener("click",function(){var href=a.getAttribute("href")||"";if(!href||href.charAt(0)==="#"||/^mailto:|^tel:|^javascript:/i.test(href))return;var dest=href.split("#")[0].split("/").pop();remember(PAGE_STAGE[dest]||activeStage,PAGE_PRIMARY.hasOwnProperty(dest)?PAGE_PRIMARY[dest]:activePrimary);});});
   }
