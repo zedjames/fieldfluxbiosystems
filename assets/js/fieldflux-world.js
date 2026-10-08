@@ -24,7 +24,7 @@
 
   if(!document.querySelector('script[data-fieldflux-nav-world-runtime]')){
     var s=document.createElement("script");
-    s.src="assets/js/fieldflux-nav-world.js?v=1";
+    s.src="assets/js/fieldflux-nav-world.js?v=2";
     s.async=false;
     s.dataset.fieldfluxNavWorldRuntime="true";
     s.addEventListener("load",function(){hideLegacyWorldLinks();setTimeout(hideLegacyWorldLinks,300);setTimeout(hideLegacyWorldLinks,1000);},{once:true});

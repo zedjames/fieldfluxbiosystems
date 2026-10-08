@@ -123,7 +123,7 @@
     }
     if (document.querySelector('script[data-fieldflux-dimension]')) return;
     var d = document.createElement("script");
-    d.src = "assets/js/fieldflux-dimension.js?v=3";
+    d.src = "assets/js/fieldflux-dimension.js?v=4";
     d.async = false;
     d.dataset.fieldfluxDimension = "true";
     document.body.appendChild(d);

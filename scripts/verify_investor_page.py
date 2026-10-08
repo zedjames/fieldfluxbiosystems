@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Regression checks for the standalone, script-independent investor page."""
+"""Regression checks for the stable investor page and shared site navigation."""
 from html.parser import HTMLParser
+import re
 from pathlib import Path
 from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "investors.html"
 CSS = ROOT / "assets/css/investor-stable.css"
+NAV = ROOT / "assets/js/fieldflux-nav-world.js"
 
 
 class Scan(HTMLParser):
@@ -46,14 +48,26 @@ class Scan(HTMLParser):
 def main():
     source = PAGE.read_text(encoding="utf-8")
     css = CSS.read_text(encoding="utf-8")
+    nav_js = NAV.read_text(encoding="utf-8")
     scan = Scan()
     scan.feed(source)
 
     assert source.lstrip().lower().startswith("<!doctype html>")
     assert len(scan.headings) == 1, "One clear investor-page heading is required"
-    assert "investor-stable.css?v=1" in source
+    assert "investor-stable.css?v=2" in source
     assert "main" in scan.ids and "development" in scan.ids and "capital" in scan.ids
-    assert not scan.scripts, "Investor page must remain usable without cascading script layers"
+    assert scan.scripts == ["assets/js/fieldflux-nav-world.js?v=2"], (
+        "Investor content must use only the standalone shared navigation helper"
+    )
+    assert "fieldflux-nav-world-fixes.css?v=1" in source
+    expected_navigation = ["platform.html", "products.html", "research.html", "about.html", "investors.html"]
+    primary = re.search(r'<nav class="nav__links"[^>]*>(.*?)</nav>', source, re.DOTALL)
+    assert primary, "Investor header is missing the canonical navigation"
+    primary_links = re.findall(r'<a[^>]*href="([^"]+)"', primary.group(1))
+    assert primary_links == expected_navigation, f"Investor navigation diverged: {primary_links}"
+    assert 'var PRIMARY=[["platform.html","Technology"],["products.html","Products"],["research.html","Publications"],["about.html","About"],["investors.html","Investors"]]' in nav_js
+    assert 'body.classList.add("ffx-fieldmap-ready")' in nav_js
+    assert "ffx-fieldmap-toggle" in nav_js
     assert "ffx-risktrack" not in source and "ffx-page" not in source
     assert len([1 for t, a in scan.elements if t == "article" and "inv-stage" in a.get("class", "").split()]) == 5
     assert len([1 for t, _ in scan.elements if t == "details"]) >= 1
@@ -69,10 +83,10 @@ def main():
             continue
         target = (ROOT / unquote(parsed.path)).resolve()
         assert target.is_relative_to(ROOT.resolve()) and target.is_file(), f"Broken local link: {href}"
-    for marker in (".inv-mobile-nav__links", "@media(max-width:640px)", ".inv-skip:focus"):
+    for marker in (".inv-mobile-nav__links", "@media(max-width:640px)", ".inv-skip:focus", ".inv-page.ffx-fieldmap-ready .inv-mobile-nav"):
         assert marker in css, f"Missing responsive/accessibility rule: {marker}"
     assert css.count("{") == css.count("}"), "Investor CSS braces unbalanced"
-    print("Investor page checks passed: static rendering, mobile navigation, five status cards, all local links.")
+    print("Investor page checks passed: shared five-link header, field map, standalone content, mobile fallback, five status cards, and all local links.")
 
 
 if __name__ == "__main__":
