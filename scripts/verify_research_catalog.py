@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Validate the public Fieldflux research catalog and its static projections."""
+"""Validate FFB historical research records and curated ILC/technology pathways."""
 from __future__ import annotations
-import html, json, re, sys
+import json, sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -67,73 +67,78 @@ def main()->int:
         if orders and orders!=list(range(1,len(orders)+1)):
             fail(f"series {sid} has noncontiguous orders {orders}",errors)
 
+    # The FFB catalog remains a frozen, complete provenance and file-integrity
+    # record. The public presentation was reorganized in October 2026:
+    # Institute Lux Consilio holds the full scholarly index, while the FFB
+    # Research / Atlas / Notebook pages now curate measurement-related paths.
     research=RESEARCH.read_text(encoding="utf-8")
     notebook=NOTEBOOK.read_text(encoding="utf-8")
     atlas=ATLAS.read_text(encoding="utf-8")
     pubs=[i for i in items if i.get("collection")=="publications"]
     notes=[i for i in items if i.get("collection")=="notebook"]
 
-    # Complete archives own the individual works.
-    for i in pubs:
-        if i["href"] not in research:
-            fail(f"publication absent from research.html: {i['href']}",errors)
-    for i in notes:
-        if i["href"] not in notebook:
-            fail(f"notebook item absent from notebook.html: {i['href']}",errors)
+    institute=c.get("canonical_institute","")
+    scholarly_catalog=c.get("canonical_scholarly_catalog","")
+    if not institute.startswith("https://zedjames.github.io/institute-lux-consilio/"):
+        fail("missing or incorrect canonical ILC institute URL",errors)
+    if scholarly_catalog!=institute.rstrip("/")+"/research/catalog.json":
+        fail("canonical ILC scholarly catalog URL does not match institute base",errors)
 
-    if research.count("data-archive-card") != len(pubs):
-        fail(f"publication archive card count mismatch: expected {len(pubs)}",errors)
-    if notebook.count("data-archive-card") != len(notes):
-        fail(f"notebook archive card count mismatch: expected {len(notes)}",errors)
-
-    # The Atlas owns durable concepts, series, and curated routes rather than
-    # enumerating every research object.
+    # Full historical coverage stays at original, stable URLs (checked above);
+    # theme/series landing pages must continue to resolve their own members.
     for t in c.get("themes",[]):
-        if html.escape(t["label"]) not in atlas and t["label"] not in atlas:
-            fail(f"theme absent from research-atlas.html: {t['label']}",errors)
         landing=t.get("landing_page")
         if not landing:
             fail(f"theme {t['id']}: missing landing_page metadata",errors)
-        elif not (ROOT/landing).exists():
+            continue
+        page_path=ROOT/landing
+        if not page_path.exists():
             fail(f"theme {t['id']}: missing landing page {landing}",errors)
-        else:
-            if landing not in atlas:
-                fail(f"theme landing absent from research-atlas.html: {landing}",errors)
-            page=(ROOT/landing).read_text(encoding="utf-8")
-            for i in items:
-                if t["id"] in i.get("themes",[]) and i["href"] not in page:
-                    fail(f"theme {t['id']} landing missing work {i['href']}",errors)
+            continue
+        page=page_path.read_text(encoding="utf-8")
+        for i in items:
+            if t["id"] in i.get("themes",[]) and i["href"] not in page:
+                fail(f"theme {t['id']} landing missing work {i['href']}",errors)
+
     for sid,smeta in series.items():
         landing=smeta.get("landing_page")
         if not landing:
             fail(f"series {sid}: missing landing_page metadata",errors)
             continue
-        if landing not in atlas:
-            fail(f"series landing absent from research-atlas.html: {landing}",errors)
-        page=(ROOT/landing).read_text(encoding="utf-8") if (ROOT/landing).exists() else ""
+        page_path=ROOT/landing
+        if not page_path.exists():
+            continue  # already reported in the metadata check above
+        page=page_path.read_text(encoding="utf-8")
         for i in pubs:
             if i.get("series")==sid and i["href"] not in page:
                 fail(f"series {sid} landing missing published paper {i['href']}",errors)
-    for route in routes:
-        if route.get("title") and route["title"] not in atlas:
-            fail(f"route absent from research-atlas.html: {route['title']}",errors)
 
-    # Stable top-level counts.
-    expected_pairs=[
-        (len(c.get("themes",[])),"durable themes"),
-        (len(c.get("series",[])),"active series"),
-        (len(items),"public research objects"),
-        (len(relations),"cataloged relations"),
+    # Curated commercial pages must point to the ILC research destination
+    # and preserve the principal FFB instrument/application pathways.
+    curated=[
+        ("research.html", research, ["institute-lux-consilio/research.html", "platform.html"]),
+        ("notebook.html", notebook, ["institute-lux-consilio/research.html", "platform.html"]),
+        ("research-atlas.html", atlas, ["institute-lux-consilio/research.html", "platform.html", "products.html"]),
     ]
-    for expected,label in expected_pairs:
-        if not re.search(rf">\s*{expected}\s*<.*?>{re.escape(label)}",atlas,re.S|re.I):
-            fail(f"atlas summary count mismatch for {label}: expected {expected}",errors)
+    for name, content, links in curated:
+        for link in links:
+            if link not in content:
+                fail(f"{name}: missing curated research/technology path {link}",errors)
+        if 'rel="canonical"' not in content:
+            fail(f"{name}: missing canonical page metadata",errors)
+
+    # The two relevant historical health-paper records remain discoverable
+    # through FFB while ILC indexes the wider scientific program.
+    for slug in ("research-constitutive-continuation-capacity.html",
+                 "research-prospective-health-across-contexts.html"):
+        if slug not in research:
+            fail(f"research.html: missing selected health foundation {slug}",errors)
 
     if errors:
         print("Research catalog validation FAILED:",file=sys.stderr)
         for e in errors: print(f" - {e}",file=sys.stderr)
         return 1
-    print(f"Research catalog OK: {len(items)} items, {len(relations)} relations, {len(routes)} routes.")
+    print(f"Research provenance and curated paths OK: {len(items)} items, {len(relations)} relations, {len(routes)} routes.")
     return 0
 
 if __name__=="__main__":
