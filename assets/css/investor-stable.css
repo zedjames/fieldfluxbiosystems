@@ -78,3 +78,12 @@
 @media(max-width:900px){.inv-mobile-nav{display:block}.nav__actions{display:none}.inv-page .nav__links{display:none}}
 @media(max-width:640px){.inv-page .inv-wrap{width:calc(100% - 36px)}.inv-hero{padding:74px 0 84px}.inv-principles,.inv-roadmap,.inv-list,.inv-resource{grid-template-columns:1fr}.inv-stage--full{grid-column:auto}.inv-principle,.inv-stage{min-height:0}.inv-contact__inner{gap:18px}.inv-page .inv-actions{align-items:stretch}.inv-page .inv-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.inv-page *, .inv-page *::before,.inv-page *::after{transition:none!important;scroll-behavior:auto!important}}
+
+/* Operable without JavaScript, including keyboard and small-screen navigation. */
+.inv-skip{position:absolute;top:0;left:12px;z-index:150;transform:translateY(-140%);padding:11px 16px;background:#f6f1e7;color:#173144;border:2px solid #866d44}
+.inv-skip:focus{transform:translateY(8px)}
+.inv-mobile-nav{position:relative}
+.inv-mobile-nav__links{left:auto;right:0;min-width:230px;width:min(80vw,340px)}
+.inv-page a:focus-visible,.inv-page summary:focus-visible{outline:2px solid #caa166;outline-offset:4px}
+.inv-page .nav__links a[aria-current="page"],.inv-page .inv-mobile-nav__links a[aria-current="page"]{font-weight:700;color:#173144}
+.inv-page .inv-principle a,.inv-page .inv-stage a{color:#1c5773;text-decoration:underline;text-underline-offset:3px}
