@@ -54,3 +54,30 @@
 @media(max-width:950px){.ffb-cycle__layout{grid-template-columns:1fr}.ffb-cycle__art{width:min(440px,85%)}.ffb-papers__grid{grid-template-columns:1fr 1fr}.ffb-paper{min-height:300px}}
 @media(max-width:620px){.ffb-cycle__steps,.ffb-papers__grid{grid-template-columns:1fr}.ffb-cycle__art{width:min(320px,90%)}.ffb-papers__heading{display:block}.ffb-paper{min-height:0}.ffb-cycle__step{padding:20px}.ffb-papers__foot{display:block}.ffb-papers__foot a{display:inline-block;margin-top:16px}}
 @media(prefers-reduced-motion:reduce){.ffb-paper{transition:none}.ffb-paper:hover{transform:none}}
+
+/* Editorial concentration: Homepage summarizes; Science owns the full spiral. */
+.ffb-overview{padding:clamp(62px,8vw,106px) 0;background:#102b3e;color:#f4f0e7}
+.ffb-overview .ffb-section-heading{color:#fff;max-width:25ch}
+.ffb-overview__intro>p:last-child{max-width:75ch;line-height:1.72;color:#cadbe2;font-size:1.04rem;margin:17px 0 0}
+.ffb-overview__phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:36px 0 25px;border-block:1px solid rgba(219,233,234,.32)}
+.ffb-overview__phases span{padding:19px 14px;font-weight:600;font-size:.86rem;line-height:1.4;text-align:center;color:#f0d4a3;position:relative}
+.ffb-overview__phases span+span{border-left:1px solid rgba(219,233,234,.2)}
+.ffb-overview__phases span:not(:last-child):after{content:"→";position:absolute;right:-7px;color:#e3ba7e}
+.ffb-overview a{color:#f2d3a2;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.ffb-index{padding:clamp(60px,8vw,108px) 0;background:#f6f0e4;color:#1c3444}
+.ffb-index__head{display:flex;gap:25px;align-items:end;justify-content:space-between;margin-bottom:31px}
+.ffb-index__head p:not(.ffb-eyebrow){max-width:72ch;line-height:1.7;margin:14px 0 0}
+.ffb-index__head a{font-size:.94rem;white-space:nowrap}
+.ffb-index__rows{border-top:1px solid #cabda8}
+.ffb-index__row{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(110px,.7fr) 25px;gap:16px;align-items:center;padding:24px 7px;color:#183246;border-bottom:1px solid #cabda8;text-decoration:none}
+.ffb-index__row:hover,.ffb-index__row:focus-visible{background:rgba(181,142,85,.1)}
+.ffb-index__row>span:first-child{color:#8c6935;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.ffb-index__row strong{font-family:var(--serif,Georgia,serif);font-size:clamp(1.1rem,1.8vw,1.56rem);font-weight:400;line-height:1.27}
+.ffb-index__row em{font-style:normal;color:#50606b;font-size:.88rem;line-height:1.4}
+.ffb-index__row>span:last-child{text-align:right;color:#956c35;font-size:1.23rem}
+.ffb-page-links{padding:36px 0;background:var(--paper-alt,#f6f0e4);border-top:1px solid var(--line-soft,#d4cdc0)}
+.ffb-page-links__inner{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.ffb-page-links__inner p{max-width:62ch;line-height:1.62;margin:0}
+.ffb-page-links__inner a{font-weight:700;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:740px){.ffb-overview__phases{grid-template-columns:1fr 1fr}.ffb-overview__phases span:nth-child(3){border-left:0;border-top:1px solid rgba(219,233,234,.2)}.ffb-overview__phases span:nth-child(4){border-top:1px solid rgba(219,233,234,.2)}.ffb-index__head{display:block}.ffb-index__head>a{display:inline-block;margin-top:14px}.ffb-index__row{grid-template-columns:70px minmax(0,1fr) 24px;gap:12px}.ffb-index__row em{grid-column:2;grid-row:2}.ffb-index__row>span:last-child{grid-column:3;grid-row:1 / span 2}}
+@media(max-width:430px){.ffb-overview__phases span{font-size:.77rem;padding:17px 9px}.ffb-index__row{padding:19px 3px;grid-template-columns:62px minmax(0,1fr) 18px}.ffb-index__row strong{font-size:1.06rem}}
