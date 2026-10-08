@@ -123,7 +123,7 @@
     }
     if (document.querySelector('script[data-fieldflux-dimension]')) return;
     var d = document.createElement("script");
-    d.src = "assets/js/fieldflux-dimension.js?v=2";
+    d.src = "assets/js/fieldflux-dimension.js?v=3";
     d.async = false;
     d.dataset.fieldfluxDimension = "true";
     document.body.appendChild(d);
@@ -203,7 +203,7 @@
       return;
     }
     var s = document.createElement("script");
-    s.src = "assets/js/fieldflux-next.js?v=8";
+    s.src = "assets/js/fieldflux-next.js?v=9";
     s.async = false;
     s.dataset.fieldfluxNext = "true";
     s.addEventListener("load", loadPass2, { once:true });
