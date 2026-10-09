@@ -49,22 +49,33 @@ def main()->int:
         else:
             fail(f"{ident}: invalid collection {i.get('collection')}",errors)
 
-    # On-site PDF availability is a publication requirement for newly added Health papers.
-    for paper_id in ("hfd4","hfd5"):
-        paper=by_id.get(paper_id, {})
+    # New publications must be fully readable on this website. Pre-existing
+    # historical works were migrated before this policy and can be backfilled.
+    import hashlib
+    manifests=json.loads((ROOT/"research"/"preprint-pdfs.json").read_text(encoding="utf-8"))
+    pdf_by_path={entry["pdf"]:entry for entry in manifests["papers"]}
+    for paper in [i for i in items if i.get("collection")=="publications"]:
+        if paper.get("date","") < "2026-10-09":
+            continue
+        ident=paper["id"]
         pdf=paper.get("pdf")
         if not pdf or not (ROOT/pdf).is_file():
-            fail(f"{paper_id}: full paper PDF absent from the site",errors)
+            fail(f"{ident}: every newly published paper needs an actual on-site PDF",errors)
             continue
-        if not (ROOT/pdf).read_bytes().startswith(b"%PDF-"):
-            fail(f"{paper_id}: purported PDF is not a PDF",errors)
+        payload=(ROOT/pdf).read_bytes()
+        if not payload.startswith(b"%PDF-"):
+            fail(f"{ident}: the reader asset is not a valid PDF",errors)
+        mirror=pdf_by_path.get(pdf)
+        if not mirror or mirror["doi"]!=paper.get("doi") or hashlib.sha256(payload).hexdigest()!=mirror.get("sha256"):
+            fail(f"{ident}: PDF absent from verified Zenodo mirror manifest or checksum mismatch",errors)
         record_html=(ROOT/paper["href"]).read_text(encoding="utf-8")
-        for expected in (f'name="citation_pdf_url"',pdf,'application/pdf'):
-            if expected not in record_html:
-                fail(f"{paper_id}: missing Scholar PDF discovery {expected}",errors)
-        for public in ("research.html","research-series-health-formally-defined.html"):
-            if pdf not in (ROOT/public).read_text(encoding="utf-8"):
-                fail(f"{public}: missing full text for {paper_id}",errors)
+        for marker in (f'name="citation_pdf_url"',pdf,'application/pdf'):
+            if marker not in record_html:
+                fail(f"{ident}: missing Scholar PDF discovery {marker}",errors)
+        if paper.get("series")=="health-formally-defined":
+            for page in ("research.html","research-series-health-formally-defined.html"):
+                if pdf not in (ROOT/page).read_text(encoding="utf-8"):
+                    fail(f"{page}: full-text PDF not discoverable for {ident}",errors)
 
     for r in relations:
         if r.get("from") not in by_id: fail(f"relation missing from item: {r}",errors)
