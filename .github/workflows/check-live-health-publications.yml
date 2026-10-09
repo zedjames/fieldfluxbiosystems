@@ -1,0 +1,55 @@
+name: Verify live Health publication rollout
+on:
+  pull_request:
+    paths:
+      - .github/workflows/check-live-health-publications.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check public HTML, PDF identity, TLS and discovery
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,ssl,urllib.request,urllib.error
+          hosts=[
+            ("https://fieldfluxbiosystems.com/research.html", ["Paper IV","Paper V","research-information-provenance-conservative-enrichment-prospective-health.pdf","research-prospective-health-declared-specifications.pdf"]),
+            ("https://fieldfluxbiosystems.com/research-information-provenance-conservative-enrichment-prospective-health.html", ["citation_pdf_url","Read PDF on this site"]),
+            ("https://fieldfluxbiosystems.com/research-prospective-health-declared-specifications.html", ["citation_pdf_url","Read PDF on this site"]),
+            ("https://instituteluxconsilio.org/publications.html", ["publication-hfd4.html","publication-hfd5.html"]),
+            ("https://instituteluxconsilio.org/research-health-formally-defined.html", ["publication-hfd4.html","publication-hfd5.html"]),
+            ("https://instituteluxconsilio.org/publication-hfd4.html", ["citation_pdf_url","papers/health-formally-defined-paper-iv.pdf"]),
+            ("https://instituteluxconsilio.org/publication-hfd5.html", ["citation_pdf_url","papers/health-formally-defined-paper-v.pdf"])
+          ]
+          pdfs=[
+            ("https://fieldfluxbiosystems.com/research-information-provenance-conservative-enrichment-prospective-health.pdf","81153d49ccd804de4c49ce9372891bf6896207c32d6abf40649c69431b44f033"),
+            ("https://fieldfluxbiosystems.com/research-prospective-health-declared-specifications.pdf","702fd63ae70487d565e92292608a20febeab202defc515559aff411581e1d112"),
+            ("https://instituteluxconsilio.org/papers/health-formally-defined-paper-iv.pdf","81153d49ccd804de4c49ce9372891bf6896207c32d6abf40649c69431b44f033"),
+            ("https://instituteluxconsilio.org/papers/health-formally-defined-paper-v.pdf","702fd63ae70487d565e92292608a20febeab202defc515559aff411581e1d112")
+          ]
+          errors=[]
+          for url,markers in hosts:
+            try:
+              req=urllib.request.Request(url,headers={"User-Agent":"ILCFFBLiveCheck/20261009","Cache-Control":"no-cache"})
+              with urllib.request.urlopen(req,timeout=20,context=ssl.create_default_context()) as r:
+                txt=r.read().decode('utf-8','replace'); print("HTML",url,"status",r.status,"length",len(txt))
+              for marker in markers:
+                if marker not in txt: errors.append(f"{url}: missing {marker}")
+            except Exception as exc:
+              errors.append(f"{url}: {exc}")
+          for url,sha in pdfs:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"ILCFFBLiveCheck/20261009"}),timeout=35,context=ssl.create_default_context()) as r:
+                blob=r.read(); print("PDF",url,"status",r.status,"bytes",len(blob))
+              digest=hashlib.sha256(blob).hexdigest()
+              if not blob.startswith(b"%PDF-") or digest!=sha:errors.append(f"{url}: PDF bytes mismatch: {digest}")
+            except Exception as exc:
+              errors.append(f"{url}: {exc}")
+          for err in errors: print("ERROR",err)
+          if errors: raise SystemExit(1)
+          print("PASS: both published sites serve the paper metadata and exact PDFs over HTTPS")
+          PY
