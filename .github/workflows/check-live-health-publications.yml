@@ -53,3 +53,37 @@ jobs:
           if errors: raise SystemExit(1)
           print("PASS: both published sites serve the paper metadata and exact PDFs over HTTPS")
           PY
+
+      - name: Inspect ILC deployed bytes despite pending certificate (diagnostic only)
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,ssl,urllib.request
+          # This deliberately ignores hostname validation FOR DIAGNOSTICS ONLY.
+          # Browsers must not bypass the certificate warning.
+          context=ssl._create_unverified_context()
+          for url,marker in [
+            ("https://instituteluxconsilio.org/publications.html","publication-hfd5.html"),
+            ("https://instituteluxconsilio.org/research-health-formally-defined.html","publication-hfd5.html"),
+            ("https://instituteluxconsilio.org/publication-hfd4.html",'citation_pdf_url'),
+            ("https://instituteluxconsilio.org/publication-hfd5.html",'citation_pdf_url')
+          ]:
+            try:
+              with urllib.request.urlopen(url,timeout=15,context=context) as res:
+                body=res.read().decode("utf8","replace")
+              print("ILC CONTENT",url,"contains expected=",marker in body,"length",len(body))
+            except Exception as exc:
+              print("ILC CONTENT UNAVAILABLE",url,str(exc))
+          for url,expected in [
+            ("https://instituteluxconsilio.org/papers/health-formally-defined-paper-iv.pdf","81153d49ccd804de4c49ce9372891bf6896207c32d6abf40649c69431b44f033"),
+            ("https://instituteluxconsilio.org/papers/health-formally-defined-paper-v.pdf","702fd63ae70487d565e92292608a20febeab202defc515559aff411581e1d112")
+          ]:
+            try:
+              with urllib.request.urlopen(url,timeout=25,context=context) as res:
+                blob=res.read()
+              sha=hashlib.sha256(blob).hexdigest()
+              print("ILC PDF",url,"bytes",len(blob),"exact author checksum",sha==expected)
+            except Exception as exc:
+              print("ILC PDF UNAVAILABLE",url,str(exc))
+          PY
