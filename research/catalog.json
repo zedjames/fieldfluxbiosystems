@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "purpose": "Historical publication and note metadata retained for original Fieldflux URLs, citation continuity, and links to the canonical ILC scholarly index.",
   "collections": [
     {
@@ -142,10 +142,10 @@
       "id": "health-formally-defined",
       "label": "Health, Formally Defined",
       "domain": "Foundations of health",
-      "description": "An ongoing series defining prospective health through viable continuation capacity, contextual licensing and transport, and the information sufficient to answer declared health queries. Further work develops scale-specific observation, calibration, uncertainty, validation, and comparison.",
+      "description": "A formal and measurement-science program that defines prospective Health, establishes contextual transport and representation sufficiency, then applies the framework to an exact finite forest provenance benchmark and an auditable empirical-synthetic forest measurement study.",
       "landing_page": "research-series-health-formally-defined.html",
-      "published_count": 3,
-      "current_status": "Ongoing series; Papers I–III published; empirical measurement-science work ahead"
+      "published_count": 5,
+      "current_status": "Ongoing series; Papers I–V published; empirical validation and measurement work continue"
     }
   ],
   "routes": [
@@ -226,13 +226,15 @@
     {
       "id": "formal-health",
       "title": "How can health be stated as a prospective mathematical property?",
-      "description": "From the motivating health question through present realization, prospective capacity, contextual transport, and query-relative representation sufficiency toward measurement.",
+      "description": "From the health question through formal definition, contextual transport, representation sufficiency, exact finite semantic provenance, and empirical-synthetic measurement.",
       "items": [
         "note-question",
         "note-fixedness",
         "hfd1",
         "hfd2",
         "hfd3",
+        "hfd4",
+        "hfd5",
         "note-observable"
       ]
     }
@@ -1038,6 +1040,64 @@
         "Representation theory",
         "Dynamical systems"
       ]
+    },
+    {
+      "id": "hfd4",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 4,
+      "date": "2026-10-09",
+      "title": "Information Provenance and Conservative Enrichment in Prospective Health",
+      "subtitle": "A Machine-Checked Finite Forest Benchmark.",
+      "href": "research-information-provenance-conservative-enrichment-prospective-health.html",
+      "doi": "10.5281/zenodo.23268802",
+      "concept_doi": "10.5281/zenodo.23268803",
+      "summary": "Paper IV establishes a five-state, machine-checked forest benchmark with two equivalent history encodings, an exact candidate-to-lawful-to-viable response census, and a complete distinction-loss classification across detailed capacity, coarse capacity, and declared Health. A generic conservative-refinement lemma and a strict forest example demonstrate preservation of established Health judgments under exact projection.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "formalization-proof",
+        "representation-reconstruction",
+        "invariance-identity",
+        "evidence-validation"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Formal methods",
+        "Measurement science",
+        "Representation theory",
+        "Ecological modeling"
+      ]
+    },
+    {
+      "id": "hfd5",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 5,
+      "date": "2026-10-09",
+      "title": "Prospective Health under Declared Specifications",
+      "subtitle": "An Auditable Empirical-Synthetic Forest Measurement Study.",
+      "href": "research-prospective-health-declared-specifications.html",
+      "doi": "10.5281/zenodo.23268987",
+      "concept_doi": "10.5281/zenodo.23268986",
+      "summary": "Paper V evaluates prospective Health as a model-conditional stochastic measurement using longitudinal Harvard Forest observations and synthetic benchmark worlds. It audits latent-state reconstruction, demographic calibration, query-relative representation and decision reliability; independent adult-mortality observations reveal severe hemlock-specific predictive miscalibration. The study does not establish operational forest Health.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "evidence-validation",
+        "representation-reconstruction",
+        "continuation-stability",
+        "boundary-measurement"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Measurement science",
+        "Forest ecology",
+        "Stochastic modeling",
+        "Empirical validation"
+      ]
     }
   ],
   "relations": [
@@ -1320,9 +1380,19 @@
       "from": "hfd2",
       "to": "hfd3",
       "type": "continues"
+    },
+    {
+      "from": "hfd3",
+      "to": "hfd4",
+      "type": "continues"
+    },
+    {
+      "from": "hfd4",
+      "to": "hfd5",
+      "type": "continues"
     }
   ],
-  "canonical_scholarly_catalog": "https://zedjames.github.io/institute-lux-consilio/research/catalog.json",
-  "canonical_institute": "https://zedjames.github.io/institute-lux-consilio/",
+  "canonical_scholarly_catalog": "https://instituteluxconsilio.org/research/catalog.json",
+  "canonical_institute": "https://instituteluxconsilio.org/",
   "archive_role": "Historical public Fieldflux research and publication provenance; Institute Lux Consilio is the comprehensive scientific index."
 }
