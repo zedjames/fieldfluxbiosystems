@@ -49,6 +49,23 @@ def main()->int:
         else:
             fail(f"{ident}: invalid collection {i.get('collection')}",errors)
 
+    # On-site PDF availability is a publication requirement for newly added Health papers.
+    for paper_id in ("hfd4","hfd5"):
+        paper=by_id.get(paper_id, {})
+        pdf=paper.get("pdf")
+        if not pdf or not (ROOT/pdf).is_file():
+            fail(f"{paper_id}: full paper PDF absent from the site",errors)
+            continue
+        if not (ROOT/pdf).read_bytes().startswith(b"%PDF-"):
+            fail(f"{paper_id}: purported PDF is not a PDF",errors)
+        record_html=(ROOT/paper["href"]).read_text(encoding="utf-8")
+        for expected in (f'name="citation_pdf_url"',pdf,'application/pdf'):
+            if expected not in record_html:
+                fail(f"{paper_id}: missing Scholar PDF discovery {expected}",errors)
+        for public in ("research.html","research-series-health-formally-defined.html"):
+            if pdf not in (ROOT/public).read_text(encoding="utf-8"):
+                fail(f"{public}: missing full text for {paper_id}",errors)
+
     for r in relations:
         if r.get("from") not in by_id: fail(f"relation missing from item: {r}",errors)
         if r.get("to") not in by_id: fail(f"relation missing to item: {r}",errors)
@@ -136,8 +153,8 @@ def main()->int:
         work=by_id.get(name,{})
         if work.get("doi")!="10.5281/zenodo."+version or work.get("concept_doi")!="10.5281/zenodo."+concept:
             fail(f"{name}: incorrect Zenodo DOI pairing",errors)
-        if work.get("pdf"):
-            fail(f"{name}: do not claim a local PDF without a committed file",errors)
+        if not work.get("pdf") or not (ROOT/work["pdf"]).is_file():
+            fail(f"{name}: required indexed PDF not found",errors)
     for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
                  "research-prospective-health-declared-specifications.html"):
         if slug not in research:
