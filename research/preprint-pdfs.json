@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-preprint-pdfs/v1",
-  "generated_from": "author-supplied PDFs received through 2026-10-05",
+  "generated_from": "Author-supplied PDFs received through 2026-10-09; verified by SHA-256",
   "papers": [
     {
       "record_page": "research-continuation-anatomy-navier-stokes.html",
@@ -178,6 +178,26 @@
       "pages": 26,
       "publication_date": "2026-10-05",
       "manuscript_date": "2026-10-04"
+    },
+    {
+      "record_page": "research-information-provenance-conservative-enrichment-prospective-health.html",
+      "pdf": "research-information-provenance-conservative-enrichment-prospective-health.pdf",
+      "doi": "10.5281/zenodo.23268802",
+      "concept_doi": "10.5281/zenodo.23268803",
+      "sha256": "81153d49ccd804de4c49ce9372891bf6896207c32d6abf40649c69431b44f033",
+      "pages": 27,
+      "publication_date": "2026-10-09",
+      "manuscript_date": "2026-10-09"
+    },
+    {
+      "record_page": "research-prospective-health-declared-specifications.html",
+      "pdf": "research-prospective-health-declared-specifications.pdf",
+      "doi": "10.5281/zenodo.23268987",
+      "concept_doi": "10.5281/zenodo.23268986",
+      "sha256": "702fd63ae70487d565e92292608a20febeab202defc515559aff411581e1d112",
+      "pages": 48,
+      "publication_date": "2026-10-09",
+      "manuscript_date": "2026-10-09"
     }
   ]
 }
