@@ -79,7 +79,7 @@ def main()->int:
 
     institute=c.get("canonical_institute","")
     scholarly_catalog=c.get("canonical_scholarly_catalog","")
-    if not institute.startswith("https://zedjames.github.io/institute-lux-consilio/"):
+    if institute != "https://instituteluxconsilio.org/":
         fail("missing or incorrect canonical ILC institute URL",errors)
     if scholarly_catalog!=institute.rstrip("/")+"/research/catalog.json":
         fail("canonical ILC scholarly catalog URL does not match institute base",errors)
@@ -128,6 +128,20 @@ def main()->int:
                 fail(f"{name}: missing curated research/technology path {link}",errors)
         if 'rel="canonical"' not in content:
             fail(f"{name}: missing canonical page metadata",errors)
+
+    health=[i for i in pubs if i.get("series")=="health-formally-defined"]
+    if sorted(i["order"] for i in health)!=[1,2,3,4,5]:
+        fail("Health series must include all five published papers",errors)
+    for name,version,concept in (("hfd4","23268802","23268803"),("hfd5","23268987","23268986")):
+        work=by_id.get(name,{})
+        if work.get("doi")!="10.5281/zenodo."+version or work.get("concept_doi")!="10.5281/zenodo."+concept:
+            fail(f"{name}: incorrect Zenodo DOI pairing",errors)
+        if work.get("pdf"):
+            fail(f"{name}: do not claim a local PDF without a committed file",errors)
+    for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
+                 "research-prospective-health-declared-specifications.html"):
+        if slug not in research:
+            fail(f"research.html: missing newly published health paper {slug}",errors)
 
     # The two relevant historical health-paper records remain discoverable
     # through FFB while ILC indexes the wider scientific program.

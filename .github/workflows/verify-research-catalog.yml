@@ -24,6 +24,7 @@ on:
       - "make-the-signal-fail.html"
       - "scripts/verify_research_catalog.py"
       - ".github/workflows/verify-research-catalog.yml"
+  pull_request:
   workflow_dispatch:
 
 # Research publication updates often touch the catalog and several static
