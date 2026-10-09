@@ -153,8 +153,8 @@ def main()->int:
         work=by_id.get(name,{})
         if work.get("doi")!="10.5281/zenodo."+version or work.get("concept_doi")!="10.5281/zenodo."+concept:
             fail(f"{name}: incorrect Zenodo DOI pairing",errors)
-        if work.get("pdf"):
-            fail(f"{name}: do not claim a local PDF without a committed file",errors)
+        if not work.get("pdf") or not (ROOT/work["pdf"]).is_file():
+            fail(f"{name}: required indexed PDF not found",errors)
     for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
                  "research-prospective-health-declared-specifications.html"):
         if slug not in research:
