@@ -54,7 +54,7 @@ def main()->int:
     import hashlib
     manifests=json.loads((ROOT/"research"/"preprint-pdfs.json").read_text(encoding="utf-8"))
     pdf_by_path={entry["pdf"]:entry for entry in manifests["papers"]}
-    for paper in pubs if "pubs" in locals() else [i for i in items if i.get("collection")=="publications"]:
+    for paper in [i for i in items if i.get("collection")=="publications"]:
         if paper.get("date","") < "2026-10-09":
             continue
         ident=paper["id"]
