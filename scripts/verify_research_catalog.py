@@ -138,8 +138,10 @@ def main()->int:
             fail(f"{name}: incorrect Zenodo DOI pairing",errors)
         if work.get("pdf"):
             fail(f"{name}: do not claim a local PDF without a committed file",errors)
-    if "hfd4" not in research or "hfd5" not in research:
-        fail("research.html: missing newly published health papers",errors)
+    for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
+                 "research-prospective-health-declared-specifications.html"):
+        if slug not in research:
+            fail(f"research.html: missing newly published health paper {slug}",errors)
 
     # The two relevant historical health-paper records remain discoverable
     # through FFB while ILC indexes the wider scientific program.
