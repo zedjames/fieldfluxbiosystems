@@ -153,6 +153,30 @@ def main():
           "Lesson 4 does not link forward to Lesson 5",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-04.html"' in fifth,
           "Lesson 5 does not reference Lesson 4 as its predecessor",errors)
+    sixth=(ROOT/"understanding-health-06.html").read_text(encoding="utf8")
+    check(sixth.count("<math ")==4,"Lesson 6 must contain four accessible MathML expressions",errors)
+    check('R' in sixth and 'P' in sixth and 'B' in sixth and 'raw' in sixth,
+          "Lesson 6 declared relational counterexample missing",errors)
+    check("health-visible" in sixth and "Stage-only" in sixth or
+          "stage-only" in sixth and "quotient" in sixth,
+          "Lesson 6 must distinguish exact target class and stage obstruction",errors)
+    check('data-ulh-transport-choice="raw"' in sixth and
+          'data-ulh-transport-choice="visible"' in sixth and
+          'data-ulh-transport-view="raw"' in sixth and
+          'data-ulh-transport-view="visible"' in sixth,
+          "Lesson 6 comparison panels must both exist without scripts",errors)
+    check("Determinacy" in sixth or "determinacy" in sixth,
+          "Lesson 6 must state the transport determinacy criterion",errors)
+    check("Determining the target is not the same as preserving Health." in sixth,
+          "Lesson 6 must distinguish determination from preservation",errors)
+    check("research-prospective-health-across-contexts.pdf" in sixth and
+          "10.5281/zenodo.23146280" in sixth,
+          "Lesson 6 needs its on-site Paper II full text and DOI",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-06.html"' in
+          (ROOT/"understanding-health-05.html").read_text(encoding="utf8"),
+          "Lesson 5 must point forward to Lesson 6",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-05.html"' in sixth,
+          "Lesson 6 must point backward to Lesson 5",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
