@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 16: Why 99% Accuracy Can Miss the Boundary | Understanding Health</title>
+<meta name="description" content="Lesson 16 examines why synthetic prospective-health classifiers can be 99.22% accurate across broad conditions yet near 56% at a 75% threshold, with oracle experiments and model-misspecification tests.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-16.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-15.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="Why a model can be 99% accurate and still struggle when it matters most">
+<meta property="og:description" content="Broad-range accuracy, difficult threshold decisions, simulation uncertainty, and errors that additional computing cannot remove.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-16.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-16.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Why a model can be 99% accurate and still struggle when it matters most","url":"https://fieldfluxbiosystems.com/understanding-health-16.html","description":"Guided review of Paper V's broad-range and near-boundary synthetic experiments, finite-bank uncertainty, oracle experiments, reconstruction sensitivity, and misspecification tests.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Prospective Health under Declared Specifications","identifier":"https://doi.org/10.5281/zenodo.23268987"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">16</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-15.html">Lesson 15</a><span aria-hidden="true">/</span><span>Lesson 16</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 16 · Classification near the decision boundary</p>
+<h1 id="lesson-title" class="ulh-serif">Why a model can be 99% accurate and still struggle when it matters most</h1>
+<p class="ulh-lede">We can now calculate model-conditional prospective Health. But how trustworthy is the result when the true viable mass is close to the threshold? Paper V asks this through synthetic experiments, controlled information tests, and deliberately difficult comparisons.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper V · Sections 5.4–5.7 and 6.4–6.7</span><span>Calibration and decision reliability</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-15.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 15</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#broad-test">The 324-world test</a><a href="#balanced">What balanced accuracy measures</a>
+<a href="#boundary-test">A harder synthetic population</a><a href="#decision">Why small errors flip answers</a>
+<a href="#finite-bank">Finite simulation uncertainty</a><a href="#oracle">The four-way oracle audit</a>
+<a href="#reconstruction">Reconstruction sensitivity</a><a href="#misspecification">When the model omits mortality</a>
+<a href="#three-errors">Three distinct uncertainty sources</a><a href="#takeaway">Carry it forward</a></nav>
+<small>Lesson 16<br>Health, Formally Defined<br>Paper V</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="broad-test">
+<p class="ulh-kicker">01 / A striking headline result</p><h2 class="ulh-serif">An estimator can classify a broad set of synthetic forests extremely well.</h2>
+<p class="ulh-lead">The first experiment creates 324 mathematically generated forest worlds. The experimenter knows the underlying state and demographic parameters, so reference Health classifications can be calculated. The estimator instead receives noisy or incomplete observations and must reconstruct the state, estimate the dynamics, and classify prospective Health.</p>
+<div class="ulh-validation-chain" role="group" aria-label="Known synthetic world, incomplete observations, estimated health, comparison with the reference answer">
+<div><span>Generate</span><strong>Known synthetic world</strong><p>State and generating parameters are controlled</p></div><b aria-hidden="true">→</b>
+<div><span>Observe</span><strong>Imperfect measurements</strong><p>The estimator cannot see the hidden truth</p></div><b aria-hidden="true">→</b>
+<div><span>Evaluate</span><strong>Estimated Health</strong><p>Reconstruct, simulate, and compare</p></div></div>
+<div class="ulh-big-stat" role="group" aria-label="99.22 percent balanced accuracy for 324 correctly specified broad-range synthetic worlds">
+<div><span>Correct-model broad-range experiment</span><strong>99.22<small>%</small></strong><p>Balanced accuracy · 324 synthetic worlds</p></div>
+<div><h3>What this result includes</h3><p>69 reference-positive and 255 reference-negative cases. The primary reference viable masses are all more than 0.10 away from the 0.75 threshold.</p><p>The test is useful for internal model-based verification, particularly on cases with margins large enough to make the decisions easier.</p></div></div>
+<p>The result is a property of this controlled synthetic population and estimator. It is not a measured diagnostic accuracy for the real Harvard Forest.</p>
+</section>
+<section class="ulh-chapter-section" id="balanced">
+<p class="ulh-kicker">02 / Understand the metric</p><h2 class="ulh-serif">Balanced accuracy gives positive and negative cases equal weight.</h2>
+<p><strong>Sensitivity</strong> asks how often reference-positive cases are correctly classified. <strong>Specificity</strong> asks how often reference-negative cases are correctly classified. Balanced accuracy averages these two rates.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Balanced classification accuracy</p><h3>The mean of sensitivity and specificity.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Balanced accuracy equals sensitivity plus specificity, divided by two"><mrow><msub><mi mathvariant="normal">BA</mi><mtext>balanced</mtext></msub><mo>=</mo><mfrac><mrow><mi mathvariant="normal">Sensitivity</mi><mo>+</mo><mi mathvariant="normal">Specificity</mi></mrow><mn>2</mn></mfrac></mrow></math></div></div><p>For example, 98% sensitivity and 90% specificity produce balanced accuracy (0.98 + 0.90)/2 = 0.94, or 94%. Balanced accuracy prevents an imbalanced test set from rewarding majority-category predictions too heavily.</p></div>
+<p>The metric helps us compare two kinds of correct answer. It does not make the test population representative of the hard decisions we eventually care about. In particular, a test with few examples near its decision boundary cannot establish precision at that boundary.</p>
+</section>
+<section class="ulh-chapter-section" id="boundary-test">
+<p class="ulh-kicker">03 / Deliberately difficult conditions</p><h2 class="ulh-serif">What happens when we deliberately place worlds near 75%?</h2>
+<p>In Lesson 15, Q₁ asks whether viable mass reaches θ = 0.75. A viable mass of 0.90 passes easily and 0.40 fails easily. But 0.749 and 0.751 lie on opposite sides despite differing by just 0.002—two-tenths of one percentage point.</p>
+<p>Paper V constructs <strong>81 synthetic worlds</strong>: 72 designed around specified capacity targets and nine present-realization controls. Among the 72 capacity-targeted worlds, 67 end up within 0.10 of the threshold and 23 within 0.02. This is a more demanding designed population.</p>
+<div class="ulh-accuracy-comparison" role="group" aria-label="Reported balanced classification accuracies: broad-range 99.22 percent, near-boundary Q1 56.30 percent, near-boundary Q2 55.49 percent">
+<div><span>Broad-range · correct model</span><strong>99.22%</strong><div class="ulh-accuracy-comparison__track"><i style="width:99.22%"></i></div><p>324 worlds · broad-range</p></div>
+<div><span>Near boundary · Q₁</span><strong>56.30%</strong><div class="ulh-accuracy-comparison__track"><i style="width:56.30%"></i></div><p>31 certified, presently realizing cases</p></div>
+<div><span>Near boundary · Q₂</span><strong>55.49%</strong><div class="ulh-accuracy-comparison__track"><i style="width:55.49%"></i></div><p>46 certified, presently realizing cases</p></div></div>
+<p class="ulh-small">Source: Paper V, Section 6.6. The Q₁ and Q₂ near-boundary subsets differ from one another and from the 324-world broad-range experiment. The figures compare performance across different designed test populations, not repeated measurements on one identical sample.</p>
+<p>These results can all be correct simultaneously. Broad-range accuracy can be excellent while near-threshold classification is unreliable in the chosen experimental conditions. The reported approximately 56% values do not establish a universal accuracy for real-world health measurement.</p>
+</section>
+<section class="ulh-chapter-section" id="decision">
+<p class="ulh-kicker">04 / Where a tiny error becomes a different answer</p><h2 class="ulh-serif">A small probability error can flip a Boolean Health judgment.</h2>
+<div class="ulh-math-panel"><p class="ulh-kicker">Q₁ at the declared threshold</p><h3>At 75%, the decision changes sides.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Q one true if viable mass is at least seventy five percent, false if below that threshold"><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>(</mo><msub><mi>m</mi><mi>V</mi></msub><mo>)</mo><mo>=</mo><mrow><mo>{</mo><mtable columnalign="left left" rowspacing=".5em"><mtr><mtd><mtext>True</mtext></mtd><mtd><mrow><msub><mi>m</mi><mi>V</mi></msub><mo>≥</mo><mn>0.75</mn></mrow></mtd></mtr><mtr><mtd><mtext>False</mtext></mtd><mtd><mrow><msub><mi>m</mi><mi>V</mi></msub><mo>&lt;</mo><mn>0.75</mn></mrow></mtd></mtr></mtable></mrow></mrow></math></div></div>
+<p>The equality belongs to the passing side. Thus 0.749 fails and 0.751 passes, even though the two probabilities are close.</p></div>
+<p>Suppose the underlying probability in a specified model is 0.751 while the estimator reports 0.748. The numerical error is only −0.003, or −0.3 percentage points. Nonetheless, the estimated decision is false while the reference decision is true.</p>
+</section>
+</article></div></section>
+
+<section class="ulh-boundary-lab" id="explore-boundary" aria-labelledby="boundary-lab-title"><div class="ulh-container">
+<p class="ulh-kicker">An interactive decision-boundary experiment</p><h2 class="ulh-serif" id="boundary-lab-title">Move a probability through the 75% line.</h2>
+<p>We hold the adequacy threshold fixed and vary an illustrative <em>estimated</em> viable mass. Watch how the classification changes at 75%, and how small the signed margin can be.</p>
+<div class="ulh-boundary-lab__panel" data-ulh16-boundary>
+<div class="ulh-boundary-lab__header"><label for="ulh16-estimate">Estimated viable mass</label><strong data-ulh16-value>74.8%</strong></div>
+<input id="ulh16-estimate" type="range" min="70" max="80" step="0.1" value="74.8" aria-describedby="ulh16-lab-caption">
+<div class="ulh-boundary-lab__axis" aria-hidden="true"><span>70%</span><span>75% decision line</span><span>80%</span></div>
+<div class="ulh-boundary-lab__track" aria-hidden="true"><div class="ulh-boundary-lab__threshold"></div><div class="ulh-boundary-lab__marker" data-ulh16-marker style="left:48%"></div></div>
+<div class="ulh-boundary-lab__results"><div><span>Signed margin</span><strong data-ulh16-margin>−0.2 percentage points</strong></div><div><span>Estimated adequacy</span><strong data-ulh16-adequacy data-result="fail">False · below threshold</strong></div></div>
+<p class="ulh-boundary-lab__note" id="ulh16-lab-caption">This interactive example is a deterministic threshold illustration. It does not calculate an empirical forest estimate or a confidence interval. The threshold remains 75%.</p>
+</div></div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Numerical uncertainty and the oracle experiment"><strong>Why estimates disagree</strong><nav aria-label="Further sections"><a href="#finite-bank">Finite sample uncertainty</a><a href="#oracle">Oracle conditions</a><a href="#reconstruction">The selected extreme</a><a href="#misspecification">Omitted mortality</a><a href="#three-errors">What can be improved</a><a href="#takeaway">Lesson 17</a></nav><small>Paper V<br>Calibration · diagnosis</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="finite-bank">
+<p class="ulh-kicker">05 / Uncertainty from sampling futures</p><h2 class="ulh-serif">With 64 simulated histories, one different outcome can reverse the decision.</h2>
+<p>In a conditional bank with 48 viable histories, the finite-bank estimate is exactly 48/64 = 0.75. But 47 successful futures out of 64 is below 75%, while 49 is above it.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Three neighboring finite banks</p><h3>Each history represents 1/64 of the bank.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="For sixty four simulated histories forty seven viable yields zero point seven three four four, forty eight yields zero point seven five, and forty nine yields zero point seven six five six"><mtable columnalign="left" rowspacing=".5em"><mtr><mtd><mrow><mfrac><mn>47</mn><mn>64</mn></mfrac><mo>≈</mo><mn>0.7344</mn></mrow></mtd></mtr><mtr><mtd><mrow><mfrac><mn>48</mn><mn>64</mn></mfrac><mo>=</mo><mn>0.7500</mn></mrow></mtd></mtr><mtr><mtd><mrow><mfrac><mn>49</mn><mn>64</mn></mfrac><mo>≈</mo><mn>0.7656</mn></mrow></mtd></mtr></mtable></math></div></div><p>A single history changes the estimated viable mass by 1/64, about 1.56 percentage points. That change can reverse a threshold classification.</p></div>
+<p>There are two questions here. We can evaluate the finite-bank rule exactly for the histories actually sampled. Estimating the probability of the underlying stochastic generator needs a separate uncertainty analysis. Paper V uses Wilson intervals for binomial proportions to flag cases where the generator-level threshold remains unresolved at the available numerical resolution.</p>
+<p>More simulated futures can reduce Monte Carlo uncertainty. They do not demonstrate that the mortality, growth, or entry laws actually describe biological dynamics.</p>
+</section>
+<section class="ulh-chapter-section" id="oracle">
+<p class="ulh-kicker">06 / Where is classification information being lost?</p><h2 class="ulh-serif">A four-way oracle audit separates two information sources.</h2>
+<p>Because the synthetic worlds have known generating states and parameters, I can supply the estimator with one or both instead of requiring it to infer them. “True” here means known from a synthetic generating world, not independently measured in the real forest.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh16-oracle-table"><caption>Paper V, Section 5.7, Eq. (101) · four oracle conditions</caption><thead><tr><th scope="col">Condition</th><th scope="col">Starting state</th><th scope="col">Future-model parameters</th></tr></thead><tbody>
+<tr><th scope="row">E00</th><td>Estimated</td><td>Estimated</td></tr>
+<tr><th scope="row">E10</th><td>True</td><td>Estimated</td></tr>
+<tr><th scope="row">E01</th><td>Estimated</td><td>True</td></tr>
+<tr><th scope="row">E11</th><td>True</td><td>True</td></tr></tbody></table></div>
+<p>Now compare the balanced accuracies measured in those conditions on the near-boundary certified cases.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh16-oracle-table"><caption>Paper V, Table 11 (printed page 36) · near-boundary balanced accuracy</caption><thead><tr><th scope="col">Information supplied</th><th scope="col">Q₁</th><th scope="col">Q₂</th></tr></thead><tbody>
+<tr><th scope="row">E00 · Estimated state and parameters</th><td>56.30%</td><td>55.49%</td></tr>
+<tr><th scope="row">E10 · True state, estimated parameters</th><td>65.13%</td><td>58.90%</td></tr>
+<tr><th scope="row">E01 · Estimated state, true parameters</th><td>51.47%</td><td>52.84%</td></tr>
+<tr><th scope="row">E11 · True state and parameters</th><td>100.00%</td><td>100.00%</td></tr></tbody></table></div>
+<p>The true starting state helps in this particular experiment when model parameters remain estimated. Providing true parameters <em>without</em> the true state performs worse here than the ordinary estimated/estimated procedure. This is an interaction inside a particular approximate inference pipeline, not a general principle that more reliable information has negative value.</p>
+<p>With both generating inputs supplied, the correctly specified synthetic classifier reaches 100% balanced accuracy on its certified test cases. That verifies agreement within the experiment's model family. It provides no independent validation of real-world forest forecasts.</p>
+</section>
+<section class="ulh-chapter-section" id="reconstruction">
+<p class="ulh-kicker">07 / A deliberately selected reconstruction extreme</p><h2 class="ulh-serif">Similar starting summaries can generate dramatically different continuation estimates.</h2>
+<p>Paper V compares two approaches to the unequal dates of individual stem measurements. One uses pooled observation times; another respects individual exposure times. In a selected one-year comparison, the starting-state summaries are close—but the separately sampled future banks disagree strongly.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh16-reconstruction-table"><caption>Paper V, Table 6 (printed page 32) · selected local extreme</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Pooled-time reconstruction</th><th scope="col">Individual-time reconstruction</th></tr></thead><tbody>
+<tr><th scope="row">Living stems</th><td>90,431</td><td>90,690</td></tr>
+<tr><th scope="row">Juvenile-support proxy</th><td>66,600</td><td>66,900</td></tr>
+<tr><th scope="row">Viable futures out of 4,096</th><td>43</td><td>3,959</td></tr>
+<tr><th scope="row">Estimated viable mass</th><td>1.05%</td><td>96.66%</td></tr></tbody></table></div>
+<div class="ulh16-extreme-contrast" role="group" aria-label="Selected pooled-time bank has 1.05 percent viable mass, selected individual-time bank has 96.66 percent">
+<div><span>Pooled-time conditional bank</span><strong>1.05%</strong><div class="ulh16-extreme-contrast__track"><i style="width:1.05%"></i></div><small>43 / 4,096 viable histories</small></div>
+<div><span>Individual-time conditional bank</span><strong>96.66%</strong><div class="ulh16-extreme-contrast__track"><i style="width:96.66%"></i></div><small>3,959 / 4,096 viable histories</small></div></div>
+<p>This specific comparison requires juvenile support at one year to reach 80% of the census reference J₀ = 82,077:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The binding continuation requirement in the selected test</p><h3>Terminal juvenile support must clear the declared minimum.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Terminal juvenile support must be at least eighty percent of the reference juvenile support of eighty two thousand seventy seven; required threshold sixty five thousand six hundred sixty one point six"><mtable columnalign="left" rowspacing=".5em"><mtr><mtd><mrow><msub><mi>J</mi><mn>1</mn></msub><mo>≥</mo><mn>0.8</mn><msub><mi>J</mi><mn>0</mn></msub></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>J</mi><mn>0</mn></msub><mo>=</mo><mn>82077</mn></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>J</mi><mn>1</mn></msub><mo>≥</mo><mn>65661.6</mn></mrow></mtd></mtr></mtable></math></div></div><p>Both reconstructed starting counts lie above this nominal level. Their modeled paths can nevertheless move below it before the one-year evaluation.</p></div>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh16-reconstruction-table"><caption>Path-by-path failure audit for the two selected banks</caption><thead><tr><th scope="col">Path outcome</th><th scope="col">Pooled-time</th><th scope="col">Individual-time</th></tr></thead><tbody>
+<tr><th scope="row">Model-lawfulness failure</th><td>0</td><td>0</td></tr><tr><th scope="row">Juvenile-support failure only</th><td>4,053</td><td>137</td></tr><tr><th scope="row">Basal-area failure</th><td>0</td><td>0</td></tr><tr><th scope="row">Viable continuation</th><td>43</td><td>3,959</td></tr></tbody></table></div>
+<p>The audit localizes every failed trajectory in these banks to the terminal juvenile-support condition. But the two response banks were separately generated from different reconstructions. We cannot attribute the entire difference to 300 juvenile-proxy stems alone. Nor do these numbers measure an observed jump in the real forest's survival probability. They reveal an extreme sensitivity of this stipulated computational specification in a selected case.</p>
+</section>
+<section class="ulh-chapter-section" id="misspecification">
+<p class="ulh-kicker">08 / When an important process is missing</p><h2 class="ulh-serif">Simulating a misspecified model more precisely does not make it biologically right.</h2>
+<p>The next experiment keeps the comparison within synthetic worlds but deliberately changes the truth-generating process. It includes an extra annual hemlock mortality hazard of <strong>0.12</strong> that the estimator omits.</p>
+<div class="ulh16-misspec" role="group" aria-label="Broad-range false-positive health judgments increase from four under the correct model to thirty four when a hemlock hazard is omitted">
+<div><span>Correct-model broad-range test</span><strong>4</strong><small>False-positive Health judgments</small></div><div><span>Omitted hemlock hazard</span><strong>34</strong><small>False-positive Health judgments</small></div></div>
+<div class="ulh16-error-pair"><div><span>Viable-mass mean absolute error</span><strong>0.01259</strong><small>Correct-model experiment</small></div><div><span>Viable-mass mean absolute error</span><strong>0.10705</strong><small>Omitted-hazard experiment</small></div></div>
+<p>These are broad-range synthetic comparisons across 324 worlds (Paper V, Section 6.6). The estimator may assign excessive probability to continued organization because its future law excludes a mortality mechanism present in the generating law.</p>
+<p>More future draws can reduce sampling noise around that estimator's answer. They cannot supply the omitted biological mechanism. This is a problem of <strong>model misspecification</strong>, which requires model evaluation and independent evidence rather than simply more Monte Carlo draws.</p>
+</section>
+<section class="ulh-chapter-section" id="three-errors">
+<p class="ulh-kicker">09 / Three problems with different remedies</p><h2 class="ulh-serif">To improve a measurement, I first need to know what kind of error I'm confronting.</h2>
+<div class="ulh16-error-types">
+<div><span>01 · State uncertainty</span><strong>The current system is incompletely known.</strong><p>Better direct observations, identification, and calibrated reconstruction may improve the state estimate.</p></div>
+<div><span>02 · Monte Carlo uncertainty</span><strong>The generator's probability is estimated from a finite future bank.</strong><p>More simulated histories and appropriate uncertainty intervals can improve numerical resolution.</p></div>
+<div><span>03 · Model misspecification</span><strong>The assumed dynamics omit or misstate generating processes.</strong><p>Model revision, independent testing, and additional biological evidence are needed.</p></div></div>
+<p>These problems can coexist. The oracle experiment shows state and parameter errors interacting; the near-boundary experiments show classification changing under tiny mass errors; the misspecified hazard experiment shows a source of error that cannot be fixed by counting more histories.</p>
+<p><strong>Specification execution and empirical measurement are separate achievements.</strong> Paper V demonstrates how to execute declared Health calculations and audit their limitations. It does not assert that those conditional classifications establish the actual ecological Health of Harvard Forest.</p>
+</section>
+</article></div></section>
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container">
+<p class="ulh-kicker">What I want you to carry forward</p>
+<h2 class="ulh-serif">Accuracy far from the threshold does not certify decisions made on the threshold.</h2>
+<p>Knowing a formal Health requirement tells us exactly which comparison to make. Empirically, we also need state reconstruction accurate enough for the question, a sufficiently resolved future probability, and a dynamics model supported by the real system. Near sharp requirements, apparently modest errors can reverse the final classification.</p>
+<p>Lesson 17 leaves the synthetic experiment and asks how the fitted mortality model fares against independent observations. In the adult-hemlock comparison, the model expects approximately 280 deaths but later records report 685 secure deaths. We'll examine that predictive failure, its uncertainty calculation, and the precise limits of what it establishes.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-15.html" class="ulh-button">← Previous: Lesson 15</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-prospective-health-declared-specifications.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper V (PDF)</a></div></div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Prospective Health under Declared Specifications</em>, Paper V in <em>Health, Formally Defined</em> (2026), Sections 5.4–5.7 and 6.4–6.7, especially Tables 6 and 11, Equation (101), and the broad-range and near-boundary experiments. <a href="research-prospective-health-declared-specifications.html">Full publication record</a> · <a href="https://doi.org/10.5281/zenodo.23268987" target="_blank" rel="noopener">Zenodo DOI</a>. Synthetic experiments, selected extreme examples, and conditional future simulations do not constitute validated ecological diagnoses.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="understanding-health-14.html">Lesson 14</a></li><li><a href="understanding-health-15.html">Lesson 15</a></li><li><a href="understanding-health-16.html">Lesson 16</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+<script src="assets/js/understanding-health-16.js?v=1" defer></script>
+</body></html>
