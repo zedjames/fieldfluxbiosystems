@@ -14,6 +14,8 @@ on:
       - "assets/css/understanding-health-06.css"
       - "assets/css/understanding-health-07.css"
       - "assets/css/understanding-health-08.css"
+      - "assets/css/understanding-health-09.css"
+      - "assets/js/understanding-health-09.js"
       - "assets/js/understanding-health-08.js"
       - "research/preprint-pdfs.json"
       - "research-representation-sufficiency-prospective-health.pdf"
@@ -94,6 +96,7 @@ jobs:
           node --check assets/js/understanding-health-06.js
           node --check assets/js/understanding-health-07.js
           node --check assets/js/understanding-health-08.js
+          node --check assets/js/understanding-health-09.js
 
       - name: Validate responsive learning layout and example in Chrome
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
