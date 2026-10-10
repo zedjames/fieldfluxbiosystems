@@ -80,4 +80,48 @@
 <p>For me, the two theorems reveal a helpful asymmetry. Giving the source additional distinguishing information cannot remove exact determinacy already established. Asking for a more detailed target adds distinctions that the source must uniquely determine.</p>
 </section>
 </article></div></section>
-<!-- LESSON9_PART_TWO -->
+<section class="ulh-transport-tradeoff" aria-labelledby="tradeoff-heading"><div class="ulh-container">
+<p class="ulh-kicker">Two sides of the same transport problem</p>
+<h2 class="ulh-serif" id="tradeoff-heading">Where does the additional detail enter?</h2>
+<p class="ulh-transport-tradeoff__intro">I find it helpful to keep these roles separate. On the source side, extra distinctions can resolve cases that looked identical. On the target side, extra distinctions must be determined.</p>
+<div class="ulh-transport-tradeoff__grid">
+<div><span>01 / What the source knows</span><h3>More detail can help.</h3><p>Refining a source may distinguish previously merged states. Any target already determinable from its coarser description remains determinable.</p><strong>S₁ ⪰ S₀</strong><small>Source refinement preserves exact determinacy</small></div>
+<div><span>02 / What the target demands</span><h3>More detail makes the task stronger.</h3><p>Refining a target asks us to determine distinctions that a coarser answer may not need. Coarsening an exactly determined target keeps it determinate.</p><strong>T₁ ⪰ T₀</strong><small>Target coarsening preserves exact determinacy</small></div>
+</div></div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Continue this lesson"><strong>The central result</strong><nav aria-label="Second half of the lesson">
+<a href="#theorem">Least sufficient target</a><a href="#proof">Why the theorem is true</a><a href="#witness">The forest witness</a><a href="#measurement">Meaning for measurement</a><a href="#takeaway">Carry it forward</a>
+</nav><small>Lesson 09<br>What the question really needs</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="theorem">
+<p class="ulh-kicker">04 / The least demanding adequate answer</p>
+<h2 class="ulh-serif">What is the coarsest future description that still answers our questions?</h2>
+<p>In Lesson 8 I introduced the canonical query-visible quotient q<sub>A</sub>. It groups target states according to their answers to every question in a declared family A. It is the coarsest representation that preserves exactly those answer distinctions.</p>
+<p>Now I ask whether a representation can satisfy two conditions at once: it must be sufficient for our target questions, and it must be exactly determined from the available source information along the declared relation.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Theorem 7.1 · Minimal sufficient target transport</p><h3>The quotient sets the exact transport boundary.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Determinate of R S and q sub A if and only if the collection of sufficient determinate target representations for R S A is nonempty">
+<mrow><mi mathvariant="normal">Determinate</mi><mo>(</mo><mi>R</mi><mo>,</mo><mi>S</mi><mo>,</mo><msub><mi>q</mi><mi>A</mi></msub><mo>)</mo><mo>⇔</mo><msub><mi mathvariant="normal">SuffDet</mi><mrow><mi>R</mi><mo>,</mo><mi>S</mi><mo>,</mo><mi>A</mi></mrow></msub><mo>≠</mo><mi>∅</mi></mrow>
+</math></div></div>
+<p>Paper III, Theorem 7.1. This is an exact statement about the declared relation, source representation, target question family, and bundled target representations—not about estimated biological prediction accuracy.</p></div>
+<p>The left-hand side asks whether our source can determine the target's query-visible class. The right-hand side asks whether <em>any</em> target representation exists that is both sufficient for every declared question and exactly determinate from the source. “Not equal to ∅” simply means that at least one such representation exists.</p>
+<dl class="ulh-term-list">
+<div><dt>R</dt><dd>The declared relationship between source and target states.</dd></div>
+<div><dt>S</dt><dd>The information representation available at the source. Here S denotes an encoding, not the stable-response symbol used in the earlier forest model.</dd></div>
+<div><dt>A</dt><dd>The family of target questions whose answers we want to preserve.</dd></div>
+<div><dt>q<sub>A</sub></dt><dd>The canonical quotient that groups target states by all their declared query answers.</dd></div>
+<div><dt>Determinate</dt><dd>The same source representation always determines the same requested target value on all related pairs.</dd></div>
+<div><dt>SuffDet</dt><dd>The collection of target representations that are both sufficient for A and determinate from the fixed source through R.</dd></div>
+</dl>
+<p>Here is the central meaning: <strong>there exists an exactly determinable representation sufficient for all our target questions if and only if the canonical query-visible quotient is itself exactly determinable.</strong></p>
+<p>If even that coarsest sufficient answer cannot be determined, adding target detail cannot solve the exact problem. If it can be determined, we already have a sufficient, determinate target: the quotient itself.</p>
+</section>
+<section class="ulh-chapter-section" id="proof">
+<p class="ulh-kicker">05 / Why the conclusion follows</p>
+<h2 class="ulh-serif">The proof follows the ideas we've already learned.</h2>
+<p>I'll walk through both directions. First, suppose our source exactly determines q<sub>A</sub>. By definition, q<sub>A</sub> retains every distinction that the declared questions can see. It is therefore a sufficient target representation. So we have at least one target that is both sufficient and determinate.</p>
+<p>Now suppose instead that some other target representation T is both sufficient and determinate. From the principal theorem in Lesson 8, its sufficiency means T refines q<sub>A</sub>: it preserves every query-visible distinction and perhaps additional ones.</p>
+<p>From today's target-coarsening theorem, determining T also determines its coarser quotient q<sub>A</sub>. So the existence of any sufficient, determinate target forces the quotient itself to be determinate.</p>
+<p>Those two steps close the argument. Representation sufficiency and target coarsening work together to identify a precise information boundary, rather than a complicated numerical prediction rule.</p>
+</section>
+</article></div></section>
+<!-- LESSON9_PART_THREE -->
