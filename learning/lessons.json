@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 11,
+  "publishedCount": 12,
   "lessons": [
     {
       "id": "01",
@@ -155,7 +155,21 @@
       "sourceSections": "Paper III Sections 11 and 12.1, 12.4: controlled responses and policy-robust recovery, route-summary representation, challenge profiles and failure-aware robust persistence",
       "status": "published",
       "summary": "Separates recovery possibility, controlled recovery, multiple routes, policy-level robustness and failure-aware robustness over a declared challenge family.",
-      "previous": "understanding-health-10.html"
+      "previous": "understanding-health-10.html",
+      "next": "understanding-health-12.html"
+    },
+    {
+      "id": "12",
+      "number": 12,
+      "title": "How information gets lost—and why it matters for health",
+      "slug": "understanding-health-12.html",
+      "sourcePaper": "Information Provenance and Conservative Enrichment in Prospective Health",
+      "sourceDoi": "10.5281/zenodo.23268802",
+      "sourcePdf": "research-information-provenance-conservative-enrichment-prospective-health.pdf",
+      "sourceSections": "Paper IV Sections 3–8 and Theorems 7.1–7.2: complete five-state forest, candidate lawfulness filtering, detailed and simplified capacities, full Health-profile quotient and lost-versus-ignored distinctions",
+      "status": "published",
+      "summary": "The exact five-to-four-to-three class hierarchy records where different forest distinctions disappear: recovered/adapted at response projection versus baseline/recovered in the declared Health answer language.",
+      "previous": "understanding-health-11.html"
     }
   ]
 }
