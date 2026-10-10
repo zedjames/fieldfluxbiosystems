@@ -161,3 +161,19 @@
  .ulh-page .ulh-button,.ulh-page .ulh-lesson-card{transition:none}
  .ulh-page .ulh-button:hover,.ulh-page .ulh-lesson-card:hover{transform:none}
 }
+
+/* Sitewide invitation to the reading room. Kept separate from the article theme. */
+.ulh-home-teaser{padding:clamp(60px,8vw,108px) 0;background:#e2e9e2;border-block:1px solid rgba(33,65,68,.18);color:#203c47}
+.ulh-home-teaser__wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.8fr);gap:clamp(28px,6vw,85px);align-items:center}
+.ulh-home-teaser .ulh-home-teaser__kicker{display:block;font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;font-weight:650;color:#8a6b45;margin:0 0 14px}
+.ulh-home-teaser h2{font-family:var(--serif,Georgia,serif);font-size:clamp(2.3rem,4.8vw,4.55rem);line-height:1.08;letter-spacing:-.04em;color:#163d49;max-width:17ch;margin:0 0 21px}
+.ulh-home-teaser__copy{color:#465d63;font-size:clamp(1rem,1.35vw,1.18rem);line-height:1.8;max-width:66ch}
+.ulh-home-teaser__copy p{margin-bottom:22px}
+.ulh-home-teaser__button{display:inline-flex;align-items:center;gap:19px;background:#173d4a;color:#fff;padding:15px 23px;font-size:.94rem;font-weight:600;text-decoration:none}
+.ulh-home-teaser__button:hover{color:#fff;background:#2b5965}
+.ulh-home-teaser__paper{background:#f8f4e9;border:1px solid #bacac1;box-shadow:13px 13px 0 rgba(36,74,68,.08);padding:clamp(27px,4vw,48px)}
+.ulh-home-teaser__paper small{display:block;text-transform:uppercase;letter-spacing:.15em;color:#997c58;font-size:.72rem}
+.ulh-home-teaser__paper strong{font-family:var(--serif,Georgia,serif);display:block;color:#204450;font-weight:400;font-size:clamp(1.8rem,2.5vw,2.65rem);letter-spacing:-.035em;line-height:1.23;margin:27px 0 20px}
+.ulh-home-teaser__paper p{font-size:.96rem;color:#5d716e;line-height:1.68}
+.ulh-home-teaser__paper span{border-top:1px solid #c5d2ca;padding-top:20px;margin-top:25px;display:block;font-size:.81rem;color:#8c6d42}
+@media(max-width:850px){.ulh-home-teaser__wrap{grid-template-columns:1fr}.ulh-home-teaser__paper{max-width:630px}}
