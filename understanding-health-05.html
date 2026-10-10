@@ -62,4 +62,45 @@
 <div><dt><i>L</i><sub>c</sub></dt><dd>The collection of all requirements licensed there.</dd></div></dl>
 <p>Declaring licensing mathematically does not establish which real biological requirements deserve that status. Their scientific justification remains a separate task.</p>
 </section>
-<!-- LESSON5_SECOND_HALF -->
+<section class="ulh-chapter-section" id="stages">
+<p class="ulh-kicker">03 / A deliberately small developmental model</p>
+<h2 class="ulh-serif">Three stage labels, two requirements.</h2>
+<p>Paper II constructs a simplified sequence of three formal stages: Newborn, Adult, and Elderly. These are stage labels in a mathematical example, rather than empirically established rules for human development.</p>
+<div class="ulh-stage-sequence" role="img" aria-label="Formal sequence Newborn N, Adult A, Elderly E"><div><span>N</span><strong>Newborn</strong></div><i aria-hidden="true">→</i><div><span>A</span><strong>Adult</strong></div><i aria-hidden="true">→</i><div><span>E</span><strong>Elderly</strong></div></div>
+<p>I then declare two possible questions: <em>r<sub>any</sub></em> asks if any viable response is available, and <em>r<sub>stable</sub></em> asks whether a stable viable response is available.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The example's licensing rules</p><h3>Different stages, different questions</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Newborn licenses r any, Adult and Elderly license r any and r stable"><mtable columnalign="left" rowspacing="1.0em"><mtr><mtd><mrow><msub><mi>L</mi><mi>N</mi></msub><mo>=</mo><mo>{</mo><msub><mi>r</mi><mtext>any</mtext></msub><mo>}</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>L</mi><mi>A</mi></msub><mo>=</mo><msub><mi>L</mi><mi>E</mi></msub><mo>=</mo><mo>{</mo><msub><mi>r</mi><mtext>any</mtext></msub><mo>,</mo><msub><mi>r</mi><mtext>stable</mtext></msub><mo>}</mo></mrow></mtd></mtr></mtable></math></div></div>
+<p>At Newborn, only the any-response question is licensed. At Adult and Elderly, both questions are licensed. This is how the finite mathematical example is specified, not a prescription for evaluating real developmental stages.</p></div>
+<p>Under those declarations, even an unchanged capacity may be compared more finely in one stage than another.</p>
+</section>
+<section class="ulh-chapter-section" id="comparison">
+<p class="ulh-kicker">04 / Same capacities, different licensed questions</p>
+<h2 class="ulh-serif">Let's hold the capacity fixed as we change stages.</h2>
+<p>Our formal states are P, the perturbed state, and R, the recovered state. Under mild conditions at a short horizon, their capacities are:</p>
+<div class="ulh-stage-capacities"><div><span>P · Perturbed</span><strong>{exposed}</strong><small>No stable response available</small></div><div><span>R · Recovered</span><strong>{stable}</strong><small>Stable response available</small></div></div>
+<p>Their adequacy answers follow immediately:</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>Adequacy results for the two possible questions</caption><thead><tr><th scope="col">Requirement</th><th scope="col">P · {exposed}</th><th scope="col">R · {stable}</th></tr></thead><tbody>
+<tr><th scope="row">Any viable response available?</th><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Stable response available?</th><td class="ulh-no">No</td><td class="ulh-yes">Yes</td></tr>
+</tbody></table></div>
+<p>At the Newborn stage, the first question is the only one licensed. Both capacities pass, so they belong to the same equivalence class for that stage's declared questions.</p>
+<p>At Adult, a stable response is required as an additional question. Now P and R give different answers. Their capacities were different all along; the new requirement makes that difference <em>visible</em> to the licensed question language.</p>
+<p>This is what the finite example calls a <em>stage-only class split</em>. Nothing about the two capacity sets needed to change for their licensed adequacy classes to separate.</p>
+</section>
+</article></div></section>
+<section class="ulh-stage-explorer" aria-labelledby="stage-explorer-heading"><div class="ulh-container">
+<p class="ulh-kicker">Explore the context change</p><h2 class="ulh-serif" id="stage-explorer-heading">The capacities stay fixed. The questions change.</h2>
+<p class="ulh-stage-explorer__intro">Compare the two formal stages. Both results are readable without interaction; the buttons simply let you focus on one stage at a time.</p>
+<fieldset class="ulh-stage-explorer__controls"><legend>Focus on a stage</legend><div class="ulh-switch__buttons"><button type="button" data-ulh-stage-choice="newborn" aria-pressed="true">Newborn · N</button><button type="button" data-ulh-stage-choice="adult" aria-pressed="false">Adult · A</button></div></fieldset>
+<div class="ulh-stage-explorer__views">
+<div class="ulh-stage-explorer__view" data-ulh-stage-view="newborn"><span class="ulh-stage-explorer__view-tag">Newborn context · Only r<sub>any</sub> licensed</span><div class="ulh-stage-explorer__result-grid">
+<div><strong>P · {exposed}</strong><span class="ulh-result" data-state="pass">Passes licensed query</span><small>Any viable response exists.</small></div>
+<div><strong>R · {stable}</strong><span class="ulh-result" data-state="pass">Passes licensed query</span><small>Any viable response exists.</small></div></div><p>The capacities cannot be distinguished by the requirements licensed here.</p></div>
+<div class="ulh-stage-explorer__view" data-ulh-stage-view="adult"><span class="ulh-stage-explorer__view-tag">Adult context · r<sub>any</sub> and r<sub>stable</sub> licensed</span><div class="ulh-stage-explorer__result-grid">
+<div><strong>P · {exposed}</strong><span class="ulh-result" data-state="fail">Fails stable query</span><small>The exposed response is available; a stable response is not.</small></div>
+<div><strong>R · {stable}</strong><span class="ulh-result" data-state="pass">Passes both queries</span><small>A stable viable response exists.</small></div></div><p>The licensed stable-response question now distinguishes the capacities.</p></div>
+</div>
+<p class="ulh-stage-explorer__summary" data-ulh-stage-summary aria-live="polite">Newborn: P and R agree on every licensed adequacy question. Their capacities remain {exposed} and {stable}.</p>
+<p class="ulh-stage-explorer__footnote">This is a mathematical stage-only class split based on Paper II's finite example. The stage labels do not establish clinical or developmental health standards for actual people.</p>
+</div></section>
+<!-- LESSON5_THIRD_PART -->
+
