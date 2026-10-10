@@ -1,0 +1,50 @@
+name: Verify live Understanding Health Lesson 6
+on:
+  pull_request:
+    paths:
+      - .github/workflows/verify-live-lesson6.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify published site and PDF over valid HTTPS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import ssl,time
+          origin="https://fieldfluxbiosystems.com/"
+          checks={
+            "understanding-health.html":["06 lessons published","understanding-health-06.html","understanding-health-05.html"],
+            "understanding-health-05.html":["understanding-health-06.html","Next: Lesson 6",'rel="next"'],
+            "understanding-health-06.html":["Lesson 06","By Zed James","research-prospective-health-across-contexts.pdf","data-ulh-transport-choice","rel=\"prev\"","data-ulh-transport-view=\"visible\"","stage-only"],
+            "assets/js/understanding-health-06.js":["raw","visible","target"],
+            "assets/css/understanding-health-06.css":["ulh-transport-lab","ulh-stage-obstruction"],
+            "sitemap.xml":["understanding-health-06.html"]
+          }
+          issues=[]
+          for route,required in checks.items():
+            for attempt in range(7):
+              try:
+                with urlopen(Request(origin+route,headers={"User-Agent":"FFB-Lesson6-Smoke/1.0","Cache-Control":"no-cache"}),timeout=20,context=ssl.create_default_context()) as r:
+                  text=r.read().decode("utf-8","replace")
+                  print("PAGE",route,r.status,len(text))
+                missing=[x for x in required if x not in text]
+                if missing:raise ValueError("Missing "+repr(missing))
+                break
+              except Exception as e:
+                if attempt==6:issues.append(route+": "+str(e))
+                else:time.sleep(4)
+          try:
+            with urlopen(origin+"research-prospective-health-across-contexts.pdf",timeout=20,context=ssl.create_default_context()) as r:
+              data=r.read(5)
+            print("PDF magic",data)
+            if data!=b"%PDF-":issues.append("Original source PDF is not a PDF")
+          except Exception as e:issues.append("source PDF: "+str(e))
+          for issue in issues:print("FAIL",issue)
+          if issues:raise SystemExit(1)
+          print("PASS: Lesson 6 and connected learning path are publicly readable over HTTPS")
+          PY
