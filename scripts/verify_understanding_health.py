@@ -254,6 +254,31 @@ def main():
           "Lesson 8 must link to Lesson 9",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-08.html"' in ninth,
           "Lesson 9 must link back to Lesson 8",errors)
+    tenth=(ROOT/"understanding-health-10.html").read_text(encoding="utf8")
+    check(tenth.count("<math ")==5,"Lesson 10 must contain five accessible MathML equations",errors)
+    check("Theorem 10.1" in tenth and "Equation (57)" in tenth,
+          "Lesson 10 must identify the source probability and cost results",errors)
+    check("999" in tenth and "1,000" in tenth and "0.90" in tenth and
+          "stipulated" in tenth, "Lesson 10 must preserve distinct formal and invented probability examples",errors)
+    check("bounded rational" in tenth.lower() and "fixed success predicate" in tenth.lower(),
+          "Lesson 10 must retain the probability theorem hypothesis",errors)
+    check("unavailable-or-attained-minimum" in tenth and
+          "CostCode(true)" in tenth and "CostCode(false)" in tenth,
+          "Lesson 10 must state justified minimum-cost code domain and fixtures",errors)
+    check('id="ulh-budget-range"' in tenth and
+          'data-ulh-budget-status="A"' in tenth and 'data-ulh-budget-status="B"' in tenth,
+          "Lesson 10 interactive budgets and static status labels are missing",errors)
+    check("not a field measurement" not in tenth or
+          "not measured" in tenth.lower() or "not ecological" in tenth.lower() or
+          "not calibrated" in tenth.lower(),
+          "Lesson 10 must distinguish formal and real measurements",errors)
+    check("research-representation-sufficiency-prospective-health.pdf" in tenth and
+          "10.5281/zenodo.23219588" in tenth,"Lesson 10 source PDF and DOI missing",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-10.html"' in
+          (ROOT/"understanding-health-09.html").read_text(encoding="utf8"),
+          "Lesson 9 must link forward to Lesson 10",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-09.html"' in tenth,
+          "Lesson 10 must link back to Lesson 9",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)

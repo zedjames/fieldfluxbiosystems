@@ -1,0 +1,38 @@
+/* Lesson 10 — finite probability and cost, deliberately scoped mathematical illustrations. */
+.ulh-page .ulh-probability-contrast,.ulh-page .ulh-summary-pair,.ulh-page .ulh-budget-explorer__cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:34px 0 24px}
+.ulh-page .ulh-probability-contrast>div{border:1px solid #bacec1;background:#ecf2ea;padding:clamp(24px,3.5vw,42px)}
+.ulh-page .ulh-probability-contrast>div:nth-child(2){background:#f5ede1;border-color:#d2c1a9}
+.ulh-page .ulh-probability-contrast>div>span:first-child{display:block;color:#896d47;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:750}
+.ulh-page .ulh-probability-contrast strong{display:block;font:400 clamp(3.1rem,6vw,6.3rem)/1.05 var(--serif,Georgia,serif);color:#23515a;letter-spacing:-.055em;margin:22px 0}
+.ulh-page .ulh-probability-contrast strong small{font-size:.4em}
+.ulh-page .ulh-probability-bar{height:11px;background:#c6d8cb;border:1px solid #b2cdb9}
+.ulh-page .ulh-probability-contrast>div:nth-child(2) .ulh-probability-bar{background:#e7d9c6;border-color:#d2bca2}
+.ulh-page .ulh-probability-bar span{display:block;height:100%;min-width:2px;background:#487e67}
+.ulh-page .ulh-probability-contrast>div:nth-child(2) .ulh-probability-bar span{background:#ac8558}
+.ulh-page .ulh-probability-contrast p{font-size:.91rem;line-height:1.7;color:#5e706a;margin:20px 0 0}
+.ulh-page .ulh-budget-explorer{background:#e8eee9;border-block:1px solid #c3d4c9;padding:clamp(65px,8vw,108px) 0}
+.ulh-page .ulh-budget-explorer h2{font:400 clamp(2.2rem,4.3vw,4.1rem)/1.13 var(--serif,Georgia,serif);letter-spacing:-.044em;color:#214551;margin:16px 0 24px;max-width:24ch}
+.ulh-page .ulh-budget-explorer__intro{font-size:1.08rem;line-height:1.78;color:#55716a;max-width:75ch}
+.ulh-page .ulh-budget-explorer__control{padding:clamp(22px,3.5vw,42px);margin:31px 0;background:#fffbf3;border:1px solid #bdd0c1}
+.ulh-page .ulh-budget-explorer__control label{display:flex;justify-content:space-between;align-items:baseline;gap:15px;flex-wrap:wrap;font-size:.93rem;font-weight:700;letter-spacing:.02em;color:#27535b}
+.ulh-page .ulh-budget-explorer__control output{font:400 clamp(1.6rem,2.8vw,2.5rem)/1.3 var(--serif,Georgia,serif);color:#24715d}
+.ulh-page .ulh-budget-explorer__control input{display:block;width:100%;max-width:100%;margin:23px 0 4px;accent-color:#1b4f58;cursor:pointer;min-height:30px}
+.ulh-page .ulh-budget-explorer__scale{display:flex;justify-content:space-between;color:#777c69;font-size:.79rem;margin:5px 3px 16px}
+.ulh-page .ulh-budget-explorer__help,.ulh-page .ulh-budget-explorer__note{font-size:.85rem;line-height:1.7;color:#6b7b71;max-width:89ch}
+.ulh-page .ulh-budget-explorer__cases{margin:18px 0 26px}
+.ulh-page .ulh-budget-explorer__cases>div{background:#fffdf7;border:1px solid #c0d0c3;padding:clamp(23px,3.5vw,38px)}
+.ulh-page .ulh-budget-explorer__cases>div:nth-child(2){background:#f6f0e5;border-color:#d4c5ae}
+.ulh-page .ulh-budget-explorer__cases>div>span:first-child{display:block;font-size:.73rem;color:#8c6e4a;letter-spacing:.13em;text-transform:uppercase;font-weight:750}
+.ulh-page .ulh-budget-explorer__cases strong{display:block;color:#23505c;font:400 clamp(2.4rem,4.6vw,4.4rem)/1.2 var(--serif,Georgia,serif);margin:17px 0}
+.ulh-page .ulh-budget-explorer__cases strong small{font-size:.32em}
+.ulh-page .ulh-budget-explorer__line{height:7px;background:#dce3d8;margin-bottom:22px}
+.ulh-page .ulh-budget-explorer__line>span{display:block;background:#76a492;height:100%}
+.ulh-page .ulh-budget-explorer__cases>div:nth-child(2) .ulh-budget-explorer__line>span{background:#b8a07a}
+.ulh-page .ulh-budget-explorer__cases p{font-size:.91rem;line-height:1.7;color:#62776d;min-height:50px;margin:18px 0 0}
+.ulh-page .ulh-budget-explorer__summary{font-size:1.07rem;line-height:1.78;color:#315b60;border-left:2px solid #b39160;padding:8px 0 8px 22px;max-width:78ch;margin:27px 0}
+.ulh-page .ulh-summary-pair>div{background:#edf1e9;border:1px solid #c3d3c6;border-top:3px solid #8bad9a;padding:25px}
+.ulh-page .ulh-summary-pair>div:nth-child(2){background:#f5eee4;border-color:#d4c5b0;border-top-color:#bca070}
+.ulh-page .ulh-summary-pair span{display:block;font-size:.73rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:#8d714a}
+.ulh-page .ulh-summary-pair strong{display:block;color:#244e57;font:400 clamp(1.36rem,2.2vw,1.9rem)/1.27 var(--serif,Georgia,serif);margin:15px 0}
+.ulh-page .ulh-summary-pair p{color:#5c7369;font-size:.9rem;line-height:1.7;margin:0}
+@media(max-width:720px){.ulh-page .ulh-probability-contrast,.ulh-page .ulh-summary-pair,.ulh-page .ulh-budget-explorer__cases{grid-template-columns:1fr}}
