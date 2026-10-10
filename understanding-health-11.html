@@ -114,4 +114,53 @@
 <p>That last possibility makes the difference visible. If all we collect are the successful responses, we can erase a failure that matters to the robustness question.</p>
 </section>
 </article></div></section>
-<!-- LESSON11_THIRD -->
+<section class="ulh-challenge-explorer" aria-labelledby="challenge-explorer-title"><div class="ulh-container">
+<p class="ulh-kicker">See what success-only information hides</p><h2 class="ulh-serif" id="challenge-explorer-title">Two systems. The same successes. Different failure information.</h2>
+<p class="ulh-challenge-explorer__intro">Both systems have an admitted successful response to drought and wind. In this deliberately small example, only System B also has an admitted failing response to wind. Choose which response information to emphasize; both profiles remain visible without JavaScript.</p>
+<fieldset class="ulh-challenge-explorer__controls"><legend>Focus on the recorded information</legend><div class="ulh-switch__buttons">
+<button type="button" data-ulh-challenge-choice="positive" aria-pressed="true">Only successful responses</button>
+<button type="button" data-ulh-challenge-choice="full" aria-pressed="false">Include failures too</button></div></fieldset>
+<div class="ulh-challenge-explorer__grid">
+<div class="ulh-challenge-card" data-ulh-challenge-system="a">
+<span class="ulh-challenge-card__name">System A</span><h3>No admitted failure in either challenge</h3>
+<div class="ulh-challenge-card__row"><span>Drought</span><strong class="ulh-challenge-good">Success</strong></div>
+<div class="ulh-challenge-card__row"><span>Wind</span><strong class="ulh-challenge-good">Success</strong></div>
+<p>Positive profile: {drought, wind}</p><p class="ulh-challenge-negative" data-ulh-negative="a">Negative profile: ∅</p>
+</div>
+<div class="ulh-challenge-card" data-ulh-challenge-system="b">
+<span class="ulh-challenge-card__name">System B</span><h3>A failure is also admitted under wind</h3>
+<div class="ulh-challenge-card__row"><span>Drought</span><strong class="ulh-challenge-good">Success</strong></div>
+<div class="ulh-challenge-card__row"><span>Wind</span><strong class="ulh-challenge-good">Success</strong><strong class="ulh-challenge-bad" data-ulh-failure-indicator>Failure also</strong></div>
+<p>Positive profile: {drought, wind}</p><p class="ulh-challenge-negative" data-ulh-negative="b">Negative profile: {wind}</p>
+</div></div>
+<p class="ulh-challenge-explorer__summary" data-ulh-challenge-summary aria-live="polite">Using only successful responses, Systems A and B have the same positive challenge profile. That information cannot distinguish their failure-aware robustness.</p>
+<p class="ulh-challenge-explorer__note">This illustrates the logical construction of Paper III, Section 12.4. Challenges, successful outcomes and failing outcomes are declared, not empirically measured. The control only changes emphasis, never the underlying mathematical example.</p>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Finish the lesson"><strong>Closing the theory</strong><nav aria-label="Final sections"><a href="#robustness">Robust persistence</a><a href="#distinction">Two notions of robustness</a><a href="#paper3">Papers I–III together</a><a href="#takeaway">Looking to Paper IV</a></nav>
+<small>Lesson 11<br>From responses to justified questions</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="robustness">
+<p class="ulh-kicker">05 / What robust persistence requires</p><h2 class="ulh-serif">The complete response profile makes a stronger judgment possible.</h2>
+<p>For the paper's failure-aware version of robust persistence, I retain the present-health condition and both positive and negative challenge profiles. The resulting representation is</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The full robust-persistence representation · Equation (81)</p><h3>Present health, successes and failures.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="E robust of x equals the tuple PresentHealth x, G plus x, and G minus x">
+<mrow><msub><mi>E</mi><mtext>rob</mtext></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi mathvariant="normal">PresentHealth</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>,</mo><msup><mi>G</mi><mo>+</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>,</mo><msup><mi>G</mi><mo>−</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></math>
+</div></div><p>Each coordinate has a definite purpose: the present condition, challenges admitting success, and challenges admitting failure.</p></div>
+<p>The formal judgment requires present health, at least one successful response to every declared challenge, and no failing response admitted for any of those challenges.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Failure-aware robust persistence · Equations (82)–(83)</p><h3>Success admitted, failure excluded, for every declared challenge.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="RobustPersistence x if and only if PresentHealth x and for every c in D, c belongs to G plus x and does not belong to G minus x">
+<mtable columnalign="left" rowspacing=".65em"><mtr><mtd><mrow><mi mathvariant="normal">RobustPersistence</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>⇔</mo><mi mathvariant="normal">PresentHealth</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>∧</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><mo>∀</mo><mi>c</mi><mo>∈</mo><mi>D</mi><mo>,</mo><mo>(</mo><mi>c</mi><mo>∈</mo><msup><mi>G</mi><mo>+</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>∧</mo><mi>c</mi><mo>∉</mo><msup><mi>G</mi><mo>−</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow></mtd></mtr></mtable></math></div></div><p>The logical quantifier ∀ ranges over the declared challenge family D. Its scope is a specified mathematical question, not every real-world hazard that could exist.</p></div>
+<p>For the two-system illustration, assume PresentHealth holds for both. System A passes this failure-aware challenge condition. System B fails it because wind has an admitted unsuccessful response, even though a successful wind response also exists.</p>
+<p>So the successful-response profile alone is insufficient to determine this robustness question. The richer representation supplies the missing information and is mathematically sufficient for the declared predicate.</p>
+</section>
+<section class="ulh-chapter-section" id="distinction">
+<p class="ulh-kicker">06 / Similar concepts, different quantifiers</p><h2 class="ulh-serif">Robust controlled recovery and robust persistence ask different questions.</h2>
+<p>It's worth keeping these two results separate. Robust endogenous recovery asks whether <em>there exists a policy</em> whose admitted generated responses are nonempty and all meet a chosen outcome condition.</p>
+<p>Failure-aware robust persistence asks whether present health holds and <em>every challenge</em> in a declared family admits successful response while excluding admitted failure.</p>
+<div class="ulh-robust-comparison"><div><span>Controlled policy</span><strong>There exists π such that all admitted responses succeed.</strong><p>Quantification is grouped by a selected policy and its generated responses.</p></div><div><span>Challenge family</span><strong>For every c, success is admitted and failure is excluded.</strong><p>Quantification ranges over the declared challenges and their response histories.</p></div></div>
+<p>Both are stronger than mere success possibility, but they have different carriers, assumptions and quantifier patterns. Neither automatically implies an unrestricted real-world guarantee.</p>
+</section>
+</article></div></section>
+<!-- LESSON11_END -->
