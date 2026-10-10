@@ -1,0 +1,53 @@
+name: Independently verify public Understanding Health Lesson 16
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-16.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify public lesson 16, navigation, assets, source PDF and sitemap
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          import ssl,time
+          base="https://fieldfluxbiosystems.com/"
+          files={
+            "understanding-health.html":["16 lessons published",'href="understanding-health-16.html"',"Why a model can be 99% accurate and still struggle when it matters most"],
+            "understanding-health-15.html":["Continue to Lesson 16","Next: Lesson 16",'rel="next"'],
+            "understanding-health-16.html":["Lesson 16","By Zed James","99.22%","56.30%","55.49%","65.13%","51.47%","data-ulh16-boundary","0.10705","research-prospective-health-declared-specifications.pdf","understanding-health-16.css?v=1","understanding-health-16.js?v=1"],
+            "assets/css/understanding-health-16.css":["ulh-boundary-lab__results","ulh-accuracy-comparison","ulh16-oracle-table"],
+            "assets/js/understanding-health-16.js":["ulh16-estimate","p>=75","data-ulh16-adequacy"],
+            "sitemap.xml":["understanding-health-15.html","understanding-health-16.html"]
+          }
+          issues=[]
+          for path,markers in files.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(base+path,headers={"User-Agent":"FFB-L16-Independent/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=22,context=ssl.create_default_context()) as r:
+                  b=r.read()
+                  code=r.status
+                txt=b.decode("utf-8","replace")
+                print("PRODUCTION",path,code,len(b),flush=True)
+                if code!=200: raise ValueError("HTTP "+str(code))
+                missing=[m for m in markers if m not in txt]
+                if missing: raise ValueError("Missing markers "+repr(missing))
+                break
+              except Exception as exc:
+                if attempt==11: issues.append(path+": "+repr(exc))
+                else: time.sleep(6)
+          try:
+            with urlopen(Request(base+"research-prospective-health-declared-specifications.pdf",headers={"Cache-Control":"no-cache"}),timeout=40,context=ssl.create_default_context()) as r:
+              original=r.read()
+            print("PAPER_V_PDF",len(original),original[:5],flush=True)
+            if not original.startswith(b"%PDF-") or len(original)<100000:issues.append("Missing or invalid local Paper V PDF")
+          except Exception as exc:issues.append("Paper V PDF "+repr(exc))
+          for issue in issues:print("FAIL",issue,flush=True)
+          if issues:raise SystemExit(1)
+          print("PASS: Lesson 16 served over HTTPS, index 16, prior link, CSS/JS, sitemap, Paper V PDF",flush=True)
+          PY
