@@ -13,7 +13,14 @@
 .ulh-page .ulh-steps span{color:#9f7949;font:400 1.4rem Georgia,serif;display:block;margin-bottom:9px}
 .ulh-page .ulh-steps strong{color:#23505b;font-size:.92rem;line-height:1.45}
 .ulh-page .ulh-steps p{color:#356264;font:400 1.1rem/1.5 Georgia,serif;margin:13px 0 0}
-.ulh-page .ulh-enrichment-theorem{border-color:#aac6b6;background:#e9f0e7}
+/* Paper IV theorem: pale background needs a deliberate dark foreground.
+   The default equation-panel palette uses near-white copy for deep-blue boxes. */
+.ulh-page .ulh-enrichment-theorem{border-color:#aac6b6;background:#e9f0e7;color:#204851}
+.ulh-page .ulh-enrichment-theorem .ulh-kicker{color:#79572e}
+.ulh-page .ulh-enrichment-theorem h3{color:#204851}
+.ulh-page .ulh-enrichment-theorem .ulh-equation,
+.ulh-page .ulh-enrichment-theorem .ulh-equation math{color:#173e4a}
+.ulh-page .ulh-enrichment-theorem p:not(.ulh-kicker){color:#466269}
 .ulh-page .ulh-proof-lines{border:1px solid #b6cbbd;background:#f4f7ef;margin:30px 0 22px}
 .ulh-page .ulh-proof-lines>div{padding:20px 24px;border-bottom:1px solid #ccd6c9}
 .ulh-page .ulh-proof-lines>div:last-child{border-bottom:0;background:#e5f0e6}
