@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 9: When More Information Makes Prediction Harder | Understanding Health</title>
+<meta name="description" content="Zed James explains why enriching a source preserves exact determinacy while demanding a finer target is harder, and how Paper III identifies the least sufficient target for health-information transport.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-09.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-08.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="Why more information can sometimes make prediction harder — Lesson 9">
+<meta property="og:description" content="What we know at the source and what we demand at the target play very different roles.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-09.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-09.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Why more information can sometimes make prediction harder","url":"https://fieldfluxbiosystems.com/understanding-health-09.html","description":"Paper III Lesson 9: source refinement, target coarsening, and the least sufficient target theorem for exact deterministic transport.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Representation Sufficiency in Prospective Health","identifier":"https://doi.org/10.5281/zenodo.23219588"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title">
+<div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">09</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-08.html">Lesson 08</a><span aria-hidden="true">/</span><span>Lesson 09</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 09 · Determining exactly what we need to know</p>
+<h1 id="lesson-title" class="ulh-serif">Why more information can sometimes make prediction harder.</h1>
+<p class="ulh-lede">We've learned what a health question requires of a representation. Now I want to combine that idea with transport: what we know about a source can help us, while demanding more detail about a target can make exact determination harder.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper III · Sections 6–8</span><span>Following Lesson 08</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-08.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 8</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#forest">Two possible futures</a>
+<a href="#source">More source information</a>
+<a href="#target">Finer target information</a>
+<a href="#theorem">The least sufficient target</a>
+<a href="#proof">Why the theorem holds</a>
+<a href="#witness">Return to our forest</a>
+<a href="#takeaway">Carry it forward</a>
+</nav><small>Lesson 09<br>Health, Formally Defined<br>Paper III</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="forest">
+<p class="ulh-kicker">01 / The problem we'll solve</p>
+<h2 class="ulh-serif">Imagine trying to determine a forest's future capacity.</h2>
+<p class="ulh-lead">Let's return to the stressed forest state P that we met in Paper II. Our declared mathematical relation connects P to two target states: the baseline state B and the recovered state R.</p>
+<p>Those targets have different capacities. B has both a stable and an exposed response, while R has only a stable response. This relation tells us neither that one target is more probable nor which will occur in the real world; it is a finite formal construction designed to reveal what a source representation determines.</p>
+<div class="ulh-transport-flow" role="img" aria-label="One formal source state P is related to two target states B and R">
+<div class="ulh-transport-flow__source"><span>Source</span><strong>P</strong><small>Perturbed state</small></div>
+<div class="ulh-transport-flow__split" aria-hidden="true"><span>↗</span><span>↘</span></div>
+<div class="ulh-transport-flow__targets"><div><span>Target</span><strong>B</strong><small>Capacity {S, E}</small></div><div><span>Target</span><strong>R</strong><small>Capacity {S}</small></div></div>
+</div>
+<p>So I can't assign one exact raw target capacity to that single source representation. Yet both B and R answer our adult-stage health requirements identically: a viable response exists, and a stable response exists.</p>
+<p>For these declared questions, both target capacities fall into the same health-visible equivalence class. The complete future capacity is not determined, while the information the questions require <em>is</em> determined.</p>
+</section>
+<section class="ulh-chapter-section" id="source">
+<p class="ulh-kicker">02 / Add distinctions to what we know</p>
+<h2 class="ulh-serif">A richer source representation cannot destroy an exact answer we already had.</h2>
+<p>Let's call a relatively coarse source description S₀ and a more detailed one S₁. Imagine that S₀ records a forest's tree count, while S₁ records tree count, composition, and juvenile regeneration. S₁ retains every distinction S₀ can make and may make additional ones.</p>
+<p>In our mathematical language, this is the refinement relation S₁ ⪰ S₀. The richer description can recover the coarser one on the values that actually occur.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Theorem 6.1 · Source refinement monotonicity</p><h3>Enriching the source preserves determinacy.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="If S one refines S zero and target T is determinate from S zero along relation R, then T is determinate from S one">
+<mtable columnalign="left" rowspacing=".85em"><mtr><mtd><mrow><msub><mi>S</mi><mn>1</mn></msub><mo>⪰</mo><msub><mi>S</mi><mn>0</mn></msub><mo>∧</mo><mi mathvariant="normal">Determinate</mi><mo>(</mo><mi>R</mi><mo>,</mo><msub><mi>S</mi><mn>0</mn></msub><mo>,</mo><mi>T</mi><mo>)</mo></mrow></mtd></mtr><mtr><mtd><mrow><mo>⟹</mo><mi mathvariant="normal">Determinate</mi><mo>(</mo><mi>R</mi><mo>,</mo><msub><mi>S</mi><mn>1</mn></msub><mo>,</mo><mi>T</mi><mo>)</mo></mrow></mtd></mtr></mtable>
+</math></div></div><p>Paper III, Theorem 6.1. The relation R and the target representation T stay fixed while the source representation is refined.</p></div>
+<p>Why is that true? Whenever two states are indistinguishable to S₁, they must also be indistinguishable to S₀. If S₀ already determines the target, S₁ has retained everything needed for the same conclusion.</p>
+<p>This is an exact logical result about deterministic information. Collecting additional noisy observations in an empirical study introduces separate statistical questions about error and estimation.</p>
+</section>
+<section class="ulh-chapter-section" id="target">
+<p class="ulh-kicker">03 / Ask for finer information at the target</p>
+<h2 class="ulh-serif">More detail in the answer creates a stronger requirement.</h2>
+<p>Now let's hold our source representation S fixed and change what we demand to know about the target. Let T₁ retain more detailed information than T₀. If we can exactly determine T₁, we can determine T₀ as well, because the coarser answer can be recovered from the finer one.</p>
+<p>The reverse is not guaranteed. Knowing that a stable response is available doesn't necessarily tell me whether an exposed response is also available.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Theorem 6.2 · Target coarsening monotonicity</p><h3>Determining a detailed target determines its coarser description.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="If T one refines T zero and T one is determinate from S, then T zero is determinate from S">
+<mtable columnalign="left" rowspacing=".85em"><mtr><mtd><mrow><msub><mi>T</mi><mn>1</mn></msub><mo>⪰</mo><msub><mi>T</mi><mn>0</mn></msub><mo>∧</mo><mi mathvariant="normal">Determinate</mi><mo>(</mo><mi>R</mi><mo>,</mo><mi>S</mi><mo>,</mo><msub><mi>T</mi><mn>1</mn></msub><mo>)</mo></mrow></mtd></mtr><mtr><mtd><mrow><mo>⟹</mo><mi mathvariant="normal">Determinate</mi><mo>(</mo><mi>R</mi><mo>,</mo><mi>S</mi><mo>,</mo><msub><mi>T</mi><mn>0</mn></msub><mo>)</mo></mrow></mtd></mtr></mtable>
+</math></div></div><p>Paper III, Theorem 6.2. The relation and source remain fixed; only the level of detail required at the target changes.</p></div>
+<p>For me, the two theorems reveal a helpful asymmetry. Giving the source additional distinguishing information cannot remove exact determinacy already established. Asking for a more detailed target adds distinctions that the source must uniquely determine.</p>
+</section>
+</article></div></section>
+<!-- LESSON9_PART_TWO -->
