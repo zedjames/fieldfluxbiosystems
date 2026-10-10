@@ -1,0 +1,51 @@
+name: Verify public Understanding Health Lesson 12
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lesson12.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Confirm published HTTPS pages, ladder, navigation and original source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time,hashlib
+          from urllib.request import Request,urlopen
+          base="https://fieldfluxbiosystems.com/"
+          pages={
+           "understanding-health.html":["12 lessons published","understanding-health-12.html"],
+           "understanding-health-11.html":["Next: Lesson 12","understanding-health-12.html",'rel="next"'],
+           "understanding-health-12.html":["Lesson 12","By Zed James","Theorems 7.1–7.2","data-ulh-ladder-group=\"RA\"","data-ulh-ladder-group=\"BRA\"","data-ulh-loss-choice=\"ignored\"","research-information-provenance-conservative-enrichment-prospective-health.pdf",'rel="prev"'],
+           "assets/js/understanding-health-12.js":["data-ulh-loss-choice","retained"],
+           "assets/css/understanding-health-12.css":["ulh-ladder__stages","ulh-loss-explorer"],
+           "sitemap.xml":["understanding-health-12.html"]
+          }
+          problems=[]
+          for path,markers in pages.items():
+           for attempt in range(9):
+            try:
+             with urlopen(Request(base+path,headers={"User-Agent":"FFB-Lesson12-Smoke/1.0","Cache-Control":"no-cache"}),timeout=25,context=ssl.create_default_context()) as response:
+              text=response.read().decode("utf-8","replace")
+              print("PUBLIC",path,response.status,len(text))
+             missing=[phrase for phrase in markers if phrase not in text]
+             if missing:raise ValueError("Missing "+repr(missing))
+             break
+            except Exception as exc:
+             if attempt==8:problems.append(path+": "+str(exc))
+             else:time.sleep(5)
+          try:
+           with urlopen(base+"research-information-provenance-conservative-enrichment-prospective-health.pdf",timeout=40,context=ssl.create_default_context()) as response:
+            pdf=response.read()
+           print("PAPER_IV_PDF",len(pdf),hashlib.sha256(pdf).hexdigest())
+           if not pdf.startswith(b"%PDF-") or len(pdf)<100000:
+            problems.append("Paper IV source PDF unavailable or invalid")
+          except Exception as exc:problems.append("PDF "+str(exc))
+          for issue in problems:print("FAIL",issue)
+          if problems:raise SystemExit(1)
+          print("PASS: Paper IV Lesson 12, reading room navigation and PDF publicly accessible over HTTPS")
+          PY
