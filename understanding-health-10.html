@@ -83,4 +83,39 @@
 <tr><th scope="row">Collapses</th><td>10%</td><td class="ulh-no">No</td></tr></tbody></table></div>
 <p>The total success probability in that imagined model is 0.40 + 0.35 + 0.15 = <strong>0.90</strong>. Collapse is an admitted outcome in the example, but it does not contribute to the successful mass.</p>
 </section>
-<!-- LESSON10_PART2 -->
+<section class="ulh-chapter-section" id="probability-threshold">
+<p class="ulh-kicker">03 / One number that answers many questions</p>
+<h2 class="ulh-serif">When does total success probability contain all the information we need?</h2>
+<p>Suppose every declared question has this form: does the success probability reach some threshold θ? Our response may be complex, with different probabilities spread among several ways of continuing, but the threshold question needs only their combined successful mass.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">A family of probability-threshold questions</p><h3>At least the declared probability θ</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The threshold question A theta of mu is true if and only if theta is less than or equal to success probability">
+<mrow><msub><mi>A</mi><mi>θ</mi></msub><mo>(</mo><mi>μ</mi><mo>)</mo><mo>⇔</mo><mi>θ</mi><mo>≤</mo><msub><mi>p</mi><mtext>succ</mtext></msub><mo>(</mo><mi>μ</mi><mo>,</mo><mi>P</mi><mo>)</mo></mrow></math></div></div>
+<p>For θ = 0.75, the question asks whether the stipulated probability of successful continuation reaches 75%.</p></div>
+<p>Now comes the precise result. Paper III's Theorem 10.1 considers all bounded rational thresholds between zero and one and a fixed success predicate P. Two finite rational response-mass distributions answer all those threshold questions identically if and only if they have the same total success probability.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Theorem 10.1 · Complete bounded-threshold language</p><h3>All threshold answers agree precisely when the success probabilities agree.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Every bounded rational threshold question agrees on mu one and mu two if and only if their success probabilities are equal">
+<mtable columnalign="left" rowspacing=".85em"><mtr><mtd><mrow><mo>∀</mo><mi>θ</mi><mo>∈</mo><mo>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>]</mo><mo>∩</mo><mi>ℚ</mi><mo>,</mo><mspace width=".3em"/><msub><mi>A</mi><mi>θ</mi></msub><mo>(</mo><msub><mi>μ</mi><mn>1</mn></msub><mo>)</mo><mo>↔</mo><msub><mi>A</mi><mi>θ</mi></msub><mo>(</mo><msub><mi>μ</mi><mn>2</mn></msub><mo>)</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><mo>⇔</mo><msub><mi>p</mi><mtext>succ</mtext></msub><mo>(</mo><msub><mi>μ</mi><mn>1</mn></msub><mo>,</mo><mi>P</mi><mo>)</mo><mo>=</mo><msub><mi>p</mi><mtext>succ</mtext></msub><mo>(</mo><msub><mi>μ</mi><mn>2</mn></msub><mo>,</mo><mi>P</mi><mo>)</mo></mrow></mtd></mtr></mtable></math></div></div>
+<p>All thresholds use the same success predicate, and the model's response masses are normalized rational values. This is a complete characterization for that specific query language.</p></div>
+<p>Here's why the proof is approachable. Suppose the success probabilities are 0.70 and 0.90. Choose a threshold of 0.80. The first fails and the second passes, so their complete threshold-answer profiles cannot agree. More generally, the two probabilities themselves lie within the permitted threshold range, allowing the theorem to distinguish any unequal pair.</p>
+<p>If the probabilities are identical, every threshold comparison obviously agrees. We have proved both directions.</p>
+<p>Consequently, the single success-probability number is a <em>minimal task-visible realization</em> of the complete bounded rational threshold language, in the precise refinement sense we learned in Lessons 8 and 9. The distribution contains richer information; all those threshold questions are answered by this one scalar.</p>
+</section>
+<section class="ulh-chapter-section" id="cost">
+<p class="ulh-kicker">04 / The resources needed for continuation</p>
+<h2 class="ulh-serif">A viable future may be possible yet expensive.</h2>
+<p>Now let's turn to a different kind of question. Imagine two systems that both have a viable recovery pathway. If I ask only whether recovery exists, they may answer identically. If I ask whether recovery can occur within a declared budget, the paths may no longer look equivalent.</p>
+<p>Paper III assigns a cost to a particular viable <em>history</em>, rather than assuming every route to the same outcome costs the same amount. This matters: two different paths leading to one endpoint may consume different amounts of a declared resource.</p>
+<p>Given a budget b, we collect the response atoms reached through histories whose costs do not exceed that budget.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The budget-restricted viable response atoms</p><h3>What can continue within our declared budget?</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="B b of x is the set of response atoms a for which there exists a viable continuation v from x with its history cost at most b and observation a">
+<mrow><msub><mi>B</mi><mi>b</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>a</mi><mo>∣</mo><mo>∃</mo><mi>v</mi><mo>∈</mo><msub><mi>V</mi><mrow><mi>d</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>,</mo><mspace width=".3em"/><mi>c</mi><mo>(</mo><mi>v</mi><mo>.</mo><mi>γ</mi><mo>)</mo><mo>≤</mo><mi>b</mi><mo>∧</mo><mi>o</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>a</mi><mo>}</mo></mrow></math></div></div><p>For a particular source x, B<sub>b</sub> records which viable response atoms are attainable with history cost no greater than b.</p></div>
+<dl class="ulh-term-list">
+<div><dt>b</dt><dd>A declared resource budget.</dd></div>
+<div><dt>c(v.γ)</dt><dd>The cost attached to a particular viable history γ.</dd></div>
+<div><dt>V<sub>d,t</sub>(x)</dt><dd>The complete viable-continuation family for the stated source, scenario and horizon.</dd></div>
+<div><dt>o(v) = a</dt><dd>That viable continuation is observed as response atom a.</dd></div>
+<div><dt>B<sub>b</sub>(x)</dt><dd>The response atoms for which at least one viable history is affordable under budget b.</dd></div>
+</dl>
+<p>That lets us distinguish what a system <em>can</em> achieve from what it can achieve within the resources the requirement permits. The costs, budgets, and meanings of those resources all belong to the declared model.</p>
+</section>
+</article></div></section>
+<!-- LESSON10_PART3 -->
+
