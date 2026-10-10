@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 13: How to Improve a Measurement Without Losing Its Meaning | Understanding Health</title>
+<meta name="description" content="Lesson 13 explains Paper IV's conservative-enrichment theorem: exact projection, adequacy pullback, preserved health judgments, and new distinctions in a finite forest model.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-13.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-12.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="Can we improve a measurement without invalidating earlier conclusions?">
+<meta property="og:description" content="The exact mathematical conditions that let richer health measurements reveal more without changing established judgments.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-13.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-13.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Can we improve a measurement without invalidating what it told us before?","url":"https://fieldfluxbiosystems.com/understanding-health-13.html","description":"A guided derivation of exact conservative capacity enrichment, adequacy pullback, forest recovery/adaptation witness, and the boundary at changed prospective dynamics.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Information Provenance and Conservative Enrichment in Prospective Health","identifier":"https://doi.org/10.5281/zenodo.23268802"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">13</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-12.html">Lesson 12</a><span aria-hidden="true">/</span><span>Lesson 13</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 13 · How more information can preserve old conclusions</p>
+<h1 id="lesson-title" class="ulh-serif">Can we improve a measurement without invalidating what it told us before?</h1>
+<p class="ulh-lede">In Lesson 12 we located precisely where information disappeared. Now I want to recover that detail without sacrificing the health judgments our simpler representation could already support. Paper IV gives us a rigorous way to do it: <em>conservative enrichment</em>.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper IV · Sections 9–12</span><span>Completing the formal forest benchmark</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-12.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 12</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections"><a href="#two-forests">Two indistinguishable forests</a><a href="#exact-projection">Recover the original capacity</a><a href="#adequacy">Preserve the original requirements</a><a href="#theorem">The preservation theorem</a><a href="#proof">Why the theorem follows</a><a href="#new-questions">What the enrichment adds</a><a href="#boundary">When the guarantee stops</a><a href="#five-papers">The five-paper argument</a></nav><small>Lesson 13<br>Health, Formally Defined<br>Paper IV</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="two-forests">
+<p class="ulh-kicker">01 / Return to the forest</p>
+<h2 class="ulh-serif">Two different histories can leave the same coarse capacity.</h2>
+<p class="ulh-lead">Consider the recovered forest R and the adapted forest A from Lesson 12, under the same declared scenario and horizon. The original, coarse observer records a stable response S for both. The detailed observer remembers whether stability comes through recovery or adaptation.</p>
+<div class="ulh-enrichment-pair" role="group" aria-label="Recovered and adapted forests project to the same simple response">
+<div class="ulh-enrichment-card"><span class="ulh-enrichment-card__tag">R · Recovered forest</span><strong class="ulh-enrichment-card__capacity">{S<sub>R</sub>}</strong><p>Detailed capacity retains recovered stability.</p><span class="ulh-enrichment-card__arrow" aria-hidden="true">↓ π</span><strong class="ulh-enrichment-card__coarse">{S}</strong><small>Original capacity</small></div>
+<div class="ulh-enrichment-card ulh-enrichment-card--adapted"><span class="ulh-enrichment-card__tag">A · Adapted forest</span><strong class="ulh-enrichment-card__capacity">{S<sub>A</sub>}</strong><p>Detailed capacity retains adapted stability.</p><span class="ulh-enrichment-card__arrow" aria-hidden="true">↓ π</span><strong class="ulh-enrichment-card__coarse">{S}</strong><small>Original capacity</small></div></div>
+<p>The original capacity satisfies <strong>C<sub>C</sub>(R) = C<sub>C</sub>(A) = {S}</strong>. The detailed capacities instead satisfy <strong>C<sub>D</sub>(R) = {S<sub>R</sub>}</strong> and <strong>C<sub>D</sub>(A) = {S<sub>A</sub>}</strong>. These are mathematically stipulated response labels, rather than measured biological mechanisms.</p>
+<p>Our question is exact: can we use the detailed representation and still recover everything the earlier capacity told us?</p>
+</section>
+<section class="ulh-chapter-section" id="exact-projection">
+<p class="ulh-kicker">02 / An exact backward map</p>
+<h2 class="ulh-serif">A richer capacity must reproduce the old one, in every covered context.</h2>
+<p>The projection π maps each detailed stable atom S<sub>B</sub>, S<sub>R</sub>, S<sub>A</sub> to S; the exposed atom E maps to E. We extend π from response atoms to sets of those atoms. For example, <strong>π({S<sub>R</sub>, E}) = {S, E}</strong>.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Exact projection · Paper IV, Eq. (40)</p><h3>The full original capacity must be recoverable.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Pi of detailed capacity C D of state x, context d, horizon t, equals the coarse capacity C C of x, d, t"><mrow><mi>π</mi><mo>(</mo><msub><mi>C</mi><mi>D</mi></msub><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>)</mo><mo>=</mo><msub><mi>C</mi><mi>C</mi></msub><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo></mrow></math></div></div>
+<p>This identity is required for each state x, scenario d, and horizon t within the theorem's declared domain—not merely for our two illustrative forests. C<sub>D</sub> is the enriched capacity; C<sub>C</sub> is the original coarse capacity.</p></div>
+<p>Think of replacing a single forest population total with counts for individual species. If the species counts sum to the original total, we still answer all the old total-population questions, and we can now ask about composition. The formal forest example uses projection between response sets rather than addition of counts, but the principle of exact recoverability is the same.</p>
+<p>Matching today's initial census alone would not meet this condition. The identity concerns <em>prospective capacity</em> over the stated scenarios and horizons.</p>
+</section>
+<section class="ulh-chapter-section" id="adequacy">
+<p class="ulh-kicker">03 / Preserve what a requirement means</p>
+<h2 class="ulh-serif">The established health question must keep its original interpretation.</h2>
+<p>Our old stable-response requirement asks whether S belongs to the coarse capacity: <strong>A<sub>stable</sub>(c) ⇔ S ∈ c</strong>. The detailed capacity contains S<sub>R</sub>, S<sub>A</sub>, or S<sub>B</sub> instead. Selecting only one of those as stable would quietly redefine the earlier requirement.</p>
+<p>To preserve its meaning, I evaluate the original adequacy predicate <em>after</em> projecting the enriched capacity. This is called <strong>pullback of adequacy</strong>.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Adequacy pullback · Paper IV, Eq. (41)</p><h3>Keep the established requirement attached to its established information.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The pulled back adequacy A superscript pi of c equals original adequacy A of pi of c"><mrow><msup><mi>A</mi><mi>π</mi></msup><mo>(</mo><mi>c</mi><mo>)</mo><mo>=</mo><mi>A</mi><mo>(</mo><mi>π</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>)</mo></mrow></math></div></div>
+<p>For c = {S<sub>A</sub>}, project first: π(c) = {S}. Then apply the old requirement: S ∈ {S}, which is true. The adapted forest continues to pass the original stable-response test.</p></div>
+<div class="ulh-steps" role="group" aria-label="How to apply the established requirement to an enriched response">
+<div><span>1</span><strong>Detailed input</strong><p>{S<sub>A</sub>}</p></div>
+<div><span>2</span><strong>Project to old capacity</strong><p>π({S<sub>A</sub>}) = {S}</p></div>
+<div><span>3</span><strong>Apply original adequacy</strong><p>S ∈ {S} → true</p></div></div>
+<p>This operation works for <em>any</em> established adequacy predicate on coarse capacity; it is not restricted to the forest's stable and nonempty tests.</p>
+</section>
+<section class="ulh-chapter-section" id="theorem">
+<p class="ulh-kicker">04 / The theorem</p>
+<h2 class="ulh-serif">Every established health judgment survives this enrichment.</h2>
+<div class="ulh-math-panel ulh-enrichment-theorem"><p class="ulh-kicker">Lemma 9.1 · Conservative Health Preservation</p><h3>Detailed health and original health are equivalent under the stated conditions.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Health judged from detailed capacity with pulled-back adequacy if and only if Health judged from coarse capacity with original adequacy"><mrow><msub><mi mathvariant="normal">Health</mi><mrow><mi>D</mi><mo>,</mo><msup><mi>A</mi><mi>π</mi></msup></mrow></msub><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>⇔</mo><msub><mi mathvariant="normal">Health</mi><mrow><mi>C</mi><mo>,</mo><mi>A</mi></mrow></msub><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo></mrow></math></div></div>
+<p>Here Health<sub>D,A<sup>π</sup></sub> uses the detailed capacity with the pulled-back adequacy predicate. Health<sub>C,A</sub> uses the coarse capacity with the original adequacy predicate. The symbol ⇔ means “if and only if.”</p></div>
+<p><strong>The conditions do the work.</strong> The detailed and coarse descriptions share the present-realization semantics and underlying prospective system; π recovers the earlier capacity exactly; and each established adequacy requirement is read through the pullback. Under those conditions the original judgment is preserved for every covered state and context.</p>
+<p>The theorem does not freeze the set of questions we are allowed to ask. It preserves the answers to the <em>established</em> questions when we retain what those questions mean.</p>
+</section>
+<section class="ulh-chapter-section" id="proof">
+<p class="ulh-kicker">05 / The proof, without skipped steps</p>
+<h2 class="ulh-serif">The preservation proof is a sequence of exact substitutions.</h2>
+<p>For the specified system, prospective Health requires both present realization and adequate prospective capacity. Begin by writing Health using the detailed representation and its pulled-back adequacy:</p>
+<div class="ulh-proof-lines" aria-label="Four steps of the conservative preservation proof">
+<div><span>1 · Detailed Health</span><p>Health<sub>D,A<sup>π</sup></sub>(x; d, t) ⇔ Realizes(x) ∧ A<sup>π</sup>(C<sub>D</sub>(x; d, t))</p></div>
+<div><span>2 · Expand the pullback</span><p>⇔ Realizes(x) ∧ A(π(C<sub>D</sub>(x; d, t)))</p></div>
+<div><span>3 · Use exact projection</span><p>⇔ Realizes(x) ∧ A(C<sub>C</sub>(x; d, t))</p></div>
+<div><span>4 · Read the original Health definition</span><p>⇔ Health<sub>C,A</sub>(x; d, t)</p></div></div>
+<p>Step 2 uses the definition of A<sup>π</sup>. Step 3 uses the identity π(C<sub>D</sub>) = C<sub>C</sub>. Step 4 recognizes the original Health definition, with unchanged present realization. The proof is short precisely because the conditions are explicit and exact.</p>
+</section>
+<section class="ulh-chapter-section" id="new-questions">
+<p class="ulh-kicker">06 / A strictly richer observer</p>
+<h2 class="ulh-serif">Now we can ask what the earlier capacity could not distinguish.</h2>
+<p>In the original representation the two forests still have capacity {S}. In the detailed representation, only the adapted forest includes S<sub>A</sub>. Define a new query at the mild, short horizon:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">An adaptation-sensitive query</p><h3>Is an adapted-stability response available?</h3>
+<div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="P A of x holds if and only if adapted stable response S A is in detailed capacity C D of x at mild now"><mrow><msub><mi>P</mi><mi>A</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>⇔</mo><msub><mi>S</mi><mi>A</mi></msub><mo>∈</mo><msub><mi>C</mi><mi>D</mi></msub><mo>(</mo><mi>x</mi><mo>;</mo><mtext>mild</mtext><mo>,</mo><mtext>now</mtext><mo>)</mo></mrow></math></div></div>
+<p>The new predicate reads an atom that was merged into S by the earlier projection.</p></div>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-enrichment-table"><caption>One newly distinguishable pair; the old stable-response test is unchanged</caption><thead><tr><th scope="col">Forest state</th><th scope="col">Detailed capacity</th><th scope="col">Old stable requirement</th><th scope="col">New adaptation query</th></tr></thead><tbody><tr><th scope="row">Recovered R</th><td>{S<sub>R</sub>}</td><td class="ulh-yes">Yes</td><td class="ulh-no">No</td></tr><tr><th scope="row">Adapted A</th><td>{S<sub>A</sub>}</td><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr></tbody></table></div>
+<p>This is a <strong>strict conservative enrichment</strong>. “Conservative” means established health judgments are preserved under projection and pullback. “Strict” means the new representation really adds a distinction that the old one cannot express.</p>
+<p>We may formulate additional requirements using the new distinction, and those requirements may yield different health classifications. The theorem does not assert that such criteria are ecologically appropriate; that is a separate scientific question.</p>
+</section>
+</article></div></section>
+<section class="ulh-enrichment-bridge" id="boundary"><div class="ulh-container">
+<p class="ulh-kicker">The boundary of the theorem</p><h2 class="ulh-serif">A more detailed predictive model is a different kind of change.</h2>
+<p>Everything proved so far enriches the <em>representation</em> of capacity from a fixed declared prospective system. Suppose we instead replace the dynamics that generate possible futures—for example, with a new age-structured forest model. Equal starting measurements do not establish equal future capacity, let alone compatible future probabilities.</p>
+<div class="ulh-enrichment-probabilities" role="group" aria-label="Illustrative stochastic models share an available successful response, but disagree about its probability">
+<div><span>Illustrative model A</span><strong>90%</strong><div class="ulh-enrichment-bar"><i style="width:90%"></i></div><p>Probability assigned to successful continuation</p></div>
+<div><span>Illustrative model B</span><strong>20%</strong><div class="ulh-enrichment-bar"><i style="width:20%"></i></div><p>Probability assigned to successful continuation</p></div></div>
+<p>Both hypothetical models can record the successful <em>set-valued</em> response category {S}. Under a newly declared adequacy threshold of 75% success probability, only model A passes. The set of attainable successes therefore cannot substitute for a probability-weighted capacity.</p>
+<p>For stochastic systems, a corresponding preservation result needs appropriate compatibility of the path probability measures and of the histories designated viable. Paper IV, Section 12.4 explains this obligation. It does not prove such compatibility for independently fitted empirical models used in Paper V.</p>
+<p>The practical lesson is important: mathematical consistency under a representation map is one kind of guarantee; reliability of a revised biological forecast requires additional model assumptions, calibration, uncertainty analysis, and empirical evidence.</p>
+</div></section>
+<section class="ulh-chapter-wrap" id="five-papers"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="The five-paper sequence"><strong>Where we stand</strong><nav aria-label="Concluding sections"><a href="#series-map">Papers I–V</a><a href="#paper-five">What changes in Paper V</a><a href="#takeaway">Carry it forward</a></nav><small>Paper IV complete<br>Next: empirical measurement</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="series-map"><p class="ulh-kicker">07 / The argument so far</p><h2 class="ulh-serif">Four papers have built the formal ground of measurement.</h2>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-series-table"><caption>The five-paper series at the end of Lesson 13</caption><thead><tr><th scope="col">Paper</th><th scope="col">Its role in the argument</th></tr></thead><tbody>
+<tr><th scope="row">I</th><td>Health combines present realization and adequate prospective continuation capacity.</td></tr>
+<tr><th scope="row">II</th><td>Context, stage, requirements, and horizon determine which information can license a health judgment.</td></tr>
+<tr><th scope="row">III</th><td>A representation is sufficient relative to the questions it is required to answer.</td></tr>
+<tr><th scope="row">IV</th><td>Information loss can be localized, and conservative enrichment can preserve established judgments exactly.</td></tr>
+<tr><th scope="row">V · Next</th><td>What can we infer from incomplete observation, stochastic dynamics, and estimated model parameters?</td></tr>
+</tbody></table></div>
+</section>
+<section class="ulh-chapter-section" id="paper-five"><p class="ulh-kicker">08 / Crossing into empirical science</p><h2 class="ulh-serif">A formal measurement principle is a beginning; an empirical estimate has to earn its reliability.</h2>
+<p>Paper V follows these definitions into forest observations, estimated demographic processes, simulated futures, and uncertainty. Its forest case draws on the 35-hectare Harvard Forest ForestGEO plot. It asks what can actually be inferred when the present system is incompletely observed and the future depends on a model.</p>
+<p>The difficulties are concrete. In one adult-hemlock mortality comparison, approximately 280 deaths were predicted and 685 were observed among the selected 7,557 stems. In a deliberately constructed near-threshold experiment, health classification was far less reliable than in well-separated examples. These examples motivate validation and uncertainty rather than supplying a theorem about the real forest's Health.</p>
+<p>The mathematical constructions of Papers I–IV remain exact within their declared semantics. Whether a model accurately represents natural forests, or whether its prospective judgments are scientifically reliable, requires independent evidence.</p>
+</section></article></div></section>
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container">
+<p class="ulh-kicker">What I want you to carry forward</p>
+<h2 class="ulh-serif">Better measurement can reveal more while preserving what earlier measurements already established.</h2>
+<p>We get that guarantee when the richer capacity projects <em>exactly</em> to the original one and the established adequacy predicates are evaluated through that projection. Recovery and adaptation may then become distinguishable without changing the original stable-response Health judgment. New requirements may use the new information, provided their scientific meaning is justified.</p>
+<p>In Lesson 14 we'll turn to Paper V: how prospective capacity is estimated when we do not even know the present forest state with certainty.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-12.html" class="ulh-button">← Previous: Lesson 12</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-information-provenance-conservative-enrichment-prospective-health.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper IV (PDF)</a></div></div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Information Provenance and Conservative Enrichment in Prospective Health: A Machine-Checked Finite Forest Benchmark</em>, Paper IV in <em>Health, Formally Defined</em> (2026), especially Sections 9–12 and Lemma 9.1. <a href="research-information-provenance-conservative-enrichment-prospective-health.html">Full publication record</a> · <a href="https://doi.org/10.5281/zenodo.23268802" target="_blank" rel="noopener">Zenodo DOI</a>. All preservation claims are relative to the declared mathematical system and its exact compatibility assumptions; empirical accuracy requires separate validation.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+</body></html>
