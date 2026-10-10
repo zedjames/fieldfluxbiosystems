@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 3,
+  "publishedCount": 4,
   "lessons": [
     {
       "id": "01",
@@ -43,7 +43,21 @@
       "sourceSections": "Paper I, Sections 6–8; requirement-visible quotient and sufficiency",
       "status": "published",
       "summary": "Capacity sets can differ while agreeing on every declared adequacy question; the requirement-visible quotient records precisely those distinctions, with an explicit new-query boundary.",
-      "previous": "understanding-health-02.html"
+      "previous": "understanding-health-02.html",
+      "next": "understanding-health-04.html"
+    },
+    {
+      "id": "04",
+      "number": 4,
+      "title": "Why having the capacity to survive is not the same as being robust",
+      "slug": "understanding-health-04.html",
+      "sourcePaper": "Constitutive Continuation Capacity",
+      "sourceDoi": "10.5281/zenodo.23131157",
+      "sourcePdf": "research-constitutive-continuation-capacity.pdf",
+      "sourceSections": "Paper I Sections 9–11 and discussion of scientific scope: presentation invariance, positive persistence/robustness and observation sufficiency",
+      "status": "published",
+      "summary": "Success-only capacity may not determine robustness, present realization alone may not determine prospective Health, and observation/representation must preserve the distinctions its questions need.",
+      "previous": "understanding-health-03.html"
     }
   ]
 }
