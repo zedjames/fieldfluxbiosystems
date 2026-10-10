@@ -1,0 +1,53 @@
+name: Verify live Understanding Health Lesson 8
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lesson8.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify HTTPS pages, PDF checksum and lesson links
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,ssl,time
+          from urllib.request import Request,urlopen
+          host="https://fieldfluxbiosystems.com/"
+          checks={
+           "understanding-health.html":["08 lessons published","understanding-health-08.html"],
+           "understanding-health-07.html":['rel="next"',"Next: Lesson 8"],
+           "understanding-health-08.html":["Lesson 08","By Zed James","RepresentationSufficient","data-ulh-measure-choice","99.9%","0.1%","research-representation-sufficiency-prospective-health.pdf",'rel="prev"'],
+           "research-representation-sufficiency-prospective-health.html":["citation_pdf_url","research-representation-sufficiency-prospective-health.pdf","paper-iii-reader"],
+           "assets/js/understanding-health-08.js":["probability","threshold"],
+           "assets/css/understanding-health-08.css":["ulh-measure-explorer"],
+           "sitemap.xml":["understanding-health-08.html"]
+          }
+          errors=[]
+          for route,markers in checks.items():
+           for attempt in range(8):
+            try:
+             with urlopen(Request(host+route,headers={"User-Agent":"FFB-Lesson8-Smoke/1.0","Cache-Control":"no-cache"}),context=ssl.create_default_context(),timeout=25) as res:
+              body=res.read().decode("utf-8","replace")
+              print("HTTPS",route,res.status,len(body))
+             missing=[p for p in markers if p not in body]
+             if missing:raise ValueError("missing "+repr(missing))
+             break
+            except Exception as exc:
+             if attempt==7:errors.append(route+": "+str(exc))
+             else:time.sleep(5)
+          try:
+           with urlopen(host+"research-representation-sufficiency-prospective-health.pdf",context=ssl.create_default_context(),timeout=40) as res:
+            data=res.read()
+           sha=hashlib.sha256(data).hexdigest()
+           print("SOURCE PDF",len(data),sha)
+           if not data.startswith(b"%PDF-") or sha!="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650":
+            errors.append("Paper III PDF fails author Zenodo checksum")
+          except Exception as exc:errors.append("Paper III PDF "+str(exc))
+          for error in errors:print("FAIL",error)
+          if errors:raise SystemExit(1)
+          print("PASS — Lesson 8 and exact Paper III PDF are live over valid HTTPS")
+          PY
