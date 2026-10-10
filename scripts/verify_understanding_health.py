@@ -177,6 +177,31 @@ def main():
           "Lesson 5 must point forward to Lesson 6",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-05.html"' in sixth,
           "Lesson 6 must point backward to Lesson 5",errors)
+    seventh=(ROOT/"understanding-health-07.html").read_text(encoding="utf8")
+    check(seventh.count("<math ")==4,"Lesson 7 must contain four accessible MathML statements",errors)
+    check("Endogenous" in seventh and "Persistent" in seventh and
+          "Intermittent" in seventh and "Withdrawn" in seventh and "autonomous" in seventh,
+          "Lesson 7 support-state table is incomplete",errors)
+    check('data-ulh-support-choice="short"' in seventh and 'data-ulh-support-choice="long"' in seventh and
+          'data-ulh-support-capacity="intermittent"' in seventh,
+          "Lesson 7 optional horizon selector missing",errors)
+    check("One input. Two incompatible values." in seventh and
+          "complete support family" in seventh,
+          "Lesson 7 transport impossibility needs correct scope",errors)
+    check("κ({E})" in seventh and "five-state forest" in seventh,
+          "Lesson 7 must retain the positive contrast from Section 7",errors)
+    check("withdrawal" in seventh.lower() and "present-realization" in seventh,
+          "Lesson 7 must distinguish exact withdrawal from Health preservation",errors)
+    check("mathematical" in seventh.lower() and "not empirical" in seventh.lower(),
+          "Lesson 7 needs mathematical-versus-empirical qualification",errors)
+    check("research-prospective-health-across-contexts.pdf" in seventh and
+          "10.5281/zenodo.23146280" in seventh,
+          "Lesson 7 must link Paper II PDF and DOI",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-07.html"' in
+          (ROOT/"understanding-health-06.html").read_text(encoding="utf8"),
+          "Lesson 6 must link to Lesson 7",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-06.html"' in seventh,
+          "Lesson 7 must point back to Lesson 6",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
