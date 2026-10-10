@@ -17,6 +17,8 @@ on:
       - "assets/css/understanding-health-09.css"
       - "assets/css/understanding-health-10.css"
       - "assets/css/understanding-health-11.css"
+      - "assets/css/understanding-health-12.css"
+      - "assets/js/understanding-health-12.js"
       - "assets/js/understanding-health-11.js"
       - "assets/js/understanding-health-10.js"
       - "assets/js/understanding-health-09.js"
@@ -103,6 +105,7 @@ jobs:
           node --check assets/js/understanding-health-09.js
           node --check assets/js/understanding-health-10.js
           node --check assets/js/understanding-health-11.js
+          node --check assets/js/understanding-health-12.js
 
       - name: Validate responsive learning layout and example in Chrome
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
