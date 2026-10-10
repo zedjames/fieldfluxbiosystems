@@ -1,0 +1,58 @@
+name: Independently verify public Understanding Health lessons 13 and 14
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lessons-13-14.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Check production HTTPS pages, teaching assets, navigation, sitemap and PDFs
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.parse import urlparse
+          import ssl, time
+          base="https://fieldfluxbiosystems.com/"
+          pages={
+           "understanding-health.html":["14 lessons published","understanding-health-13.html","understanding-health-14.html"],
+           "understanding-health-12.html":["Next: Lesson 13","understanding-health-13.html"],
+           "understanding-health-13.html":["Lesson 13","Lemma 9.1","Continue to Lesson 14","Next: Lesson 14","understanding-health-14.html",'rel="next"'],
+           "understanding-health-14.html":["Lesson 14","By Zed James","Harvard Forest","61,985","6,992","data-ulh-quiz","ulh-uncertain-survival","research-prospective-health-declared-specifications.pdf"],
+           "assets/css/understanding-health-13.css":["ulh-enrichment-card","ulh-enrichment-theorem"],
+           "assets/css/understanding-health-14.css":["ulh-mask-chart","ulh-hypothetical"],
+           "assets/js/understanding-health-14.js":["data-ulh-check-answer","ulh-14-answer"],
+           "sitemap.xml":["understanding-health-13.html","understanding-health-14.html"]
+          }
+          failures=[]
+          for path,needles in pages.items():
+           for attempt in range(10):
+            try:
+             with urlopen(Request(base+path,headers={"User-Agent":"FFB-Health-Independent-Verify/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=22,context=ssl.create_default_context()) as response:
+              raw=response.read()
+              text=raw.decode("utf-8","replace")
+              status=response.status
+              print("PRODUCTION",path,status,len(raw),flush=True)
+             if status!=200:raise ValueError("HTTP "+str(status))
+             missing=[token for token in needles if token not in text]
+             if missing:raise ValueError("Missing markers: "+repr(missing))
+             break
+            except Exception as exc:
+             if attempt==9:failures.append(path+": "+repr(exc))
+             else:time.sleep(6)
+          for pdf in ["research-information-provenance-conservative-enrichment-prospective-health.pdf","research-prospective-health-declared-specifications.pdf"]:
+           try:
+            with urlopen(Request(base+pdf,headers={"Cache-Control":"no-cache"}),timeout=35,context=ssl.create_default_context()) as response:
+             raw=response.read()
+             status=response.status
+            print("PUBLISHED_PDF",pdf,status,len(raw),flush=True)
+            if status!=200 or not raw.startswith(b"%PDF-") or len(raw)<100000: failures.append("Invalid original PDF: "+pdf)
+           except Exception as exc:failures.append("PDF "+pdf+": "+repr(exc))
+          for failure in failures:print("FAIL",failure,flush=True)
+          if failures:raise SystemExit(1)
+          print("PASS: live production lessons 13 and 14, index, forward navigation, CSS/JS, sitemap and source PDFs",flush=True)
+          PY
