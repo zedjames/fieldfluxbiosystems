@@ -49,7 +49,7 @@ def main():
         print("Chromium unavailable locally; static HTML/JS checks remain mandatory")
         return 0
     errors=[]
-    for page in ("understanding-health.html","understanding-health-01.html"):
+    for page in ["understanding-health.html"]+[p["slug"] for p in json.loads((ROOT/"learning"/"lessons.json").read_text(encoding="utf8"))["lessons"]]:
         for width in (430,1440):
             result=run(page,width)
             print(page,width,json.dumps(result,sort_keys=True))
@@ -57,17 +57,18 @@ def main():
                 errors.append(page+" did not render meaningful content at "+str(width))
             if result["documentWidth"] > result["innerWidth"]+4:
                 errors.append(page+" has horizontal document overflow at "+str(width))
-            if page.endswith("-01.html"):
+            if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
-                change=result["changed"]
-                if not change or change["pressed"]!="true" or "Meets the any-response" not in change["text"]:
-                    errors.append(page+" requirement selector did not update at "+str(width))
+                if page.endswith("-01.html"):
+                    change=result["changed"]
+                    if not change or change["pressed"]!="true" or "Meets the any-response" not in change["text"]:
+                        errors.append(page+" requirement selector did not update at "+str(width))
     if errors:
         print("Browser layout QA failed",file=sys.stderr)
         for err in errors:print(" - "+err,file=sys.stderr)
         return 1
-    print("Chrome layout QA passed at phone and desktop widths")
+    print("Chrome layout QA passed for all published chapters at phone and desktop widths")
     return 0
 
 if __name__=="__main__":

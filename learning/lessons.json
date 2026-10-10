@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 1,
+  "publishedCount": 2,
   "lessons": [
     {
       "id": "01",
@@ -15,7 +15,21 @@
       "sourcePdf": "research-constitutive-continuation-capacity.pdf",
       "sourceSections": "Introduction; finite forest example, Section 5 and Appendix A",
       "status": "published",
-      "summary": "Present condition, represented viable continuation capacity, and the role of declared scenario, time horizon, specification, and requirement."
+      "summary": "Present condition, represented viable continuation capacity, and the role of declared scenario, time horizon, specification, and requirement.",
+      "next": "understanding-health-02.html"
+    },
+    {
+      "id": "02",
+      "number": 2,
+      "title": "What is a viable continuation?",
+      "slug": "understanding-health-02.html",
+      "sourcePaper": "Constitutive Continuation Capacity",
+      "sourceDoi": "10.5281/zenodo.23131157",
+      "sourcePdf": "research-constitutive-continuation-capacity.pdf",
+      "sourceSections": "Paper I, Sections 2–4; finite-forest candidate filter clarified in Paper IV",
+      "status": "published",
+      "summary": "The complete viable family, the separation of lawfulness and continuation, and capacity as an observer-dependent representation of viable histories.",
+      "previous": "understanding-health-01.html"
     }
   ]
 }

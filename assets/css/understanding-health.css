@@ -179,3 +179,50 @@
 .ulh-home-teaser__paper p{font-size:.96rem;color:#5d716e;line-height:1.68}
 .ulh-home-teaser__paper span{border-top:1px solid #c5d2ca;padding-top:20px;margin-top:25px;display:block;font-size:.81rem;color:#8c6d42}
 @media(max-width:850px){.ulh-home-teaser__wrap{grid-template-columns:1fr}.ulh-home-teaser__paper{max-width:630px}}
+
+
+/* Subsequent chapters: diagrammatic pathways, logic table, and semantic compression. */
+.ulh-page .ulh-lesson-card+.ulh-lesson-card{margin-top:17px}
+.ulh-page .ulh-chapter-section{scroll-margin-top:104px}
+.ulh-page .ulh-chapter-section+.ulh-chapter-section{margin-top:67px;padding-top:16px;border-top:1px solid #d6d3c9}
+.ulh-page .ulh-pathways{background:#e9eee9;border:1px solid #c6d3cc;padding:clamp(22px,3.8vw,37px);margin:34px 0 21px}
+.ulh-page .ulh-pathways__origin{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;background:#183d47;color:#f3efdf;padding:19px 23px;font-size:.94rem}
+.ulh-page .ulh-pathways__origin strong{font-weight:700;letter-spacing:.04em}
+.ulh-page .ulh-pathways__origin small{font-size:.82rem;color:#c4d5d0;margin-left:auto}
+.ulh-page .ulh-pathways__dot{width:12px;height:12px;border-radius:50%;background:#deb572;box-shadow:0 0 0 5px rgba(220,187,117,.15)}
+.ulh-page .ulh-pathways__branch{width:1px;height:29px;background:#abbeb7;margin-left:36px}
+.ulh-page .ulh-pathways__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.ulh-page .ulh-pathways__item{background:#fcfaf5;border:1px solid #bfd0c5;display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:14px;padding:22px 20px;align-items:start}
+.ulh-page .ulh-pathways__item--loss{border-color:#d3c7ad;background:#f6f0e5}
+.ulh-page .ulh-pathways__glyph{color:#648b7b;font-size:1.5rem;line-height:1.1}
+.ulh-page .ulh-pathways__item--loss .ulh-pathways__glyph{color:#ac825b}
+.ulh-page .ulh-pathways__item small{display:block;font-size:.71rem;letter-spacing:.07em;color:#75887d;margin-bottom:11px}
+.ulh-page .ulh-pathways__item strong{display:block;font-family:var(--serif,Georgia,serif);font-weight:400;font-size:clamp(1.14rem,2vw,1.48rem);line-height:1.27;color:#254e56;margin-bottom:9px}
+.ulh-page .ulh-pathways__item p{font-size:.87rem;line-height:1.66;color:#61736a;margin:0}
+.ulh-page .ulh-pathways__tag{grid-column:2;justify-self:start;font-size:.67rem;font-weight:750;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid #c4d2c8;padding-top:10px;margin-top:17px;color:#537967}
+.ulh-page .ulh-pathways__item--loss .ulh-pathways__tag{color:#996643;border-color:#d4c5ac}
+.ulh-page .ulh-status-table-wrap{overflow-x:auto;margin:32px 0 23px;border:1px solid #ced2c7;background:#fcfaf5}
+.ulh-page .ulh-status-table{width:100%;border-collapse:collapse;font-family:var(--body,system-ui,sans-serif);font-size:.92rem;line-height:1.52;min-width:545px}
+.ulh-page .ulh-status-table caption{text-align:left;font-size:.79rem;font-weight:650;letter-spacing:.11em;text-transform:uppercase;color:#87633e;padding:18px 20px 12px}
+.ulh-page .ulh-status-table th,.ulh-page .ulh-status-table td{text-align:left;border-top:1px solid #e0e0d6;padding:15px 14px;vertical-align:top}
+.ulh-page .ulh-status-table thead th{background:#ede9dc;color:#214452;font-size:.73rem;text-transform:uppercase;letter-spacing:.09em}
+.ulh-page .ulh-status-table tbody th{font-weight:550;color:#314e54;width:44%}
+.ulh-page .ulh-status-table td{color:#526d6a}
+.ulh-page .ulh-status-table .ulh-yes{color:#2c6550;font-weight:700}
+.ulh-page .ulh-status-table .ulh-no{color:#9c623f;font-weight:700}
+.ulh-page .ulh-compression{display:grid;grid-template-columns:minmax(0,1fr) 105px minmax(0,1fr);align-items:stretch;gap:5px;border:1px solid #d3d5c8;background:#f5f2e8;padding:clamp(20px,3vw,32px);margin:33px 0 20px;font-family:var(--body,system-ui,sans-serif)}
+.ulh-page .ulh-compression__source,.ulh-page .ulh-compression__target{padding:22px 16px;background:#fffaf1;border:1px solid #d0d4ca}
+.ulh-page .ulh-compression__eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:#8f764a;display:block;margin:0 0 17px}
+.ulh-page .ulh-compression__chips{display:flex;flex-wrap:wrap;gap:6px}
+.ulh-page .ulh-compression__chips span{border:1px solid #c6d5ce;background:#eaf0ea;padding:8px 12px;font:1.05rem Georgia,serif;color:#28505a}
+.ulh-page .ulh-compression__source small,.ulh-page .ulh-compression__target small{display:block;margin-top:16px;font-size:.81rem;color:#718079;line-height:1.5}
+.ulh-page .ulh-compression__target strong{display:block;font-family:Georgia,serif;font-weight:400;color:#28505b;font-size:clamp(1.05rem,2vw,1.5rem);line-height:1.5}
+.ulh-page .ulh-compression__bridge{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;color:#6b8a7d;font-size:.73rem;text-transform:uppercase;letter-spacing:.05em;text-align:center}
+.ulh-page .ulh-compression__bridge b{font-size:2rem;font-weight:400;line-height:1;color:#a78952}
+@media(max-width:680px){
+ .ulh-page .ulh-pathways__grid{grid-template-columns:1fr}
+ .ulh-page .ulh-compression{grid-template-columns:1fr}
+ .ulh-page .ulh-compression__bridge{flex-direction:row;gap:14px;padding:14px 0}
+ .ulh-page .ulh-compression__bridge b{transform:rotate(90deg)}
+ .ulh-page .ulh-pathways__origin small{margin-left:0}
+}

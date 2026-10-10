@@ -58,7 +58,7 @@ def main():
         check(p.canonical==[SITE+page],page+": canonical URL mismatch",errors)
         check(bool(p.meta.get("description")),page+": search description absent",errors)
         check(bool(p.meta.get("robots")),page+": explicit indexing policy absent",errors)
-        check("assets/css/understanding-health.css?v=1" in html,page+": shared learning stylesheet missing",errors)
+        check("assets/css/understanding-health.css?v=2" in html,page+": updated shared learning stylesheet missing",errors)
         for attr,url in p.urls:
             parsed=urlsplit(url)
             if parsed.scheme or url.startswith(("//","mailto:","tel:","data:")):continue
@@ -77,6 +77,29 @@ def main():
         check(lesson["sourceDoi"] in html,page+": no archival source DOI",errors)
         check("by Zed James" in html.lower() or "By Zed James" in html or "Zed James" in html,page+": first-person attribution absent",errors)
         check("the author begins" not in html.lower(),page+": external narrator voice slipped in",errors)
+    # Each published lesson is reachable from the library and neighbors;
+    # the first and last link to actual pages, never a future placeholder.
+    for index,lesson in enumerate(lessons):
+        page=lesson["slug"]
+        current=(ROOT/page).read_text(encoding="utf8")
+        if index>0:
+            previous=lessons[index-1]["slug"]
+            check(lesson.get("previous")==previous,page+": manifest previous link incorrect",errors)
+            check(previous in current,page+": no previous-lesson navigation",errors)
+        if index<len(lessons)-1:
+            next_page=lessons[index+1]["slug"]
+            check(lesson.get("next")==next_page,page+": manifest next link incorrect",errors)
+            check(next_page in current,page+": no next-lesson navigation",errors)
+        else:
+            check(not lesson.get("next"),page+": should not link to unpublished next chapter",errors)
+        check("understanding-health.html" in current,page+": no library return link",errors)
+    # The second chapter covers filtering and the downstream capacity collector,
+    # with three accessible equations and explicit attribution of Paper IV's
+    # candidate-lawfulness encoding.
+    second=(ROOT/"understanding-health-02.html").read_text(encoding="utf8")
+    check(second.count("<math ")==3,"Lesson 2 should render three MathML equations",errors)
+    check("Paper IV" in second and "candidate-lawfulness" in second,"Lesson 2 needs precise forest-model attribution",errors)
+    check("only the continuing history is viable" in second,"Lesson 2 must state its no-quiz illustrative answer",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
@@ -93,7 +116,7 @@ def main():
         print("Understanding Health validation FAILED",file=sys.stderr)
         for x in errors:print(" - "+x,file=sys.stderr)
         return 1
-    print("Understanding Health validated: "+str(len(lessons))+" lesson(s), indexed static pages, full-source links and interactive example.")
+    print("Understanding Health validated: "+str(len(lessons))+" lessons, bidirectional navigation, exact source links, MathML and static reading.")
     return 0
 
 if __name__=="__main__":
