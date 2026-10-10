@@ -88,9 +88,9 @@ def main():
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
                 if page.endswith("-07.html"):
                     support=result["supportState"]
-                    if not support or support["pressed"]!="true" or support["capacity"]!="∅" or
-                       "Fails reserve requirement" not in support["status"] or
-                       "long horizon" not in support["summary"].lower():
+                    if (not support or support["pressed"]!="true" or support["capacity"]!="∅" or
+                        "Fails reserve requirement" not in support["status"] or
+                        "long horizon" not in support["summary"].lower()):
                         errors.append(page+" horizon comparison did not update at "+str(width))
                 if page.endswith("-06.html"):
                     transport=result["transportState"]
