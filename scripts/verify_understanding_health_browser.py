@@ -22,9 +22,15 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const mathScroll=document.querySelector(".ulh-math-scroll");
  const term=document.querySelector(".ulh-term-list");
  const switcher=document.querySelector('[data-ulh-requirement="any"]');
+ const quotientSwitcher=document.querySelector('[data-ulh-quotient="extended"]');
+ let quotientState=null;
+ if(quotientSwitcher) {
+  quotientSwitcher.click();
+  quotientState={pressed:quotientSwitcher.getAttribute("aria-pressed"),expandedVisible:document.querySelector('[data-ulh-quotient-view="extended"]')?.hidden===false,originalHidden:document.querySelector('[data-ulh-quotient-view="base"]')?.hidden===true,explanation:document.querySelector("[data-ulh-quotient-explanation]")?.textContent||""};
+ }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -60,6 +66,10 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-03.html"):
+                    quotient=result["quotientState"]
+                    if not quotient or quotient["pressed"]!="true" or not quotient["expandedVisible"] or not quotient["originalHidden"] or "four subsets" not in quotient["explanation"].lower():
+                        errors.append(page+" expanded quotient grouping didn't respond to the new requirement at "+str(width))
                 if page.endswith("-01.html"):
                     change=result["changed"]
                     if not change or change["pressed"]!="true" or "Meets the any-response" not in change["text"]:

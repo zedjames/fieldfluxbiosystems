@@ -58,7 +58,7 @@ def main():
         check(p.canonical==[SITE+page],page+": canonical URL mismatch",errors)
         check(bool(p.meta.get("description")),page+": search description absent",errors)
         check(bool(p.meta.get("robots")),page+": explicit indexing policy absent",errors)
-        check("assets/css/understanding-health.css?v=2" in html,page+": updated shared learning stylesheet missing",errors)
+        check("assets/css/understanding-health.css?v=3" in html,page+": updated shared learning stylesheet missing",errors)
         for attr,url in p.urls:
             parsed=urlsplit(url)
             if parsed.scheme or url.startswith(("//","mailto:","tel:","data:")):continue
@@ -100,6 +100,23 @@ def main():
     check(second.count("<math ")==3,"Lesson 2 should render three MathML equations",errors)
     check("Paper IV" in second and "candidate-lawfulness" in second,"Lesson 2 needs precise forest-model attribution",errors)
     check("only the continuing history is viable" in second,"Lesson 2 must state its no-quiz illustrative answer",errors)
+    third=(ROOT/"understanding-health-03.html").read_text(encoding="utf8")
+    check(third.count("<math ")==3,"Lesson 3 must contain three accessible MathML formulas",errors)
+    check('data-ulh-quotient-view="base"' in third and 'data-ulh-quotient-view="extended"' in third,
+          "Lesson 3 needs both original and expanded query groupings",errors)
+    check('data-ulh-quotient="extended"' in third and 'data-ulh-quotient="base"' in third,
+          "Lesson 3 interactive selectors absent",errors)
+    check('data-ulh-quotient-view="extended" class="ulh-quotient-group-grid ulh-quotient-group-grid--four"' in third,
+          "Expanded quotient must expose four classes",errors)
+    check("present realization" in third.lower() and "not measurements" in third,
+          "Lesson 3 must distinguish full Health and illustrative capacity",errors)
+    check("research-constitutive-continuation-capacity.pdf" in third,
+          "Lesson 3 must link to full source PDF",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-03.html"' in
+          (ROOT/"understanding-health-02.html").read_text(encoding="utf8"),
+          "Lesson 2 next metadata not pointing to Lesson 3",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-02.html"' in third,
+          "Lesson 3 previous metadata not pointing to Lesson 2",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)

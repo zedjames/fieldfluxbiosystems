@@ -11,6 +11,7 @@ on:
       - "learning/**"
       - "assets/css/understanding-health.css"
       - "assets/js/understanding-health.js"
+      - "assets/js/understanding-health-*.js"
       - "scripts/verify_understanding_health.py"
       - "scripts/verify_understanding_health_browser.py"
       - "notebook.html"
@@ -78,7 +79,9 @@ jobs:
 
       - name: Validate lesson JavaScript syntax
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
-        run: node --check assets/js/understanding-health.js
+        run: |
+          node --check assets/js/understanding-health.js
+          node --check assets/js/understanding-health-03.js
 
       - name: Validate responsive learning layout and example in Chrome
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
