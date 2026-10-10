@@ -1,0 +1,54 @@
+name: Independently verify public Understanding Health Lesson 15
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-15.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify lesson 15 production HTTPS and source PDF
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import ssl,time
+          origin="https://fieldfluxbiosystems.com/"
+          pages={
+            "understanding-health.html":["15 lessons published",'href="understanding-health-15.html"',"How do we calculate the probability that a system will continue to survive?"],
+            "understanding-health-14.html":["Next: Lesson 15","Continue to Lesson 15",'rel="next"'],
+            "understanding-health-15.html":["Lesson 15","By Zed James","data-ulh-threshold-lab","64 sampled future histories","0.2099","0.0779","0.1973","0.0723","research-prospective-health-declared-specifications.pdf","assets/css/understanding-health-15.css?v=1","assets/js/understanding-health-15.js?v=1"],
+            "assets/css/understanding-health-15.css":["ulh-denominator-pair","ulh-threshold-lab","ulh-model-results"],
+            "assets/js/understanding-health-15.js":["62.5>=theta","data-ulh-threshold-label"],
+            "sitemap.xml":["understanding-health-14.html","understanding-health-15.html"]
+          }
+          problems=[]
+          for path,needles in pages.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(origin+path,headers={"Cache-Control":"no-cache","Pragma":"no-cache","User-Agent":"FFB-L15-LiveSmoke/1.0"}),timeout=23,context=ssl.create_default_context()) as response:
+                  body=response.read()
+                  status=response.status
+                text=body.decode("utf-8","replace")
+                print("PRODUCTION",path,status,len(body),flush=True)
+                if status!=200:raise ValueError("HTTP "+str(status))
+                missing=[x for x in needles if x not in text]
+                if missing:raise ValueError("Missing "+repr(missing))
+                break
+              except Exception as exc:
+                if attempt==11:problems.append(path+": "+str(exc))
+                else:time.sleep(6)
+          try:
+            with urlopen(origin+"research-prospective-health-declared-specifications.pdf",timeout=40,context=ssl.create_default_context()) as response:
+              pdf=response.read()
+            print("SOURCE_PDF",len(pdf),pdf[:5],flush=True)
+            if not pdf.startswith(b"%PDF-") or len(pdf)<100000:problems.append("Source PDF invalid")
+          except Exception as exc:problems.append("Source PDF: "+str(exc))
+          if problems:
+            for issue in problems:print("FAIL",issue,flush=True)
+            raise SystemExit(1)
+          print("PASS live Lesson 15, index, prior navigation, assets, sitemap and Paper V PDF",flush=True)
+          PY
