@@ -1,0 +1,48 @@
+name: Check public Understanding Health pages
+on:
+  pull_request:
+    paths: [.github/workflows/check-public-understanding-health.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed HTTPS content and full source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,urllib.request,hashlib,time
+          checks=[
+          ("https://fieldfluxbiosystems.com/understanding-health.html",["Understanding Health","What does it actually mean for something to be healthy?","understanding-health-01.html","learningResourceType"]),
+          ("https://fieldfluxbiosystems.com/understanding-health-01.html",["Let's begin with two forests","data-ulh-requirement","<math","research-constitutive-continuation-capacity.pdf"]),
+          ("https://fieldfluxbiosystems.com/index.html",["understanding-health.html"]),
+          ("https://fieldfluxbiosystems.com/research.html",["understanding-health.html"]),
+          ("https://fieldfluxbiosystems.com/research-series-health-formally-defined.html",["understanding-health.html"])
+          ]
+          errors=[]
+          for url,markers in checks:
+            for attempt in range(5):
+              try:
+                req=urllib.request.Request(url,headers={"User-Agent":"FieldfluxLessonSmoke/20261010","Cache-Control":"no-cache"})
+                with urllib.request.urlopen(req,timeout=20,context=ssl.create_default_context()) as res:
+                  data=res.read().decode("utf-8","replace")
+                  print("HTML",url,res.status,len(data),res.headers.get("content-type"))
+                missing=[x for x in markers if x not in data]
+                if missing: raise ValueError("Missing: "+str(missing))
+                break
+              except Exception as exc:
+                if attempt==4:errors.append(url+": "+str(exc))
+                else:time.sleep(4)
+          req=urllib.request.Request("https://fieldfluxbiosystems.com/research-constitutive-continuation-capacity.pdf",headers={"User-Agent":"FieldfluxLessonSmoke/20261010"})
+          try:
+            with urllib.request.urlopen(req,timeout=30,context=ssl.create_default_context()) as res:
+              data=res.read()
+            print("SOURCE PDF",len(data),"header",data[:5])
+            if not data.startswith(b"%PDF-"):errors.append("Original cited Paper I PDF is not served")
+          except Exception as exc:errors.append("Paper I PDF: "+str(exc))
+          for issue in errors:print("ERROR",issue)
+          if errors:raise SystemExit(1)
+          print("PASS: public reading room and Lesson 1 served via valid HTTPS with source PDF")
+          PY
