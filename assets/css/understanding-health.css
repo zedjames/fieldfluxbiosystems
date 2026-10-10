@@ -4,6 +4,8 @@
 .ulh-page *{min-width:0}
 .ulh-page a:focus-visible,.ulh-page button:focus-visible,.ulh-page summary:focus-visible{outline:3px solid #b37b2c;outline-offset:4px}
 .ulh-page .nav{background:#fcf8f0}
+.ulh-page .ulh-skip{position:absolute;left:-9999px;top:8px;z-index:999;background:#fff;color:#193743;padding:8px 15px}
+.ulh-page .ulh-skip:focus{left:8px}
 .ulh-page .nav__links a[aria-current=page]{color:#193b4a;text-decoration:underline;text-underline-offset:8px;text-decoration-color:#bc975d}
 .ulh-page .ulh-container{width:min(calc(100% - clamp(34px,8vw,120px)),1150px);margin:0 auto}
 .ulh-page .ulh-reading{max-width:755px}
