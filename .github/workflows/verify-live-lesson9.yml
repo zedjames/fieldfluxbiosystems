@@ -1,0 +1,52 @@
+name: Verify live Understanding Health Lesson 9
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lesson9.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify deployed HTTPS chapter, scholarly source and navigation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,ssl,time
+          from urllib.request import Request,urlopen
+          base="https://fieldfluxbiosystems.com/"
+          checks={
+            "understanding-health.html":["09 lessons published","understanding-health-09.html"],
+            "understanding-health-08.html":["Next: Lesson 9","understanding-health-09.html",'rel="next"'],
+            "understanding-health-09.html":["Lesson 09","By Zed James","Theorem 6.1","Theorem 6.2","Theorem 7.1","data-ulh-target-choice","research-representation-sufficiency-prospective-health.pdf",'rel="prev"'],
+            "assets/js/understanding-health-09.js":["data-ulh-target","exactly determinate"],
+            "assets/css/understanding-health-09.css":["ulh-transport-tradeoff","ulh-target-explorer"],
+            "sitemap.xml":["understanding-health-09.html"]
+          }
+          problems=[]
+          for path,terms in checks.items():
+            for attempt in range(8):
+              try:
+                with urlopen(Request(base+path,headers={"User-Agent":"FFB-Lesson9-Smoke/1.0","Cache-Control":"no-cache"}),timeout=25,context=ssl.create_default_context()) as res:
+                  content=res.read().decode("utf-8","replace")
+                  print("PAGE",path,res.status,len(content))
+                absent=[s for s in terms if s not in content]
+                if absent:raise ValueError("missing "+repr(absent))
+                break
+              except Exception as e:
+                if attempt==7:problems.append(path+": "+str(e))
+                else:time.sleep(5)
+          try:
+            with urlopen(base+"research-representation-sufficiency-prospective-health.pdf",timeout=50,context=ssl.create_default_context()) as res:
+              pdf=res.read()
+            digest=hashlib.sha256(pdf).hexdigest()
+            print("SOURCE PAPER III",len(pdf),digest)
+            if not pdf.startswith(b"%PDF-") or digest!="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650":
+              problems.append("Original Paper III PDF differs from provided canonical file")
+          except Exception as e:problems.append("PDF "+str(e))
+          for item in problems:print("FAIL",item)
+          if problems:raise SystemExit(1)
+          print("PASS — Lesson 9, linked reading path and exact Paper III source are public over valid HTTPS")
+          PY
