@@ -25,6 +25,13 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const quotientSwitcher=document.querySelector('[data-ulh-quotient="extended"]');
  const stageSwitcher=document.querySelector('[data-ulh-stage-choice="adult"]');
  const transportSwitcher=document.querySelector('[data-ulh-transport-choice="visible"]');
+ const horizonSwitcher=document.querySelector('[data-ulh-support-choice="long"]');
+ let supportState=null;
+ if(horizonSwitcher){
+  horizonSwitcher.click();
+  supportState={pressed:horizonSwitcher.getAttribute("aria-pressed"),capacity:document.querySelector('[data-ulh-support-capacity="intermittent"]')?.textContent||"",status:document.querySelector('[data-ulh-support-status="intermittent"]')?.textContent||"",summary:document.querySelector("[data-ulh-support-summary]")?.textContent||""};
+ }
+
  let transportState=null;
  if(transportSwitcher){
   transportSwitcher.click();
@@ -43,7 +50,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -79,6 +86,12 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-07.html"):
+                    support=result["supportState"]
+                    if not support or support["pressed"]!="true" or support["capacity"]!="∅" or
+                       "Fails reserve requirement" not in support["status"] or
+                       "long horizon" not in support["summary"].lower():
+                        errors.append(page+" horizon comparison did not update at "+str(width))
                 if page.endswith("-06.html"):
                     transport=result["transportState"]
                     if not transport or transport["pressed"]!="true" or not transport["visibleShown"] or not transport["rawHidden"] or "quotient" not in transport["summary"].lower():
