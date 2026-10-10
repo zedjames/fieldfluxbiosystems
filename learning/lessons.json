@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 8,
+  "publishedCount": 9,
   "lessons": [
     {
       "id": "01",
@@ -113,7 +113,21 @@
       "sourceSections": "Paper III Sections 1–5 and 9: representation sufficiency and principal refinement theorem; probability illustration from Section 12.3 and full thresholds from Section 10.1",
       "status": "published",
       "summary": "The principal theorem characterizes representations sufficient for a query family exactly as refinements of its query-visible quotient. Stipulated probability distributions illustrate why an accurate yes/no observation can be insufficient and why deterministic postprocessing cannot recover erased information.",
-      "previous": "understanding-health-07.html"
+      "previous": "understanding-health-07.html",
+      "next": "understanding-health-09.html"
+    },
+    {
+      "id": "09",
+      "number": 9,
+      "title": "Why more information can sometimes make prediction harder",
+      "slug": "understanding-health-09.html",
+      "sourcePaper": "Representation Sufficiency in Prospective Health",
+      "sourceDoi": "10.5281/zenodo.23219588",
+      "sourcePdf": "research-representation-sufficiency-prospective-health.pdf",
+      "sourceSections": "Paper III Sections 6–8: source refinement, target coarsening, minimal sufficient target determinacy and exact Paper-II forest witness",
+      "status": "published",
+      "summary": "More source information preserves exact determinacy for a fixed target; finer target information imposes stronger exact demands. The canonical query-visible quotient is the coarsest sufficient target, and the finite forest witness separates raw-target failure from health-visible determination.",
+      "previous": "understanding-health-08.html"
     }
   ]
 }
