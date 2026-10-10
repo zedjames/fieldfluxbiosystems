@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 17: When a Model Meets Real-World Evidence | Understanding Health</title>
+<meta name="description" content="Lesson 17 tests fitted forest mortality hazards against independent 2021–2024 adult-stem observations, explaining hemlock miscalibration, predictive intervals, shared hazard uncertainty, and an extreme-tail probability.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-17.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-16.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="What happens when the mathematical model is confronted with real-world evidence?">
+<meta property="og:description" content="280 predicted hemlock deaths versus 685 observed: a direct lesson about empirical calibration and the boundaries of formal mathematical claims.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-17.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-17.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"What happens when the mathematical model is confronted with real-world evidence?","url":"https://fieldfluxbiosystems.com/understanding-health-17.html","description":"An accessible guided explanation of the independent adult forest mortality evaluation, hemlock mortality calibration failure, shared hazard uncertainty, and the distinction between model verification and empirical validity.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Prospective Health under Declared Specifications","identifier":"https://doi.org/10.5281/zenodo.23268987"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">17</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-16.html">Lesson 16</a><span aria-hidden="true">/</span><span>Lesson 17</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 17 · A test against independent observations</p>
+<h1 id="lesson-title" class="ulh-serif">What happens when the mathematical model is confronted with real-world evidence?</h1>
+<p class="ulh-lede">We have defined and computed model-conditional prospective Health. Now I want to ask a more demanding question: how well do the forest mortality rates fitted from earlier observations predict what was later observed? One adult-tree group reveals an important discrepancy.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper V · Sections 5.8, 6.5 and 7.1</span><span>Independent mortality comparison</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-16.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 16</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#external-test">The independent mortality test</a>
+<a href="#death-counts">Predicted versus observed deaths</a>
+<a href="#rates">Compare mortality rates</a>
+<a href="#predictive-intervals">The expected range</a>
+<a href="#extreme-tail">An extraordinarily small probability</a>
+<a href="#two-uncertainties">Where predictive uncertainty comes from</a>
+<a href="#rare-events">What simulations can miss</a>
+<a href="#mechanism">Evidence and causal explanation</a>
+<a href="#scope">What this does and does not validate</a>
+<a href="#knowledge-check">Check your understanding</a>
+</nav><small>Lesson 17<br>Health, Formally Defined<br>Paper V</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="external-test">
+<p class="ulh-kicker">01 / An out-of-fitting-period evaluation</p>
+<h2 class="ulh-serif">Can previously fitted mortality hazards predict later adult-tree deaths?</h2>
+<p class="ulh-lead">The survival model uses estimated mortality hazards for different forest cohorts. The question now is whether those hazards predict later outcomes that were unavailable when the model was fitted. This is a direct comparison against a separate observational record.</p>
+<p>Paper V uses the Harvard Forest <strong>HF453 adult-tree health and mortality survey</strong>. It selects adult stems observed alive at a 2021 baseline and matches eligible observations through 2024, subject to explicit stem identity, size, and status restrictions.</p>
+<div class="ulh17-population" role="group" aria-label="Strict eligible adult-stem mortality comparison with 21,576 adults, including 7,557 hemlocks and 14,019 other taxa">
+<div><span>Matched adult risk set</span><strong>21,576</strong><small>Adult stems with eligible later observed endpoints</small></div>
+<div><span>Eastern hemlock</span><strong>7,557</strong><small>Stems in the hemlock comparison</small></div>
+<div><span>Other taxa</span><strong>14,019</strong><small>All remaining selected adult stems</small></div></div>
+<p>This is a <strong>retrospective out-of-fitting-period assessment</strong>. The later mortality outcomes were not used to fit the earlier hazards, but the predictions were evaluated retrospectively; they were not a publicly issued forecast made before 2021–2024.</p>
+<p>The risk set is conditional on surviving and being recorded alive in 2021, then meeting the study's matching requirements. That limits which broader forest populations the findings can describe.</p>
+</section>
+
+<section class="ulh-chapter-section" id="death-counts">
+<p class="ulh-kicker">02 / What did the model predict?</p><h2 class="ulh-serif">Most of the discrepancy appears in one tree group.</h2>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh17-deaths"><caption>Paper V, Table 8 (printed page 33) · adult deaths from the 2021–2024 selected risk set</caption><thead><tr><th scope="col">Adult-tree group</th><th scope="col">Model-expected deaths</th><th scope="col">Observed secure deaths</th></tr></thead><tbody>
+<tr><th scope="row">Hemlock</th><td>280.3</td><td>685</td></tr>
+<tr><th scope="row">Other taxa</th><td>769.9</td><td>792</td></tr>
+<tr><th scope="row">All adults</th><td>1,050.3</td><td>1,477</td></tr>
+</tbody></table></div>
+<div class="ulh17-death-hero" role="group" aria-label="Hemlock mortality 280.3 expected versus 685 secure observed deaths in 7,557 matched stems">
+<div><span>Hemlock · expected deaths</span><strong>280.3</strong><small>Previously fitted model</small></div>
+<div class="ulh17-death-hero__arrow" aria-hidden="true">→</div>
+<div><span>Hemlock · observed deaths</span><strong>685</strong><small>Secure endpoints in the later record</small></div>
+</div>
+<p>There are approximately <strong>405 more hemlock deaths</strong> than the model's expected count. For the other tree groups, approximately 770 deaths were expected and 792 observed. The deviation therefore has a pronounced taxon-specific pattern.</p>
+<p>Expected deaths are not deterministic predictions that exactly that many trees must die. They are the average count implied by the fitted predictive model. To interpret the discrepancy scientifically we need its predicted variability, as well as the mean.</p>
+</section>
+
+<section class="ulh-chapter-section" id="rates">
+<p class="ulh-kicker">03 / Compare the proportions</p><h2 class="ulh-serif">Different population sizes call for a mortality-rate comparison.</h2>
+<p>The hemlock and other-taxa groups contain different numbers of adults. Converting counts to cumulative 2021–2024 mortality rates helps put them on a comparable scale.</p>
+<div class="ulh17-rates" role="group" aria-label="Cumulative mortality rates predicted and observed: hemlock predicted 3.71 percent, observed 9.06 percent; other taxa predicted approximately 5.49 percent, observed approximately 5.65 percent">
+<div class="ulh17-rates__legend"><span><i></i>Predicted</span><span><i></i>Observed</span></div>
+<div class="ulh17-rates__group"><strong>Hemlock</strong><div class="ulh17-rates__bar"><span>Expected · 3.71%</span><div><i class="ulh17-rates__predicted" style="width:37.1%"></i></div></div><div class="ulh17-rates__bar"><span>Observed · 9.06%</span><div><i class="ulh17-rates__observed" style="width:90.6%"></i></div></div></div>
+<div class="ulh17-rates__group"><strong>Other taxa</strong><div class="ulh17-rates__bar"><span>Expected · ~5.49%</span><div><i class="ulh17-rates__predicted" style="width:54.9%"></i></div></div><div class="ulh17-rates__bar"><span>Observed · ~5.65%</span><div><i class="ulh17-rates__observed" style="width:56.5%"></i></div></div></div>
+<div class="ulh17-rates__axis" aria-hidden="true"><span>0%</span><span>5%</span><span>10%</span></div></div>
+<p>For hemlock, the observed cumulative mortality rate of approximately 9.06% is about 2.4 times the model's 3.71% prediction. For other taxa the rates are much closer, at roughly 5.5–5.6%.</p>
+<p class="ulh-small">These are <em>cumulative</em> percentages over the selected observation interval, not annual mortality rates. The nonhemlock values are rounded here from the Table 8 counts and group size.</p>
+</section>
+
+<section class="ulh-chapter-section" id="predictive-intervals">
+<p class="ulh-kicker">04 / How much variability did the model expect?</p>
+<h2 class="ulh-serif">The observed hemlock mortality lies well outside the model's predicted range.</h2>
+<p>A statistical model predicts a distribution of death counts, not only its average count. Under the fitted hazard model the central 95% predictive intervals are:</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh17-prediction-table"><caption>Paper V, Table 10 (printed page 35) · predictive death counts</caption><thead><tr><th scope="col">Group</th><th scope="col">Expected deaths</th><th scope="col">Central 95% predictive interval</th><th scope="col">Observed deaths</th></tr></thead><tbody>
+<tr><th scope="row">Hemlock</th><td>280.3</td><td>220–347</td><td>685</td></tr>
+<tr><th scope="row">Other taxa</th><td>769.9</td><td>654–896</td><td>792</td></tr>
+<tr><th scope="row">All adults</th><td>1,050.3</td><td>918–1,192</td><td>1,477</td></tr></tbody></table></div>
+<div class="ulh17-interval-view" role="group" aria-label="Hemlock 95% predictive interval 220 to 347 deaths, model expected 280.3, observed 685. Other taxa interval 654 to 896, observed 792.">
+<div class="ulh17-interval-view__head"><span>Mortality predictive distribution</span><span>Predicted central interval versus observed count</span></div>
+<div class="ulh17-interval-view__row"><strong>Hemlock</strong><div class="ulh17-interval-view__track"><div class="ulh17-interval-view__range" style="left:22%;width:12.7%"></div><span class="ulh17-interval-view__expected" style="left:28.03%" aria-hidden="true"></span><span class="ulh17-interval-view__observed" style="left:68.5%" aria-hidden="true"></span></div><small>220–347 vs 685</small></div>
+<div class="ulh17-interval-view__row"><strong>Other taxa</strong><div class="ulh17-interval-view__track"><div class="ulh17-interval-view__range" style="left:65.4%;width:24.2%"></div><span class="ulh17-interval-view__expected" style="left:76.99%" aria-hidden="true"></span><span class="ulh17-interval-view__observed" style="left:79.2%" aria-hidden="true"></span></div><small>654–896 vs 792</small></div>
+<div class="ulh17-interval-view__legend"><span><i class="ulh17-interval-view__legend--range"></i>Central 95% range</span><span><i class="ulh17-interval-view__legend--expected"></i>Expected</span><span><i class="ulh17-interval-view__legend--observed"></i>Observed</span></div>
+<p class="ulh-small">Both horizontal scales run from 0 to 1,000 deaths, allowing comparison of interval width and observed position. The model's interval already incorporates the specified fitted-hazard uncertainty.</p></div>
+<p>The observed hemlock count is nearly twice the upper endpoint of its central 95% interval. The other-taxa count falls inside its reported interval. The model's predictive disagreement is strongest for hemlock.</p>
+</section>
+
+<section class="ulh-chapter-section" id="extreme-tail">
+<p class="ulh-kicker">05 / Quantifying the unusual observation</p>
+<h2 class="ulh-serif">Under the fitted hemlock model, 685 or more deaths has an extraordinarily small probability.</h2>
+<div class="ulh-math-panel"><p class="ulh-kicker">Hemlock upper-tail predictive probability</p><h3>What is the chance of at least 685 deaths under the specified model?</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Under the fitted hemlock mortality model the probability of 685 or more adult hemlock deaths is 4.6308 times 10 to the negative 21"><mrow><mi mathvariant="normal">P</mi><mo>(</mo><mi>D</mi><mo>≥</mo><mn>685</mn><mo>)</mo><mo>=</mo><mn>4.6308</mn><mo>×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>21</mn></mrow></msup></mrow></math></div></div><p>D is the total death count from the fitted predictive distribution for the selected hemlock stems. The event D ≥ 685 includes 685 or more deaths. The probability is conditional on that predictive model and risk set.</p></div>
+<p>To see the scale of the expression, remember that 10 raised to a negative exponent is a fraction:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Reading scientific notation</p><h3>A small positive tail probability.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Ten to the negative twenty one equals one divided by ten to the twenty first power"><mrow><msup><mn>10</mn><mrow><mo>−</mo><mn>21</mn></mrow></msup><mo>=</mo><mfrac><mn>1</mn><msup><mn>10</mn><mn>21</mn></msup></mfrac></mrow></math></div></div><p>The factor 4.6308 multiplies the reciprocal of 10<sup>21</sup>. The result is far smaller than conventional significance thresholds.</p></div>
+<p>It is strong evidence that the tested mortality model does not adequately predict these selected hemlock outcomes. This number is <em>not</em> a probability that the model is true or false, and it is not a probability that the mathematical definition of health is correct.</p>
+<p>Statistical evidence tells us that the observed outcome is exceptionally implausible under the specified predictive distribution; scientific explanation requires a separate analysis of the generating process.</p>
+</section>
+<section class="ulh-chapter-section" id="two-uncertainties">
+<p class="ulh-kicker">06 / Accounting for uncertainty within the model</p>
+<h2 class="ulh-serif">The death-count prediction includes both event variation and fitted-hazard uncertainty.</h2>
+<p>Each model cell has a fitted hazard distribution rather than a perfectly known hazard. In a predictive replicate, stems assigned to the same cell share the sampled hazard. The uncertainty in the predicted total therefore comes from two sources.</p>
+<div class="ulh17-uncertainty-split"><div><span>Event variability</span><strong>Deaths vary even with hazards fixed.</strong><p>Individual stem outcomes still differ between draws.</p></div><div><span>Hazard uncertainty</span><strong>Estimated mortality rates themselves vary.</strong><p>Different sampled cell hazards shift the expected deaths together.</p></div></div>
+<div class="ulh-math-panel"><p class="ulh-kicker">Law of total variance</p><h3>Total predictive variance contains both sources.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Variance of total deaths equals the expectation of variance of deaths conditional on sampled hazards, plus variance of expected deaths conditional on the hazards"><mrow><mi mathvariant="normal">Var</mi><mo>(</mo><mi>D</mi><mo>)</mo><mo>=</mo><mi mathvariant="normal">E</mi><mo>[</mo><mi mathvariant="normal">Var</mi><mo>(</mo><mi>D</mi><mo>∣</mo><mi>H</mi><mo>)</mo><mo>]</mo><mo>+</mo><mi mathvariant="normal">Var</mi><mo>(</mo><mi mathvariant="normal">E</mi><mo>[</mo><mi>D</mi><mo>∣</mo><mi>H</mi><mo>]</mo><mo>)</mo></mrow></math></div></div><p>H denotes the collection of sampled cell hazards. The first term averages outcome variance conditional on fixed hazards; the second captures how the conditional mean changes when hazard values vary.</p></div>
+<div class="ulh17-variance-band" role="img" aria-label="Approximately 74.6 percent of reported hemlock predictive death-count variance is due to uncertainty in shared fitted hazards; approximately 25.4 percent is event variation under those hazards">
+<div><span style="width:74.6%">74.6% · hazard uncertainty</span><span style="width:25.4%">25.4%</span></div>
+<p>In the reported hemlock calculation, about 74.6% of the predictive variance comes from fitted-hazard uncertainty. The remainder is event variation.</p></div>
+<p>Even after accounting for these modeled uncertainties, 685 deaths remains far outside the predictive distribution. This also leaves open whether the uncertainty law or its conditioning on 2021 survivors appropriately represents the real observational population.</p>
+</section>
+<section class="ulh-chapter-section" id="rare-events">
+<p class="ulh-kicker">07 / Why many simulation draws are still insufficient</p>
+<h2 class="ulh-serif">Zero simulated exceedances do not establish a zero underlying probability.</h2>
+<p>The study generates <strong>262,144 predictive mortality replicates</strong>. None reaches 685 hemlock deaths. The direct simulation proportion of exceedances is thus 0/262,144—but that is an observation about this finite simulation experiment.</p>
+<div class="ulh17-simulation-contrast"><div><span>Monte Carlo sample</span><strong>0 / 262,144</strong><p>Replicates with at least 685 hemlock deaths in this finite run</p></div><div><span>Direct tail calculation</span><strong>4.6308 × 10<sup>−21</sup></strong><p>A small positive upper-tail probability under the stipulated fitted distribution</p></div></div>
+<p>Events this rare can be absent from a finite simulation even when their theoretical probability is positive. The paper therefore evaluates the extreme upper tail numerically and reports independent numerical checks rather than declaring the probability to be zero.</p>
+<p>A simulation can characterize the middle of a distribution well while having insufficient resolution for its far tail. Exact or independently checked numerical probability methods can answer a different question about that distribution.</p>
+</section>
+</article></div></section>
+
+<section class="ulh17-interpretation" id="mechanism"><div class="ulh-container">
+<p class="ulh-kicker">08 / Evidence for miscalibration and the search for mechanism</p>
+<h2 class="ulh-serif">Finding where a model fails does not uniquely identify why it failed.</h2>
+<p>The adult mortality test identifies a substantial hemlock-specific underprediction. The author discusses <em>hemlock woolly adelgid</em>, an insect associated with eastern hemlock decline, as a plausible mechanism deserving further investigation.</p>
+<p>That biological explanation has not been isolated by the matched mortality comparison. Testing it would require evidence on infestation pressure, crown condition, damage history, changing hazards, and independently held-out outcomes. A useful next model would include biologically supported mechanisms and determine whether they improve prospective prediction.</p>
+<p>The current result is a strong component-level test of the <em>previously fitted mortality law</em> on a selected adult population. It establishes a predictive calibration problem within that scope.</p>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Closing interpretation"><strong>The scientific boundary</strong><nav aria-label="Lesson closing sections"><a href="#scope">Three distinct claims</a><a href="#knowledge-check">Check your understanding</a><a href="#three-standards">Three standards of evidence</a><a href="#takeaway">Next: Lesson 18</a></nav><small>Lesson 17<br>Paper V · Component validation</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="scope">
+<p class="ulh-kicker">09 / What exactly does the evidence establish?</p><h2 class="ulh-serif">The fitted hazard component has failed a demanding observational test.</h2>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>Three different kinds of scientific claim</caption><thead><tr><th scope="col">Claim</th><th scope="col">What the mortality result addresses</th></tr></thead><tbody>
+<tr><th scope="row">Formal definition of prospective Health</th><td>The discrepancy does not contradict the definition or its mathematical consequences.</td></tr>
+<tr><th scope="row">Correct execution of declared probability calculations</th><td>The program may implement its probability model correctly even where that model predicts actual observations poorly.</td></tr>
+<tr><th scope="row">Reliable real-forest mortality prediction</th><td>The selected hemlock comparison provides strong evidence against the tested hazard component's predictive calibration.</td></tr></tbody></table></div>
+<p>The complete prospective-Health claim involves present forest reconstruction, future growth, entry, mortality, viability thresholds, and a distribution over entire histories. This adult-mortality comparison tests one important part of that chain.</p>
+<p>It cannot independently validate or reject the entire prospective-health measurement pipeline. The 2021 survivor baseline and matching rules also constrain the interpretation: deaths before that baseline and outcomes outside the eligible risk set were not directly tested here.</p>
+</section>
+
+<section class="ulh-chapter-section" id="knowledge-check">
+<p class="ulh-kicker">10 / A question to carry forward</p>
+<h2 class="ulh-serif">The model's central 95% hemlock interval is 220–347 deaths, and 685 are observed. What can we conclude?</h2>
+<div class="ulh17-quiz" data-ulh17-quiz>
+<fieldset><legend>Choose the strongest conclusion supported by the comparison.</legend>
+<label><input type="radio" name="ulh17-answer" value="definition"><span>The entire mathematical definition of prospective Health has been disproved.</span></label>
+<label><input type="radio" name="ulh17-answer" value="calibration"><span>The fitted hemlock mortality model shows serious predictive miscalibration on the selected adult-stem population.</span></label>
+<label><input type="radio" name="ulh17-answer" value="cause"><span>Hemlock woolly adelgid has been proved the sole cause of the extra deaths.</span></label>
+</fieldset><button class="ulh-button ulh-button--ink" type="button" data-ulh17-check>Check my answer</button>
+<p class="ulh17-quiz__feedback" data-ulh17-feedback role="status" aria-live="polite">Select an answer to see what the observation establishes.</p>
+<noscript><p><strong>Answer:</strong> The second choice. This test finds substantial predictive miscalibration of the fitted hazard component in the specified matched risk set.</p></noscript>
+</div>
+</section>
+<section class="ulh-chapter-section" id="three-standards">
+<p class="ulh-kicker">11 / Three achievements that require different evidence</p>
+<h2 class="ulh-serif">A proof, a reproducible calculation, and a reliable measurement answer different questions.</h2>
+<div class="ulh17-three-standards"><div><span>Mathematical verification</span><strong>Do the conclusions follow from the formal assumptions?</strong><p>Exact statements, definitions, and proof obligations.</p></div><div><span>Computational reproducibility</span><strong>Can we replay the stipulated calculation faithfully?</strong><p>Inspectability, checksums, code, and numerical execution.</p></div><div><span>Empirical validity</span><strong>Does the calculation accurately describe the observed system?</strong><p>Independent observational evidence and calibrated prediction.</p></div></div>
+<p>Paper V demonstrates why all three are needed in an empirical measurement program. The hemlock discrepancy is a substantive finding about the predictive system and a guide to what requires better scientific modeling.</p>
+</section>
+</article></div></section>
+
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container"><p class="ulh-kicker">What I want you to carry forward</p>
+<h2 class="ulh-serif">A measured discrepancy can tell us precisely which model component requires new evidence.</h2>
+<p>In the selected adult forest population, the previously fitted hazards predict far fewer hemlock deaths than were subsequently observed. The discrepancy remains extreme after accounting for the model's specified hazard uncertainty. It tests the empirical reliability of one important mechanism without rewriting the mathematical definition of Health.</p>
+<p>Lesson 18 returns to an exact question about information. A cohort representation can preserve stem count, RMS diameter, and basal area while losing the number of stems below a 10-centimeter juvenile threshold. We'll examine why this is a mathematical information-loss result with consequences for the very continuation questions the numerical model tries to answer.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-16.html" class="ulh-button">← Previous: Lesson 16</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-prospective-health-declared-specifications.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper V (PDF)</a></div>
+</div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Prospective Health under Declared Specifications</em>, Paper V of <em>Health, Formally Defined</em> (2026), especially Sections 5.8, 6.5 and 7.1, Tables 8 and 10, and the predictive hemlock tail calculation. <a href="research-prospective-health-declared-specifications.html">Full publication record</a> · <a href="https://doi.org/10.5281/zenodo.23268987" target="_blank" rel="noopener">Zenodo DOI</a>. The mortality findings are a component-level retrospective evaluation on a selected adult risk set, not an independently validated real-forest Health classification.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="understanding-health-14.html">Lesson 14</a></li><li><a href="understanding-health-15.html">Lesson 15</a></li><li><a href="understanding-health-16.html">Lesson 16</a></li><li><a href="understanding-health-17.html">Lesson 17</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+<script src="assets/js/understanding-health-17.js?v=1" defer></script>
+</body></html>
