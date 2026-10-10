@@ -279,6 +279,32 @@ def main():
           "Lesson 9 must link forward to Lesson 10",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-09.html"' in tenth,
           "Lesson 10 must link back to Lesson 9",errors)
+    eleventh=(ROOT/"understanding-health-11.html").read_text(encoding="utf8")
+    check(eleventh.count("<math ")==6,"Lesson 11 must show six accessible MathML constructions",errors)
+    check("Equation (68)" in eleventh and "Equation (69)" in eleventh and
+          "Equation (63)" in eleventh and "Equations (77)–(79)" in eleventh,
+          "Lesson 11 must identify the actual controlled and route equations",errors)
+    check("Equations (82)–(83)" in eleventh and "PresentHealth" in eleventh,
+          "Lesson 11 failure-aware robustness statement missing",errors)
+    check("admissible" in eleventh and "nonempty" in eleventh and "policy" in eleventh,
+          "Lesson 11 must distinguish controls and policy-nonempty robustness",errors)
+    check("independence-class" in eleventh and "physical independence" in eleventh,
+          "Lesson 11 route-class semantics must retain empirical boundary",errors)
+    check('data-ulh-challenge-choice="positive"' in eleventh and
+          'data-ulh-challenge-choice="full"' in eleventh and
+          'data-ulh-negative="a"' in eleventh and
+          'data-ulh-negative="b"' in eleventh,
+          "Lesson 11 needs both static success and failure profiles",errors)
+    check("different carriers" in eleventh and "mathematical" in eleventh.lower(),
+          "Lesson 11 must keep robust-policy and robust-persistence domains distinct",errors)
+    check("research-representation-sufficiency-prospective-health.pdf" in eleventh and
+          "10.5281/zenodo.23219588" in eleventh,
+          "Lesson 11 must cite the exact local Paper III full text and DOI",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-11.html"' in
+          (ROOT/"understanding-health-10.html").read_text(encoding="utf8"),
+          "Lesson 10 must link forward to Lesson 11",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-10.html"' in eleventh,
+          "Lesson 11 must link backward to Lesson 10",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
