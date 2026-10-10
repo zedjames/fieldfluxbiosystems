@@ -1,0 +1,49 @@
+name: Verify live Lesson 4 publication
+on:
+  pull_request:
+    paths:
+      - .github/workflows/verify-live-lesson4.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect live HTTPS content and lesson paths
+        run: |
+          python3 - <<'PY'
+          import time,ssl
+          from urllib.request import Request,urlopen
+          host="https://fieldfluxbiosystems.com/"
+          checks={
+            "understanding-health.html":["04 lessons published","understanding-health-04.html","understanding-health-03.html"],
+            "understanding-health-03.html":['rel="next" href="https://fieldfluxbiosystems.com/understanding-health-04.html"',"Next: Lesson 4"],
+            "understanding-health-04.html":["By Zed James","understanding-health-03.html",'<math ',"ulh-robustness-pair","ulh-architecture__steps","research-constitutive-continuation-capacity.pdf",'rel="prev"'],
+            "sitemap.xml":["understanding-health-04.html"],
+            "assets/css/understanding-health.css":["ulh-robustness-pair","ulh-paper1-recap"]
+          }
+          errors=[]
+          for path,phrases in checks.items():
+            for attempt in range(6):
+              try:
+                with urlopen(Request(host+path,headers={"User-Agent":"FFB-Lesson4-Verify/20261010","Cache-Control":"no-cache"}),context=ssl.create_default_context(),timeout=20) as res:
+                  page=res.read().decode("utf-8","replace")
+                  print("HTTPS",path,res.status,len(page))
+                missing=[p for p in phrases if p not in page]
+                if missing:raise RuntimeError("missing "+repr(missing))
+                break
+              except Exception as exc:
+                if attempt==5:errors.append(f"{path}: {exc}")
+                else:time.sleep(5)
+          try:
+            with urlopen(host+"research-constitutive-continuation-capacity.pdf",timeout=30,context=ssl.create_default_context()) as res:
+              pdf=res.read(5)
+            print("Paper I PDF header:",pdf)
+            if pdf!=b"%PDF-":errors.append("source full text unavailable")
+          except Exception as exc:errors.append("source PDF: "+str(exc))
+          if errors:
+            for x in errors:print("ERROR",x)
+            raise SystemExit(1)
+          print("PASS — Understanding Health Lesson 4, chapter navigation, source PDF and public HTTPS verified")
+          PY
