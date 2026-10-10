@@ -30,6 +30,13 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const targetSwitcher=document.querySelector('[data-ulh-target-choice="class"]');
  const budgetSlider=document.querySelector("#ulh-budget-range");
  const challengeSwitcher=document.querySelector('[data-ulh-challenge-choice="full"]');
+ const lossSwitcher=document.querySelector('[data-ulh-loss-choice="ignored"]');
+ let lossState=null;
+ if(lossSwitcher){
+  lossSwitcher.click();
+  lossState={pressed:lossSwitcher.getAttribute("aria-pressed"),active:document.querySelector('[data-ulh-loss-card="ignored"]')?.dataset.active||"",other:document.querySelector('[data-ulh-loss-card="erased"]')?.dataset.active||"",summary:document.querySelector("[data-ulh-loss-summary]")?.textContent||""};
+ }
+
  let challengeState=null;
  if(challengeSwitcher){
    challengeSwitcher.click();
@@ -79,7 +86,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,budgetState,challengeState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,budgetState,challengeState,lossState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -115,6 +122,11 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-12.html"):
+                    loss=result["lossState"]
+                    if (not loss or loss["pressed"]!="true" or loss["active"]!="true" or
+                        loss["other"]!="false" or "retained" not in loss["summary"].lower()):
+                        errors.append(page+" distinction provenance selector failed at "+str(width))
                 if page.endswith("-11.html"):
                     challenge=result["challengeState"]
                     if (not challenge or challenge["pressed"]!="true" or challenge["focus"]!="full" or
