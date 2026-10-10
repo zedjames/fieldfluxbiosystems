@@ -202,6 +202,36 @@ def main():
           "Lesson 6 must link to Lesson 7",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-06.html"' in seventh,
           "Lesson 7 must point back to Lesson 6",errors)
+    eighth=(ROOT/"understanding-health-08.html").read_text(encoding="utf8")
+    check(eighth.count("<math ")==4,"Lesson 8 requires four accessible MathML expressions",errors)
+    check("RepresentationSufficient" in eighth and "⪰" in eighth and "q<sub>A</sub>" in eighth,
+          "Lesson 8 must state the principal sufficiency theorem and refinement",errors)
+    check("99.9%" in eighth and "0.1%" in eighth and "50%" in eighth and
+          "stipulated" in eighth, "Lesson 8 needs the qualified probability counterexample",errors)
+    check('data-ulh-measure-choice="possible"' in eighth and
+          'data-ulh-measure-choice="probability"' in eighth and
+          'data-ulh-measure-choice="threshold"' in eighth,
+          "Lesson 8 measurement selector must contain all three cases",errors)
+    check("deterministic" in eighth.lower() and "additional" in eighth.lower(),
+          "Lesson 8 must discuss deterministic information loss and added evidence",errors)
+    check("research-representation-sufficiency-prospective-health.pdf" in eighth and
+          "10.5281/zenodo.23219588" in eighth,"Lesson 8 Paper III full source missing",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-08.html"' in
+          (ROOT/"understanding-health-07.html").read_text(encoding="utf8"),
+          "Lesson 7 must link forward to Lesson 8",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-07.html"' in eighth,
+          "Lesson 8 must link back to Lesson 7",errors)
+    paper3=ROOT/"research-representation-sufficiency-prospective-health.pdf"
+    check(paper3.exists(),"Mirrored exact Paper III PDF missing",errors)
+    if paper3.exists():
+        import hashlib
+        digest=hashlib.sha256(paper3.read_bytes()).hexdigest()
+        check(digest=="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650",
+              "Paper III PDF does not match published Zenodo SHA-256",errors)
+    source3=(ROOT/"research-representation-sufficiency-prospective-health.html").read_text(encoding="utf8")
+    check("citation_pdf_url" in source3 and
+          "research-representation-sufficiency-prospective-health.pdf" in source3,
+          "Paper III scholarly citation record missing local PDF indexing",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)

@@ -26,6 +26,13 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const stageSwitcher=document.querySelector('[data-ulh-stage-choice="adult"]');
  const transportSwitcher=document.querySelector('[data-ulh-transport-choice="visible"]');
  const horizonSwitcher=document.querySelector('[data-ulh-support-choice="long"]');
+ const representationSwitcher=document.querySelector('[data-ulh-measure-choice="threshold"]');
+ let representationState=null;
+ if(representationSwitcher){
+   representationSwitcher.click();
+   representationState={pressed:representationSwitcher.getAttribute("aria-pressed"),active:document.querySelector('[data-ulh-measure-card="threshold"]')?.dataset.active||"",coarse:document.querySelector('[data-ulh-measure-card="possible"]')?.dataset.active||"",summary:document.querySelector("[data-ulh-measure-summary]")?.textContent||""};
+ }
+
  let supportState=null;
  if(horizonSwitcher){
   horizonSwitcher.click();
@@ -50,7 +57,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -86,6 +93,11 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-08.html"):
+                    representation=result["representationState"]
+                    if (not representation or representation["pressed"]!="true" or representation["active"]!="true" or
+                        representation["coarse"]!="false" or "task-visible" not in representation["summary"]):
+                        errors.append(page+" representation comparator failed at "+str(width))
                 if page.endswith("-07.html"):
                     support=result["supportState"]
                     if (not support or support["pressed"]!="true" or support["capacity"]!="∅" or

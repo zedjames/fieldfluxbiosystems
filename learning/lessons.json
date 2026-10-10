@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 7,
+  "publishedCount": 8,
   "lessons": [
     {
       "id": "01",
@@ -99,7 +99,21 @@
       "sourceSections": "Paper II Section 12 and Section 7: open-system support states, horizon transport, withdrawal and comparison with the five-state forest",
       "status": "published",
       "summary": "The four-state open-system example proves that equal short-horizon capacities need not determine long-horizon capacity; withdrawal changes reserve-Health despite preserved present realization. It distinguishes formal dependence from empirical claims.",
-      "previous": "understanding-health-06.html"
+      "previous": "understanding-health-06.html",
+      "next": "understanding-health-08.html"
+    },
+    {
+      "id": "08",
+      "number": 8,
+      "title": "How do we know whether a measurement contains enough information to determine health?",
+      "slug": "understanding-health-08.html",
+      "sourcePaper": "Representation Sufficiency in Prospective Health",
+      "sourceDoi": "10.5281/zenodo.23219588",
+      "sourcePdf": "research-representation-sufficiency-prospective-health.pdf",
+      "sourceSections": "Paper III Sections 1–5 and 9: representation sufficiency and principal refinement theorem; probability illustration from Section 12.3 and full thresholds from Section 10.1",
+      "status": "published",
+      "summary": "The principal theorem characterizes representations sufficient for a query family exactly as refinements of its query-visible quotient. Stipulated probability distributions illustrate why an accurate yes/no observation can be insufficient and why deterministic postprocessing cannot recover erased information.",
+      "previous": "understanding-health-07.html"
     }
   ]
 }
