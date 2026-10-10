@@ -232,6 +232,28 @@ def main():
     check("citation_pdf_url" in source3 and
           "research-representation-sufficiency-prospective-health.pdf" in source3,
           "Paper III scholarly citation record missing local PDF indexing",errors)
+    ninth=(ROOT/"understanding-health-09.html").read_text(encoding="utf8")
+    check(ninth.count("<math ")==4,"Lesson 9 requires four accessible MathML statements",errors)
+    check("Theorem 6.1" in ninth and "Theorem 6.2" in ninth and "Theorem 7.1" in ninth,
+          "Lesson 9 must identify all three key transport theorems",errors)
+    check("Source refinement monotonicity" in ninth and "Target coarsening monotonicity" in ninth,
+          "Lesson 9 must distinguish source and target roles",errors)
+    check("SuffDet" in ninth and "q<sub>A</sub>" in ninth,
+          "Lesson 9 must explain the least sufficient target criterion",errors)
+    check('data-ulh-target-choice="raw"' in ninth and 'data-ulh-target-choice="class"' in ninth and
+          'data-ulh-target-card="raw"' in ninth and 'data-ulh-target-card="class"' in ninth,
+          "Lesson 9 must preserve both comparison views without scripts",errors)
+    check("exact finite witness" in ninth and "Paper III" in ninth and "{S, E}" in ninth and "{S}" in ninth,
+          "Lesson 9 must include Paper III finite forest witness",errors)
+    check("statistical" in ninth.lower() and "uncertainty" in ninth.lower(),
+          "Lesson 9 must separate mathematical exactness from empirical confidence",errors)
+    check("research-representation-sufficiency-prospective-health.pdf" in ninth and
+          "10.5281/zenodo.23219588" in ninth,"Lesson 9 Paper III full source missing",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-09.html"' in
+          (ROOT/"understanding-health-08.html").read_text(encoding="utf8"),
+          "Lesson 8 must link to Lesson 9",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-08.html"' in ninth,
+          "Lesson 9 must link back to Lesson 8",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
