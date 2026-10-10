@@ -1,0 +1,52 @@
+name: Verify public Understanding Health Lesson 11
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lesson11.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check public HTTPS, lesson content, navigation and source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time,hashlib
+          from urllib.request import Request,urlopen
+          host="https://fieldfluxbiosystems.com/"
+          pages={
+           "understanding-health.html":["11 lessons published","understanding-health-11.html"],
+           "understanding-health-10.html":["Next: Lesson 11","understanding-health-11.html",'rel="next"'],
+           "understanding-health-11.html":["Lesson 11","By Zed James","Equation (68)","Equation (69)","Equation (63)","Equations (82)–(83)","data-ulh-challenge-choice","research-representation-sufficiency-prospective-health.pdf",'rel="prev"'],
+           "assets/js/understanding-health-11.js":["challenge","failing wind response"],
+           "assets/css/understanding-health-11.css":["ulh-challenge-explorer","ulh-policy-grid"],
+           "sitemap.xml":["understanding-health-11.html"]
+          }
+          failures=[]
+          for path,terms in pages.items():
+           for attempt in range(8):
+            try:
+             with urlopen(Request(host+path,headers={"User-Agent":"FFB-Lesson11-Smoke/1.0","Cache-Control":"no-cache"}),context=ssl.create_default_context(),timeout=25) as res:
+              body=res.read().decode("utf-8","replace")
+              print("HTTPS",path,res.status,len(body))
+             absent=[term for term in terms if term not in body]
+             if absent:raise ValueError("Missing "+repr(absent))
+             break
+            except Exception as e:
+             if attempt==7:failures.append(path+": "+str(e))
+             else:time.sleep(5)
+          try:
+           with urlopen(host+"research-representation-sufficiency-prospective-health.pdf",timeout=40,context=ssl.create_default_context()) as res:
+            pdf=res.read()
+           sha=hashlib.sha256(pdf).hexdigest()
+           print("PAPER III PDF",len(pdf),sha)
+           if not pdf.startswith(b"%PDF-") or sha!="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650":
+            failures.append("Original Paper III PDF checksum mismatch")
+          except Exception as e:failures.append("PDF "+str(e))
+          for f in failures:print("FAIL",f)
+          if failures:raise SystemExit(1)
+          print("PASS Lesson 11 is public with source and navigation under verified HTTPS")
+          PY
