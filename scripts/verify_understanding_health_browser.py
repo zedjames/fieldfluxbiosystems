@@ -23,6 +23,12 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const term=document.querySelector(".ulh-term-list");
  const switcher=document.querySelector('[data-ulh-requirement="any"]');
  const quotientSwitcher=document.querySelector('[data-ulh-quotient="extended"]');
+ const stageSwitcher=document.querySelector('[data-ulh-stage-choice="adult"]');
+ let stageState=null;
+ if(stageSwitcher){
+  stageSwitcher.click();
+  stageState={pressed:stageSwitcher.getAttribute("aria-pressed"),adultVisible:document.querySelector('[data-ulh-stage-view="adult"]')?.hidden===false,newbornHidden:document.querySelector('[data-ulh-stage-view="newborn"]')?.hidden===true,summary:document.querySelector("[data-ulh-stage-summary]")?.textContent||""};
+ }
  let quotientState=null;
  if(quotientSwitcher) {
   quotientSwitcher.click();
@@ -30,7 +36,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -66,6 +72,10 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-05.html"):
+                    stage=result["stageState"]
+                    if not stage or stage["pressed"]!="true" or not stage["adultVisible"] or not stage["newbornHidden"] or "capacities have not changed" not in stage["summary"]:
+                        errors.append(page+" stage licensing controls did not respond at "+str(width))
                 if page.endswith("-03.html"):
                     quotient=result["quotientState"]
                     if not quotient or quotient["pressed"]!="true" or not quotient["expandedVisible"] or not quotient["originalHidden"] or "four subsets" not in quotient["explanation"].lower():
