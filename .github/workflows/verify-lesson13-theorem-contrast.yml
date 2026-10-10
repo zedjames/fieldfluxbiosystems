@@ -1,0 +1,50 @@
+name: Verify live Lesson 13 theorem contrast fix
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-lesson13-theorem-contrast.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Fetch production page and updated theorem styles
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          import ssl,time
+          origin="https://fieldfluxbiosystems.com/"
+          files={
+            "understanding-health-13.html":[
+              'id="theorem"',
+              'Lemma 9.1',
+              'class="ulh-math-panel ulh-enrichment-theorem"',
+              'assets/css/understanding-health-13.css?v=2'
+            ],
+            "assets/css/understanding-health-13.css?v=2":[
+              ".ulh-page .ulh-enrichment-theorem h3{color:#204851}",
+              ".ulh-page .ulh-enrichment-theorem .ulh-equation math{color:#173e4a}",
+              ".ulh-page .ulh-enrichment-theorem p:not(.ulh-kicker){color:#466269}"
+            ]
+          }
+          failures=[]
+          for path,needles in files.items():
+            for attempt in range(8):
+              try:
+                with urlopen(Request(origin+path,headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'FFB-L13-Contrast-Check/1.0'}),timeout=20,context=ssl.create_default_context()) as response:
+                  s=response.read().decode("utf-8","replace")
+                  print("LIVE",path,response.status,len(s),flush=True)
+                missing=[needle for needle in needles if needle not in s]
+                if missing:raise ValueError("Missing "+repr(missing))
+                break
+              except Exception as e:
+                if attempt==7:failures.append(str(e))
+                else:time.sleep(5)
+          if failures:
+            for e in failures:print("FAIL",e)
+            raise SystemExit(1)
+          print("PASS live HTML points to CSS v2 and theorem MathML, heading, and description have dark contrast",flush=True)
+          PY
