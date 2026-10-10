@@ -117,5 +117,55 @@
 <p>That lets us distinguish what a system <em>can</em> achieve from what it can achieve within the resources the requirement permits. The costs, budgets, and meanings of those resources all belong to the declared model.</p>
 </section>
 </article></div></section>
-<!-- LESSON10_PART3 -->
+<section class="ulh-budget-explorer" id="budget" aria-labelledby="budget-title">
+<div class="ulh-container">
+<p class="ulh-kicker">Explore a declared budget</p>
+<h2 class="ulh-serif" id="budget-title">Two available paths. Two different minimum costs.</h2>
+<p class="ulh-budget-explorer__intro">Paper III's finite example has two attained minimum viable costs: 1 and 3 units. I'll call these Case A and Case B for our illustration. Start with a budget of 2 units and move the control to see when each case becomes affordable.</p>
+<div class="ulh-budget-explorer__control">
+<label for="ulh-budget-range">Available budget: <output for="ulh-budget-range" data-ulh-budget-value>2 units</output></label>
+<input id="ulh-budget-range" type="range" min="0" max="5" value="2" step="1" aria-describedby="ulh-budget-help">
+<div class="ulh-budget-explorer__scale" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+<p class="ulh-budget-explorer__help" id="ulh-budget-help">The budget is a declared mathematical parameter, measured in abstract units; it is not a calibrated biological resource quantity.</p></div>
+<div class="ulh-budget-explorer__cases">
+<div><span>Case A · Minimum viable cost</span><strong>1 <small>unit</small></strong><div class="ulh-budget-explorer__line" role="img" aria-label="Case A minimum cost: 1 unit"><span style="width:20%"></span></div><span class="ulh-result" data-ulh-budget-status="A" data-state="pass">Affordable</span><p data-ulh-budget-explain="A">A viable response is attainable with a minimum cost of 1, within the current budget of 2.</p></div>
+<div><span>Case B · Minimum viable cost</span><strong>3 <small>units</small></strong><div class="ulh-budget-explorer__line" role="img" aria-label="Case B minimum cost: 3 units"><span style="width:60%"></span></div><span class="ulh-result" data-ulh-budget-status="B" data-state="fail">Not affordable</span><p data-ulh-budget-explain="B">The minimum cost is 3, which exceeds the current budget of 2.</p></div>
+</div>
+<p class="ulh-budget-explorer__summary" data-ulh-budget-summary aria-live="polite">At budget 2, Case A is affordable and Case B is not. Both are possible in the declared example, but the budget question distinguishes them.</p>
+<p class="ulh-budget-explorer__note">The values 1 and 3 come from the paper's actual Boolean cost-code fixture. The Case A/Case B labels, adjustable budget, and visual design are instructional choices. Without JavaScript, the initially displayed budget-2 results remain readable.</p>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Continue reading"><strong>Complete the idea</strong><nav aria-label="Final sections">
+<a href="#cost-code">The all-budget theorem</a><a href="#compare">Probability and cost together</a><a href="#scope">Scientific interpretation</a><a href="#takeaway">Carry it forward</a></nav>
+<small>Lesson 10<br>Two ways to enrich continuation</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="cost-code">
+<p class="ulh-kicker">05 / One code for every budget question</p>
+<h2 class="ulh-serif">The minimum attainable cost can also summarize an entire question family.</h2>
+<p>To study all possible budget questions for a fixed observed response atom a, Paper III introduces a cost code. If the response is unavailable through every viable continuation, its code is <code>none</code>. If a viable minimum cost is attained, the code is <code>some(m)</code>, recording that minimum m.</p>
+<p>The paper's finite Boolean example has CostCode(true) = some(1) and CostCode(false) = some(3). Here <code>some(1)</code> is a typed mathematical value meaning that a minimum exists and equals 1; it is not an empirical resource price.</p>
+<p>On the paper's declared <em>unavailable-or-attained-minimum domain</em>, all budget-adequacy answers agree for two states exactly when their cost codes agree.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The complete all-budget quotient · Paper III, Equation (57)</p><h3>Budget answers agree exactly when the minimum-cost codes agree.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="For every budget b the budget query answers agree for x and y if and only if cost code a of x equals cost code a of y">
+<mtable columnalign="left" rowspacing=".85em">
+<mtr><mtd><mrow><mo>∀</mo><mi>b</mi><mo>,</mo><msub><mi>A</mi><mi>b</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>↔</mo><msub><mi>A</mi><mi>b</mi></msub><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><mo>⇔</mo><msub><mi mathvariant="normal">CostCode</mi><mi>a</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msub><mi mathvariant="normal">CostCode</mi><mi>a</mi></msub><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mtd></mtr>
+</mtable></math></div></div>
+<p>The statement is relative to one fixed observed response atom a, the complete declared budget language, and the cost-code domain where a minimum is attained or the atom is unavailable.</p></div>
+<p>The domain qualification is important. I have not assumed that any arbitrary set of history costs must possess a minimum. The theorem uses cases where the minimum really exists, or the response is absent.</p>
+<p>With that condition, the cost code is a concrete minimal task-visible realization for the all-budget questions. The full collection of costed histories may contain many additional details, including multiple routes to the same observed response.</p>
+</section>
+<section class="ulh-chapter-section" id="compare">
+<p class="ulh-kicker">06 / Two examples of the same representation principle</p>
+<h2 class="ulh-serif">What information do our questions actually use?</h2>
+<p>The probability theorem and the cost theorem now have the same conceptual shape. Both begin with richer response information. Each then specifies a family of questions that consumes only certain distinctions in that information.</p>
+<div class="ulh-summary-pair" role="group" aria-label="Two families of health-relevant questions and their task-visible sufficient statistics">
+<div><span>Probability threshold questions</span><strong>Total success probability</strong><p>For all bounded rational thresholds and a fixed success predicate, one scalar captures exactly the complete query-answer profile.</p></div>
+<div><span>Budget affordability questions</span><strong>Attained minimum cost, or unavailable</strong><p>For one observed response atom and every declared budget, the justified cost code captures exactly the query-answer profile.</p></div></div>
+<p>We can now distinguish several kinds of information a measurement might be asked to supply. If the requirement asks only whether continuation is possible, possibility information may be sufficient. If it asks how probable a successful outcome is, probability information is required. If it asks whether a viable response is affordable, we need cost information as well.</p>
+<p>If our requirements involve which paths are distinct, whether a policy can actually produce a successful continuation, or whether failure remains possible under challenges, the representation may need those richer response structures. We'll develop them in Lesson 11.</p>
+</section>
+</article></div></section>
+<!-- LESSON10_END -->
+
 
