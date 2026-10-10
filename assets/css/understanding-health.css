@@ -226,3 +226,51 @@
  .ulh-page .ulh-compression__bridge b{transform:rotate(90deg)}
  .ulh-page .ulh-pathways__origin small{margin-left:0}
 }
+
+
+/* Lesson 3: comparing capacity sets and their requirement-visible quotient. */
+.ulh-page .ulh-capacity-forests .ulh-forest figcaption{min-height:192px}
+.ulh-page .ulh-capacity-forests .ulh-forest strong{margin-bottom:3px}
+.ulh-page .ulh-capacity-set{display:block;font:400 clamp(1.5rem,2.3vw,2.15rem)/1.2 Georgia,serif;color:#254f55;margin:13px 0 10px}
+.ulh-page .ulh-requirements-table{min-width:520px}
+.ulh-page .ulh-quotient-section{padding:clamp(65px,8vw,115px) 0;background:#e6ece6;border-block:1px solid #c8d5cc}
+.ulh-page .ulh-quotient-section .ulh-kicker{color:#886638}
+.ulh-page .ulh-quotient-section h2{font:400 clamp(2.2rem,4.5vw,4.2rem)/1.12 var(--serif,Georgia,serif);color:#183e49;letter-spacing:-.045em;margin:15px 0 20px}
+.ulh-page .ulh-quotient-intro{font-size:clamp(1rem,1.5vw,1.18rem);color:#4c6664;line-height:1.75;max-width:72ch;margin-bottom:31px}
+.ulh-page .ulh-capacity-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 38px}
+.ulh-page .ulh-capacity-atom{padding:24px 19px;background:#faf8f1;border:1px solid #c3cfc4;min-height:160px;display:flex;flex-direction:column}
+.ulh-page .ulh-capacity-atom span{font-size:.7rem;text-transform:uppercase;letter-spacing:.13em;color:#836d4f;font-weight:650}
+.ulh-page .ulh-capacity-atom strong{font:400 clamp(1.4rem,2.3vw,2.1rem)/1.3 Georgia,serif;color:#1b5058;margin:15px 0 14px}
+.ulh-page .ulh-capacity-atom small{font-size:.85rem;line-height:1.55;color:#677a70;margin-top:auto}
+.ulh-page .ulh-quotient-controls{margin:0 0 19px;padding:0;border:0}
+.ulh-page .ulh-quotient-controls legend{font-size:.79rem;color:#385b5e;letter-spacing:.11em;text-transform:uppercase;font-weight:750;margin-bottom:13px}
+.ulh-page .ulh-quotient-controls .ulh-switch__buttons{display:flex;flex-wrap:wrap;gap:10px}
+.ulh-page .ulh-quotient-controls button{border:1px solid #a4b9af;background:#f8faf3;color:#27535a;padding:11px 17px;font:600 .91rem var(--body,system-ui,sans-serif);cursor:pointer;min-height:43px}
+.ulh-page .ulh-quotient-controls button[aria-pressed="true"]{background:#1b424c;border-color:#1b424c;color:#fff}
+.ulh-page .ulh-quotient-controls button:focus-visible{outline:3px solid #ba9254;outline-offset:2px}
+.ulh-page [data-ulh-quotient-view][hidden]{display:none!important}
+.ulh-page .ulh-quotient-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.ulh-page .ulh-quotient-group-grid--four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ulh-page .ulh-quotient-group{background:#fffdf8;border:1px solid #aebeb6;padding:clamp(20px,2.9vw,33px);display:flex;flex-direction:column;min-height:220px}
+.ulh-page .ulh-quotient-group:first-child{border-top:3px solid #749d87}
+.ulh-page .ulh-quotient-group__label{font-size:.75rem;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:#96754c}
+.ulh-page .ulh-quotient-group strong{font:400 clamp(1.17rem,2.1vw,1.75rem)/1.3 Georgia,serif;color:#254951;margin:15px 0 15px}
+.ulh-page .ulh-quotient-group p{font-size:.94rem;line-height:1.65;color:#62736a;margin:0}
+.ulh-page .ulh-quotient-group__tag{margin-top:auto;padding-top:15px;font-size:.8rem;line-height:1.5;color:#43705b;font-weight:650}
+.ulh-page .ulh-quotient-explanation{border-left:2px solid #a78c5f;margin:30px 0 14px;padding:5px 0 5px 24px;color:#32565b;font-size:1.06rem;line-height:1.75;max-width:75ch}
+.ulh-page .ulh-quotient-footnote{font-size:.88rem;line-height:1.65;color:#66746d;max-width:90ch;margin-top:23px}
+@media(max-width:970px){
+.ulh-page .ulh-quotient-group-grid--four{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+.ulh-page .ulh-capacity-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ulh-page .ulh-quotient-group-grid{grid-template-columns:1fr}
+.ulh-page .ulh-quotient-group-grid--four{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ulh-page .ulh-quotient-group{min-height:unset}
+}
+@media(max-width:480px){
+.ulh-page .ulh-capacity-gallery{gap:8px}
+.ulh-page .ulh-capacity-atom{min-height:156px;padding:16px 13px}
+.ulh-page .ulh-quotient-group-grid--four{grid-template-columns:1fr}
+.ulh-page .ulh-quotient-controls button{flex:1 1 100%;text-align:left}
+}
