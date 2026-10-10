@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 8: Does a Measurement Preserve Enough Information? | Understanding Health</title>
+<meta name="description" content="Zed James introduces representation sufficiency in Paper III, explaining why a perfectly accurate observation can still omit what a health question needs and how refinement characterizes sufficient information.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-08.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-07.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="How do we know whether a measurement contains enough information to determine health?">
+<meta property="og:description" content="From an accurate observation to the information that actually determines the answer. An introduction to Paper III.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-08.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-08.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"How do we know whether a measurement contains enough information to determine health?","url":"https://fieldfluxbiosystems.com/understanding-health-08.html","description":"Lesson 8 in Understanding Health: representation sufficiency, refinement, the canonical query-visible quotient and limits of deterministic postprocessing.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","learningResourceType":"Lesson","inLanguage":"en","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Representation Sufficiency in Prospective Health","identifier":"https://doi.org/10.5281/zenodo.23219588"}}</script>
+</head><body class="ulh-page">
+<a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title">
+<div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">08</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-07.html">Lesson 07</a><span aria-hidden="true">/</span><span>Lesson 08</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 08 · The information required to measure Health</p>
+<h1 class="ulh-serif" id="lesson-title">How do we know whether a measurement contains enough information to determine health?</h1>
+<p class="ulh-lede">I want to begin Paper III with a distinction that matters to any science of measurement. A measurement may record something perfectly accurately and still lack the information needed to answer the question we're asking.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper III · Sections 1–5 and 9</span><span>Opening the representation series</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a class="ulh-button ulh-button--quiet" href="understanding-health-07.html">← Revisit Lesson 7</a><a class="ulh-button ulh-button--quiet" href="understanding-health.html">All lessons</a></div>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson">
+<strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#probability">One measurement, two answers</a>
+<a href="#representation">What is a representation?</a>
+<a href="#sufficiency">The sufficiency condition</a>
+<a href="#refinement">The principal theorem</a>
+<a href="#compare">Three ways to record</a>
+<a href="#processing">Why postprocessing cannot restore information</a>
+<a href="#minimality">What minimal really means</a>
+<a href="#takeaway">What to carry forward</a>
+</nav><small>Lesson 08<br>Health, Formally Defined<br>Paper III</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="probability">
+<p class="ulh-kicker">01 / An accurate observation can be insufficient</p>
+<h2 class="ulh-serif">Let's begin with two systems that give the same simple measurement.</h2>
+<p class="ulh-lead">Imagine two biological systems. Each has a possible successful continuation. If I ask only whether success is possible, both answer yes.</p>
+<p>Now I want to enrich the example. Suppose the two systems are described by different probability distributions over success and failure. This is a stipulated mathematical example, developed later in Paper III, Section 12.3.</p>
+<div class="ulh-probability-pair" role="group" aria-label="Two stipulated success probabilities in a formal mathematical example: system A 99.9 percent, system B 0.1 percent">
+<div class="ulh-probability-card"><span class="ulh-probability-card__name">System A</span><strong>99.9<small>%</small></strong><div class="ulh-probability-card__meter" role="img" aria-label="Success probability 99.9 percent"><span style="width:99.9%"></span></div><p>999 successes out of 1,000, according to the stipulated distribution.</p></div>
+<div class="ulh-probability-card ulh-probability-card--second"><span class="ulh-probability-card__name">System B</span><strong>0.1<small>%</small></strong><div class="ulh-probability-card__meter" role="img" aria-label="Success probability 0.1 percent"><span style="width:0.1%"></span></div><p>1 success out of 1,000, according to the stipulated distribution.</p></div>
+</div>
+<p class="ulh-small">These percentages are given by the formal example. They are not observed biological frequencies or empirically validated probabilities for real systems.</p>
+<p>The support of the two distributions—the set of outcomes with positive probability—is the same: success and failure are both possible in each. So a measurement recording only <em>Is successful continuation possible?</em> returns yes for both.</p>
+<p>But suppose my declared health question requires at least a 50% chance of successful continuation. System A passes that threshold and System B does not. The simple yes/no possibility measurement has merged two cases that this new question must distinguish.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>Different declared probabilities, identical success-possible answers</caption>
+<thead><tr><th scope="col">What I ask</th><th scope="col">System A</th><th scope="col">System B</th></tr></thead><tbody>
+<tr><th scope="row">Successful continuation possible?</th><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Stipulated success probability</th><td>99.9%</td><td>0.1%</td></tr>
+<tr><th scope="row">Meets the declared 50% requirement?</th><td class="ulh-yes">Yes</td><td class="ulh-no">No</td></tr>
+</tbody></table></div>
+<p>Nothing was necessarily measured incorrectly. We simply didn't record the probability information that the new question needs. That is the problem I want to solve mathematically.</p>
+</section>
+<section class="ulh-chapter-section" id="representation">
+<p class="ulh-kicker">02 / How information is encoded</p>
+<h2 class="ulh-serif">What exactly do I mean by a representation?</h2>
+<p>In this framework, a representation is a rule for describing the objects we want to study. It may be a measurement, a classification, or the result of a mathematical procedure. It maps each state into some observable or descriptive value.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The basic mathematical object</p><h3>A rule that assigns a description.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="e maps X to O"><mrow><mi>e</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>O</mi></mrow></math></div></div>
+<p>X is the collection of states or objects, O is the collection of possible descriptions, and e is the rule that produces a description for each state.</p></div>
+<p>Imagine a forest. I might record only its number of trees. Or I might describe the distribution of species, the size of every tree, juvenile regeneration, or some representation of its future responses. All of those can be meaningful descriptions, while preserving different distinctions.</p>
+<p>Suppose two forests each contain one thousand trees. The tree-count representation gives both the same value. The forests may nevertheless differ in regeneration and their capacity to continue under a specified challenge.</p>
+<p>That observation leads to a practical question: <strong>Has the representation discarded something that matters to the exact health question I intend to answer?</strong></p>
+</section>
+<!-- LESSON8_PART_TWO -->
