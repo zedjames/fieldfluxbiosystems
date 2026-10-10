@@ -62,4 +62,55 @@
 <p>Both presently realize the declared organization. Under the fixed adult context and those licensed requirements, the targets give the same adequacy answers and the same corresponding full Health judgments.</p>
 <p>That means I can't infer a single raw target capacity from the source P under this relation, but the two target capacities belong to the same <em>health-visible class</em>. Their difference in E isn't visible to the particular licensed questions we're asking.</p>
 </section>
-<!-- LESSON6_PART_TWO -->
+<section class="ulh-chapter-section" id="determinacy">
+<p class="ulh-kicker">03 / When exact transport exists</p>
+<h2 class="ulh-serif">A deterministic rule needs an answer that the source can determine.</h2>
+<p>Now let's express the criterion precisely. Call the source capacity representation C<sub>0</sub> and the target representation C<sub>1</sub>. A relation R connects source states x to target states y. I can transport the target capacity deterministically from the source capacity only if identical source capacity information never leads, along admitted relation pairs, to different target capacities.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Capacity determinacy</p><h3>Equal source information must determine equal target information.</h3>
+<div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Whenever x is related to y and x prime is related to y prime, equality of C zero x and C zero x prime implies equality of C one y and C one y prime">
+<mtable columnalign="left" rowspacing=".72em"><mtr><mtd><mrow><mi>R</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>∧</mo><mi>R</mi><mo>(</mo><msup><mi>x</mi><mo>′</mo></msup><mo>,</mo><msup><mi>y</mi><mo>′</mo></msup><mo>)</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><mo>∧</mo><msub><mi>C</mi><mn>0</mn></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msub><mi>C</mi><mn>0</mn></msub><mo>(</mo><msup><mi>x</mi><mo>′</mo></msup><mo>)</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><mo>⟹</mo><msub><mi>C</mi><mn>1</mn></msub><mo>(</mo><mi>y</mi><mo>)</mo><mo>=</mo><msub><mi>C</mi><mn>1</mn></msub><mo>(</mo><msup><mi>y</mi><mo>′</mo></msup><mo>)</mo></mrow></mtd></mtr></mtable></math></div></div>
+<p>The implication compares every pair of admitted relations whose sources look identical to C<sub>0</sub>. Target equality is what makes a well-defined deterministic map possible on the attained source-capacity values.</p></div>
+<dl class="ulh-term-list">
+<div><dt>R(x,y)</dt><dd>The source state x is related to a target state y.</dd></div>
+<div><dt>x′ and y′</dt><dd>Another related source and target pair. The prime mark distinguishes the second pair.</dd></div>
+<div><dt>C<sub>0</sub></dt><dd>The capacity information available at the source.</dd></div>
+<div><dt>C<sub>1</sub></dt><dd>The capacity representation demanded at the target.</dd></div>
+<div><dt>⟹</dt><dd>“Implies.” If the hypotheses hold, the conclusion must hold as well.</dd></div>
+</dl>
+<p>Our finite forest relation supplies the counterexample. The same P is related to B and R. Its source capacity is necessarily the same in both pairs, because the starting state is the same. Yet the two target capacities are {S, E} and {S}. A single-valued rule cannot assign both outputs to the same input.</p>
+<p>This is an information limitation. It isn't repaired by writing a more elaborate formula: the source representation has not specified which raw target capacity to choose.</p>
+</section>
+<section class="ulh-chapter-section" id="visible">
+<p class="ulh-kicker">04 / Transport only the distinctions we need</p>
+<h2 class="ulh-serif">The health-visible class can still be determined.</h2>
+<p>Lesson 3 gave us a way to group different capacities whenever every declared adequacy question returns the same answer. Paper II uses the context-licensed version of that idea.</p>
+<p>Let q<sub>A</sub> represent the quotient-class map for the licensed adult questions. Since {S,E} and {S} both pass the any-response and stable-response questions, they have the same class:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Target health-visible agreement</p><h3>Different capacities, one adequacy signature</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="q adult of capacity B equals q adult of capacity R">
+<mrow><msub><mi>q</mi><mi>A</mi></msub><mo>(</mo><mi>C</mi><mo>(</mo><mi>B</mi><mo>)</mo><mo>)</mo><mo>=</mo><msub><mi>q</mi><mi>A</mi></msub><mo>(</mo><mi>C</mi><mo>(</mo><mi>R</mi><mo>)</mo><mo>)</mo></mrow></math></div></div>
+<p>This is equality of <em>adult health-visible quotient classes</em>, not equality of B and R or their full represented capacities. Here q<sub>A</sub> is a class map; it is distinct from the letter Q used elsewhere for a collection of requirements.</p></div>
+<p>That leaves us with two different transport tasks. One asks for every detail of the raw target capacity. The other asks only for the equivalence class determined by the licensed health questions.</p>
+</section></article></div></section>
+<section class="ulh-transport-lab" aria-labelledby="transport-lab-heading">
+<div class="ulh-container">
+<p class="ulh-kicker">See the distinction</p><h2 class="ulh-serif" id="transport-lab-heading">One relation. Two different questions.</h2>
+<p class="ulh-transport-lab__intro">Both target outcomes remain part of the same declared relation. Change which information you ask the source to determine. The two views are shown below even without scripts.</p>
+<fieldset class="ulh-transport-lab__choices"><legend>Choose the information to transport</legend>
+<div class="ulh-switch__buttons"><button type="button" data-ulh-transport-choice="raw" aria-pressed="true">The entire target capacity</button><button type="button" data-ulh-transport-choice="visible" aria-pressed="false">The health-visible target class</button></div></fieldset>
+<div class="ulh-transport-lab__views">
+<div class="ulh-transport-lab__view" data-ulh-transport-view="raw">
+<span class="ulh-transport-lab__label">Task A · Raw capacity transport</span>
+<div class="ulh-transport-lab__output"><div><span>Source P → Target B</span><strong>{S, E}</strong></div><span class="ulh-transport-lab__versus" aria-hidden="true">≠</span><div><span>Source P → Target R</span><strong>{S}</strong></div></div>
+<p><strong>No unique raw answer.</strong> The same source capacity would have to determine different raw target capacities.</p>
+</div>
+<div class="ulh-transport-lab__view" data-ulh-transport-view="visible">
+<span class="ulh-transport-lab__label">Task B · Adult health-visible transport</span>
+<div class="ulh-transport-lab__output"><div><span>Source P → Target B</span><strong>(yes, yes)</strong></div><span class="ulh-transport-lab__versus" aria-hidden="true">=</span><div><span>Source P → Target R</span><strong>(yes, yes)</strong></div></div>
+<p><strong>One well-defined class answer.</strong> Both targets meet the two licensed adult requirements, so their adequacy signatures agree.</p>
+</div></div>
+<p data-ulh-transport-summary class="ulh-transport-lab__summary" aria-live="polite">For the raw target capacity, two related targets disagree. Exact deterministic transport from this source-capacity value is impossible.</p>
+<p class="ulh-transport-lab__note">Logical determinacy here is a theorem-relative property of a specified mathematical relation. It is not a claim that a real forest forecast has been experimentally calibrated or shown reliable.</p>
+</div></section>
+<!-- LESSON6_PART_THREE -->
