@@ -305,6 +305,34 @@ def main():
           "Lesson 10 must link forward to Lesson 11",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-10.html"' in eleventh,
           "Lesson 11 must link backward to Lesson 10",errors)
+    twelfth=(ROOT/"understanding-health-12.html").read_text(encoding="utf8")
+    check(twelfth.count("<math ")==5,"Lesson 12 requires five accessible MathML expressions",errors)
+    check("Theorems 7.1–7.2" in twelfth and "five-to-four-to-three" in twelfth.lower(),
+          "Lesson 12 must identify complete-model information ladder and formal source",errors)
+    check('data-ulh-ladder-group="RA"' in twelfth and
+          'data-ulh-ladder-group="BRA"' in twelfth,
+          "Lesson 12 must show projected and complete Health class mergers",errors)
+    check('data-ulh-loss-choice="erased"' in twelfth and
+          'data-ulh-loss-choice="ignored"' in twelfth and
+          'data-ulh-loss-card="erased"' in twelfth and
+          'data-ulh-loss-card="ignored"' in twelfth,
+          "Lesson 12 needs complete no-JavaScript comparison of lost versus ignored information",errors)
+    check("all declared contexts" in twelfth.lower() or "full family" in twelfth.lower(),
+          "Lesson 12 must distinguish full Health-signature classification from one census",errors)
+    check("projection itself" in twelfth.lower() and
+          "ignored" in twelfth.lower() and
+          "recovered" in twelfth.lower(),
+          "Lesson 12 must locate distinct information losses",errors)
+    check("not a probability" in twelfth.lower() or "without probability weights" in twelfth.lower(),
+          "Lesson 12 must preserve set-valued capacity scope",errors)
+    check("research-information-provenance-conservative-enrichment-prospective-health.pdf" in twelfth and
+          "10.5281/zenodo.23268802" in twelfth,
+          "Lesson 12 must cite the Paper IV PDF and DOI",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-12.html"' in
+          (ROOT/"understanding-health-11.html").read_text(encoding="utf8"),
+          "Lesson 11 must link forward to Lesson 12",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-11.html"' in twelfth,
+          "Lesson 12 must link back to Lesson 11",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
