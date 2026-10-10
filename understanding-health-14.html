@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 14: Reconstructing a Forest We Cannot Fully Observe | Understanding Health</title>
+<meta name="description" content="Lesson 14 begins Paper V: reconstructing uncertain forest states from two incomplete Harvard Forest censuses, cohort mathematics, survival hazards, masking tests, and identifiability limits.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-14.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-13.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="What happens when we don't actually know the system's present state?">
+<meta property="og:description" content="The first challenge of measuring prospective health is reconstructing a forest that was never completely observed.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-14.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-14.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"What happens when we don't actually know the system's present state?","url":"https://fieldfluxbiosystems.com/understanding-health-14.html","description":"A guided introduction to latent forest-state reconstruction, 64-cohort compression, survival hazards, uncertainty calibration, and identifiability in Paper V.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Prospective Health under Declared Specifications","identifier":"https://doi.org/10.5281/zenodo.23268987"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">14</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-13.html">Lesson 13</a><span aria-hidden="true">/</span><span>Lesson 14</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 14 · From formal definition to incomplete observations</p>
+<h1 id="lesson-title" class="ulh-serif">What happens when we don't actually know the system's present state?</h1>
+<p class="ulh-lede">The first four papers worked with explicitly defined mathematical systems. In Paper V, I begin with a real forest whose state was never completely observed. Before we can calculate what futures remain possible, we must face a prior question: <em>what was the forest's state at the time the future begins?</em></p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper V · Sections 2–4 and 6.3</span><span>Beginning empirical reconstruction</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-13.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 13</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#starting-state">The starting state problem</a><a href="#harvard-forest">Harvard Forest observations</a>
+<a href="#incomplete-records">What the census records say</a><a href="#latent">Observed and latent states</a>
+<a href="#cohorts">Why 64 cohorts?</a><a href="#diameter">Diameter and basal area</a>
+<a href="#hazard">Survival across different dates</a><a href="#reconstruction">A distribution of possible presents</a>
+<a href="#masking">What masking tests reveal</a><a href="#identity">The identification boundary</a>
+<a href="#knowledge-check">A question to test</a><a href="#takeaway">Carry it forward</a>
+</nav><small>Lesson 14<br>Health, Formally Defined<br>Paper V</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="starting-state"><p class="ulh-kicker">01 / The problem comes before prediction</p>
+<h2 class="ulh-serif">Prospective health begins with a present state. How do we know that state?</h2>
+<p class="ulh-lead">We've returned to this definition throughout the series: a system must presently realize its organization and have sufficient capacity for viable continuation under the specified scenario and horizon.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The prospective-health definition</p><h3>One equation; a newly difficult input.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Health of x in scenario d horizon t means Realizes x and Adequate of Capacity x d t"><mrow><mi mathvariant="normal">Health</mi><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>⇔</mo><mi mathvariant="normal">Realizes</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>∧</mo><mi mathvariant="normal">Adequate</mi><mo>(</mo><mi mathvariant="normal">Capacity</mi><mo>(</mo><mi>x</mi><mo>;</mo><mi>d</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>)</mo></mrow></math></div></div><p>Here x is the present state, d a scenario, and t a horizon. In the five-state forest from Paper IV, I could declare x to be baseline, stressed, recovered, adapted, or collapsed. An empirical forest is not supplied as a perfectly identified mathematical state.</p></div>
+<p>We have to infer it from recorded stem identities, measurements, dates, apparent survival, and missing information. Errors or gaps in that inference flow into everything we later say about continuation.</p>
+</section>
+
+<section class="ulh-chapter-section" id="harvard-forest"><p class="ulh-kicker">02 / The observed site</p><h2 class="ulh-serif">A 35-hectare forest, observed over many years rather than on one day.</h2>
+<p>The empirical study uses the Harvard Forest ForestGEO plot in Massachusetts, a 700 × 500 meter research area. Researchers recorded large numbers of woody stems during two census periods, but the observations were not all made at the same instant.</p>
+<div class="ulh-forest-timeline" aria-label="Harvard Forest census and reconstruction timeline"><div class="ulh-forest-timeline__rule" aria-hidden="true"></div>
+<div><span>E0</span><strong>June 2010 – March 2014</strong><p>Earlier census observations, with stem identities and measurements recorded on individual dates.</p></div>
+<div><span>E1</span><strong>May 2018 – January 2020</strong><p>Later records, including changes, missing diameters, and outcomes that remain unresolved.</p></div>
+<div class="ulh-forest-timeline__anchor"><span>Modeled origin</span><strong>January 3, 2020</strong><p>The common reference date for reconstructed forest states and future simulations.</p></div></div>
+<p>Measurements taken years apart do not describe the same point in time. Before a future simulation can begin on January 3, 2020, the method must reconcile differing observation dates and reconstruct a plausible common-time state.</p>
+<p class="ulh-small">The research footprint and dates describe the source study, not a new field survey undertaken for this lesson.</p>
+</section>
+
+<section class="ulh-chapter-section" id="incomplete-records"><p class="ulh-kicker">03 / What was actually recorded?</p>
+<h2 class="ulh-serif">The record is extensive. It is also incomplete in consequential ways.</h2>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-census-table"><caption>Selected reported data, Paper V, Table 1 (printed page 3)</caption>
+<thead><tr><th scope="col">Observation category</th><th scope="col">Records</th></tr></thead><tbody>
+<tr><th scope="row">E0 stem records</th><td>116,227</td></tr>
+<tr><th scope="row">E1 stem records</th><td>123,218</td></tr>
+<tr><th scope="row">Living stems in E0</th><td>108,632</td></tr>
+<tr><th scope="row">E1 records marked <code>stem_gone</code></th><td>37,577</td></tr>
+<tr><th scope="row">E1 records without a diameter measurement</th><td>61,985</td></tr>
+<tr><th scope="row">Living stem IDs recorded only in E1</th><td>6,992</td></tr>
+</tbody></table></div>
+<p>These counts describe different record categories and should not be added together as though they were mutually exclusive groups of trees. Each matters for a different reason.</p>
+<p><strong><code>stem_gone</code> is not proof of biological death.</strong> A missing diameter introduces uncertainty in physical structure. A stem appearing only in E1 may be a genuine entrant, a previously missed stem, or another identity-recording outcome. The raw census is evidence about the forest, rather than a complete, error-free state description.</p>
+</section>
+
+<section class="ulh-chapter-section" id="latent"><p class="ulh-kicker">04 / Observed evidence and unobserved state</p>
+<h2 class="ulh-serif">I need to distinguish what was seen from what I am inferring.</h2>
+<p>Let Y contain the two census records. Let X denote the modeled forest state at our common starting date. In statistical language, X is a <strong>latent state</strong>: the state of interest is not fully and directly observed.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The data and the target state</p><h3>Observations are not identical to the latent forest state.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Y equals the paired observations Y E zero, Y E one; X denotes the latent reconstructed state"><mtable columnalign="left" rowspacing=".8em"><mtr><mtd><mrow><mi>Y</mi><mo>=</mo><mo>(</mo><msub><mi>Y</mi><mtext>E0</mtext></msub><mo>,</mo><msub><mi>Y</mi><mtext>E1</mtext></msub><mo>)</mo></mrow></mtd></mtr><mtr><mtd><mrow><mi>X</mi><mo>≠</mo><mi>Y</mi></mrow></mtd></mtr></mtable></math></div></div><p>The symbol Y denotes recorded evidence. The symbol X denotes the forest state we seek to reconstruct from that evidence. We require a reconstruction law rather than simply asserting X = Y.</p></div>
+<p>Imagine a purely illustrative census of 100 trees. Seventy are confirmed alive later, ten are known dead, and twenty have unresolved fates. Neither “only seventy survive” nor “all twenty unresolved trees survive” follows from those observations.</p>
+<div class="ulh-hypothetical" id="survival-example"><div class="ulh-hypothetical__intro"><div><p class="ulh-kicker">Explore a declared assumption</p><h3>How much can our estimate change while the observed records stay fixed?</h3></div><span>Illustration only</span></div>
+<p>Suppose we assign the twenty unresolved trees the same modeled survival probability. Move the slider to see the <em>expected</em> number surviving, not a directly observed number of survivors.</p>
+<label for="ulh-uncertain-survival">Assumed survival probability for each unresolved tree: <strong data-ulh-survival-value>80%</strong></label>
+<input id="ulh-uncertain-survival" type="range" min="0" max="100" step="5" value="80" aria-describedby="ulh-survival-explanation">
+<div class="ulh-hypothetical__display"><div><span>Confirmed alive</span><strong>70</strong></div><div><span>Expected alive among 20 unresolved</span><strong data-ulh-unresolved-count>16</strong></div><div class="ulh-hypothetical__total"><span>Expected alive out of 100</span><strong data-ulh-expected>86</strong></div></div>
+<p id="ulh-survival-explanation" class="ulh-small">The numbers are invented to explain conditional state reconstruction. The expected count need not be an integer; the actual outcome remains uncertain. The independence or common-probability assumptions used by a given model need separate justification.</p></div>
+<p>Our data have not changed when the slider moves. The statistical assumption has. That difference is exactly why the resulting inferred state cannot be treated as a direct observation.</p>
+</section>
+
+<section class="ulh-chapter-section" id="cohorts"><p class="ulh-kicker">05 / Compressing the forest</p>
+<h2 class="ulh-serif">Hundreds of thousands of records become 64 cohort cells.</h2>
+<p>Following each individual stem through every demographic mechanism would require an extremely detailed system. The paper defines a computational representation with three grouping dimensions, four groups in each dimension.</p>
+<div class="ulh-cohort-figure" role="group" aria-label="Four taxon groups times four spatial and protocol strata times four diameter classes equals sixty four cohort cells">
+<div><span>Taxon</span><strong>4</strong><small>groups</small></div><b aria-hidden="true">×</b><div><span>Space and protocol</span><strong>4</strong><small>strata</small></div><b aria-hidden="true">×</b><div><span>Stem size</span><strong>4</strong><small>diameter classes</small></div><b aria-hidden="true">=</b><div class="ulh-cohort-figure__result"><span>Computed representation</span><strong>64</strong><small>cohort cells</small></div></div>
+<p>Each cohort cell c stores a stem count n<sub>c</sub> and a root-mean-square diameter d<sub>c</sub>. One spatial/protocol category is a wet-candidate proxy; the study does not independently validate a corresponding hydrological classification.</p>
+<p>As we saw in Paper III, compression must be judged against the questions the representation will later need to answer. A summary that retains one useful quantity may erase another.</p>
+</section>
+
+<section class="ulh-chapter-section" id="diameter"><p class="ulh-kicker">06 / What the compression preserves</p>
+<h2 class="ulh-serif">Root-mean-square diameter keeps the basal-area calculation intact.</h2>
+<p>Tree basal area scales with the square of trunk diameter. For diameters d<sub>1</sub> through d<sub>n</sub>, the root-mean-square (RMS) diameter is the square root of the average squared diameter:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Root-mean-square diameter</p><h3>Square, average, then take the square root.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="RMS diameter equals the square root of the sum of squared diameters divided by n"><mrow><msub><mi>d</mi><mtext>RMS</mtext></msub><mo>=</mo><msqrt><mfrac><mrow><msubsup><mi>d</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>d</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><mo>⋯</mo><mo>+</mo><msubsup><mi>d</mi><mi>n</mi><mn>2</mn></msubsup></mrow><mi>n</mi></mfrac></msqrt></mrow></math></div></div>
+<p>Unlike the ordinary average, this summary preserves the sum of squared diameters across the stems in each cohort.</p></div>
+<p>With diameter measured in centimeters and basal area expressed in square meters, the cohort-state basal area is:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper V · Section 4.1</p><h3>Total stem basal area from 64 cohorts.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="BA of X equals pi over forty thousand times the sum from cohort zero to sixty three of stem counts n c times cohort squared RMS diameter d c squared"><mrow><mi mathvariant="normal">BA</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>=</mo><mfrac><mi>π</mi><mn>40000</mn></mfrac><munderover><mo>∑</mo><mrow><mi>c</mi><mo>=</mo><mn>0</mn></mrow><mn>63</mn></munderover><msub><mi>n</mi><mi>c</mi></msub><msubsup><mi>d</mi><mi>c</mi><mn>2</mn></msubsup></mrow></math></div></div>
+<p>n<sub>c</sub> is the number of stems in cohort c. d<sub>c</sub> is its RMS diameter in centimeters. The factor π/40,000 converts diameter squared into circular basal area in square meters.</p></div>
+<p>This exact aggregation protects the basal-area calculation, <em>given the grouped stem values</em>. It does not recover every original diameter. Two cohorts may share n<sub>c</sub> and d<sub>c</sub> while containing different counts of stems below the study's 10-centimeter continuation threshold. That limitation becomes important later in Paper V.</p>
+</section>
+
+<section class="ulh-chapter-section" id="hazard"><p class="ulh-kicker">07 / Different stems, different observation windows</p>
+<h2 class="ulh-serif">A modeled annual mortality hazard converts elapsed time into a survival probability.</h2>
+<p>Because individual stems were observed on different dates, each stem has its own elapsed observation interval. Paper V uses a conditional constant-hazard survival model.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper V · Section 4.3, Eq. (30)</p><h3>Survival over an observation interval.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Probability stem i survives conditioned on cohort hazard h c and elapsed time delta i equals e to the power negative h c delta i"><mrow><mi mathvariant="normal">P</mi><mo>(</mo><msub><mi>Z</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn><mo>∣</mo><msub><mi>h</mi><mi>c</mi></msub><mo>,</mo><msub><mi>Δ</mi><mi>i</mi></msub><mo>)</mo><mo>=</mo><msup><mi>e</mi><mrow><mo>−</mo><msub><mi>h</mi><mi>c</mi></msub><msub><mi>Δ</mi><mi>i</mi></msub></mrow></msup></mrow></math></div></div>
+<p>Z<sub>i</sub> = 1 denotes survival of stem i, h<sub>c</sub> is its cohort's annual mortality hazard, and Δ<sub>i</sub> is elapsed time in years. The bar means “conditional on.” The exponential is e raised to the negative hazard multiplied by the elapsed time.</p></div>
+<p>For a positive constant hazard, a longer interval yields a lower modeled probability of survival. This allows the reconstruction to respect actual observation dates rather than treating all intervals as equally long.</p>
+<p>It remains a model assumption. The real hazard is not known in advance, and a constant-hazard law is not established by writing the formula. The method must estimate its parameters and test how the resulting predictions behave.</p>
+</section>
+
+<section class="ulh-chapter-section" id="reconstruction"><p class="ulh-kicker">08 / Sampling possible present states</p>
+<h2 class="ulh-serif">Instead of one certain present, we generate possible present forests.</h2>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper V · Section 4.5, Eq. (50)</p><h3>The conditional reconstruction law.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="X is sampled from reconstruction kernel K rec of dot given observed Y and model parameters theta"><mrow><mi>X</mi><mo>∼</mo><msub><mi>K</mi><mtext>rec</mtext></msub><mo>(</mo><mo>·</mo><mo>∣</mo><mi>Y</mi><mo>,</mo><mi>ϑ</mi><mo>)</mo></mrow></math></div></div>
+<p>K<sub>rec</sub> is the reconstruction kernel; Y is the observed record; ϑ denotes the model parameters. Drawing X from the kernel produces one possible common-time forest state conditional on the records and assumptions.</p></div>
+<div class="ulh-reconstruction-flow" aria-label="Observed records through a conditional reconstruction model yield several possible present forests">
+<div class="ulh-reconstruction-flow__input"><span>Observed</span><strong>Census records Y</strong><p>Measurements, identities, dates, and missing entries</p></div><div class="ulh-reconstruction-flow__arrow" aria-hidden="true">→</div>
+<div class="ulh-reconstruction-flow__model"><span>Inferred conditionally</span><strong>K<sub>rec</sub>(· | Y, ϑ)</strong><p>Hazard, growth, entry, and observation assumptions</p></div><div class="ulh-reconstruction-flow__arrow" aria-hidden="true">→</div>
+<div class="ulh-reconstruction-flow__outputs"><span>Possible presents</span><strong>X₁</strong><strong>X₂</strong><strong>X₃</strong><small>Many alternative common-time states</small></div></div>
+<p>In the primary computational design, the paper samples <strong>256 reconstructed states</strong>. Combining those draws with parameter variations and two growth-model variants gives <strong>1,024 outer computational units</strong>, each with <strong>64 simulated future histories per scenario</strong>. These are conditional computational units, not 1,024 separately observed real forests.</p>
+<p>Every possible future begins downstream of this uncertain starting point. The simulation pipeline can be executed exactly as designed while the scientific accuracy of its assumptions remains an open question.</p>
+</section>
+</article></div></section>
+
+<section class="ulh-mask-audit" id="masking"><div class="ulh-container">
+<p class="ulh-kicker">09 / Confronting reconstruction with held-out observations</p>
+<h2 class="ulh-serif">The nominal 90% diameter intervals contained the true held-out values only about half the time.</h2>
+<p>One diagnostic temporarily hides selected recorded information, reconstructs it, and compares the inferred interval with the held-out recorded diameter. This is a <em>masking experiment</em>, and it is a direct test of reconstruction calibration on the observations available for checking.</p>
+<div class="ulh-mask-legend"><span>Interval coverage under four declared masking mechanisms</span><span class="ulh-mask-legend__target">90% nominal target</span></div>
+<div class="ulh-mask-chart" role="img" aria-label="Approximate average reported coverage of nominal ninety percent diameter intervals. M0 random masking fifty point one percent; M1 taxon size forty seven point one percent; M2 stratum forty nine point seven percent; M3 protocol fifty five point five percent. All below the ninety percent target.">
+<div class="ulh-mask-chart__ticks" aria-hidden="true"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+<div class="ulh-mask-chart__plot">
+<div class="ulh-mask-chart__target" aria-hidden="true"></div>
+<div class="ulh-mask-chart__row"><span>M0 · Random</span><div class="ulh-mask-chart__track"><i style="width:50.1%"></i></div><strong>50.1%</strong></div>
+<div class="ulh-mask-chart__row"><span>M1 · Taxon / size</span><div class="ulh-mask-chart__track"><i style="width:47.1%"></i></div><strong>47.1%</strong></div>
+<div class="ulh-mask-chart__row"><span>M2 · Stratum</span><div class="ulh-mask-chart__track"><i style="width:49.7%"></i></div><strong>49.7%</strong></div>
+<div class="ulh-mask-chart__row"><span>M3 · Protocol</span><div class="ulh-mask-chart__track"><i style="width:55.55%"></i></div><strong>55.6%</strong></div>
+</div></div>
+<p class="ulh-small">Displayed values are approximate midpoints of the three-replicate coverage ranges in Paper V, Table 4 (printed page 31), not new estimates. Full reported ranges: M0 49.9–50.3%, M1 46.8–47.4%, M2 49.1–50.3%, M3 55.1–56.0%.</p>
+<div class="ulh-mask-contrast"><div><span>Individual diameters</span><strong>~47–56%</strong><p>Observed coverage under nominal 90% intervals, across the reported masking families.</p></div><div><span>Aggregated basal area</span><strong>~92–97%</strong><p>Reported coverage for a different, aggregated target under the corresponding masking families.</p></div></div>
+<p>The sharp contrast matters. The procedure performs poorly at this individual-stem task while showing much better interval coverage on aggregated basal area. As Paper III taught us, adequacy and sufficiency depend on the question being asked.</p>
+<p>These tests use stems whose information can be held out and later inspected. They do not certify the model's calibration for genuinely unresolved stem fates. That is a separate evidence boundary.</p>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Finishing the lesson"><strong>Before the futures</strong><nav aria-label="Last sections"><a href="#identity">What observations cannot identify</a><a href="#knowledge-check">Check your understanding</a><a href="#levels">Three knowledge levels</a><a href="#takeaway">Lesson 15</a></nav><small>Lesson 14<br>Paper V · Reconstruction</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="identity"><p class="ulh-kicker">10 / A deeper boundary than numerical uncertainty</p>
+<h2 class="ulh-serif">The later census cannot by itself tell us how every later-only stem entered the record.</h2>
+<p>The identity audit finds <strong>6,992 living stem IDs appearing only in E1</strong>, and none can be certified from the available two-census identity evidence as an unequivocal biological threshold entrant. This result does not mean that no biological entry occurred.</p>
+<div class="ulh-identity-pair" role="group" aria-label="Two different histories that can produce the same later-only observation">
+<div><span>Explanation A</span><strong>Genuine entry</strong><p>The stem crossed the inventory's inclusion threshold between censuses.</p></div><div><span>Explanation B</span><strong>Earlier omission</strong><p>The stem was already eligible earlier but was not recorded then.</p></div></div>
+<p>Both histories may produce the same later-only observation. When two underlying explanations give indistinguishable evidence, no deterministic function of that evidence alone identifies which one occurred. This is <strong>non-identifiability</strong>, and it is the representation problem from Paper III encountered in an empirical study.</p>
+<p>We can introduce an assumption-based entry model. We cannot turn an unobserved event into an observed fact by adding a parameter. Additional identifying evidence would be needed.</p>
+</section>
+<section class="ulh-chapter-section" id="knowledge-check"><p class="ulh-kicker">11 / Test the distinction</p><h2 class="ulh-serif">One stem is recorded in E1 but is absent from E0. What follows from that fact alone?</h2>
+<div class="ulh-knowledge-check" data-ulh-quiz><fieldset><legend>Choose the conclusion supported by the observed records.</legend>
+<label><input type="radio" name="ulh-14-answer" value="entry"><span>The stem must have entered the measured biological population after E0.</span></label>
+<label><input type="radio" name="ulh-14-answer" value="uncertain"><span>The stem may be an entrant, but an earlier missed observation or another identity explanation is also possible.</span></label>
+<label><input type="radio" name="ulh-14-answer" value="earlier"><span>The stem must have been alive during E0.</span></label>
+</fieldset><button class="ulh-button ulh-button--ink" type="button" data-ulh-check-answer>Check my answer</button><p class="ulh-knowledge-check__feedback" data-ulh-answer-feedback role="status" aria-live="polite">Select an answer to test what the observation establishes.</p>
+<noscript><p><strong>Answer:</strong> The second statement. A later-only identity does not by itself identify the biological history that produced it.</p></noscript></div>
+</section>
+<section class="ulh-chapter-section" id="levels"><p class="ulh-kicker">12 / What kind of knowledge do we have?</p><h2 class="ulh-serif">There are three different levels of inference.</h2>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>Separate the evidence from the assumptions used downstream</caption><thead><tr><th scope="col">Level</th><th scope="col">What it means</th></tr></thead><tbody><tr><th scope="row">Observed</th><td>Recorded measurements, dates, classifications, and missingness in the two censuses.</td></tr><tr><th scope="row">Reconstructed</th><td>A conditional estimate or distribution over possible January 2020 forest states.</td></tr><tr><th scope="row">Simulated</th><td>Future histories produced by assumed demographic dynamics, scenarios, and sampled starting states.</td></tr></tbody></table></div>
+<p>Each stage inherits the limits of the previous one and introduces additional modeling commitments. Correct execution of the declared mathematics and reliable measurement of the real forest are distinct achievements. Paper V documents both the construction and the points at which empirical evidence does not yet justify a stronger conclusion.</p>
+<p>This study does not establish an operational health classification of Harvard Forest. It establishes an auditable path from recorded evidence toward model-conditional continuation estimates, together with substantial calibration and identification limits.</p>
+</section>
+</article></div></section>
+
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container"><p class="ulh-kicker">What I want you to carry forward</p>
+<h2 class="ulh-serif">Before we can measure future capacity, we must identify what we actually know about the present.</h2>
+<p>The observed census is not the latent forest state. Cohort compression preserves some aggregate quantities and loses others. Reconstruction depends on estimated hazards, missingness assumptions, and imperfectly identified biological events. Holding those distinctions together is how we move from a sound formal definition toward a measurement system that can be tested.</p>
+<p>In Lesson 15, we'll begin simulating alternative futures from these possible present states. We'll learn how to assign probability to viable continuations—and why deleting failed futures before recomputing the probability would corrupt the result.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-13.html" class="ulh-button">← Previous: Lesson 13</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-prospective-health-declared-specifications.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper V (PDF)</a></div></div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Prospective Health under Declared Specifications</em>, Paper V of <em>Health, Formally Defined</em> (2026), particularly Sections 2–4 and 6.3, Tables 1 and 4, and Equations (30) and (50). <a href="research-prospective-health-declared-specifications.html">Publication record</a> · <a href="https://doi.org/10.5281/zenodo.23268987" target="_blank" rel="noopener">Zenodo DOI</a>. All estimates are conditional on the stated data and model; no operational ecological health verdict is asserted.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="understanding-health-14.html">Lesson 14</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+<script src="assets/js/understanding-health-14.js?v=1" defer></script>
+</body></html>
