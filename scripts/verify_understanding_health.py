@@ -135,6 +135,24 @@ def main():
           "Lesson 3 does not link to Lesson 4 as next",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-03.html"' in fourth,
           "Lesson 4 lacks previous link metadata",errors)
+    fifth=(ROOT/"understanding-health-05.html").read_text(encoding="utf8")
+    check(fifth.count("<math ")==4, "Lesson 5 needs four accessible MathML expressions",errors)
+    check('data-ulh-stage-view="newborn"' in fifth and 'data-ulh-stage-view="adult"' in fifth,
+          "Lesson 5 must show both licensed stage comparisons",errors)
+    check('data-ulh-stage-choice="newborn"' in fifth and 'data-ulh-stage-choice="adult"' in fifth,
+          "Lesson 5 stage-focus controls absent",errors)
+    check("ulh-stage-capacities" in fifth and "ulh-stage-horizon" in fifth,
+          "Lesson 5 must separate stage-only licensing from horizon-capacity change",errors)
+    check("not a prescription" in fifth and "not clinical" in fifth.lower() or
+          "clinical" in fifth.lower() and "mathematical" in fifth.lower(),
+          "Lesson 5 stage labels must retain mathematical scope",errors)
+    check("research-prospective-health-across-contexts.pdf" in fifth and
+          "10.5281/zenodo.23146280" in fifth, "Lesson 5 source PDF or DOI missing",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-05.html"' in
+          (ROOT/"understanding-health-04.html").read_text(encoding="utf8"),
+          "Lesson 4 does not link forward to Lesson 5",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-04.html"' in fifth,
+          "Lesson 5 does not reference Lesson 4 as its predecessor",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
