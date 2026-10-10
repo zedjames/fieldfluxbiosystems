@@ -1,0 +1,57 @@
+name: Independently verify public Understanding Health Lesson 18
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-18.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Validate public lesson, source PDF, interactions, and navigation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time
+          from urllib.request import Request,urlopen
+          origin="https://fieldfluxbiosystems.com/"
+          paths={
+           "understanding-health.html":["18 lessons published",'href="understanding-health-18.html"',"When a perfectly accurate measurement hides something essential"],
+           "understanding-health-17.html":["Next: Lesson 18","Continue to Lesson 18",'rel="next"'],
+           "understanding-health-18.html":["Lesson 18","By Zed James","Proposition 5.1","√119","53,611","1,187","1,205","2.25%","26.2","data-ulh18-explorer","data-ulh18-quiz","assets/css/understanding-health-18.css?v=1","assets/js/understanding-health-18.js?v=1","research-prospective-health-declared-specifications.pdf"],
+           "assets/css/understanding-health-18.css":["ulh18-stems","ulh18-explorer","ulh18-quiz"],
+           "assets/js/understanding-health-18.js":["ulh18View",'selected.value==="insufficient"',"0 / 100 juveniles"],
+           "sitemap.xml":["understanding-health-17.html","understanding-health-18.html"]
+          }
+          errors=[]
+          for path,needles in paths.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(origin+path,headers={"User-Agent":"FFB-Lesson18-Independent/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=24,context=ssl.create_default_context()) as res:
+                  body=res.read()
+                  code=res.status
+                html=body.decode("utf-8","replace")
+                print("PUBLIC",path,code,len(body),flush=True)
+                if code!=200:raise ValueError("Unexpected HTTP "+str(code))
+                missing=[x for x in needles if x not in html]
+                if missing:raise ValueError("Missing markers: "+repr(missing))
+                if path=="understanding-health-18.html" and html.count('class="ulh18-stem ')!=200:
+                  raise ValueError("100-stem grids have the wrong number of dots")
+                break
+              except Exception as exc:
+                if attempt==11:errors.append(path+": "+repr(exc))
+                else:time.sleep(6)
+          try:
+            with urlopen(Request(origin+"research-prospective-health-declared-specifications.pdf",headers={"Cache-Control":"no-cache"}),timeout=40,context=ssl.create_default_context()) as response:
+              original=response.read()
+            print("PAPER_V_PDF",len(original),original[:5],flush=True)
+            if not original.startswith(b"%PDF-") or len(original)<100000:
+              errors.append("Original Paper V PDF unavailable or invalid")
+          except Exception as exc:
+            errors.append("Original Paper V PDF: "+repr(exc))
+          for error in errors:print("FAIL",error,flush=True)
+          if errors:raise SystemExit(1)
+          print("PASS: public Lesson 18, 18-lesson reading room, 100-stem diagrams, navigation, assets, sitemap and Paper V PDF",flush=True)
+          PY
