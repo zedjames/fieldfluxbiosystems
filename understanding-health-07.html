@@ -86,4 +86,49 @@
 <p>We have equal source information and different target information. That is exactly the kind of situation we learned to examine in Lesson 6.</p>
 </section>
 </article></div></section>
-<!-- LESSON7_MIDDLE -->
+<section class="ulh-support-explorer" id="reserve-example" aria-labelledby="reserve-heading"><div class="ulh-container">
+<p class="ulh-kicker">Follow the support across time</p><h2 class="ulh-serif" id="reserve-heading">The short horizon conceals an important difference.</h2>
+<p class="ulh-support-explorer__lede">Let's concentrate on Persistent and Intermittent support. In the comparison below, both states are assumed to presently realize their organization, and our declared adequacy requirement asks whether a reserve response is available.</p>
+<fieldset class="ulh-support-explorer__controls"><legend>Choose the horizon to inspect</legend><div class="ulh-switch__buttons">
+<button type="button" data-ulh-support-choice="short" aria-pressed="true">Short horizon</button>
+<button type="button" data-ulh-support-choice="long" aria-pressed="false">Long horizon</button>
+</div></fieldset>
+<div class="ulh-support-explorer__comparison">
+<div class="ulh-support-explorer__card"><span>Persistent support</span><strong data-ulh-support-capacity="persistent">{reserve}</strong><p>Reserve response remains available.</p><span class="ulh-result" data-ulh-support-status="persistent" data-state="pass">Meets reserve requirement</span></div>
+<div class="ulh-support-explorer__card ulh-support-explorer__card--intermittent"><span>Intermittent support</span><strong data-ulh-support-capacity="intermittent">{reserve}</strong><p data-ulh-support-note="intermittent">Reserve response is available at this horizon.</p><span class="ulh-result" data-ulh-support-status="intermittent" data-state="pass">Meets reserve requirement</span></div>
+</div>
+<p class="ulh-support-explorer__summary" data-ulh-support-summary aria-live="polite">At the short horizon, both states have the capacity {reserve}. Both satisfy the reserve requirement.</p>
+<p class="ulh-support-explorer__note">Both horizons and all four states appear in the complete table above, regardless of scripts. The comparison changes only which portion of the declared model is in focus; it does not simulate an empirical probability or a physical experiment.</p>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Continue reading"><strong>What the difference implies</strong><nav aria-label="Later lesson sections">
+<a href="#impossibility">The exact impossibility</a><a href="#previous-transport">When transport works</a><a href="#withdrawal">Support withdrawal</a><a href="#interpretation">Health and dependence</a><a href="#takeaway">Paper II together</a>
+</nav><small>Lesson 07<br>Short and long horizons</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="impossibility">
+<p class="ulh-kicker">04 / Transport from a short horizon</p>
+<h2 class="ulh-serif">The same input cannot require two different outputs.</h2>
+<p>In Lesson 6 we discovered a precise condition for deterministic transport: if the source representation has the same value in two cases, the target representation must also agree for a single-valued map to exist.</p>
+<p>For the support model, suppose I want a function that takes the short-horizon capacity and returns the long-horizon capacity for every declared support state. I would need:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The proposed transport rule</p><h3>Determine long capacity from short capacity</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="f of short capacity of x equals long capacity of x"><mrow><mi>f</mi><mo>(</mo><msub><mi>C</mi><mtext>short</mtext></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><msub><mi>C</mi><mtext>long</mtext></msub><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math></div></div>
+<p>Here f would be one deterministic rule, valid for all support states x in the model. We are asking what information the shorter representation is sufficient to determine.</p></div>
+<p>But the Persistent and Intermittent states both present the same short-horizon input, {reserve}. Their long-horizon outputs disagree.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The conflicting demands</p><h3>One input. Two incompatible values.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The function of reserve would have to equal reserve and also equal the empty set"><mtable columnalign="left" rowspacing="1em"><mtr><mtd><mrow><mi>f</mi><mo>(</mo><mo>{</mo><mtext>reserve</mtext><mo>}</mo><mo>)</mo><mo>=</mo><mo>{</mo><mtext>reserve</mtext><mo>}</mo></mrow></mtd></mtr><mtr><mtd><mrow><mi>f</mi><mo>(</mo><mo>{</mo><mtext>reserve</mtext><mo>}</mo><mo>)</mo><mo>=</mo><mi>∅</mi></mrow></mtd></mtr></mtable></math></div></div>
+<p>The identical input appears twice. Each equation demands a different result. No ordinary deterministic function can satisfy both.</p></div>
+<p>That proves that the complete support family does not admit exact short-to-long capacity transport <em>from short-horizon capacity alone</em>. The missing information is the persistence of the support arrangement.</p>
+<p>If we had retained the support-state identity, we could distinguish Persistent from Intermittent. Once both have been represented only by {reserve}, that distinguishing detail cannot be reconstructed from the representation.</p>
+<p>This is an information limit. More elaborate computation cannot recover a distinction that the selected input never retained.</p>
+</section>
+<section class="ulh-chapter-section" id="previous-transport">
+<p class="ulh-kicker">05 / Why this doesn't contradict Lesson 6</p>
+<h2 class="ulh-serif">Other declared systems can admit exact transport.</h2>
+<p>Earlier in Paper II, the finite five-state forest under mild conditions had a very different structure. In that example, a short-horizon capacity always determined the same long-horizon capacity. One exact transformation could therefore act on the complete attained short-capacity range.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">A model where transport succeeds</p><h3>Adding a stable response when capacity is nonempty</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Kappa of c equals c union stable S if c is nonempty"><mrow><mi>κ</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>=</mo><mi>c</mi><mo>∪</mo><mo>{</mo><mi>S</mi><mo>∣</mo><mi>c</mi><mo>≠</mo><mi>∅</mi><mo>}</mo></mrow></math></div></div>
+<p>The symbol ∪ means set union: take the combined members of the sets. Here S is the stable response atom. If c is nonempty, the rule adds S; if c is empty, nothing is added. This transformation is established for the specified forest model.</p></div>
+<p>For instance, κ({E}) = {E, S}. In that forest construction, equal short-capacity values always have equal long-capacity values. The rule is well-defined.</p>
+<p>The external-support model has a different relationship between its short and long representations. Equal short values there may conceal different support persistence, so its corresponding transport fails.</p>
+<p>These are two precise mathematical outcomes in two different declared systems. The definition of prospective Health alone does not impose a universal short-to-long prediction rule.</p>
+</section>
+</article></div></section>
+<!-- LESSON7_END -->
+
