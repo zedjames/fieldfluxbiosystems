@@ -76,4 +76,42 @@
 <p>Suppose two forests each contain one thousand trees. The tree-count representation gives both the same value. The forests may nevertheless differ in regeneration and their capacity to continue under a specified challenge.</p>
 <p>That observation leads to a practical question: <strong>Has the representation discarded something that matters to the exact health question I intend to answer?</strong></p>
 </section>
-<!-- LESSON8_PART_TWO -->
+<section class="ulh-chapter-section" id="sufficiency">
+<p class="ulh-kicker">03 / What does sufficient mean?</p>
+<h2 class="ulh-serif">Sufficiency means preserving the answers the questions require.</h2>
+<p>Suppose I'm considering a collection of health-relevant questions, and I have a representation e that gives me a description of each state. To test sufficiency, I compare two states whenever the representation returns exactly the same description.</p>
+<p>If their answers agree for every declared question, the representation is sufficient for that question family. If even one question gives opposite answers, the representation has merged two states that the question must distinguish.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper III · Representation sufficiency</p><h3>The answer must survive the representation.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="If e of x equals e of y, then for every declared question q, A of q and x if and only if A of q and y">
+<mrow><mi>e</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>e</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>⟹</mo><mo>∀</mo><mi>q</mi><mo>∈</mo><mi mathvariant="normal">Queries</mi><mo>,</mo><mspace width=".4em"/><mi>A</mi><mo>(</mo><mi>q</mi><mo>,</mo><mi>x</mi><mo>)</mo><mo>↔</mo><mi>A</mi><mo>(</mo><mi>q</mi><mo>,</mo><mi>y</mi><mo>)</mo></mrow></math>
+</div></div><p>This is the condition illustrated in Paper III, Section 2. The phrase “every question” refers to the declared question family, not every question anyone could imagine.</p></div>
+<dl class="ulh-term-list">
+<div><dt>e(x)</dt><dd>What the representation records about state x.</dd></div>
+<div><dt>e(x) = e(y)</dt><dd>The observation cannot distinguish the two states.</dd></div>
+<div><dt>A(q,x)</dt><dd>The answer to declared question q about state x.</dd></div>
+<div><dt>∀</dt><dd>“For every.” Every question in the declared family must agree.</dd></div>
+<div><dt>⟹ and ↔</dt><dd>The first means “implies.” The second means the two answers have the same truth value.</dd></div>
+</dl>
+<p>This condition does not require me to reconstruct the full state. It asks for exactly the distinctions that the declared questions can detect. That's a much more focused information requirement.</p>
+</section>
+<section class="ulh-chapter-section" id="refinement">
+<p class="ulh-kicker">04 / The principal theorem</p>
+<h2 class="ulh-serif">There is a canonical way to describe the information each question needs.</h2>
+<p>In Lesson 3 we learned how to group capacities that give identical adequacy answers. Paper III applies the same underlying idea to a declared family of questions over states. I call the resulting answer-class map the <em>canonical query-visible quotient</em>, written q<sub>A</sub>.</p>
+<p>It groups together exactly the states whose entire pattern of answers agrees. If all our questions treat two states identically, the quotient places them in the same class. If any question separates them, the quotient keeps the classes separate.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Theorem 3.1 · Principal sufficiency</p><h3>Representations must refine the question's own information.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Representation sufficient for A and e if and only if e refines q sub A">
+<mrow><mi mathvariant="normal">RepresentationSufficient</mi><mo>(</mo><mi>A</mi><mo>,</mo><mi>e</mi><mo>)</mo><mo>⇔</mo><mi>e</mi><mo>⪰</mo><msub><mi>q</mi><mi>A</mi></msub></mrow></math>
+</div></div><p>The relation ⪰ means refinement: e retains at least every distinction retained by q<sub>A</sub>. It may retain more.</p></div>
+<p>Refinement has a precise meaning. If the finer representation e gives equal values on two states, the coarser representation q<sub>A</sub> must give equal values as well. Another way of saying this is that e is not allowed to merge a pair of states that the question-answer quotient needs to keep apart.</p>
+<div class="ulh-refinement-steps" aria-label="Three levels of information for a 50 percent probability threshold question">
+<div><span>01 / Too coarse</span><strong>Success is possible?</strong><p>Both systems answer yes. The 50% requirement cannot be recovered.</p></div>
+<div><span>02 / More detailed</span><strong>Exact success probability</strong><p>99.9% and 0.1% remain distinguishable. The threshold answer is determined.</p></div>
+<div><span>03 / Task-visible</span><strong>Meets 50%?</strong><p>Yes and no remain distinct. This is exactly the distinction required by the single threshold question.</p></div>
+</div>
+<p>Both the exact probability and the threshold-answer representation are sufficient for the 50% question. The first retains information beyond the question; the second retains the precise answer class. The success-possible representation is insufficient because it assigns the same value to two states with different threshold answers.</p>
+<p>The theorem proves the relationship in the declared mathematical setting: a representation is sufficient <em>if and only if</em> it refines the quotient determined by the questions.</p>
+</section>
+</article></div></section>
+<!-- LESSON8_PART_THREE -->
+
