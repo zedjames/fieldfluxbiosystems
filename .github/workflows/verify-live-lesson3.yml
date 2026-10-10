@@ -1,0 +1,43 @@
+name: Verify live Understanding Health Lesson 3
+on:
+  pull_request:
+    paths: [.github/workflows/verify-live-lesson3.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validate deployed pages, code, and bidirectional links over HTTPS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time
+          from urllib.request import Request,urlopen
+          base="https://fieldfluxbiosystems.com/"
+          tests={
+          "understanding-health.html":["03 lessons published","understanding-health-01.html","understanding-health-02.html","understanding-health-03.html"],
+          "understanding-health-02.html":["Next: Lesson 3","understanding-health-03.html",'rel="next"'],
+          "understanding-health-03.html":["By Zed James","Previous: Lesson 2","understanding-health-02.html","<math ","data-ulh-quotient-view=\"base\"","data-ulh-quotient-view=\"extended\"","research-constitutive-continuation-capacity.pdf"],
+          "assets/js/understanding-health-03.js":["All four subsets are now in separate requirement-visible groups"],
+          "sitemap.xml":["understanding-health-03.html"],
+          }
+          errors=[]
+          for route,markers in tests.items():
+            for attempt in range(7):
+              try:
+                request=Request(base+route,headers={"User-Agent":"FFB-Lesson3-check/1.0","Cache-Control":"no-cache"})
+                with urlopen(request,context=ssl.create_default_context(),timeout=20) as response:
+                  body=response.read().decode("utf-8","replace")
+                  print("PAGE",route,"HTTP",response.status,"bytes",len(body))
+                missing=[v for v in markers if v not in body]
+                if missing: raise ValueError("Content missing: "+repr(missing))
+                break
+              except Exception as e:
+                if attempt==6:errors.append(f"{route}: {e}")
+                else:time.sleep(5)
+          for e in errors:print("ERROR",e)
+          if errors:raise SystemExit(1)
+          print("PASS — Lesson 3 and links are live, accessible over validated HTTPS")
+          PY
