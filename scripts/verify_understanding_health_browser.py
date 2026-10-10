@@ -28,6 +28,14 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const horizonSwitcher=document.querySelector('[data-ulh-support-choice="long"]');
  const representationSwitcher=document.querySelector('[data-ulh-measure-choice="threshold"]');
  const targetSwitcher=document.querySelector('[data-ulh-target-choice="class"]');
+ const budgetSlider=document.querySelector("#ulh-budget-range");
+ let budgetState=null;
+ if(budgetSlider){
+   budgetSlider.value="4";
+   budgetSlider.dispatchEvent(new Event("input",{bubbles:true}));
+   budgetState={value:budgetSlider.value,shown:document.querySelector("[data-ulh-budget-value]")?.textContent||"",caseA:document.querySelector('[data-ulh-budget-status="A"]')?.textContent||"",caseB:document.querySelector('[data-ulh-budget-status="B"]')?.textContent||"",summary:document.querySelector("[data-ulh-budget-summary]")?.textContent||""};
+ }
+
  let targetState=null;
  if(targetSwitcher){
   targetSwitcher.click();
@@ -64,7 +72,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,budgetState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -100,6 +108,12 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-10.html"):
+                    budget=result["budgetState"]
+                    if (not budget or budget["value"]!="4" or budget["shown"]!="4 units" or
+                        budget["caseA"]!="Affordable" or budget["caseB"]!="Affordable" or
+                        "Case B is affordable" not in budget["summary"]):
+                        errors.append(page+" budget interaction failed at "+str(width))
                 if page.endswith("-09.html"):
                     target=result["targetState"]
                     if (not target or target["pressed"]!="true" or target["active"]!="true" or
