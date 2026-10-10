@@ -1,0 +1,41 @@
+/* Lesson 9 — source refinement, target coarsening, query-visible transport. */
+.ulh-page .ulh-transport-flow{display:grid;grid-template-columns:minmax(0,.8fr) 75px minmax(0,1.2fr);align-items:center;gap:12px;background:#eaf0e9;border:1px solid #c1d3c7;padding:clamp(22px,4vw,39px);margin:35px 0}
+.ulh-page .ulh-transport-flow__source,.ulh-page .ulh-transport-flow__targets>div{background:#fffdf4;border:1px solid #c2d0c4;padding:20px;text-align:center}
+.ulh-page .ulh-transport-flow__targets{display:grid;gap:12px}
+.ulh-page .ulh-transport-flow__source span,.ulh-page .ulh-transport-flow__targets span{display:block;text-transform:uppercase;letter-spacing:.13em;color:#967853;font-size:.72rem;font-weight:750}
+.ulh-page .ulh-transport-flow__source strong,.ulh-page .ulh-transport-flow__targets strong{font:400 clamp(2rem,4vw,3.2rem)/1.15 var(--serif,Georgia,serif);color:#254d57;display:block;margin:11px 0}
+.ulh-page .ulh-transport-flow__source small,.ulh-page .ulh-transport-flow__targets small{font-size:.83rem;color:#647b73;line-height:1.5}
+.ulh-page .ulh-transport-flow__split{display:flex;height:150px;align-items:center;flex-direction:column;justify-content:space-around;color:#a28a5d;font:400 2rem Georgia,serif}
+.ulh-page .ulh-transport-tradeoff{padding:clamp(65px,8vw,105px) 0;background:#e8ede7;border-block:1px solid #c3d1c8}
+.ulh-page .ulh-transport-tradeoff h2,.ulh-page .ulh-target-explorer h2{font:400 clamp(2.25rem,4.3vw,4.1rem)/1.12 var(--serif,Georgia,serif);color:#204652;letter-spacing:-.04em;margin:18px 0 25px}
+.ulh-page .ulh-transport-tradeoff__intro,.ulh-page .ulh-target-explorer__intro{font-size:1.08rem;line-height:1.76;color:#576c66;max-width:75ch}
+.ulh-page .ulh-transport-tradeoff__grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:34px}
+.ulh-page .ulh-transport-tradeoff__grid>div{background:#faf8f0;border:1px solid #bed0c3;padding:clamp(24px,4vw,45px)}
+.ulh-page .ulh-transport-tradeoff__grid>div:nth-child(2){background:#f4eee1;border-color:#d4c5a8}
+.ulh-page .ulh-transport-tradeoff__grid span{font-size:.76rem;font-weight:750;color:#99764c;text-transform:uppercase;letter-spacing:.1em}
+.ulh-page .ulh-transport-tradeoff__grid h3{font:400 clamp(1.5rem,2.3vw,2.1rem)/1.19 var(--serif,Georgia,serif);color:#24505b;margin:20px 0}
+.ulh-page .ulh-transport-tradeoff__grid p{font-size:.98rem;line-height:1.73;color:#536b65;margin-bottom:22px}
+.ulh-page .ulh-transport-tradeoff__grid strong{display:block;color:#2b585a;font:400 2rem/1.2 Georgia,serif;border-top:1px solid #c5d6c8;padding-top:18px}
+.ulh-page .ulh-transport-tradeoff__grid small{display:block;font-size:.82rem;line-height:1.5;color:#64796f;margin-top:13px}
+.ulh-page .ulh-target-explorer{background:#e6ede7;padding:clamp(65px,8vw,105px) 0;border-block:1px solid #c3d1c9}
+.ulh-page .ulh-target-explorer__controls{margin:34px 0 22px;padding:0;border:0}
+.ulh-page .ulh-target-explorer__controls legend{font-size:.77rem;letter-spacing:.12em;text-transform:uppercase;color:#4b6b63;font-weight:750;margin-bottom:13px}
+.ulh-page .ulh-target-explorer__controls button{font:600 .94rem var(--body,system-ui,sans-serif);padding:12px 19px;background:#fffdf5;color:#264e5c;border:1px solid #acbfb1;cursor:pointer;min-height:45px}
+.ulh-page .ulh-target-explorer__controls button[aria-pressed=true]{background:#1e4853;color:#fff;border-color:#1e4853}
+.ulh-page .ulh-target-explorer__grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.ulh-page .ulh-target-explorer__card{background:#fffdf5;border:1px solid #c0d0c4;padding:clamp(22px,3vw,38px);transition:border-color .2s ease,box-shadow .2s ease}
+.ulh-page .ulh-target-explorer__card:nth-child(2){background:#f8f2e6;border-color:#d3c6b0}
+.ulh-page .ulh-target-explorer__card[data-active=true]{box-shadow:0 0 0 3px #90b2a1;border-color:#558b78}
+.ulh-page .ulh-target-explorer__label{font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.12em;color:#967248}
+.ulh-page .ulh-target-explorer__values{display:grid;gap:12px;margin:29px 0 20px}
+.ulh-page .ulh-target-explorer__values>span{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:.85rem;color:#607a70;border-bottom:1px solid #cdd8cb;padding-bottom:11px}
+.ulh-page .ulh-target-explorer__values strong{font:400 clamp(1.42rem,2.8vw,2.2rem)/1.25 var(--serif,Georgia,serif);color:#26505b}
+.ulh-page .ulh-target-explorer__card p{font-size:.98rem;line-height:1.75;color:#5d7168;min-height:110px}
+.ulh-page .ulh-target-explorer__status{display:inline-block;color:#a16a49;border-top:1px solid #d7bdab;padding-top:15px;font-size:.76rem;text-transform:uppercase;letter-spacing:.07em}
+.ulh-page .ulh-target-explorer__status--yes{color:#457c62;border-color:#b0cbb9}
+.ulh-page .ulh-target-explorer__summary{color:#33575d;border-left:2px solid #a98b55;padding:9px 0 9px 21px;max-width:80ch;line-height:1.77;font-size:1.04rem;margin:30px 0 12px}
+.ulh-page .ulh-target-explorer__note{color:#697d72;font-size:.88rem;line-height:1.7;max-width:88ch}
+@media(max-width:750px){.ulh-page .ulh-transport-tradeoff__grid,.ulh-page .ulh-target-explorer__grid{grid-template-columns:1fr}.ulh-page .ulh-target-explorer__card p{min-height:0}}
+@media(max-width:650px){.ulh-page .ulh-transport-flow{grid-template-columns:1fr}.ulh-page .ulh-transport-flow__split{height:auto;flex-direction:row}.ulh-page .ulh-transport-flow__split span:first-child{transform:rotate(45deg)}.ulh-page .ulh-transport-flow__split span:last-child{transform:rotate(-45deg)}}
+@media(max-width:480px){.ulh-page .ulh-target-explorer__controls button{flex:1 1 100%;text-align:left}}
+@media(prefers-reduced-motion:reduce){.ulh-page .ulh-target-explorer__card{transition:none}}
