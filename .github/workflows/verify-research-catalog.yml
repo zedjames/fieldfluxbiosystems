@@ -6,6 +6,12 @@ on:
     paths:
       - "research/catalog.json"
       - "research.html"
+      - "index.html"
+      - "understanding-health*.html"
+      - "learning/**"
+      - "assets/css/understanding-health.css"
+      - "assets/js/understanding-health.js"
+      - "scripts/verify_understanding_health.py"
       - "notebook.html"
       - "research-atlas.html"
       - "research-*.html"
@@ -64,3 +70,11 @@ jobs:
       - name: Validate catalog, relations, and static projections
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
         run: python3 scripts/verify_research_catalog.py
+
+      - name: Validate guided Understanding Health lesson library
+        if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
+        run: python3 scripts/verify_understanding_health.py
+
+      - name: Validate lesson JavaScript syntax
+        if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
+        run: node --check assets/js/understanding-health.js
