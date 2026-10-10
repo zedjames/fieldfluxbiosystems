@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 4,
+  "publishedCount": 5,
   "lessons": [
     {
       "id": "01",
@@ -57,7 +57,21 @@
       "sourceSections": "Paper I Sections 9–11 and discussion of scientific scope: presentation invariance, positive persistence/robustness and observation sufficiency",
       "status": "published",
       "summary": "Success-only capacity may not determine robustness, present realization alone may not determine prospective Health, and observation/representation must preserve the distinctions its questions need.",
-      "previous": "understanding-health-03.html"
+      "previous": "understanding-health-03.html",
+      "next": "understanding-health-05.html"
+    },
+    {
+      "id": "05",
+      "number": 5,
+      "title": "How can the same system be healthy in one context and unhealthy in another?",
+      "slug": "understanding-health-05.html",
+      "sourcePaper": "Prospective Health Across Contexts",
+      "sourceDoi": "10.5281/zenodo.23146280",
+      "sourcePdf": "research-prospective-health-across-contexts.pdf",
+      "sourceSections": "Paper II, Sections 1 and 5–8: contextual licensing, developmental stage, stage-only class splitting and horizon change",
+      "status": "published",
+      "summary": "A contextual health judgment may change when the capacity changes or when the licensed requirement language changes, even with fixed capacity.",
+      "previous": "understanding-health-04.html"
     }
   ]
 }

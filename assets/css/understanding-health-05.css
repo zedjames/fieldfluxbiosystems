@@ -1,0 +1,33 @@
+/* Lesson 5: contextual licensing and stage/horizon comparisons. */
+.ulh-page .ulh-context-contrast,.ulh-page .ulh-stage-capacities,.ulh-page .ulh-mechanism-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:32px 0}
+.ulh-page .ulh-context-contrast>div,.ulh-page .ulh-mechanism-pair>div,.ulh-page .ulh-stage-capacities>div{background:#eaf0e9;border:1px solid #c2d1c5;padding:clamp(22px,3vw,34px)}
+.ulh-page .ulh-context-contrast>div:nth-child(2),.ulh-page .ulh-stage-capacities>div:nth-child(2),.ulh-page .ulh-mechanism-pair>div:nth-child(2){background:#f4eee1;border-color:#d2c4aa}
+.ulh-page .ulh-context-contrast span,.ulh-page .ulh-stage-capacities span,.ulh-page .ulh-mechanism-pair small{font-size:.74rem;text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:#92734b}
+.ulh-page .ulh-context-contrast strong,.ulh-page .ulh-stage-capacities strong,.ulh-page .ulh-mechanism-pair strong{display:block;font:400 clamp(1.3rem,2.1vw,1.92rem)/1.24 var(--serif,Georgia,serif);color:#244d56;margin:15px 0}
+.ulh-page .ulh-context-contrast p,.ulh-page .ulh-mechanism-pair p{font-size:.94rem;line-height:1.72;color:#5e736d}
+.ulh-page .ulh-context-contrast small,.ulh-page .ulh-stage-capacities small{font-size:.82rem;color:#5e746d;line-height:1.5}
+.ulh-page .ulh-stage-sequence{display:flex;align-items:center;gap:clamp(6px,2vw,22px);padding:25px 13px;background:#edf1e9;border:1px solid #cbd6ca;margin:33px 0}
+.ulh-page .ulh-stage-sequence>div{display:flex;flex:1;flex-direction:column;align-items:center;gap:10px}
+.ulh-page .ulh-stage-sequence span{width:clamp(52px,7vw,82px);aspect-ratio:1;border:1px solid #b7cdbf;background:#fdfbf6;border-radius:50%;display:grid;place-items:center;color:#26505c;font:400 clamp(1.6rem,3vw,2.7rem)/1 var(--serif,Georgia,serif)}
+.ulh-page .ulh-stage-sequence strong{font-size:.82rem;color:#51706d}
+.ulh-page .ulh-stage-sequence i{color:#8eae9e;font-size:1.4rem}
+.ulh-page .ulh-stage-explorer{background:#e6ece6;border-block:1px solid #c2d1c8;padding:clamp(65px,8vw,112px) 0}
+.ulh-page .ulh-stage-explorer h2{font:400 clamp(2.1rem,4vw,4rem)/1.12 var(--serif,Georgia,serif);color:#214750;letter-spacing:-.04em;margin:16px 0 19px}
+.ulh-page .ulh-stage-explorer__intro{font-size:1.09rem;line-height:1.73;max-width:76ch;color:#4f6863}
+.ulh-page .ulh-stage-explorer__controls{border:0;padding:0;margin:28px 0 24px}
+.ulh-page .ulh-stage-explorer__controls legend{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4d6c64;margin-bottom:12px}
+.ulh-page .ulh-stage-explorer__controls button{border:1px solid #acbdb0;color:#234d56;background:#fafaf3;padding:12px 20px;cursor:pointer;font:600 .91rem var(--body,system-ui,sans-serif)}
+.ulh-page .ulh-stage-explorer__controls button[aria-pressed=true]{background:#1e4851;color:#fff}
+.ulh-page [data-ulh-stage-view][hidden]{display:none!important}
+.ulh-page .ulh-stage-explorer__views{display:grid;gap:15px}
+.ulh-page .ulh-stage-explorer__view{background:#fcfaf3;border:1px solid #c6d2c4;padding:clamp(22px,3.5vw,40px)}
+.ulh-page .ulh-stage-explorer__view:nth-child(2){background:#f6f0e5}
+.ulh-page .ulh-stage-explorer__view-tag{display:block;font-size:.77rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8e7047;margin-bottom:20px}
+.ulh-page .ulh-stage-explorer__result-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.ulh-page .ulh-stage-explorer__result-grid>div{padding:20px 0;border-top:1px solid #c8d1c8}
+.ulh-page .ulh-stage-explorer__result-grid strong{font:400 1.5rem/1.28 var(--serif,Georgia,serif);color:#234c56;display:block;margin-bottom:14px}
+.ulh-page .ulh-stage-explorer__result-grid small{display:block;margin-top:16px;color:#61766c;font-size:.87rem;line-height:1.6}
+.ulh-page .ulh-stage-explorer__view p,.ulh-page .ulh-stage-explorer__footnote{color:#63776d;font-size:.9rem;line-height:1.7}
+.ulh-page .ulh-stage-explorer__summary{border-left:2px solid #ae8b53;padding:6px 0 6px 20px;margin:24px 0 16px;color:#345e61;line-height:1.7}
+@media(max-width:750px){.ulh-page .ulh-context-contrast,.ulh-page .ulh-mechanism-pair,.ulh-page .ulh-stage-explorer__result-grid{grid-template-columns:1fr}}
+@media(max-width:550px){.ulh-page .ulh-stage-capacities{grid-template-columns:1fr}.ulh-page .ulh-stage-explorer__controls button{flex:1 1 100%}.ulh-page .ulh-stage-sequence strong{font-size:.72rem}}
