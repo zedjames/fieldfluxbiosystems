@@ -1,0 +1,47 @@
+/* Lesson 11 — policy generation, route evidence, and failure-aware robustness. */
+.ulh-page .ulh-policy-grid,.ulh-page .ulh-route-grid,.ulh-page .ulh-robust-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:34px 0}
+.ulh-page .ulh-policy,.ulh-page .ulh-route-card,.ulh-page .ulh-robust-comparison>div{background:#ecf1e9;border:1px solid #c0d0c4;padding:clamp(23px,3vw,34px)}
+.ulh-page .ulh-policy:nth-child(2),.ulh-page .ulh-route-card:nth-child(2),.ulh-page .ulh-robust-comparison>div:nth-child(2){background:#f2ecdf;border-color:#d3c4ac}
+.ulh-page .ulh-policy>span:first-child,.ulh-page .ulh-route-card>span:first-child,.ulh-page .ulh-robust-comparison span{display:block;text-transform:uppercase;letter-spacing:.1em;font-size:.73rem;color:#95734a;font-weight:750}
+.ulh-page .ulh-policy__rows{display:grid;gap:11px;margin:23px 0}
+.ulh-page .ulh-policy__outcome{display:block;padding:13px 16px;font-size:.9rem;line-height:1.5;font-weight:700;border:1px solid #b2cdbc}
+.ulh-page .ulh-policy__outcome--yes,.ulh-page .ulh-challenge-good{color:#31654f;background:#e0eee4}
+.ulh-page .ulh-policy__outcome--no,.ulh-page .ulh-challenge-bad{color:#975e40;background:#f5e4d9;border-color:#dfc2b2}
+.ulh-page .ulh-policy>strong,.ulh-page .ulh-robust-comparison strong{font:400 clamp(1.3rem,2vw,1.75rem)/1.3 var(--serif,Georgia,serif);color:#274f57;display:block;margin:15px 0}
+.ulh-page .ulh-policy p,.ulh-page .ulh-route-card p,.ulh-page .ulh-robust-comparison p{font-size:.92rem;line-height:1.71;color:#5f716b;margin:0}
+.ulh-page .ulh-route-lines{display:flex;align-items:center;gap:10px;margin:16px 0;border-bottom:1px solid #ced8ce;padding-bottom:13px;color:#586f67;font-size:.92rem}
+.ulh-page .ulh-route-lines strong{margin-left:auto;color:#28545a;font:400 1.6rem var(--serif,Georgia,serif)}
+.ulh-page .ulh-route-card p{margin-top:21px}
+.ulh-page .ulh-challenge-explorer{padding:clamp(70px,9vw,115px) 0;background:#e8ede7;border-block:1px solid #c3d1c8}
+.ulh-page .ulh-challenge-explorer h2,.ulh-page .ulh-paper3-recap h2{font:400 clamp(2.2rem,4.4vw,4.3rem)/1.13 var(--serif,Georgia,serif);letter-spacing:-.043em;color:#204651;margin:17px 0 22px}
+.ulh-page .ulh-challenge-explorer__intro{color:#587068;font-size:1.08rem;line-height:1.78;max-width:83ch}
+.ulh-page .ulh-challenge-explorer__controls{border:0;padding:0;margin:31px 0 23px}
+.ulh-page .ulh-challenge-explorer__controls legend{font-size:.78rem;font-weight:750;text-transform:uppercase;letter-spacing:.12em;color:#496960;margin-bottom:13px}
+.ulh-page .ulh-challenge-explorer__controls button{border:1px solid #aec3b3;background:#fffdf6;color:#25505a;font:600 .93rem var(--body,system-ui,sans-serif);cursor:pointer;min-height:44px;padding:12px 20px}
+.ulh-page .ulh-challenge-explorer__controls button[aria-pressed=true]{background:#1b4652;color:#fff;border-color:#1b4652}
+.ulh-page .ulh-challenge-explorer__grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.ulh-page .ulh-challenge-card{background:#fffdf6;border:1px solid #bed1c1;padding:clamp(23px,3.3vw,40px)}
+.ulh-page .ulh-challenge-card:nth-child(2){background:#f7f0e5;border-color:#d3c5a9}
+.ulh-page .ulh-challenge-card__name{font-size:.76rem;color:#8e714b;letter-spacing:.13em;text-transform:uppercase;font-weight:750}
+.ulh-page .ulh-challenge-card h3{font:400 clamp(1.4rem,2.1vw,1.85rem)/1.25 var(--serif,Georgia,serif);color:#204d58;min-height:68px;margin:16px 0 24px}
+.ulh-page .ulh-challenge-card__row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #c6d3c7;padding:14px 0}
+.ulh-page .ulh-challenge-card__row>span{min-width:70px;color:#536c65;font-size:.9rem}
+.ulh-page .ulh-challenge-card__row>strong{font-size:.81rem;font-weight:700;padding:8px 10px;border:1px solid #b5cbb9}
+.ulh-page .ulh-challenge-card__row>strong.ulh-challenge-bad{border-color:#dabca7}
+.ulh-page .ulh-challenge-card>p{font-size:.88rem;color:#61766d;line-height:1.65;margin:15px 0}
+.ulh-page .ulh-challenge-explorer[data-focus=positive] .ulh-challenge-bad,.ulh-page .ulh-challenge-explorer[data-focus=positive] .ulh-challenge-negative{opacity:.5}
+.ulh-page .ulh-challenge-explorer[data-focus=full] .ulh-challenge-bad,.ulh-page .ulh-challenge-explorer[data-focus=full] .ulh-challenge-negative{font-weight:750}
+.ulh-page .ulh-challenge-explorer__summary{border-left:2px solid #ab8e5e;padding:8px 0 8px 20px;color:#345960;font-size:1.06rem;line-height:1.78;max-width:82ch;margin:31px 0 14px}
+.ulh-page .ulh-challenge-explorer__note{font-size:.88rem;line-height:1.7;color:#677b70;max-width:85ch}
+.ulh-page .ulh-paper3-recap{background:#e7ede8;border-block:1px solid #c4d1c8;padding:clamp(75px,9vw,115px) 0}
+.ulh-page .ulh-paper3-recap>.ulh-container>p:not(.ulh-kicker){color:#59716a;font-size:1.09rem;line-height:1.78;max-width:81ch}
+.ulh-page .ulh-paper3-recap__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:37px 0}
+.ulh-page .ulh-paper3-recap__grid>div{padding:clamp(21px,3vw,36px);border:1px solid #b8cec0;background:#fcfaf3}
+.ulh-page .ulh-paper3-recap__grid>div:nth-child(2){background:#f3f0e5}
+.ulh-page .ulh-paper3-recap__grid span{display:block;font-size:.74rem;letter-spacing:.13em;font-weight:750;text-transform:uppercase;color:#91724c}
+.ulh-page .ulh-paper3-recap__grid h3{font:400 clamp(1.3rem,1.9vw,1.76rem)/1.25 var(--serif,Georgia,serif);color:#264f59;margin:18px 0}
+.ulh-page .ulh-paper3-recap__grid p{color:#5c706a;font-size:.92rem;line-height:1.69}
+.ulh-page .ulh-paper3-recap__close{border-left:2px solid #b49b72;padding-left:21px;margin-top:25px}
+@media(max-width:880px){.ulh-page .ulh-paper3-recap__grid{grid-template-columns:1fr}}
+@media(max-width:700px){.ulh-page .ulh-policy-grid,.ulh-page .ulh-route-grid,.ulh-page .ulh-robust-comparison,.ulh-page .ulh-challenge-explorer__grid{grid-template-columns:1fr}.ulh-page .ulh-challenge-card h3{min-height:0}}
+@media(max-width:480px){.ulh-page .ulh-challenge-explorer__controls button{flex:1 1 100%;text-align:left}}

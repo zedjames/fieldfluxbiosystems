@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 10,
+  "publishedCount": 11,
   "lessons": [
     {
       "id": "01",
@@ -141,7 +141,21 @@
       "sourceSections": "Paper III Sections 10.1–10.2 and 12.2–12.3: finite response probability-threshold queries and the attained all-budget minimum-cost code",
       "status": "published",
       "summary": "Theorems for complete bounded rational probability thresholds and fixed-atom all-budget cost queries identify exact task-visible statistics. Possibility, probability and affordability remain distinct.",
-      "previous": "understanding-health-09.html"
+      "previous": "understanding-health-09.html",
+      "next": "understanding-health-11.html"
+    },
+    {
+      "id": "11",
+      "number": 11,
+      "title": "Having a way to survive is not the same as being able to control your survival",
+      "slug": "understanding-health-11.html",
+      "sourcePaper": "Representation Sufficiency in Prospective Health",
+      "sourceDoi": "10.5281/zenodo.23219588",
+      "sourcePdf": "research-representation-sufficiency-prospective-health.pdf",
+      "sourceSections": "Paper III Sections 11 and 12.1, 12.4: controlled responses and policy-robust recovery, route-summary representation, challenge profiles and failure-aware robust persistence",
+      "status": "published",
+      "summary": "Separates recovery possibility, controlled recovery, multiple routes, policy-level robustness and failure-aware robustness over a declared challenge family.",
+      "previous": "understanding-health-10.html"
     }
   ]
 }
