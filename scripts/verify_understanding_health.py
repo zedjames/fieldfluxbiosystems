@@ -58,7 +58,7 @@ def main():
         check(p.canonical==[SITE+page],page+": canonical URL mismatch",errors)
         check(bool(p.meta.get("description")),page+": search description absent",errors)
         check(bool(p.meta.get("robots")),page+": explicit indexing policy absent",errors)
-        check("assets/css/understanding-health.css?v=3" in html,page+": updated shared learning stylesheet missing",errors)
+        check("assets/css/understanding-health.css?v=4" in html,page+": updated shared learning stylesheet missing",errors)
         for attr,url in p.urls:
             parsed=urlsplit(url)
             if parsed.scheme or url.startswith(("//","mailto:","tel:","data:")):continue
@@ -117,6 +117,24 @@ def main():
           "Lesson 2 next metadata not pointing to Lesson 3",errors)
     check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-02.html"' in third,
           "Lesson 3 previous metadata not pointing to Lesson 2",errors)
+    fourth=(ROOT/"understanding-health-04.html").read_text(encoding="utf8")
+    check(fourth.count("<math ")==3,"Lesson 4 must include three accessible formal expressions",errors)
+    check("∃" in fourth and "∀" in fourth,"Lesson 4 must unpack existential and universal claims",errors)
+    check("positive successful-continuation information" in fourth and
+          "present realization alone" in fourth.lower(),
+          "Lesson 4 must preserve both distinct negative results",errors)
+    check("ulh-robustness-pair" in fourth and "ulh-architecture__steps" in fourth,
+          "Lesson 4 visual robustness example or final Paper-I sequence missing",errors)
+    check("scientific" in fourth.lower() and "empirical" in fourth.lower(),
+          "Lesson 4 must disclose formal and empirical authority",errors)
+    check("research-constitutive-continuation-capacity.pdf" in fourth and
+          "10.5281/zenodo.23131157" in fourth,
+          "Lesson 4 full paper citation missing",errors)
+    check('rel="next" href="https://fieldfluxbiosystems.com/understanding-health-04.html"' in
+          (ROOT/"understanding-health-03.html").read_text(encoding="utf8"),
+          "Lesson 3 does not link to Lesson 4 as next",errors)
+    check('rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-03.html"' in fourth,
+          "Lesson 4 lacks previous link metadata",errors)
     first=(ROOT/"understanding-health-01.html").read_text(encoding="utf8")
     check("<math " in first and "<msub>" in first,"Lesson 1 requires accessible native equation",errors)
     check('data-ulh-outcome="short"' in first and 'data-ulh-outcome="long"' in first,"Horizon comparison missing",errors)
