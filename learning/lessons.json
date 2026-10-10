@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 6,
+  "publishedCount": 7,
   "lessons": [
     {
       "id": "01",
@@ -85,7 +85,21 @@
       "sourceSections": "Paper II, Sections 2–4 and 8–11: relational transport, determinacy, health-visible quotient and stage obstruction; external-support illustration in Section 12",
       "status": "published",
       "summary": "Raw target capacities can be indeterminate while a target adequacy class is determined. Stage-specific questions can obstruct transport, and determinacy alone does not preserve full Health.",
-      "previous": "understanding-health-05.html"
+      "previous": "understanding-health-05.html",
+      "next": "understanding-health-07.html"
+    },
+    {
+      "id": "07",
+      "number": 7,
+      "title": "Can a system be healthy if it depends on something outside itself to survive?",
+      "slug": "understanding-health-07.html",
+      "sourcePaper": "Prospective Health Across Contexts",
+      "sourceDoi": "10.5281/zenodo.23146280",
+      "sourcePdf": "research-prospective-health-across-contexts.pdf",
+      "sourceSections": "Paper II Section 12 and Section 7: open-system support states, horizon transport, withdrawal and comparison with the five-state forest",
+      "status": "published",
+      "summary": "The four-state open-system example proves that equal short-horizon capacities need not determine long-horizon capacity; withdrawal changes reserve-Health despite preserved present realization. It distinguishes formal dependence from empirical claims.",
+      "previous": "understanding-health-06.html"
     }
   ]
 }
