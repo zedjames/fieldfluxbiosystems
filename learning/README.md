@@ -26,3 +26,5 @@ The public learning library is at `understanding-health.html`. Each lesson is a 
 7. Inspect on mobile and desktop and verify HTTP 200 on the canonical URL after deployment.
 
 The scholarly source for Lesson 01 is `research-constitutive-continuation-capacity.pdf`, DOI `10.5281/zenodo.23131157`. The full PDF remains available for download from the lesson.
+
+The source for Lesson 02 is the same Paper I: Sections 2–4 and the viable-history/capacity construction. Its discussion of the permissive candidate-lawfulness filter explicitly attributes that later encoding to Paper IV. The lesson includes direct links back to Lesson 01 and the library; Lesson 01 now has a real forward link. For subsequent lessons, keep `previous` and `next` in the registry synchronized with the navigation; never link to unpublished chapters.
