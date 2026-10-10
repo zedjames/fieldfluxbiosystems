@@ -67,7 +67,7 @@
 <h2 class="ulh-serif">A policy can permit success without making every admitted response successful.</h2>
 <p>Consider two illustrative forest-management policies. Under Policy A, one admitted generated response recovers and another fails. Under Policy B, both admitted generated responses satisfy our declared recovery condition.</p>
 <div class="ulh-policy-grid" role="group" aria-label="Two hypothetical policies, each with two admitted generated responses. Policy A contains one failure; Policy B has two successes.">
-<div class="ulh-policy"><span>Policy A · A successful possibility</span><div class="ulh-policy__rows"><span class="ulh-policy__outcome ulh-policy__outcome--yes"><icon aria-hidden="true"></icon>Recovers</span><span class="ulh-policy__outcome ulh-policy__outcome--no">Fails to recover</span></div><strong>At least one success</strong><p>A successful generated response exists, but another admitted response fails the condition.</p></div>
+<div class="ulh-policy"><span>Policy A · A successful possibility</span><div class="ulh-policy__rows"><span class="ulh-policy__outcome ulh-policy__outcome--yes">Recovers</span><span class="ulh-policy__outcome ulh-policy__outcome--no">Fails to recover</span></div><strong>At least one success</strong><p>A successful generated response exists, but another admitted response fails the condition.</p></div>
 <div class="ulh-policy"><span>Policy B · Robust under this policy</span><div class="ulh-policy__rows"><span class="ulh-policy__outcome ulh-policy__outcome--yes">Recovers</span><span class="ulh-policy__outcome ulh-policy__outcome--yes">Recovers</span></div><strong>Every admitted response succeeds</strong><p>The policy generates nonempty admitted responses, all satisfying the declared outcome.</p></div>
 </div>
 <p class="ulh-small">These two policies are an illustration of the Section 12.1 quantifiers, not measured forest-management outcomes.</p>
@@ -80,4 +80,38 @@
 <p>π, pronounced pi, denotes a policy. The nonempty condition prevents a policy with no generated responses from counting as robust merely because it has no failures.</p></div>
 <p>The order of the quantifiers is crucial: <strong>there exists a policy for which every admitted generated response succeeds</strong>. I am not asking every policy to succeed, nor claiming that the selected policy necessarily controls every possible real-world outcome.</p>
 </section>
-<!-- LESSON11_SECOND -->
+<section class="ulh-chapter-section" id="routes">
+<p class="ulh-kicker">03 / The difference between arriving and how we arrive</p>
+<h2 class="ulh-serif">Two systems can reach the same outcome through different numbers of routes.</h2>
+<p>Now suppose two forests can both regenerate to a stable condition. One has a single admitted route to that response; another has two different routes. A representation that records only the final response category would describe both as <strong>{stable}</strong>.</p>
+<p>But that description has erased how many routes were available. If the question asks about route multiplicity, we need a richer representation.</p>
+<div class="ulh-route-grid" role="group" aria-label="Formal route contrast: one route to stable for Forest A, two routes to stable for Forest B">
+<div class="ulh-route-card"><span>Forest A · One available route</span><div class="ulh-route-lines"><span>Route 1</span><span aria-hidden="true">→</span><strong>Stable</strong></div><p>One distinct route produces the observed response.</p></div>
+<div class="ulh-route-card"><span>Forest B · Two available routes</span><div class="ulh-route-lines"><span>Route 1</span><span aria-hidden="true">→</span><strong>Stable</strong></div><div class="ulh-route-lines"><span>Route 2</span><span aria-hidden="true">→</span><strong>Stable</strong></div><p>Two routes produce the same observed response.</p></div></div>
+<p>The formal route capacity includes which routes exist, the response each route produces, and a <em>declared independence-class label</em> for each route. From that complete object, Paper III constructs a shorter summary:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper III · Section 11, Equation (63)</p><h3>Keep the attained response types, route count and declared classes.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="RouteSummary of C is the tuple of endpoint set projection of C, number of routes in R C, and image of the route independence class labels">
+<mrow><mi mathvariant="normal">RouteSummary</mi><mo>(</mo><mi>C</mi><mo>)</mo><mo>=</mo><mo>(</mo><msub><mi>π</mi><mtext>set</mtext></msub><mo>(</mo><mi>C</mi><mo>)</mo><mo>,</mo><mo>|</mo><msub><mi>R</mi><mi>C</mi></msub><mo>|</mo><mo>,</mo><msub><mi>ι</mi><mi>C</mi></msub><mo>[</mo><msub><mi>R</mi><mi>C</mi></msub><mo>]</mo><mo>)</mo></mrow></math></div></div>
+<p>The summary includes precisely the information consumed by the displayed route-multiplicity and class-image queries; it is not claimed to be minimal for every possible route question.</p></div>
+<dl class="ulh-term-list">
+<div><dt>π<sub>set</sub>(C)</dt><dd>The set of observed response types reached by the routes.</dd></div>
+<div><dt>|R<sub>C</sub>|</dt><dd>The number of distinct routes available in the formal route set.</dd></div>
+<div><dt>ι<sub>C</sub>[R<sub>C</sub>]</dt><dd>The set of declared route-class labels represented among those routes.</dd></div></dl>
+<p>In an ecological interpretation, routes might describe different mechanisms of regeneration. Whether those mechanisms are actually independent, share a vulnerable resource, or withstand the same disturbance requires scientific evidence. The paper's abstract class labels do not establish physical independence on their own.</p>
+</section>
+<section class="ulh-chapter-section" id="challenges">
+<p class="ulh-kicker">04 / Give failure an explicit place</p>
+<h2 class="ulh-serif">An account of robustness must be able to see unsuccessful responses.</h2>
+<p>In Lesson 4 I introduced a boundary: having a successful continuation does not, by itself, establish robustness. Paper III returns to it by recording the response information in a more complete form.</p>
+<p>Imagine two challenges: drought and wind. For each, the declared model may admit multiple response histories, some successful and some unsuccessful.</p>
+<p>I collect three pieces of information. G<sub>adm</sub> identifies challenges with at least one admitted response. G<sup>+</sup> identifies challenges with at least one successful response. G<sup>−</sup> identifies challenges with at least one unsuccessful response.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Paper III · Section 12.4, Equations (77)–(79)</p><h3>Admitted, successful and unsuccessful challenge profiles.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Three challenge profiles, admitted G adm, success G plus, and failure G minus">
+<mtable columnalign="left" rowspacing=".75em">
+<mtr><mtd><mrow><msub><mi>G</mi><mtext>adm</mtext></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>c</mi><mo>∈</mo><mi>D</mi><mo>∣</mo><mo>∃</mo><mi>h</mi><mo>,</mo><mi mathvariant="normal">responds</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>τ</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>,</mo><mi>h</mi><mo>)</mo><mo>}</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><msup><mi>G</mi><mo>+</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>c</mi><mo>∈</mo><mi>D</mi><mo>∣</mo><mo>∃</mo><mi>h</mi><mo>,</mo><mi mathvariant="normal">responds</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>τ</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>,</mo><mi>h</mi><mo>)</mo><mo>∧</mo><mi>P</mi><mo>(</mo><mi>h</mi><mo>)</mo><mo>}</mo></mrow></mtd></mtr>
+<mtr><mtd><mrow><msup><mi>G</mi><mo>−</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>c</mi><mo>∈</mo><mi>D</mi><mo>∣</mo><mo>∃</mo><mi>h</mi><mo>,</mo><mi mathvariant="normal">responds</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>τ</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>,</mo><mi>h</mi><mo>)</mo><mo>∧</mo><mo>¬</mo><mi>P</mi><mo>(</mo><mi>h</mi><mo>)</mo><mo>}</mo></mrow></mtd></mtr></mtable></math></div></div>
+<p>D is the declared challenge family. τ(c) supplies the declared time horizon for each challenge; P decides whether a response history satisfies the specified outcome. A challenge may belong to both G<sup>+</sup> and G<sup>−</sup> when admitted histories include both success and failure.</p></div>
+<p>That last possibility makes the difference visible. If all we collect are the successful responses, we can erase a failure that matters to the robustness question.</p>
+</section>
+</article></div></section>
+<!-- LESSON11_THIRD -->
