@@ -8,7 +8,7 @@
  if(buttons.length!==2||cards.length!==2||!summary)return;
  const text={
   erased:"Recovered and adapted become indistinguishable when the projection merges S_R and S_A. The capacity representation itself has erased that information.",
-  ignored:"Baseline and recovered remain distinguishable by simplified capacities, {S,E} and {S}; the declared health questions simply do not consume the exposed-response distinction."
+  ignored:"Baseline and recovered remain distinguishable by simplified capacities, {S,E} and {S}. Their distinction is retained by capacity but ignored by the declared Health questions."
  };
  function focus(mode){
   if(!Object.prototype.hasOwnProperty.call(text,mode))return;
