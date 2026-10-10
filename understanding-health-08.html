@@ -113,5 +113,59 @@
 <p>The theorem proves the relationship in the declared mathematical setting: a representation is sufficient <em>if and only if</em> it refines the quotient determined by the questions.</p>
 </section>
 </article></div></section>
-<!-- LESSON8_PART_THREE -->
+<section class="ulh-measure-explorer" id="compare" aria-labelledby="measurement-heading"><div class="ulh-container">
+<p class="ulh-kicker">The same example, three descriptions</p><h2 class="ulh-serif" id="measurement-heading">What did our representation actually retain?</h2>
+<p class="ulh-measure-explorer__intro">All three descriptions below are accurate under the stipulated example. Select one to focus on what information it keeps for the declared 50% success question. All three remain readable without JavaScript.</p>
+<fieldset class="ulh-measure-explorer__controls"><legend>Focus on a representation</legend>
+<div class="ulh-switch__buttons"><button type="button" data-ulh-measure-choice="possible" aria-pressed="true">Possibility only</button><button type="button" data-ulh-measure-choice="probability" aria-pressed="false">Exact probability</button><button type="button" data-ulh-measure-choice="threshold" aria-pressed="false">50% answer</button></div></fieldset>
+<div class="ulh-measure-explorer__grid">
+<div class="ulh-measure-explorer__card" data-ulh-measure-card="possible" data-active="true">
+<span class="ulh-measure-explorer__number">01 / Success possible?</span><div class="ulh-measure-explorer__results"><span>System A <strong>Yes</strong></span><span>System B <strong>Yes</strong></span></div>
+<p>Both systems look identical to this representation.</p><strong class="ulh-measure-explorer__verdict">Insufficient for 50%</strong></div>
+<div class="ulh-measure-explorer__card" data-ulh-measure-card="probability" data-active="false">
+<span class="ulh-measure-explorer__number">02 / Success probability</span><div class="ulh-measure-explorer__results"><span>System A <strong>99.9%</strong></span><span>System B <strong>0.1%</strong></span></div>
+<p>The exact values preserve the difference needed for the threshold.</p><strong class="ulh-measure-explorer__verdict ulh-measure-explorer__verdict--pass">Sufficient, more detailed</strong></div>
+<div class="ulh-measure-explorer__card" data-ulh-measure-card="threshold" data-active="false">
+<span class="ulh-measure-explorer__number">03 / Meets at least 50%?</span><div class="ulh-measure-explorer__results"><span>System A <strong>Yes</strong></span><span>System B <strong>No</strong></span></div>
+<p>Exactly the answer distinction required by this one declared question.</p><strong class="ulh-measure-explorer__verdict ulh-measure-explorer__verdict--pass">Sufficient, task-visible</strong></div>
+</div>
+<p class="ulh-measure-explorer__summary" data-ulh-measure-summary aria-live="polite">Possibility alone is insufficient: it returns the same value for systems with opposite 50% threshold answers.</p>
+<p class="ulh-measure-explorer__note">The probabilities are stipulated mathematical values from Paper III, Section 12.3. They do not indicate observed risks or scientific health assessments for real organisms.</p>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Continue reading"><strong>The consequences</strong><nav aria-label="Later lesson sections"><a href="#processing">Deterministic information loss</a><a href="#minimality">What minimal means</a><a href="#measurement">Scientific measurement</a><a href="#takeaway">Carry it forward</a></nav><small>Lesson 08<br>Why processing needs the right information</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="processing">
+<p class="ulh-kicker">05 / What postprocessing can and cannot do</p>
+<h2 class="ulh-serif">We cannot calculate our way out of missing information.</h2>
+<p>I want to explore one especially consequential implication of the sufficiency condition. Suppose a representation e gives the same value for two states x and y, but our declared health question gives different answers.</p>
+<p>Now imagine processing e through an arbitrarily sophisticated deterministic procedure f. The procedure still receives the same input in both cases. So its output must be the same too:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The deterministic postprocessing limit</p><h3>Equal inputs remain equal after the same rule.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="If e of x equals e of y, then f of e x equals f of e y">
+<mrow><mi>e</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>e</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>⟹</mo><mi>f</mi><mo>(</mo><mi>e</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>e</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>)</mo></mrow></math>
+</div></div><p>This is the essential postprocessing argument from Paper III's information-loss results. A deterministic transformation cannot split identical recorded inputs into distinct correct answers without additional distinguishing information.</p></div>
+<p>In the probability example, if all I've retained is “success is possible,” both systems receive yes. No deterministic calculation using only that value can recover which system passes the 50% threshold.</p>
+<p>That does not make inference or prediction impossible. A statistical model may bring in new assumptions, training data, or other measured variables to estimate a missing distinction. Such a prediction is conditional on those added ingredients. It is not an exact deduction from the original yes/no representation alone.</p>
+<p>This becomes important later when we move from formal histories to empirical and model-based assessments in Paper V.</p>
+</section>
+<section class="ulh-chapter-section" id="minimality">
+<p class="ulh-kicker">06 / What I mean by the least information</p>
+<h2 class="ulh-serif">Minimal here has a precise mathematical meaning.</h2>
+<p>The canonical quotient groups together exactly those states that give identical answers to the declared question family. Every sufficient representation must preserve at least that grouping's distinctions.</p>
+<p>For the single 50% question, the task-visible quotient only needs two answer classes: passes and does not pass. Knowing the exact probability is sufficient but gives us a finer description than that question alone demands.</p>
+<p>If I expand the question family to include <em>every</em> probability threshold between zero and one, then two different probabilities can be separated by at least one threshold. In that expanded language, the exact success probability becomes the minimal task-visible quantity. Paper III studies this distinction separately in Section 10.1.</p>
+<div class="ulh-minimality-note"><span>What “least” means here</span><p>The smallest distinction structure sufficient for the declared questions. It is not necessarily the smallest file, fewest bytes, easiest computation, lowest entropy, or least expensive instrument.</p></div>
+<p>The measurement-design implication is subtle: we can identify what distinctions an instrument <em>must</em> preserve without yet knowing how to build the cheapest instrument that does so.</p>
+</section>
+<section class="ulh-chapter-section" id="measurement">
+<p class="ulh-kicker">07 / Connecting the mathematics to measurement science</p>
+<h2 class="ulh-serif">Logical sufficiency is one part of scientific validity.</h2>
+<p>Let me connect this result to the larger program we've been developing. Paper I established an explicit prospective Health predicate. Paper II made context, licensing, and transport conditions visible. Paper III now provides a mathematical test for whether a chosen representation contains enough information to determine the question's answer.</p>
+<p>If a representation merges states that a declared health question distinguishes, it is insufficient for exact determination of that answer. If the representation refines the canonical query-visible quotient, it is logically sufficient in the declared formal setting.</p>
+<p>But that logical property alone doesn't establish that we can measure the representation accurately, model the future correctly, or justify the biological meaning of the requirement. Those are additional scientific obligations.</p>
+<p>It's precisely why I distinguish an exact mathematical information guarantee from empirical calibration, uncertainty, and validation. We need both kinds of work when we want a formal judgment to become a trustworthy measurement of a living system.</p>
+</section>
+</article></div></section>
+<!-- LESSON8_END -->
+
 
