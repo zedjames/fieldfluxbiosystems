@@ -1,0 +1,41 @@
+name: Verify live Understanding Health lesson 2
+on:
+  pull_request:
+    paths: [.github/workflows/verify-live-lesson2.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check published lesson sequence over HTTPS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import ssl,time
+          base="https://fieldfluxbiosystems.com/"
+          paths={
+            "understanding-health.html":["understanding-health-01.html","understanding-health-02.html","02 lessons published","What is a viable continuation?"],
+            "understanding-health-01.html":["Next: Lesson 2","understanding-health-02.html","rel=\"next\""],
+            "understanding-health-02.html":["Lesson 02","Previous: Lesson 1","understanding-health-01.html","<math ","candidate-lawfulness","research-constitutive-continuation-capacity.pdf"],
+            "sitemap.xml":["understanding-health-02.html"]
+          }
+          errors=[]
+          for path,markers in paths.items():
+            for i in range(4):
+              try:
+                with urlopen(Request(base+path,headers={"User-Agent":"FFBLessonVerify/1.0","Cache-Control":"no-cache"}),context=ssl.create_default_context(),timeout=20) as res:
+                  text=res.read().decode("utf-8","replace")
+                  print(path,res.status,len(text))
+                missed=[marker for marker in markers if marker not in text]
+                if missed:raise ValueError("Missing "+repr(missed))
+                break
+              except Exception as e:
+                if i==3:errors.append(f"{path}: {e}")
+                else:time.sleep(5)
+          for error in errors:print("FAIL",error)
+          if errors:raise SystemExit(1)
+          print("PASS — Published Lesson 2 and both directions of navigation accessible over valid HTTPS")
+          PY
