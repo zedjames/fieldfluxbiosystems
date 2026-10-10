@@ -1,0 +1,50 @@
+/* Understanding Health — Lesson 6: relational transport and sufficiency. */
+.ulh-page .ulh-transport-flow{display:grid;grid-template-columns:minmax(0,.9fr) 88px minmax(0,1.1fr);align-items:center;gap:10px;background:#ecf0e9;border:1px solid #c5d3c8;padding:clamp(22px,4vw,40px);margin:35px 0}
+.ulh-page .ulh-transport-flow__source,.ulh-page .ulh-transport-flow__targets>div{background:#fffdf5;border:1px solid #bed0c7;padding:20px;text-align:center}
+.ulh-page .ulh-transport-flow__targets{display:grid;gap:12px}
+.ulh-page .ulh-transport-flow__source span,.ulh-page .ulh-transport-flow__targets span{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;color:#8d724e;font-weight:750}
+.ulh-page .ulh-transport-flow__source strong,.ulh-page .ulh-transport-flow__targets strong{font:400 2.9rem/1.15 var(--serif,Georgia,serif);color:#1e4b53;display:block;margin:9px 0}
+.ulh-page .ulh-transport-flow__source small,.ulh-page .ulh-transport-flow__targets small{display:block;font-size:.88rem;color:#6f8178}
+.ulh-page .ulh-transport-flow__split{height:150px;display:flex;flex-direction:column;justify-content:space-around;align-items:center;color:#9b865f;font-size:2rem}
+.ulh-page .ulh-transport-capacities{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0}
+.ulh-page .ulh-transport-capacities>div{border:1px solid #b9cbbf;background:#edf2eb;padding:26px}
+.ulh-page .ulh-transport-capacities>div:nth-child(2){background:#f3eee1;border-color:#cec6ae}
+.ulh-page .ulh-transport-capacities small{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;color:#876b49;font-weight:750}
+.ulh-page .ulh-transport-capacities strong{display:block;font:400 clamp(1.8rem,3vw,2.7rem)/1.2 var(--serif,Georgia,serif);color:#22505b;margin:16px 0}
+.ulh-page .ulh-transport-capacities span{font-size:.9rem;color:#5c766c}
+.ulh-page .ulh-transport-lab{background:#e7ede7;border-block:1px solid #c1d2c7;padding:clamp(66px,8vw,110px) 0}
+.ulh-page .ulh-transport-lab h2{font:400 clamp(2.2rem,4.5vw,4.25rem)/1.08 var(--serif,Georgia,serif);letter-spacing:-.04em;color:#1d4550;margin:17px 0 23px}
+.ulh-page .ulh-transport-lab__intro{max-width:75ch;font-size:1.1rem;line-height:1.75;color:#536d66}
+.ulh-page .ulh-transport-lab__choices{border:0;padding:0;margin:33px 0 23px}
+.ulh-page .ulh-transport-lab__choices legend{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:#4c6960;font-weight:750;margin-bottom:12px}
+.ulh-page .ulh-transport-lab__choices button{padding:12px 21px;font:600 .93rem var(--body,system-ui,sans-serif);cursor:pointer;color:#28515b;background:#fffef7;border:1px solid #a8bdb0}
+.ulh-page .ulh-transport-lab__choices button[aria-pressed=true]{background:#1d4551;color:#fff;border-color:#1d4551}
+.ulh-page [data-ulh-transport-view][hidden]{display:none!important}
+.ulh-page .ulh-transport-lab__views{display:grid;gap:15px}
+.ulh-page .ulh-transport-lab__view{background:#fffdf6;border:1px solid #bacdbf;padding:clamp(23px,3.5vw,39px)}
+.ulh-page .ulh-transport-lab__view:nth-child(2){background:#f6f0e5;border-color:#cfc4aa}
+.ulh-page .ulh-transport-lab__label{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:#8d6e47;font-weight:750}
+.ulh-page .ulh-transport-lab__output{display:grid;grid-template-columns:1fr 35px 1fr;gap:14px;align-items:center;margin:25px 0}
+.ulh-page .ulh-transport-lab__output>div{border-top:1px solid #bfcfc2;padding:18px 0}
+.ulh-page .ulh-transport-lab__output span:not(.ulh-transport-lab__versus){display:block;color:#687a70;font-size:.81rem}
+.ulh-page .ulh-transport-lab__output strong{display:block;font:400 clamp(1.6rem,2.7vw,2.25rem)/1.25 var(--serif,Georgia,serif);color:#25535a;margin-top:12px}
+.ulh-page .ulh-transport-lab__versus{text-align:center;font:400 1.8rem var(--serif,Georgia,serif);color:#ad8c58}
+.ulh-page .ulh-transport-lab__view>p{color:#566c66;font-size:.98rem;line-height:1.7}
+.ulh-page .ulh-transport-lab__summary{border-left:2px solid #af935f;padding:7px 0 7px 20px;margin:28px 0;color:#315861;max-width:85ch;font-size:1.05rem;line-height:1.75}
+.ulh-page .ulh-transport-lab__note{max-width:87ch;font-size:.89rem;color:#677a72;line-height:1.65}
+.ulh-page .ulh-stage-obstruction{display:grid;grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);align-items:center;gap:13px;background:#edf0e8;border:1px solid #c4d1c4;padding:28px 23px;margin:32px 0}
+.ulh-page .ulh-stage-obstruction>div:not(.ulh-stage-obstruction__arrow){padding:21px;background:#fffaf0;border:1px solid #c3cec4}
+.ulh-page .ulh-stage-obstruction small{display:block;color:#906e48;text-transform:uppercase;letter-spacing:.1em;font-weight:750;font-size:.72rem}
+.ulh-page .ulh-stage-obstruction strong{display:block;font:400 1.4rem/1.25 var(--serif,Georgia,serif);color:#214851;margin:13px 0}
+.ulh-page .ulh-stage-obstruction span{font-size:.86rem;color:#5a736b}
+.ulh-page .ulh-stage-obstruction__arrow{text-align:center;color:#9d8158;font-size:2rem}
+.ulh-page .ulh-transport-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:36px 0}
+.ulh-page .ulh-transport-three>div{padding:24px 20px;border-top:3px solid #8cb2a1;background:#edf0e9}
+.ulh-page .ulh-transport-three>div:nth-child(2){background:#eef0e3;border-color:#a1ae83}
+.ulh-page .ulh-transport-three>div:nth-child(3){background:#f3ecdf;border-color:#b59a6b}
+.ulh-page .ulh-transport-three span{font-size:.78rem;color:#906f47;letter-spacing:.14em}
+.ulh-page .ulh-transport-three strong{display:block;font:400 1.38rem/1.25 var(--serif,Georgia,serif);color:#24515a;margin:15px 0}
+.ulh-page .ulh-transport-three p{font-size:.9rem;line-height:1.65;color:#5c726c}
+@media(max-width:830px){.ulh-page .ulh-transport-three{grid-template-columns:1fr}}
+@media(max-width:660px){.ulh-page .ulh-transport-flow,.ulh-page .ulh-stage-obstruction{grid-template-columns:1fr}.ulh-page .ulh-transport-flow__split{height:auto;flex-direction:row}.ulh-page .ulh-transport-flow__split span:first-child{transform:rotate(45deg)}.ulh-page .ulh-transport-flow__split span:last-child{transform:rotate(-45deg)}.ulh-page .ulh-stage-obstruction__arrow{transform:rotate(90deg)}.ulh-page .ulh-transport-capacities{grid-template-columns:1fr}}
+@media(max-width:480px){.ulh-page .ulh-transport-lab__output{grid-template-columns:1fr;gap:5px}.ulh-page .ulh-transport-lab__versus{line-height:1}.ulh-page .ulh-transport-lab__choices button{flex:1 1 100%;text-align:left}}
