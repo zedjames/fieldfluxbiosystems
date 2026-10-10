@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 10: Possibility, Probability and Cost | Understanding Health</title>
+<meta name="description" content="Zed James explains when continuation is merely possible, how likely it is under a declared probability model, and whether it is achievable under a resource budget. Includes exact Paper III mathematics and an interactive cost example.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-10.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-09.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="Is being able to survive the same as being likely to survive? — Lesson 10">
+<meta property="og:description" content="Probability and viable cost give us different descriptions of continuation—and precise questions about which information we need.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-10.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-10.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Is being able to survive the same as being likely to survive?","url":"https://fieldfluxbiosystems.com/understanding-health-10.html","description":"A guided explanation of Paper III's bounded probability-threshold and all-budget viable-cost quotient results, illustrated with a formal success distribution and an interactive budget comparison.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Representation Sufficiency in Prospective Health","identifier":"https://doi.org/10.5281/zenodo.23219588"}}</script>
+</head><body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header><main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">10</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-09.html">Lesson 09</a><span aria-hidden="true">/</span><span>Lesson 10</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 10 · Probability, cost and viable continuation</p>
+<h1 id="lesson-title" class="ulh-serif">Is being able to survive the same as being likely to survive?</h1>
+<p class="ulh-lede">We've learned how to ask whether a system can continue. Now I want to make two further distinctions: how likely is a successful continuation under a declared model, and what resources does that continuation require?</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper III · Sections 10 and 12</span><span>Following Lesson 09</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-09.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 9</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#possibility">Possibility and probability</a>
+<a href="#probability-formula">What success probability counts</a>
+<a href="#probability-threshold">One number, many questions</a>
+<a href="#cost">Introducing viable cost</a>
+<a href="#budget">Explore the budget</a>
+<a href="#cost-code">The all-budget result</a>
+<a href="#scope">What these results establish</a>
+<a href="#takeaway">Carry it forward</a></nav>
+<small>Lesson 10<br>Health, Formally Defined<br>Paper III</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="possibility">
+<p class="ulh-kicker">01 / Two different questions about continuing</p>
+<h2 class="ulh-serif">A possible successful future tells us nothing by itself about its probability.</h2>
+<p class="ulh-lead">Imagine two forests. Both have at least one future response that maintains their defining organization. By a simple possibility test, both have a successful continuation available.</p>
+<p>But now suppose we've equipped our mathematical model with a probability distribution over possible responses. In Paper III, Section 12.3, I use two finite distributions with very different success probabilities: 999 out of 1,000 and 1 out of 1,000.</p>
+<div class="ulh-probability-contrast" role="group" aria-label="Stipulated finite model probabilities: System A 99.9 percent successful continuation, System B 0.1 percent">
+<div><span>System A · declared distribution</span><strong>99.9<small>%</small></strong><div class="ulh-probability-bar" role="img" aria-label="99.9 percent success probability"><span style="width:99.9%"></span></div><p>Probability assigned to successful continuation.</p></div>
+<div><span>System B · declared distribution</span><strong>0.1<small>%</small></strong><div class="ulh-probability-bar" role="img" aria-label="0.1 percent success probability"><span style="width:0.1%"></span></div><p>Probability assigned to successful continuation.</p></div>
+</div>
+<p class="ulh-small">Both distributions are stipulated mathematical examples with the same positive outcome support. The percentages are not measured ecological success rates or calibrated biological forecasts.</p>
+<p>Both pass the possibility question because each assigns positive probability to some successful outcome. Now declare a stricter question: must at least half the probability be assigned to success? System A passes. System B does not.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>Possibility versus the declared 50% success-probability requirement</caption>
+<thead><tr><th scope="col">Question</th><th scope="col">System A</th><th scope="col">System B</th></tr></thead>
+<tbody><tr><th scope="row">Successful continuation possible?</th><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Stipulated success probability</th><td>99.9%</td><td>0.1%</td></tr>
+<tr><th scope="row">At least 50% success probability?</th><td class="ulh-yes">Yes</td><td class="ulh-no">No</td></tr></tbody></table></div>
+<p>Possibility and probability ask different things. The original set of attained viable response categories does not automatically carry a probability law, so this extension requires its own declared semantics.</p>
+</section>
+<section class="ulh-chapter-section" id="probability-formula">
+<p class="ulh-kicker">02 / Adding the successful response masses</p>
+<h2 class="ulh-serif">Here's how I calculate success probability.</h2>
+<p>For a finite response collection, I give each response r a probability mass μ(r) and declare which responses satisfy the success condition P. The total success probability sums the masses of responses that satisfy that condition.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Success probability</p><h3>Add the probability of each successful response.</h3><div class="ulh-math-scroll"><div class="ulh-equation">
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Success probability of mu and P is sum over responses r of indicator P of r times mu of r">
+<mrow><msub><mi>p</mi><mtext>succ</mtext></msub><mo>(</mo><mi>μ</mi><mo>,</mo><mi>P</mi><mo>)</mo><mo>=</mo><munder><mo>∑</mo><mi>r</mi></munder><msub><mn mathvariant="double-struck">1</mn><mi>P</mi></msub><mo>(</mo><mi>r</mi><mo>)</mo><mi>μ</mi><mo>(</mo><mi>r</mi><mo>)</mo></mrow></math>
+</div></div><p>The indicator 1<sub>P</sub>(r) is 1 when response r counts as successful and 0 otherwise. That way, only successful response mass contributes to the sum.</p></div>
+<dl class="ulh-term-list">
+<div><dt>μ</dt><dd>The separately specified finite probability distribution.</dd></div>
+<div><dt>r and P(r)</dt><dd>A response r, and the declaration that it satisfies success criterion P.</dd></div>
+<div><dt>1<sub>P</sub>(r)</dt><dd>The indicator: 1 for success, 0 for failure.</dd></div>
+<div><dt>∑</dt><dd>Add the contributions over the response carrier.</dd></div>
+<div><dt>p<sub>succ</sub></dt><dd>The total mass assigned to successful responses.</dd></div>
+</dl>
+<p>To make the arithmetic tangible, imagine a different, purely pedagogical forest response law. Stable continuation has probability 40%, regeneration 35%, adaptation 15%, and collapse 10%. I declare the first three responses successful and collapse unsuccessful.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table"><caption>An invented four-response distribution illustrating the sum</caption><thead><tr><th scope="col">Response</th><th scope="col">Probability</th><th scope="col">Success?</th></tr></thead>
+<tbody><tr><th scope="row">Remains stable</th><td>40%</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Regenerates</th><td>35%</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Adapts</th><td>15%</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Collapses</th><td>10%</td><td class="ulh-no">No</td></tr></tbody></table></div>
+<p>The total success probability in that imagined model is 0.40 + 0.35 + 0.15 = <strong>0.90</strong>. Collapse is an admitted outcome in the example, but it does not contribute to the successful mass.</p>
+</section>
+<!-- LESSON10_PART2 -->
