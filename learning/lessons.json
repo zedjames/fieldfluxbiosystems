@@ -3,7 +3,7 @@
   "updated": "2026-10-10",
   "collection": "Understanding Health",
   "sourceSeries": "Health, Formally Defined",
-  "publishedCount": 5,
+  "publishedCount": 6,
   "lessons": [
     {
       "id": "01",
@@ -71,7 +71,21 @@
       "sourceSections": "Paper II, Sections 1 and 5–8: contextual licensing, developmental stage, stage-only class splitting and horizon change",
       "status": "published",
       "summary": "A contextual health judgment may change when the capacity changes or when the licensed requirement language changes, even with fixed capacity.",
-      "previous": "understanding-health-04.html"
+      "previous": "understanding-health-04.html",
+      "next": "understanding-health-06.html"
+    },
+    {
+      "id": "06",
+      "number": 6,
+      "title": "How can we carry information about health from one context to another?",
+      "slug": "understanding-health-06.html",
+      "sourcePaper": "Prospective Health Across Contexts",
+      "sourceDoi": "10.5281/zenodo.23146280",
+      "sourcePdf": "research-prospective-health-across-contexts.pdf",
+      "sourceSections": "Paper II, Sections 2–4 and 8–11: relational transport, determinacy, health-visible quotient and stage obstruction; external-support illustration in Section 12",
+      "status": "published",
+      "summary": "Raw target capacities can be indeterminate while a target adequacy class is determined. Stage-specific questions can obstruct transport, and determinacy alone does not preserve full Health.",
+      "previous": "understanding-health-05.html"
     }
   ]
 }
