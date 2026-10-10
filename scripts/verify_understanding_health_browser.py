@@ -29,6 +29,13 @@ window.addEventListener("load",()=>setTimeout(()=>{
  const representationSwitcher=document.querySelector('[data-ulh-measure-choice="threshold"]');
  const targetSwitcher=document.querySelector('[data-ulh-target-choice="class"]');
  const budgetSlider=document.querySelector("#ulh-budget-range");
+ const challengeSwitcher=document.querySelector('[data-ulh-challenge-choice="full"]');
+ let challengeState=null;
+ if(challengeSwitcher){
+   challengeSwitcher.click();
+   challengeState={pressed:challengeSwitcher.getAttribute("aria-pressed"),focus:document.querySelector(".ulh-challenge-explorer")?.dataset.focus||"",summary:document.querySelector("[data-ulh-challenge-summary]")?.textContent||"",negativeA:document.querySelector('[data-ulh-negative="a"]')?.textContent||"",negativeB:document.querySelector('[data-ulh-negative="b"]')?.textContent||""};
+ }
+
  let budgetState=null;
  if(budgetSlider){
    budgetSlider.value="4";
@@ -72,7 +79,7 @@ window.addEventListener("load",()=>setTimeout(()=>{
  }
  let changed=null;
  if(switcher){switcher.click();changed={pressed:switcher.getAttribute("aria-pressed"),text:document.querySelector('[data-ulh-outcome="short"]')?.textContent||""};}
- const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,budgetState,bodyText:document.body.innerText.length};
+ const record={innerWidth:innerWidth,documentWidth:document.documentElement.scrollWidth,mainWidth:main?.getBoundingClientRect().width||0,mathScrollWidth:mathScroll?.clientWidth||0,mathFullWidth:mathScroll?.scrollWidth||0,termsWidth:term?.getBoundingClientRect().width||0,changed,quotientState,stageState,transportState,supportState,representationState,targetState,budgetState,challengeState,bodyText:document.body.innerText.length};
  const pre=document.createElement("pre");pre.id="ulh-layout-result";pre.textContent=JSON.stringify(record);document.body.appendChild(pre);
 },160));
 </script>
@@ -108,6 +115,13 @@ def main():
             if page.startswith("understanding-health-") and page.endswith(".html"):
                 if not result["mathScrollWidth"] or not result["termsWidth"]:
                     errors.append(page+" formal equation/glossary failed to render at "+str(width))
+                if page.endswith("-11.html"):
+                    challenge=result["challengeState"]
+                    if (not challenge or challenge["pressed"]!="true" or challenge["focus"]!="full" or
+                        "failing wind response" not in challenge["summary"] or
+                        "Negative profile: ∅" not in challenge["negativeA"] or
+                        "Negative profile: {wind}" not in challenge["negativeB"]):
+                        errors.append(page+" failure-aware challenge control failed at "+str(width))
                 if page.endswith("-10.html"):
                     budget=result["budgetState"]
                     if (not budget or budget["value"]!="4" or budget["shown"]!="4 units" or
