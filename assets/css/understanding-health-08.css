@@ -1,0 +1,44 @@
+/* Understanding Health · Lesson 8 — measurement sufficiency and refinement. */
+.ulh-page .ulh-probability-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:36px 0 22px}
+.ulh-page .ulh-probability-card{border:1px solid #b8d1c2;background:#eef4eb;padding:clamp(22px,3.8vw,42px)}
+.ulh-page .ulh-probability-card--second{background:#f4eee5;border-color:#d5c6ad}
+.ulh-page .ulh-probability-card__name{display:block;text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;font-weight:750;color:#8a7050}
+.ulh-page .ulh-probability-card>strong{display:block;color:#28545d;font:400 clamp(3.3rem,6.2vw,6rem)/1.08 var(--serif,Georgia,serif);letter-spacing:-.055em;margin:20px 0}
+.ulh-page .ulh-probability-card>strong small{font-size:.4em;letter-spacing:0}
+.ulh-page .ulh-probability-card__meter{height:9px;background:#c4d7ca;overflow:hidden}
+.ulh-page .ulh-probability-card--second .ulh-probability-card__meter{background:#e1d6c5}
+.ulh-page .ulh-probability-card__meter>span{display:block;background:#427e6e;height:100%;min-width:2px}
+.ulh-page .ulh-probability-card--second .ulh-probability-card__meter>span{background:#af8762}
+.ulh-page .ulh-probability-card p{font-size:.92rem;line-height:1.7;color:#5f716b;margin:23px 0 0}
+.ulh-page .ulh-refinement-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:35px 0}
+.ulh-page .ulh-refinement-steps>div{background:#edf1e9;border-top:3px solid #88afa0;padding:clamp(18px,2.5vw,27px)}
+.ulh-page .ulh-refinement-steps>div:first-child{border-color:#b99270;background:#f4ece1}
+.ulh-page .ulh-refinement-steps span{font-size:.72rem;color:#8c724e;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.ulh-page .ulh-refinement-steps strong{display:block;color:#28515a;font:400 clamp(1.13rem,1.75vw,1.48rem)/1.25 var(--serif,Georgia,serif);margin:15px 0}
+.ulh-page .ulh-refinement-steps p{font-size:.88rem;line-height:1.65;color:#64736e;margin:0}
+.ulh-page .ulh-measure-explorer{padding:clamp(70px,8vw,112px) 0;background:#e9eee9;border-block:1px solid #c6d4cb}
+.ulh-page .ulh-measure-explorer h2{font:400 clamp(2.25rem,4vw,4rem)/1.12 var(--serif,Georgia,serif);letter-spacing:-.045em;color:#1e4552;margin:16px 0 22px}
+.ulh-page .ulh-measure-explorer__intro{font-size:1.07rem;color:#546c64;line-height:1.8;max-width:79ch}
+.ulh-page .ulh-measure-explorer__controls{border:0;margin:34px 0 20px;padding:0}
+.ulh-page .ulh-measure-explorer__controls legend{font-size:.78rem;color:#4c6960;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:12px}
+.ulh-page .ulh-measure-explorer__controls button{font:600 .9rem var(--body,system-ui,sans-serif);cursor:pointer;border:1px solid #acbdaf;padding:12px 19px;background:#fbfcf6;color:#204e57;min-height:45px}
+.ulh-page .ulh-measure-explorer__controls button[aria-pressed=true]{background:#1d4651;border-color:#1d4651;color:#fff}
+.ulh-page .ulh-measure-explorer__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ulh-page .ulh-measure-explorer__card{background:#fffcf5;border:1px solid #c4d1c4;padding:clamp(19px,3vw,32px);transition:box-shadow .2s ease,border-color .2s ease}
+.ulh-page .ulh-measure-explorer__card[data-active=true]{box-shadow:0 0 0 3px #8fae9d;border-color:#4e8977}
+.ulh-page .ulh-measure-explorer__number{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#90744f;font-weight:750;display:block;min-height:36px}
+.ulh-page .ulh-measure-explorer__results{display:grid;gap:11px;margin:23px 0}
+.ulh-page .ulh-measure-explorer__results>span{display:flex;justify-content:space-between;gap:8px;align-items:baseline;border-bottom:1px solid #d7dfd6;padding-bottom:10px;color:#5a756f;font-size:.86rem}
+.ulh-page .ulh-measure-explorer__results strong{color:#24515a;font:400 1.63rem var(--serif,Georgia,serif)}
+.ulh-page .ulh-measure-explorer__card p{min-height:95px;font-size:.91rem;line-height:1.65;color:#60746c}
+.ulh-page .ulh-measure-explorer__verdict{display:inline-block;color:#93583f;font-size:.76rem;letter-spacing:.03em;border-top:1px solid #cfb8a9;padding-top:13px}
+.ulh-page .ulh-measure-explorer__verdict--pass{color:#3f8066;border-color:#b3cfc0}
+.ulh-page .ulh-measure-explorer__summary{font-size:1.07rem;line-height:1.72;color:#345e5e;border-left:2px solid #ae9266;padding:7px 0 7px 21px;margin:33px 0 14px;max-width:77ch}
+.ulh-page .ulh-measure-explorer__note{color:#687d75;font-size:.86rem;line-height:1.7;max-width:83ch}
+.ulh-page .ulh-minimality-note{margin:35px 0;background:#edf0e8;border-left:3px solid #a88a54;padding:27px 30px}
+.ulh-page .ulh-minimality-note span{display:block;font-size:.74rem;color:#93734a;text-transform:uppercase;letter-spacing:.13em;font-weight:750;margin-bottom:11px}
+.ulh-page .ulh-minimality-note p{font-size:1rem;line-height:1.76;color:#526967;margin:0}
+@media(max-width:880px){.ulh-page .ulh-measure-explorer__grid{grid-template-columns:1fr}.ulh-page .ulh-measure-explorer__card p{min-height:unset}.ulh-page .ulh-refinement-steps{grid-template-columns:1fr}}
+@media(max-width:680px){.ulh-page .ulh-probability-pair{grid-template-columns:1fr}}
+@media(max-width:470px){.ulh-page .ulh-measure-explorer__controls button{flex:1 1 100%;text-align:left}.ulh-page .ulh-probability-card>strong{font-size:3.7rem}}
+@media(prefers-reduced-motion:reduce){.ulh-page .ulh-measure-explorer__card{transition:none}}
