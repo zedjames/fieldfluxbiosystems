@@ -319,7 +319,7 @@ def main():
           "Lesson 12 needs complete no-JavaScript comparison of lost versus ignored information",errors)
     check("all declared contexts" in twelfth.lower() or "full family" in twelfth.lower(),
           "Lesson 12 must distinguish full Health-signature classification from one census",errors)
-    check("projection itself" in twelfth.lower() and
+    check("representation itself" in twelfth.lower() and
           "ignored" in twelfth.lower() and
           "recovered" in twelfth.lower(),
           "Lesson 12 must locate distinct information losses",errors)
