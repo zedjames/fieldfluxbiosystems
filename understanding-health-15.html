@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 15: Calculating the Probability of Viable Continuation | Understanding Health</title>
+<meta name="description" content="Lesson 15 follows Paper V's simulated forest futures, viable subprobability mass, Q1 and Q2 health thresholds, and conditional 20-year results with an interactive threshold explorer.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-15.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-14.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="How do we calculate the probability that a system will continue to survive?">
+<meta property="og:description" content="Count viable futures without erasing failed ones, and discover how probability thresholds become conditional health judgments.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-15.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-15.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"How do we calculate the probability that a system will continue to survive?","url":"https://fieldfluxbiosystems.com/understanding-health-15.html","description":"A guided explanation of stochastic forest simulations, probability mass preservation, two prospective Health questions, and conditional scenario results.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Prospective Health under Declared Specifications","identifier":"https://doi.org/10.5281/zenodo.23268987"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">15</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-14.html">Lesson 14</a><span aria-hidden="true">/</span><span>Lesson 15</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 15 · Probability-weighted viable continuation</p>
+<h1 id="lesson-title" class="ulh-serif">How do we calculate the probability that a system will continue to survive?</h1>
+<p class="ulh-lede">We've reconstructed possible present forests. Now I want to follow those states into the future, distinguish trajectories that preserve the declared organization, and calculate the probability mass assigned to viable continuation. The essential rule is to keep failed futures in the original probability accounting.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper V · Sections 3.2, 4.6–4.7, 5.12 and 6.2</span><span>From reconstructed states to viable mass</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-14.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 14</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#present-to-futures">One present, many futures</a><a href="#annual-step">A simulated year</a>
+<a href="#continuation">The continuation criteria</a><a href="#filtering">Lawful and viable histories</a>
+<a href="#bank">The 64-future example</a><a href="#original-mass">Keep the failures</a>
+<a href="#q1">First adequacy question</a><a href="#q2">Juvenile reserve question</a>
+<a href="#threshold">Explore the threshold</a><a href="#results">The actual model results</a>
+<a href="#ensemble">Why averages differ</a><a href="#limits">Scientific scope</a>
+</nav><small>Lesson 15<br>Health, Formally Defined<br>Paper V</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="present-to-futures">
+<p class="ulh-kicker">01 / Starting from a reconstructed state</p><h2 class="ulh-serif">One possible present can lead to many modeled futures.</h2>
+<p class="ulh-lead">Lesson 14 gave us a conditional reconstruction law over possible January 2020 forest states. For this lesson, take one such state, call it X<sub>0</sub>, and fix a set of model parameters and one scenario. The stochastic model can now generate many future histories from that same starting point.</p>
+<p>Some stems die. Others grow. New stems may enter the measured population. Different sampled outcomes produce different trajectories, even when the initial reconstruction and scenario are held fixed.</p>
+<div class="ulh-history-fan" role="group" aria-label="One reconstructed starting state splits into multiple simulated future histories">
+<div class="ulh-history-fan__origin"><span>Reconstructed state</span><strong>X<sub>0</sub></strong><small>Observed data + reconstruction assumptions</small></div>
+<div class="ulh-history-fan__connector" aria-hidden="true">→</div>
+<div class="ulh-history-fan__branches"><div><span>History γ₁</span><strong>Continues</strong></div><div><span>History γ₂</span><strong>Interrupted</strong></div><div><span>History γ₃</span><strong>Fails model check</strong></div><small>Illustrative possible histories — the study samples many more</small></div></div>
+<p>The model evaluates horizons of <strong>1, 5, 10, and 20 years</strong>. These are simulated outcomes under a declared demographic law, not observed future forests.</p>
+</section>
+<section class="ulh-chapter-section" id="annual-step">
+<p class="ulh-kicker">02 / What changes during a modeled year?</p><h2 class="ulh-serif">Mortality, growth, and candidate entry update the cohort state.</h2>
+<div class="ulh-annual-operations" role="group" aria-label="The annual model includes sampled survival, stochastic diameter growth, and sampled entry"><div><span>01</span><strong>Survival and mortality</strong><p>Sample surviving stems using a probability derived from each cohort's mortality hazard.</p></div><div><span>02</span><strong>Diameter growth</strong><p>Grow the surviving cohort diameters under one of two stochastic growth models.</p></div><div><span>03</span><strong>Candidate entry</strong><p>Sample incoming counts using a stipulated entry-intensity law.</p></div></div>
+<div class="ulh-math-panel"><p class="ulh-kicker">Population accounting</p><h3>Current stems, minus deaths, plus entrants.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The number of stems at the next step equals the current number minus deaths plus entrants"><mrow><msub><mi>N</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>N</mi><mi>t</mi></msub><mo>−</mo><msub><mi>D</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>B</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow></math></div></div><p>N<sub>t</sub> is the current stem count, D<sub>t+1</sub> the number of modeled deaths, and B<sub>t+1</sub> the modeled entrants during the next step.</p></div>
+<p>If a hypothetical modeled forest begins with 1,000 stems, loses 50, and gains 30, its next count is <strong>980</strong>. The change in total count alone does not settle whether the system has satisfied its declared continuation requirements.</p>
+</section>
+<section class="ulh-chapter-section" id="continuation">
+<p class="ulh-kicker">03 / Which future maintains the defined organization?</p><h2 class="ulh-serif">The specification checks structural support and how long an interruption lasts.</h2>
+<p>Paper V asks about two quantities at the annual checkpoints: <strong>basal area</strong>, BA(X<sub>t</sub>), and <strong>juvenile support</strong>, J(X<sub>t</sub>). The juvenile measure is a declared count proxy for woody stems below 10 cm diameter. The reference quantities come from the earlier census.</p>
+<div class="ulh-reference-pair" role="group" aria-label="Specified reference basal area and juvenile count">
+<div><span>Reference basal area · B₀</span><strong>1,478.624132 <small>m²</small></strong></div>
+<div><span>Reference juvenile support · J₀</span><strong>82,077</strong></div></div>
+<div class="ulh-math-panel"><p class="ulh-kicker">Structural requirements at a checkpoint</p><h3>Both reference-relative bounds must be satisfied.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Organization at a checkpoint requires basal area at least alpha times the reference basal area and juvenile support at least beta times its reference"><mtable columnalign="left" rowspacing=".65em"><mtr><mtd><mrow><mi mathvariant="normal">BA</mi><mo>(</mo><msub><mi>X</mi><mi>t</mi></msub><mo>)</mo><mo>≥</mo><mi>α</mi><msub><mi>B</mi><mn>0</mn></msub></mrow></mtd></mtr><mtr><mtd><mrow><mi>J</mi><mo>(</mo><msub><mi>X</mi><mi>t</mi></msub><mo>)</mo><mo>≥</mo><mi>β</mi><msub><mi>J</mi><mn>0</mn></msub></mrow></mtd></mtr></mtable></math></div></div><p>α controls the basal-area fraction; β controls the juvenile-support fraction. For the reported illustrative settings α = 0.75 and β = 0.4, the respective minimums are 75% and 40% of the reference quantities.</p></div>
+<p>A prospective history must also satisfy the declared terminal structural conditions and a bound on its longest <em>consecutive</em> interruption. The parameter <strong>τ</strong> specifies the tolerated number of consecutive annual checkpoints below the structural criteria. For example, τ = 2 permits a qualifying interruption of at most two consecutive checkpoints.</p>
+<p>These values are declared demonstration requirements. The study does not establish them as scientifically validated thresholds for the health of Harvard Forest.</p>
+</section>
+<section class="ulh-chapter-section" id="filtering">
+<p class="ulh-kicker">04 / Candidate, lawful, viable</p><h2 class="ulh-serif">A sampled history must pass two different checks before it counts as viable.</h2>
+<p>First, the model's lawfulness check, Lawful<sub>G</sub>, assesses valid cohort counts and diameters, chronology, and population accounting. This verifies consistency with the <em>declared computational rules</em>; it does not establish biological correctness.</p>
+<p>Second, a lawful history must pass the continuation criteria just described. A lawfully simulated future may lose the specified organization, or remain structurally insufficient for longer than allowed.</p>
+<div class="ulh-filter-strip" role="group" aria-label="Candidate histories are filtered for model lawfulness, then continuation"><div><span>All candidate histories</span><strong>Sampled trajectories</strong></div><b aria-hidden="true">→</b><div><span>Model-lawful histories</span><strong>Pass Lawful<sub>G</sub></strong></div><b aria-hidden="true">→</b><div><span>Viable histories</span><strong>Pass continuation</strong></div></div>
+<p>This is the candidate → lawful → viable architecture from Papers I and IV, now evaluated on a finite sample bank. Histories that fail either test retain their original probability weight in the accounting that follows.</p>
+</section>
+<section class="ulh-chapter-section" id="bank">
+<p class="ulh-kicker">05 / A bank of 64 possible futures</p><h2 class="ulh-serif">Here is a simple example we can calculate exactly.</h2>
+<p>Imagine a single conditional bank of 64 equally weighted future histories. The following counts are invented to explain the mathematics and are separate from the study's reported numerical results.</p>
+<div class="ulh-bank" role="group" aria-label="Hypothetical set of sixty four equally weighted futures: forty eight viable, twelve lawful noncontinuing, four model-unlawful">
+<div class="ulh-bank__header"><strong>64 sampled future histories</strong><small>Hypothetical · equal conditional weights</small></div>
+<div class="ulh-bank__cells" aria-hidden="true"><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--viable"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--lawful"></i><i class="ulh-bank__cell--unlawful"></i><i class="ulh-bank__cell--unlawful"></i><i class="ulh-bank__cell--unlawful"></i><i class="ulh-bank__cell--unlawful"></i></div>
+<div class="ulh-bank__key"><span><i class="ulh-bank__key--viable"></i><strong>48</strong> viable</span><span><i class="ulh-bank__key--lawful"></i><strong>12</strong> lawful failures</span><span><i class="ulh-bank__key--unlawful"></i><strong>4</strong> model-unlawful</span></div></div>
+<p>The viable-mass estimate for this equally weighted bank is <strong>48/64 = 0.75</strong>. A quarter of the original conditional sample weight remains attached to histories that do not qualify as viable.</p>
+<p>This estimate is a statement about the declared simulation bank. It is not an independently calibrated 75% ecological survival probability.</p>
+</section>
+<section class="ulh-chapter-section" id="original-mass">
+<p class="ulh-kicker">06 / Keep the denominator</p><h2 class="ulh-serif">Discarding failures would quietly change the probability question.</h2>
+<div class="ulh-denominator-pair" role="group" aria-label="Original probability accounting yields seventy five percent viable mass; conditioning on selected successes yields one hundred percent among selected successes">
+<div><span>Original candidate bank</span><strong>48 / 64</strong><b>75%</b><p>Share of the <em>original</em> probability mass assigned to viable continuation.</p></div>
+<div><span>After retaining only successes</span><strong>48 / 48</strong><b>100%</b><p>Share of the <em>selected viable subset</em> that is viable. The failures have disappeared from the denominator.</p></div></div>
+<p>The second calculation is true as a conditional statement after we deliberately select successful futures. It cannot answer the original question about how much mass the model assigns to possible failure.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Total mass identity</p><h3>Original probability is partitioned across all outcomes.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The candidate history probability is partitioned into unlawful mass, lawful failure mass, and viable mass"><mrow><mn>1</mn><mo>=</mo><msub><mi>m</mi><mtext>unlawful</mtext></msub><mo>+</mo><msub><mi>m</mi><mtext>lawful failure</mtext></msub><mo>+</mo><msub><mi>m</mi><mi>V</mi></msub></mrow></math></div></div><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="One equals four over sixty four plus twelve over sixty four plus forty eight over sixty four"><mrow><mn>1</mn><mo>=</mo><mfrac><mn>4</mn><mn>64</mn></mfrac><mo>+</mo><mfrac><mn>12</mn><mn>64</mn></mfrac><mo>+</mo><mfrac><mn>48</mn><mn>64</mn></mfrac></mrow></math></div></div><p>The four model-unlawful histories, twelve lawful noncontinuing histories, and forty-eight viable histories partition the whole 64-history candidate bank; their weights sum to one.</p></div>
+<p>The <strong>viable subprobability measure</strong> retains the original weights of viable histories and restricts attention to them. Its total mass can be less than one. The failed histories no longer contribute to viable response capacity, while their excluded weight remains explicitly accounted for under the original law.</p>
+</section>
+<section class="ulh-chapter-section" id="q1">
+<p class="ulh-kicker">07 / The first question · Q₁</p><h2 class="ulh-serif">How much of the original probability mass supports a viable future?</h2>
+<p>Introduce a declared minimum viable probability θ (theta). The first adequacy question asks whether viable mass reaches this level.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Viable-mass adequacy</p><h3>Q₁: does the viable mass reach θ?</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Q one asks whether viable mass m V is greater than or equal to theta"><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>:</mo><msub><mi>m</mi><mi>V</mi></msub><mo>≥</mo><mi>θ</mi></mrow></math></div></div><p>For our hypothetical bank, m<sub>V</sub> = 0.75. A threshold θ = 0.75 is satisfied; θ = 0.80 is not. The comparison includes equality.</p></div>
+<p>If the starting forest also presently realizes the declared organization, the same Q₁ adequacy answer becomes its full prospective Health answer for the specified scenario and horizon. That present-realization condition remains essential.</p>
+</section>
+<section class="ulh-chapter-section" id="q2">
+<p class="ulh-kicker">08 / The second question · Q₂</p><h2 class="ulh-serif">A viable future may still finish with a depleted juvenile reserve.</h2>
+<p>Paper V adds an additional terminal reserve requirement. For a simulated history γ, compare the terminal juvenile-support count with its initial value.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Terminal juvenile reserve ratio</p><h3>A declared minimum ratio ρ identifies reserve-qualified futures.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The terminal juvenile reserve ratio r J of gamma equals juvenile support at terminal state divided by juvenile support at initial state"><mrow><msub><mi>r</mi><mi>J</mi></msub><mo>(</mo><mi>γ</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>J</mi><mo>(</mo><msub><mi>X</mi><mi>t</mi></msub><mo>)</mo></mrow><mrow><mi>J</mi><mo>(</mo><msub><mi>X</mi><mn>0</mn></msub><mo>)</mo></mrow></mfrac></mrow></math></div></div><p>When the initial juvenile-support denominator is zero, the paper defines this ratio as zero. A reserve-qualified history satisfies r<sub>J</sub>(γ) ≥ ρ, using the declared reserve threshold ρ (rho).</p></div>
+<p>Call the original probability mass of histories that are <em>both viable and reserve-qualified</em> m<sub>R</sub>(ρ). The second adequacy question is:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Reserve-qualified adequacy</p><h3>Q₂: does reserve-qualified viable mass reach θ?</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Q two asks whether the reserve qualified viable mass m R at reserve ratio rho is greater than or equal to theta"><mrow><msub><mi>Q</mi><mn>2</mn></msub><mo>:</mo><msub><mi>m</mi><mi>R</mi></msub><mo>(</mo><mi>ρ</mi><mo>)</mo><mo>≥</mo><mi>θ</mi></mrow></math></div></div><p>Every reserve-qualified viable history is also viable. Therefore m<sub>R</sub> ≤ m<sub>V</sub>, and requiring m<sub>R</sub> ≥ θ already implies the Q₁ mass condition.</p></div>
+<p>Suppose 40 of the 48 viable histories in the invented bank also qualify for juvenile reserve. Then m<sub>R</sub> = 40/64 = <strong>0.625</strong>. At θ = 0.75, Q₁ passes and Q₂ fails. The additional question detects something that the first does not require.</p>
+</section>
+</article></div></section>
+
+<section class="ulh-threshold-lab" id="threshold" aria-labelledby="threshold-heading"><div class="ulh-container">
+<p class="ulh-kicker">09 / Try it yourself</p><h2 class="ulh-serif" id="threshold-heading">The future bank stays fixed. You choose the adequacy threshold.</h2>
+<p>The 64 futures are unchanged: 48 are viable and 40 are reserve-qualified viable. Move θ to evaluate the very same bank using different requirements. This exercise assumes the initial forest presently realizes the stipulated organization.</p>
+<div class="ulh-threshold-lab__panel" data-ulh-threshold-lab>
+<label for="ulh15-threshold">Required minimum mass <strong data-ulh-threshold-label>75%</strong></label>
+<input id="ulh15-threshold" type="range" min="0" max="100" step="5" value="75" aria-describedby="ulh15-threshold-help">
+<div class="ulh-threshold-lab__axis" aria-hidden="true"><span>0%</span><span>50%</span><span>75%</span><span>100%</span></div>
+<div class="ulh-threshold-lab__comparison">
+<div><span>Q₁ · Viable future mass</span><strong>75%</strong><div class="ulh-threshold-lab__track"><i style="width:75%"></i><b data-ulh-threshold-tick style="left:75%"></b></div><p data-ulh-q1-status data-result="pass">Adequate · 75% ≥ 75%</p></div>
+<div><span>Q₂ · Viable plus juvenile reserve</span><strong>62.5%</strong><div class="ulh-threshold-lab__track ulh-threshold-lab__track--reserve"><i style="width:62.5%"></i><b data-ulh-threshold-tick style="left:75%"></b></div><p data-ulh-q2-status data-result="fail">Inadequate · 62.5% &lt; 75%</p></div>
+</div><p id="ulh15-threshold-help" class="ulh-threshold-lab__note">Changing θ changes the declared requirement, not the future histories or their weights. At θ = 0, even a zero-mass capacity satisfies a non-strict mass threshold algebraically; the scientific meaning of such a cutoff would still require justification.</p>
+</div></div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Reported computational results"><strong>Back to Paper V</strong><nav aria-label="Study results and limits"><a href="#results">20-year scenario results</a><a href="#ensemble">Individual units vs averages</a><a href="#limits">Scientific interpretation</a><a href="#takeaway">Carry it forward</a></nav><small>Lesson 15<br>Paper V · Finite design</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="results">
+<p class="ulh-kicker">10 / What the actual finite design computes</p><h2 class="ulh-serif">Different declared scenarios yield sharply different continuation masses.</h2>
+<p>We can now return to the reported experiment. The primary design uses <strong>1,024 combinations</strong> of reconstructed starting states, sampled predictive parameters, and growth-model variants. Each combination produces <strong>64 future histories per scenario</strong>. Health is evaluated separately for each conditional unit.</p>
+<p>The following 20-year results use α = 0.75, β = 0.4, τ = 2, θ = 0.75, and ρ = 0.5.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-model-results">
+<caption>Paper V, Table 3 (printed page 30) · 20-year conditional finite-design results</caption>
+<thead><tr><th scope="col">Declared scenario</th><th scope="col">Mean viable mass m<sub>V</sub></th><th scope="col">Mean reserve mass m<sub>R</sub></th><th scope="col">Fraction Q₁</th><th scope="col">Fraction Q₂</th></tr></thead>
+<tbody>
+<tr><th scope="row">D0 · Reference</th><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr>
+<tr><th scope="row">D1 · Drought-like</th><td>0.2099</td><td>0.0779</td><td>0.1973</td><td>0.0723</td></tr>
+<tr><th scope="row">D2 · Hemlock pressure</th><td>0.2815</td><td>0.2815</td><td>0.1318</td><td>0.1318</td></tr>
+<tr><th scope="row">D3 · Combined stress</th><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr>
+</tbody></table></div>
+<p class="ulh-small">These figures are conditional numerical outputs from the declared simulation design, not calibrated probabilities for the real Harvard Forest and not an operational health classification.</p>
+<div class="ulh-scenario-bars" role="group" aria-label="Reported mean 20-year viable versus reserve-qualified masses, scaled zero to one hundred percent">
+<div class="ulh-scenario-bars__key"><span><i></i>Viable mass</span><span><i></i>Reserve-qualified mass</span></div>
+<div><span>D0 · Reference</span><div><i class="ulh-scenario-bars__viable" style="width:100%"></i><i class="ulh-scenario-bars__reserve" style="width:100%"></i></div><small>100.00% / 100.00%</small></div>
+<div><span>D1 · Drought-like</span><div><i class="ulh-scenario-bars__viable" style="width:20.99%"></i><i class="ulh-scenario-bars__reserve" style="width:7.79%"></i></div><small>20.99% / 7.79%</small></div>
+<div><span>D2 · Hemlock pressure</span><div><i class="ulh-scenario-bars__viable" style="width:28.15%"></i><i class="ulh-scenario-bars__reserve" style="width:28.15%"></i></div><small>28.15% / 28.15%</small></div>
+<div><span>D3 · Combined stress</span><div><i class="ulh-scenario-bars__viable" style="width:0%"></i><i class="ulh-scenario-bars__reserve" style="width:0%"></i></div><small>0.00% / 0.00%</small></div>
+</div>
+<p>The reference scenario assigns all sampled histories viable and reserve-qualified mass in the displayed design. The combined-stress scenario assigns none. Those are properties of the assumed dynamics, forcing, reconstruction, and finite sample, not claims about actual ecological outcomes.</p>
+</section>
+<section class="ulh-chapter-section" id="ensemble">
+<p class="ulh-kicker">11 / One subtle averaging distinction</p><h2 class="ulh-serif">The average viable mass is not the fraction of units that pass the Health requirement.</h2>
+<p>Look at D1. Its mean viable mass is 0.2099, or <strong>20.99%</strong>. The fraction of conditional units satisfying Q₁ is <strong>0.1973</strong>, or 19.73%. This difference has a precise source: the study applies the declared threshold to <em>each unit's mass</em> and then averages the true-or-false judgments.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Threshold first, then average</p><h3>These operations generally give different answers.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Average of threshold outcomes is not generally equivalent to the outcome of thresholding the average"><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mn>𝟙</mn><mrow><msub><mi>m</mi><mi>i</mi></msub><mo>≥</mo><mi>θ</mi></mrow></msub><mo>≠</mo><msub><mn>𝟙</mn><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>m</mi><mi>i</mi></msub><mo>≥</mo><mi>θ</mi></mrow></msub></mrow></math></div></div><p>On the left, the indicator equals 1 for each unit whose mass m<sub>i</sub> reaches θ, and 0 otherwise. On the right, we first average the masses and then threshold the one average. The two operations answer different questions.</p></div>
+<p>For example, if a model ensemble contains many units with very low mass but a smaller set with mass above 75%, the average viable mass and the fraction of units passing the 75% threshold need not be numerically similar.</p>
+<p>The fractions in Table 3 refer to computational model/reconstruction units, not proportions of independently sampled real forests.</p>
+</section>
+<section class="ulh-chapter-section" id="limits">
+<p class="ulh-kicker">12 / The scope of the calculation</p><h2 class="ulh-serif">We now have an auditable numerical interpretation of prospective capacity.</h2>
+<p>Paper V makes the inference chain explicit: census evidence enters a reconstruction procedure; a conditional state and parameter sample enter a stochastic future model; simulated histories undergo model-lawfulness and continuation tests; the original candidate probability law supplies viable and reserve-qualified mass; declared adequacy predicates yield conditional Health judgments.</p>
+<div class="ulh-inference-levels" role="group" aria-label="Observation, reconstruction, simulation, and health evaluation">
+<div><span>Observed</span><strong>Census records</strong></div><b aria-hidden="true">→</b>
+<div><span>Reconstructed</span><strong>Possible state X₀</strong></div><b aria-hidden="true">→</b>
+<div><span>Simulated</span><strong>Candidate futures</strong></div><b aria-hidden="true">→</b>
+<div><span>Judged</span><strong>Q₁ and Q₂</strong></div></div>
+<p>The calculation is inspectable inside its declared model. Its empirical reliability depends on reconstruction calibration, mortality and entry assumptions, growth dynamics, the probability law over histories, and the ecological justification for the chosen requirements.</p>
+<p>A mathematically correct model-conditional result is not automatically a reliable probability for the real forest. This study does not claim to establish an operational Health status for Harvard Forest.</p>
+</section></article></div></section>
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container">
+<p class="ulh-kicker">What I want you to carry forward</p><h2 class="ulh-serif">Viable continuation is measured against the original futures—including those that fail.</h2>
+<p>The viable subprobability measure tells us how much probability the candidate model assigns to qualifying histories. The reserve-qualified measure answers a stronger declared question. Thresholds turn those masses into conditional Health judgments, provided present realization also holds. The mathematics makes each interpretation and each modeling assumption explicit.</p>
+<p>Lesson 16 follows the calibration challenge. A model can achieve approximately 99.22% balanced accuracy in one synthetic experiment yet fall to approximately 56% on deliberately difficult cases near the decision threshold. We'll examine what those contrasting results reveal about numerical measurement and trustworthy classification.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-14.html" class="ulh-button">← Previous: Lesson 14</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-prospective-health-declared-specifications.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper V (PDF)</a></div>
+</div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Prospective Health under Declared Specifications</em>, Paper V of <em>Health, Formally Defined</em> (2026), especially Sections 3.2, 4.6–4.7, 5.12, and 6.2, and Table 3. <a href="research-prospective-health-declared-specifications.html">Full publication record</a> · <a href="https://doi.org/10.5281/zenodo.23268987" target="_blank" rel="noopener">Zenodo DOI</a>. The 64-history teaching bank is invented; the 20-year table is conditional on the stated numerical design and declared requirements.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="understanding-health-14.html">Lesson 14</a></li><li><a href="understanding-health-15.html">Lesson 15</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+<script src="assets/js/understanding-health-15.js?v=1" defer></script>
+</body></html>
