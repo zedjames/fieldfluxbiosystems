@@ -1,0 +1,51 @@
+name: Verify live Understanding Health Lesson 7
+on:
+  pull_request:
+    paths:
+      - .github/workflows/verify-live-lesson7.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Confirm public HTTPS content, navigation, and original PDF
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time
+          from urllib.request import Request,urlopen
+          host="https://fieldfluxbiosystems.com/"
+          checks={
+          "understanding-health.html":["07 lessons published","understanding-health-07.html"],
+          "understanding-health-06.html":["Next: Lesson 7","understanding-health-07.html",'rel="next"'],
+          "understanding-health-07.html":["Lesson 07","By Zed James","Endogenous","Persistent","Intermittent","Withdrawn","ulh-support-explorer","ulh-paper2-recap","research-prospective-health-across-contexts.pdf"],
+          "assets/css/understanding-health-07.css":["ulh-support-explorer","ulh-paper2-recap"],
+          "assets/js/understanding-health-07.js":["intermittent","long"],
+          "sitemap.xml":["understanding-health-07.html"]
+          }
+          issues=[]
+          for path,terms in checks.items():
+            for attempt in range(7):
+              try:
+                with urlopen(Request(host+path,headers={"User-Agent":"FFB-Lesson7-Smoke/1.0","Cache-Control":"no-cache"}),timeout=20,context=ssl.create_default_context()) as res:
+                  txt=res.read().decode("utf-8","replace")
+                  print("HTTPS",path,res.status,len(txt))
+                missing=[t for t in terms if t not in txt]
+                if missing:raise ValueError("Missing "+repr(missing))
+                break
+              except Exception as e:
+                if attempt==6:issues.append(path+": "+str(e))
+                else:time.sleep(5)
+          try:
+            with urlopen(host+"research-prospective-health-across-contexts.pdf",context=ssl.create_default_context(),timeout=25) as res:
+              magic=res.read(5)
+            if magic!=b"%PDF-":issues.append("Paper II local source PDF missing")
+            print("Paper II PDF",magic)
+          except Exception as e:issues.append("source PDF: "+str(e))
+          if issues:
+            for i in issues:print("FAIL",i)
+            raise SystemExit(1)
+          print("PASS Lesson 7 and complete reading flow are live over HTTPS")
+          PY
