@@ -1,0 +1,21 @@
+{
+  "schema": "ffb-guided-health-lessons/v1",
+  "updated": "2026-10-10",
+  "collection": "Understanding Health",
+  "sourceSeries": "Health, Formally Defined",
+  "publishedCount": 1,
+  "lessons": [
+    {
+      "id": "01",
+      "number": 1,
+      "title": "What does it actually mean for something to be healthy?",
+      "slug": "understanding-health-01.html",
+      "sourcePaper": "Constitutive Continuation Capacity",
+      "sourceDoi": "10.5281/zenodo.23131157",
+      "sourcePdf": "research-constitutive-continuation-capacity.pdf",
+      "sourceSections": "Introduction; finite forest example, Section 5 and Appendix A",
+      "status": "published",
+      "summary": "Present condition, represented viable continuation capacity, and the role of declared scenario, time horizon, specification, and requirement."
+    }
+  ]
+}
