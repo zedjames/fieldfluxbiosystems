@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: Different Capacities, Same Health Requirements? | Understanding Health</title>
+<meta name="description" content="Lesson 3 with Zed James: learn why two different capacity representations can satisfy the same Health requirements, what a requirement-visible quotient means, and how new questions change the grouping.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-03.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-02.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="Different capacities, the same Health answers? — Lesson 3">
+<meta property="og:description" content="Two forests, four capacity sets, and the exact amount of information our health requirements can see.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-03.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3"><link rel="stylesheet" href="assets/css/understanding-health.css?v=3">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Can two systems have different capacities but still be equally healthy?","url":"https://fieldfluxbiosystems.com/understanding-health-03.html","description":"Lesson 3 of Understanding Health: differing viable-capacity representations, equivalent adequacy answers, and the mathematical requirement-visible quotient.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-10","learningResourceType":"Lesson","inLanguage":"en","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Constitutive Continuation Capacity","identifier":"https://doi.org/10.5281/zenodo.23131157"}}</script>
+</head>
+<body class="ulh-page">
+<a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson" aria-labelledby="lesson-title">
+<div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">03</div>
+<div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-02.html">Lesson 02</a><span aria-hidden="true">/</span><span>Lesson 03</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 03 · What information must we keep?</p>
+<h1 id="lesson-title" class="ulh-serif">Can two systems have different capacities but still be equally healthy?</h1>
+<p class="ulh-lede">We've followed possible histories into the viable family and watched an observer collect them into capacity. Now I want to show you why two genuinely different capacities can still give exactly the same answers to our declared Health requirements.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper I · Sections 6–8</span><span>Follows Lesson 02</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a class="ulh-button ulh-button--quiet" href="understanding-health-02.html">← Revisit Lesson 2</a><a class="ulh-button ulh-button--quiet" href="understanding-health.html">All lessons</a></div>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson">
+<strong>On this page</strong>
+<nav aria-label="Lesson sections">
+<a href="#two-capacities">Two different capacities</a>
+<a href="#two-requirements">The declared requirements</a>
+<a href="#equivalence">Equivalence by answers</a>
+<a href="#quotient">What is a quotient?</a>
+<a href="#sufficiency">How much information?</a>
+<a href="#new-requirement">When the questions change</a>
+<a href="#takeaway">Carry it forward</a>
+</nav>
+<small>Lesson 03<br>Health, Formally Defined<br>Paper I</small>
+</aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="two-capacities">
+<p class="ulh-kicker">01 / Two capacities, one starting question</p>
+<h2 class="ulh-serif">Let's look at two more forests.</h2>
+<p class="ulh-lead">Imagine two forests that both maintain the organization we've agreed to call a forest. Their present organization meets the specification, but the viable responses represented for each are different.</p>
+<p>Forest A has a capacity containing only a <em>stable</em> response. Forest B has that same stable response, together with an <em>exposed</em> response. I use the two symbols <strong>S</strong> and <strong>E</strong> to keep the example small enough that we can see every distinction.</p>
+<div class="ulh-forest-pair ulh-capacity-forests" aria-label="Two imagined forests with different declared capacity sets">
+<figure class="ulh-forest"><svg viewBox="0 0 400 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized leafy forest illustrating a stable-only response classification; illustration does not measure ecological capacity">
+<rect width="400" height="175" fill="#e4ecdc"/><path d="M0 139Q90 116 176 135T400 128V175H0Z" fill="#c1d2b7"/>
+<g stroke="#63745c" stroke-width="6" stroke-linecap="round"><path d="M62 147V67M144 149V42M235 145V61M331 146V49"/></g>
+<g fill="#4d8067"><ellipse cx="62" cy="59" rx="43" ry="40"/><ellipse cx="145" cy="40" rx="57" ry="43"/><ellipse cx="235" cy="57" rx="46" ry="38"/><ellipse cx="328" cy="47" rx="51" ry="40"/></g>
+<g fill="#79a88a"><ellipse cx="48" cy="45" rx="28" ry="26"/><ellipse cx="137" cy="28" rx="33" ry="29"/><ellipse cx="224" cy="48" rx="28" ry="25"/><ellipse cx="314" cy="35" rx="27" ry="23"/></g>
+<path d="M0 153H400" stroke="#f0f2e5" stroke-width="3" opacity=".5"/></svg><figcaption><strong>Forest A</strong><span>Represented viable capacity</span><b class="ulh-capacity-set">{S}</b><span>Stable response available</span></figcaption></figure>
+<figure class="ulh-forest ulh-forest--two"><svg viewBox="0 0 400 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized mixed canopy with exposed areas illustrating a capacity classification that includes stable and exposed responses; not a measurement">
+<rect width="400" height="175" fill="#e5eadb"/><path d="M0 139Q100 118 192 135T400 128V175H0Z" fill="#bbcfb4"/>
+<g stroke="#6c7e5d" stroke-width="6" stroke-linecap="round"><path d="M60 146V72M165 146V49M297 145V66M340 148V119"/></g>
+<g fill="#59886d"><ellipse cx="62" cy="67" rx="46" ry="40"/><ellipse cx="165" cy="47" rx="52" ry="39"/><ellipse cx="296" cy="58" rx="45" ry="37"/></g>
+<g fill="#95b693"><ellipse cx="48" cy="53" rx="26" ry="27"/><ellipse cx="147" cy="30" rx="33" ry="25"/><ellipse cx="283" cy="45" rx="27" ry="25"/></g>
+<g stroke="#648878" stroke-width="3" stroke-linecap="round"><path d="M223 146V115M223 116l-18 16M223 116l18 14M360 146V122M360 122l-13 13M360 122l12 15"/></g>
+<circle cx="223" cy="112" r="13" fill="#83ae83"/><circle cx="360" cy="120" r="10" fill="#80a984"/>
+<path d="M0 153H400" stroke="#f0f2e5" stroke-width="3" opacity=".5"/></svg><figcaption><strong>Forest B</strong><span>Represented viable capacity</span><b class="ulh-capacity-set">{S, E}</b><span>Stable and exposed responses available</span></figcaption></figure>
+</div>
+<p class="ulh-small">These drawings are illustrations. Their capacity sets are declared mathematical response categories from the finite forest framework, not measurements of the pictured trees, and no probabilities are implied.</p>
+<p>The capacities are plainly different. Forest B retains one additional response category.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Distinguishable representations</p><h3>Different capacity sets.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The stable-only capacity is not equal to the capacity with both stable and exposed responses">
+<mrow><msub><mi>C</mi><mi>A</mi></msub><mo>=</mo><mo>{</mo><mi>S</mi><mo>}</mo><mo>≠</mo><mo>{</mo><mi>S</mi><mo>,</mo><mi>E</mi><mo>}</mo><mo>=</mo><msub><mi>C</mi><mi>B</mi></msub></mrow></math></div></div><p>The symbol ≠ means “is not equal to.” These are different represented capacities even though both contain a stable response.</p></div>
+<p>Whether the difference changes their Health judgment depends on what we have asked the capacity to establish.</p>
+</section>
+<section class="ulh-chapter-section" id="two-requirements">
+<p class="ulh-kicker">02 / The declared questions</p>
+<h2 class="ulh-serif">Let's give each forest the same two requirements.</h2>
+<p>Paper I uses a very simple requirement language for this finite case. The first requirement asks whether the capacity contains <em>any</em> viable response category at all. The second asks whether a stable response is available.</p>
+<p>That gives us an unusually clear comparison:</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-requirements-table"><caption>Both forests, evaluated under the same two requirements</caption>
+<thead><tr><th scope="col">Adequacy requirement</th><th scope="col">Forest A · {S}</th><th scope="col">Forest B · {S, E}</th></tr></thead>
+<tbody><tr><th scope="row">Any viable response available?</th><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr>
+<tr><th scope="row">Stable response available?</th><td class="ulh-yes">Yes</td><td class="ulh-yes">Yes</td></tr></tbody>
+</table></div>
+<p>Both forests pass every requirement we've declared. Their capacity representations differ, but the resulting adequacy answers agree. Because our thought experiment also assumes that both forests presently realize their defining organization, their full Health judgments agree under those same indices and requirements.</p>
+<p>I don't want to attach a value judgment to Forest B's additional exposed response. In this finite example, capacity is a set of attained viable response categories. The presence of E tells us that the category is available; it does not say how frequently a response occurs or how likely failure would be.</p>
+</section>
+<section class="ulh-chapter-section" id="equivalence">
+<p class="ulh-kicker">03 / What the declared requirements can see</p>
+<h2 class="ulh-serif">Here is the mathematical heart of the idea.</h2>
+<p>I call two capacities <em>equivalent with respect to a collection of requirements</em> when every requirement in that collection returns the same adequacy answer on both. The notation looks abstract, but the rule is the one we just used for the forests.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Requirement-visible equivalence</p><h3>Equal answers for every declared requirement.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Capacities c one and c two are Q-equivalent if and only if for every requirement r in Q their adequacy answers agree">
+<mrow><msub><mi>c</mi><mn>1</mn></msub><msub><mo>∼</mo><mi>Q</mi></msub><msub><mi>c</mi><mn>2</mn></msub><mo>⇔</mo><mo>∀</mo><mi>r</mi><mo>∈</mo><mi>Q</mi><mo>,</mo><mspace width=".5em"/><msub><mi mathvariant="normal">Adequate</mi><mi>r</mi></msub><mo>(</mo><msub><mi>c</mi><mn>1</mn></msub><mo>)</mo><mo>↔</mo><msub><mi mathvariant="normal">Adequate</mi><mi>r</mi></msub><mo>(</mo><msub><mi>c</mi><mn>2</mn></msub><mo>)</mo></mrow></math></div></div><p>Paper I's equivalence definition. The statement compares adequacy answers, not the complete content of the underlying capacity sets.</p></div>
+<dl class="ulh-term-list">
+<div><dt><i>c</i><sub>1</sub> ∼<sub>Q</sub> <i>c</i><sub>2</sub></dt><dd>Two capacities give the same answers for every requirement in the declared collection Q.</dd></div>
+<div><dt><i>Q</i></dt><dd>The collection of requirements we're considering.</dd></div>
+<div><dt>∀</dt><dd>“For every.” We compare all the requirements in Q, not only one convenient example.</dd></div>
+<div><dt>Adequate<sub>r</sub>(<i>c</i>)</dt><dd>Does capacity <i>c</i> meet requirement <i>r</i>?</dd></div>
+<div><dt>↔</dt><dd>“If and only if” between the two adequacy answers: either both hold or both do not.</dd></div>
+</dl>
+<p>The equivalence is relative to the declared requirements. If our questions cannot distinguish the two capacities, then for <em>those questions</em> they belong to the same group. The full capacities remain different; we are retaining only what the chosen requirement language can observe.</p>
+</section>
+<section class="ulh-chapter-section" id="quotient">
+<p class="ulh-kicker">04 / Turning equivalence into a new object</p>
+<h2 class="ulh-serif">What do I mean by a quotient?</h2>
+<p>The word <em>quotient</em> often suggests division. Here, it means something much more tangible: we group objects together whenever the stated equivalence rule gives them the same status.</p>
+<p>Our two response atoms, S and E, have four possible subsets: the empty set, {E}, {S}, and {S, E}. Under the two declared requirements, they collapse into just three groups of adequacy answers.</p>
+</section>
+</article></div></section>
+<section class="ulh-quotient-section" id="capacity-groups" aria-label="An interactive view of requirement-visible groups">
+<div class="ulh-container">
+<p class="ulh-kicker">See the information grouping</p>
+<h2 class="ulh-serif">Four capacity sets. Three distinct answers.</h2>
+<p class="ulh-quotient-intro">Start with all four capacity sets. Then compare which distinctions are visible to our current requirements. You can add the exposed-response question to see why the grouping changes.</p>
+<div class="ulh-capacity-gallery" aria-label="Four possible subsets of two response atoms">
+<div class="ulh-capacity-atom"><span>Empty</span><strong>∅</strong><small>Neither response type</small></div>
+<div class="ulh-capacity-atom"><span>Exposed</span><strong>{E}</strong><small>Exposed response only</small></div>
+<div class="ulh-capacity-atom"><span>Stable</span><strong>{S}</strong><small>Stable response only</small></div>
+<div class="ulh-capacity-atom"><span>Both</span><strong>{S, E}</strong><small>Both response types</small></div>
+</div>
+<fieldset class="ulh-quotient-controls"><legend>Choose which questions the grouping preserves</legend>
+<div class="ulh-switch__buttons">
+<button type="button" data-ulh-quotient="base" aria-pressed="true">The original two requirements</button>
+<button type="button" data-ulh-quotient="extended" aria-pressed="false">Add: Is exposed available?</button>
+</div></fieldset>
+<div data-ulh-quotient-view="base" class="ulh-quotient-group-grid" aria-label="Three groups for the original requirements">
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 1</span><strong>{S} and {S, E}</strong><p>Any response: yes<br>Stable response: yes</p><span class="ulh-quotient-group__tag">Both requirements pass</span></div>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 2</span><strong>{E}</strong><p>Any response: yes<br>Stable response: no</p><span class="ulh-quotient-group__tag">Only one requirement passes</span></div>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 3</span><strong>∅</strong><p>Any response: no<br>Stable response: no</p><span class="ulh-quotient-group__tag">Neither requirement passes</span></div>
+</div>
+<div data-ulh-quotient-view="extended" class="ulh-quotient-group-grid ulh-quotient-group-grid--four" aria-label="Four groups after adding the exposed-response requirement" hidden>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 1</span><strong>{S, E}</strong><p>Any: yes · Stable: yes · Exposed: yes</p></div>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 2</span><strong>{S}</strong><p>Any: yes · Stable: yes · Exposed: no</p></div>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 3</span><strong>{E}</strong><p>Any: yes · Stable: no · Exposed: yes</p></div>
+<div class="ulh-quotient-group"><span class="ulh-quotient-group__label">Group 4</span><strong>∅</strong><p>Any: no · Stable: no · Exposed: no</p></div>
+</div>
+<p class="ulh-quotient-explanation" data-ulh-quotient-explanation aria-live="polite">With the original two requirements, {S} and {S, E} belong to the same group because both answer “yes” to every declared requirement.</p>
+<p class="ulh-quotient-footnote">Each capacity set here is a subset of {S, E}. The grouping concerns exact logical adequacy answers in the stated formal example; it does not express measured forest outcomes or empirical frequencies.</p>
+</div></section>
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="Continue reading"><strong>The remaining ideas</strong><nav aria-label="Second half of the lesson"><a href="#quotient">The quotient</a><a href="#sufficiency">Information sufficiency</a><a href="#new-requirement">New requirements</a><a href="#takeaway">Take it forward</a></nav><small>Lesson 03<br>From equivalence to observation</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="quotient-formula">
+<p>Under the original two requirements, {S} and {S, E} are grouped together. {E} forms its own group. The empty capacity forms another. Four distinct capacities have become three different adequacy signatures.</p>
+<p>I call the resulting space the <em>requirement-visible health-capacity quotient</em>. Its notation records exactly what we've done:</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">The requirement-visible quotient</p><h3>Keep the differences the questions can see.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Health-capacity quotient for Q is the capacity space divided into equivalence classes according to Q">
+<mrow><msub><mi mathvariant="normal">HealthCap</mi><mi>Q</mi></msub><mo>=</mo><mi mathvariant="normal">Cap</mi><mo>/</mo><msub><mo>∼</mo><mi>Q</mi></msub></mrow></math></div></div><p>Form a quotient of the capacity space by the equivalence relation determined by Q. Each class contains the capacities with exactly the same adequacy answers for those requirements.</p></div>
+<p>We're not making the capacities physically identical. We're choosing a precise level of information. At that level, a capacity is represented by the pattern of answers it produces for the declared health questions.</p>
+</section>
+<section class="ulh-chapter-section" id="sufficiency">
+<p class="ulh-kicker">05 / Why the construction matters for measurement</p>
+<h2 class="ulh-serif">How much information do we actually need?</h2>
+<p>Imagine recording every tree, every relationship among them, every disturbance and every possible history of an evolving forest. It would be an enormous amount of information. Whether all that detail is needed depends on what question the measurement is intended to answer.</p>
+<p>For our two declared requirements, a representation is sufficient if it can always determine whether capacity is nonempty and whether S is present. The quotient tells us the coarsest distinction between capacities that preserves those answers.</p>
+<p>Paper I formalizes that property. Any representation that is sufficient to answer every requirement in Q must retain enough information to determine the capacity's quotient class, at least on the capacities that the representation actually attains. A richer representation is free to preserve more detail. But it cannot erase a distinction that changes a declared adequacy answer and remain sufficient for those questions.</p>
+<p>This is a useful way to approach measurement science. We can ask exactly what information an observation needs to preserve <em>before</em> deciding that a particular sensor, model, or computation measures the desired property.</p>
+</section>
+<section class="ulh-chapter-section" id="new-requirement">
+<p class="ulh-kicker">06 / When the questions change</p>
+<h2 class="ulh-serif">A new requirement changes what we must remember.</h2>
+<p>Now I'll add a third requirement: <em>Does an exposed response exist?</em> Forest A, with {S}, answers no. Forest B, with {S, E}, answers yes.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh-requirements-table">
+<caption>The additional exposed-response question</caption><thead><tr><th scope="col">New requirement</th><th scope="col">Forest A · {S}</th><th scope="col">Forest B · {S, E}</th></tr></thead>
+<tbody><tr><th scope="row">Exposed response available?</th><td class="ulh-no">No</td><td class="ulh-yes">Yes</td></tr></tbody>
+</table></div>
+<p>The two capacities now need different quotient classes. They were equivalent for the original question language and distinguishable for this expanded one. That is the point of the visual grouping above: the quotient is always relative to the questions we choose to preserve.</p>
+<p>There is also a scientific responsibility here. Adding a mathematically definable question does not automatically make it an appropriate health requirement. Establishing which requirements are meaningful for an actual organism, forest, or physiological system needs evidence and careful domain interpretation.</p>
+</section>
+</article></div></section>
+<section class="ulh-boundary" id="qualification"><div class="ulh-container"><div class="ulh-boundary__card">
+<p class="ulh-kicker">A distinction worth protecting</p>
+<h2 class="ulh-serif">Equal adequacy answers are one part of the full Health judgment.</h2>
+<p>The quotient groups capacities according to declared adequacy questions. Full Health also includes present realization. If two systems have the same represented capacity and the same requirements and context, their adequacy answers must agree; that's how adequacy is defined.</p>
+<p>The full Health answers can still differ when one system presently realizes its defining organization and the other does not. Our two-forest illustration assumed both realized their organization so we could isolate the capacity distinction.</p>
+<p>Just as importantly, the set-valued example does not tell us how likely different futures are. Two equal sets of response categories can have different probability weights under separately specified stochastic laws. Those distinctions belong to richer measurement questions in the broader series.</p>
+</div></div></section>
+<section class="ulh-takeaway" id="takeaway"><div class="ulh-container">
+<p class="ulh-kicker">What to carry with you</p>
+<h2 class="ulh-serif">A health judgment needs the information its requirements can see.</h2>
+<p>We've now followed three levels of the same idea. First are the viable histories: lawful possibilities along which the organization continues. Second is the capacity representation collected from those histories. Third is the information visible to the declared adequacy questions.</p>
+<p>The quotient tells us which capacity distinctions can be forgotten without changing those particular answers. It doesn't settle which requirements science ought to declare, and it doesn't replace the present-realization condition.</p>
+<p>In Lesson 4, I'll explore the remaining limits from Paper I: why an available successful future tells us less than we might wish about robustness against failure, and why knowing what a system looks like now can be insufficient to determine its prospective Health.</p>
+<div class="ulh-takeaway__actions">
+<a class="ulh-button" href="understanding-health-02.html">← Previous: Lesson 2</a>
+<a class="ulh-button ulh-button--quiet" href="understanding-health.html">All lessons ↗</a>
+<a class="ulh-button ulh-button--quiet" href="research-constitutive-continuation-capacity.pdf" target="_blank" rel="noopener">Read Paper I (PDF)</a>
+</div>
+</div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Constitutive Continuation Capacity: A Machine-Checked Framework for Prospective Health</em>, Paper I in <em>Health, Formally Defined</em> (2026), especially the capacity-equivalence and requirement-visible quotient development. <a href="research-constitutive-continuation-capacity.html">Full publication record</a> · <a href="https://doi.org/10.5281/zenodo.23131157" target="_blank" rel="noopener">Zenodo DOI</a>. The illustrated forest capacities are formally declared response sets, not measurements or probability estimates.</p></div>
+</main>
+<footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+<script src="assets/js/understanding-health-03.js?v=1" defer></script>
+</body>
+</html>
