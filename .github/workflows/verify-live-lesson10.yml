@@ -1,0 +1,52 @@
+name: Verify public Understanding Health Lesson 10
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-lesson10.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify public HTTPS pages, navigation, control assets and exact PDF
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import hashlib,ssl,time
+          base="https://fieldfluxbiosystems.com/"
+          checks={
+           "understanding-health.html":["10 lessons published","understanding-health-10.html"],
+           "understanding-health-09.html":["Next: Lesson 10","understanding-health-10.html",'rel="next"'],
+           "understanding-health-10.html":["Lesson 10","By Zed James","Theorem 10.1","Equation (57)","data-ulh-budget-status","id=\"ulh-budget-range\"","research-representation-sufficiency-prospective-health.pdf",'rel="prev"'],
+           "assets/js/understanding-health-10.js":["Affordable","budget"],
+           "assets/css/understanding-health-10.css":["ulh-budget-explorer"],
+           "sitemap.xml":["understanding-health-10.html"]
+          }
+          issues=[]
+          for path,words in checks.items():
+           for attempt in range(8):
+            try:
+             with urlopen(Request(base+path,headers={"User-Agent":"FFB-Lesson10-Smoke/1.0","Cache-Control":"no-cache"}),context=ssl.create_default_context(),timeout=25) as res:
+              html=res.read().decode("utf-8","replace")
+              print("PUBLIC",path,res.status,len(html))
+             missing=[s for s in words if s not in html]
+             if missing:raise RuntimeError("missing "+repr(missing))
+             break
+            except Exception as err:
+             if attempt==7:issues.append(path+": "+str(err))
+             else:time.sleep(5)
+          try:
+           with urlopen(base+"research-representation-sufficiency-prospective-health.pdf",timeout=40,context=ssl.create_default_context()) as res:
+            data=res.read()
+           digest=hashlib.sha256(data).hexdigest()
+           print("PDF",len(data),digest)
+           if not data.startswith(b"%PDF-") or digest!="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650":
+            issues.append("Paper III original PDF failed checksum")
+          except Exception as e:issues.append("PDF "+str(e))
+          for x in issues:print("FAIL",x)
+          if issues:raise SystemExit(1)
+          print("PASS: Lesson 10 and full source are public over valid HTTPS")
+          PY
