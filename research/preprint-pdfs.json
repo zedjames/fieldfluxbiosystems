@@ -206,6 +206,16 @@
       "pages": 48,
       "publication_date": "2026-10-09",
       "manuscript_date": "2026-10-09"
+    },
+    {
+      "record_page": "research-constitutive-observability-prospective-health.html",
+      "pdf": "research-constitutive-observability-prospective-health.pdf",
+      "doi": "10.5281/zenodo.23301732",
+      "concept_doi": "10.5281/zenodo.23301733",
+      "sha256": "35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c",
+      "pages": 37,
+      "publication_date": "2026-10-11",
+      "manuscript_date": "2026-10-11"
     }
   ]
 }
