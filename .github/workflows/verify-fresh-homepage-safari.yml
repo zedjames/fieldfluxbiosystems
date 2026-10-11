@@ -1,0 +1,36 @@
+name: Verify fresh homepage URL from independent browser network
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-fresh-homepage-safari.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Confirm the fresh path returns five-paper content
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time,hashlib
+          from urllib.request import Request,urlopen
+          urls=["https://fieldfluxbiosystems.com/homepage-fresh-20261010.html","https://fieldfluxbiosystems.com/index.html"]
+          for url in urls:
+            for attempt in range(14):
+              try:
+                with urlopen(Request(url,headers={"User-Agent":"FFB-Safari-Fresh-Path-Verification/1.0","Cache-Control":"no-cache"}),timeout=25,context=ssl.create_default_context()) as response:
+                  data=response.read()
+                  html=data.decode("utf-8","replace")
+                  print("PUBLIC",url,response.status,len(data),response.headers.get("ETag"),response.headers.get("Cache-Control"),flush=True)
+                checks={"hero":'<dd>Five published papers</dd>' in html,"old_text_absent":'Three published papers' not in html,"rows":html.count('class="ffb-index__row"')==5,"paper_iv":'Paper IV' in html,"paper_v":'Paper V' in html}
+                if "homepage-fresh" in url:checks["revision_marker"]="TEMPORARY FFB HOMEPAGE VERIFICATION" in html
+                print("CHECK",url,checks,"hash",hashlib.sha256(data).hexdigest(),flush=True)
+                if not all(checks.values()):raise ValueError("Content discrepancy "+str(checks))
+                break
+              except Exception as exc:
+                if attempt==13:raise
+                time.sleep(5)
+          print("PASS fresh unique path and canonical homepage show same five-paper content",flush=True)
+          PY
