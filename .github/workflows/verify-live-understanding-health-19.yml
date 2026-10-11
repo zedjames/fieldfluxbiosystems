@@ -41,9 +41,9 @@ jobs:
                   if "Paper VI" in text or "unpublished paper" in text:raise ValueError("Unpublished work referenced")
                   if text.count('<math ')!=1 or text.count('</math>')!=1:raise ValueError("MathML formula missing")
                 if path=="understanding-health.html":
-                  m=re.search(r'<script type="application/ld\\+json">(.*?)</script>',text,re.S)
-                  if not m:raise ValueError("Structured data missing")
-                  if len(json.loads(m.group(1)).get("hasPart",[]))!=19:raise ValueError("Expected nineteen structured lesson refs")
+                  block=text.split('<script type="application/ld+json">',1)[1].split('</script>',1)[0]
+                  if not block:raise ValueError("Structured data missing")
+                  if len(json.loads(block).get("hasPart",[]))!=19:raise ValueError("Expected nineteen structured lesson refs")
                 break
               except Exception as exc:
                 if attempt==11:errors.append(path+": "+repr(exc))
