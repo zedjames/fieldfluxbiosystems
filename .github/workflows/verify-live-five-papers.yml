@@ -1,0 +1,53 @@
+name: Verify live homepage has all five published papers
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-five-papers.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect public HTTPS homepage content and five paper destinations
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import urlopen,Request
+          import ssl,time,re
+          origin="https://fieldfluxbiosystems.com/"
+          papers=[
+            "research-constitutive-continuation-capacity.html",
+            "research-prospective-health-across-contexts.html",
+            "research-representation-sufficiency-prospective-health.html",
+            "research-information-provenance-conservative-enrichment-prospective-health.html",
+            "research-prospective-health-declared-specifications.html"
+          ]
+          problems=[]
+          for attempt in range(12):
+            try:
+              with urlopen(Request(origin+"index.html",headers={"User-Agent":"FFB-Five-Papers-Fresh/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=22,context=ssl.create_default_context()) as res:
+                html=res.read().decode("utf-8","replace")
+                print("LIVE HOMEPAGE",res.status,len(html),flush=True)
+              if "<dd>Five published papers</dd>" not in html:raise ValueError("Hero still lacks five-paper count")
+              if "Three published papers" in html:raise ValueError("Stale three-paper claim on homepage")
+              if html.count('class="ffb-index__row"')!=5:raise ValueError("Expected exactly five publication rows")
+              missing=[p for p in papers if not re.search(r'href="'+re.escape(p)+r'" class="ffb-index__row"',html)]
+              if missing:raise ValueError("Paper link(s) missing: "+repr(missing))
+              print("PASS homepage hero + all 5 publication links",flush=True)
+              break
+            except Exception as err:
+              if attempt==11:problems.append("Homepage: "+str(err))
+              else:time.sleep(6)
+          for path in papers:
+            try:
+              with urlopen(Request(origin+path,headers={"Cache-Control":"no-cache"}),timeout=25,context=ssl.create_default_context()) as res:
+                body=res.read()
+                print("LIVE PAPER",path,res.status,len(body),flush=True)
+                if res.status!=200 or len(body)<1200:raise ValueError("bad response")
+            except Exception as err:problems.append("Paper "+path+": "+str(err))
+          for x in problems:print("FAIL",x,flush=True)
+          if problems:raise SystemExit(1)
+          print("PASS 5 published homepage papers, fresh HTTPS",flush=True)
+          PY
