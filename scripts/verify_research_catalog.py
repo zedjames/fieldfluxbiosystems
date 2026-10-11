@@ -158,16 +158,17 @@ def main()->int:
             fail(f"{name}: missing canonical page metadata",errors)
 
     health=[i for i in pubs if i.get("series")=="health-formally-defined"]
-    if sorted(i["order"] for i in health)!=[1,2,3,4,5]:
-        fail("Health series must include all five published papers",errors)
-    for name,version,concept in (("hfd4","23268802","23268803"),("hfd5","23268987","23268986")):
+    if sorted(i["order"] for i in health)!=[1,2,3,4,5,6]:
+        fail("Health series must include all six published papers",errors)
+    for name,version,concept in (("hfd4","23268802","23268803"),("hfd5","23268987","23268986"),("hfd6","23301732","23301733")):
         work=by_id.get(name,{})
         if work.get("doi")!="10.5281/zenodo."+version or work.get("concept_doi")!="10.5281/zenodo."+concept:
             fail(f"{name}: incorrect Zenodo DOI pairing",errors)
         if not work.get("pdf") or not (ROOT/work["pdf"]).is_file():
             fail(f"{name}: required indexed PDF not found",errors)
     for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
-                 "research-prospective-health-declared-specifications.html"):
+                 "research-prospective-health-declared-specifications.html",
+                 "research-constitutive-observability-prospective-health.html"):
         if slug not in research:
             fail(f"research.html: missing newly published health paper {slug}",errors)
 
