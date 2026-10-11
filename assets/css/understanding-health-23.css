@@ -1,0 +1,59 @@
+/* Understanding Health · Lesson 23
+   The final lesson uses the existing editorial reading room's warm paper, sage
+   surfaces and contrast math panel. Visualizations explain published mathematics
+   and known engineering stages without depicting proprietary instrument methods. */
+.ulh-page .ulh23-hero .ulh-hero__mark{opacity:.24}
+.ulh-page .ulh23-temporal{padding:clamp(75px,9vw,120px) 0;background:#e6eee5;border-block:1px solid #c0d1c3}
+.ulh-page .ulh23-temporal .ulh-kicker,.ulh-page .ulh23-path .ulh-kicker{color:#8e704a}
+.ulh-page .ulh23-temporal h2,.ulh-page .ulh23-path h2{font:400 clamp(2.25rem,4.25vw,4.05rem)/1.13 var(--serif,Georgia,serif);color:#234d59;letter-spacing:-.043em;max-width:24ch;margin:17px 0 23px}
+.ulh-page .ulh23-temporal>.ulh-container>p:not(.ulh-kicker),.ulh-page .ulh23-path>.ulh-container>p:not(.ulh-kicker){color:#587169;line-height:1.78;font-size:1.05rem;max-width:80ch}
+.ulh-page .ulh23-temporal__timeline{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr) 34px minmax(0,1fr);gap:9px;align-items:stretch;margin:35px 0 20px}
+.ulh-page .ulh23-temporal__point{border:1px solid #bfd0c1;background:#fdfbf5;padding:clamp(20px,3vw,32px);min-height:252px;display:flex;flex-direction:column;align-items:flex-start}
+.ulh-page .ulh23-temporal__point--positive{background:#ecf2e9}
+.ulh-page .ulh23-temporal__point--failure{background:#f3e8df;border-color:#d7bdad}
+.ulh-page .ulh23-temporal__point span{font-size:.74rem;color:#8b714a;text-transform:uppercase;letter-spacing:.10em;font-weight:750;min-height:36px;line-height:1.5}
+.ulh-page .ulh23-temporal__point>strong{font:400 clamp(3.3rem,5vw,5.3rem)/1 var(--serif,Georgia,serif);letter-spacing:-.05em;color:#276950;margin:13px 0 7px}
+.ulh-page .ulh23-temporal__point--failure>strong{color:#945d43}
+.ulh-page .ulh23-temporal__point>small{font-size:.79rem;color:#617a6d;margin-bottom:17px}
+.ulh-page .ulh23-temporal__point>p{font:400 clamp(1.08rem,1.65vw,1.36rem)/1.3 var(--serif,Georgia,serif);color:#245260;margin:auto 0 0}
+.ulh-page .ulh23-temporal__point--failure>p{color:#895d42}
+.ulh-page .ulh23-temporal__connector{align-self:center;text-align:center;font:400 1.9rem Georgia,serif;color:#a38457}
+.ulh-page .ulh23-temporal__requirement{border:1px solid #c6d1bf;background:#fdfbf5;padding:clamp(19px,2.8vw,30px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:6px 21px;align-items:start}
+.ulh-page .ulh23-temporal__requirement span{font-size:.75rem;color:#896d48;text-transform:uppercase;letter-spacing:.1em;font-weight:750}
+.ulh-page .ulh23-temporal__requirement strong{font:400 clamp(1.25rem,2vw,1.7rem)/1.23 var(--serif,Georgia,serif);color:#245563;grid-column:2;grid-row:1}
+.ulh-page .ulh23-temporal__requirement p{grid-column:1/-1;font-size:.84rem;color:#60766b;line-height:1.75;margin:7px 0 0}
+.ulh-page .ulh23-temporal__note{font-size:.84rem!important;color:#637b6f!important;line-height:1.75!important;margin:20px 0 0!important}
+.ulh-page .ulh23-obligations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:33px 0}
+.ulh-page .ulh23-obligations>div{padding:clamp(19px,2.65vw,28px);border:1px solid #c6d3c3;background:#edf2ea}
+.ulh-page .ulh23-obligations>div:nth-child(even){background:#f4eee3;border-color:#d9ccb8}
+.ulh-page .ulh23-obligations span,.ulh-page .ulh23-papers span,.ulh-page .ulh23-project>.ulh-kicker{display:block;font-weight:750;text-transform:uppercase;font-size:.72rem;letter-spacing:.11em;color:#8d704a;margin-bottom:17px}
+.ulh-page .ulh23-obligations strong{display:block;font:400 clamp(1.16rem,1.9vw,1.52rem)/1.28 var(--serif,Georgia,serif);color:#255461}
+.ulh-page .ulh23-obligations p{color:#61776d;line-height:1.65;font-size:.81rem;margin:12px 0 0}
+.ulh-page .ulh23-papers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:32px 0}
+.ulh-page .ulh23-papers>div{border-left:2px solid #ac936c;background:#f4eee3;padding:21px 24px}
+.ulh-page .ulh23-papers>div:nth-child(2n){border-left-color:#8aab95;background:#e8f0e8}
+.ulh-page .ulh23-papers span{margin-bottom:9px}
+.ulh-page .ulh23-papers p{font-size:.92rem;line-height:1.72;color:#47636a;margin:0}
+.ulh-page .ulh23-project{margin:31px 0;padding:clamp(23px,3.2vw,36px);background:#eff3ed;border:1px solid #c5d4c6;border-left:3px solid #81a493}
+.ulh-page .ulh23-project:nth-of-type(even){background:#f4eee3;border-color:#dccdb9;border-left-color:#bb9a6b}
+.ulh-page .ulh23-project>.ulh-kicker{margin-bottom:8px}
+.ulh-page .ulh23-project h3{font:400 clamp(1.7rem,2.55vw,2.3rem)/1.23 var(--serif,Georgia,serif);color:#23515f;margin:0 0 17px}
+.ulh-page .ulh23-project p{font-size:.98rem;line-height:1.82;color:#3c585d;margin:13px 0 0}
+.ulh-page .ulh23-path{background:#e4ece4;border-block:1px solid #bfd0c1;padding:clamp(72px,8vw,105px) 0}
+.ulh-page .ulh23-path__steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:33px}
+.ulh-page .ulh23-path__steps>div{border:1px solid #c4d2c4;background:#fcfaf4;padding:clamp(20px,2.6vw,29px);min-height:186px}
+.ulh-page .ulh23-path__steps>div:nth-child(even){background:#f5eee3;border-color:#d9c8b0}
+.ulh-page .ulh23-path__steps span{display:block;color:#a17e50;font:400 1.8rem Georgia,serif;margin-bottom:25px}
+.ulh-page .ulh23-path__steps strong{font:400 clamp(1.17rem,1.95vw,1.59rem)/1.25 var(--serif,Georgia,serif);display:block;color:#295563}
+.ulh-page .ulh23-path__steps p{font-size:.81rem;color:#627a70;line-height:1.6;margin:11px 0 0}
+.ulh-page .ulh23-takeaway .ulh23-ending{padding:19px 0 19px clamp(20px,2.8vw,30px);border-left:2px solid #b79962;color:#e6eee4;margin:28px 0;line-height:1.8}
+@media(max-width:980px){
+ .ulh-page .ulh23-temporal__timeline{grid-template-columns:1fr;gap:9px}
+ .ulh-page .ulh23-temporal__connector{transform:rotate(90deg);line-height:1;padding:5px}
+ .ulh-page .ulh23-temporal__point{min-height:0}
+ .ulh-page .ulh23-temporal__point span{min-height:0}
+ .ulh-page .ulh23-temporal__point>p{margin-top:19px}
+ .ulh-page .ulh23-path__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){.ulh-page .ulh23-obligations,.ulh-page .ulh23-papers{grid-template-columns:1fr}.ulh-page .ulh23-temporal__requirement{display:block}.ulh-page .ulh23-temporal__requirement strong{display:block;margin-top:12px}}
+@media(max-width:510px){.ulh-page .ulh23-path__steps{grid-template-columns:1fr}.ulh-page .ulh23-temporal h2,.ulh-page .ulh23-path h2{font-size:2.25rem}}
