@@ -1,0 +1,45 @@
+name: Diagnose public homepage cache variants
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/diagnose-homepage-cache-variants.yml"
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Inspect live HTML variants and public cache headers
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,ssl,socket,urllib.request
+          from urllib.error import URLError
+          host="fieldfluxbiosystems.com"
+          try:
+            print("DNS",socket.getaddrinfo(host,443,proto=socket.IPPROTO_TCP)[:8],flush=True)
+          except Exception as exc: print("DNS ERROR",repr(exc),flush=True)
+          paths=[
+            ("noquery","https://fieldfluxbiosystems.com/index.html",{}),
+            ("fresh-no-cache","https://fieldfluxbiosystems.com/index.html",{"Cache-Control":"no-cache","Pragma":"no-cache"}),
+            ("root","https://fieldfluxbiosystems.com/",{}),
+            ("root-no-cache","https://fieldfluxbiosystems.com/",{"Cache-Control":"no-cache","Pragma":"no-cache"}),
+            ("query-old","https://fieldfluxbiosystems.com/index.html?v=20261010",{}),
+            ("query-new","https://fieldfluxbiosystems.com/index.html?revision=20261010T211300",{}),
+            ("root-new","https://fieldfluxbiosystems.com/?revision=20261010T211300",{}),
+            ("www","https://www.fieldfluxbiosystems.com/index.html",{})
+          ]
+          for label,url,headers in paths:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={"User-Agent":"Fieldflux-Cdn-Diagnostic/1.0",**headers}),timeout=20,context=ssl.create_default_context()) as res:
+                data=res.read()
+                rh=dict(res.headers.items())
+                effective=res.geturl()
+                status=res.status
+              html=data.decode("utf-8","replace")
+              print("RESULT",label,"code",status,"url",effective,"bytes",len(data),"sha256",hashlib.sha256(data).hexdigest(),flush=True)
+              print("CACHING",label,{k:v for k,v in rh.items() if k.lower() in ("server","date","via","age","x-cache","cf-cache-status","cache-control","etag","last-modified","expires","vary","location")},flush=True)
+              print("CONTENT",label,"old_hero",html.count("Three published papers"),"new_hero",html.count("Five published papers"),"paper_rows",html.count('class="ffb-index__row"'),"old_listing","Three published papers establish" in html,"paper_IV", "Paper IV" in html,"paper_V","Paper V" in html,flush=True)
+            except Exception as exc:print("ERROR",label,repr(exc),flush=True)
+          PY
