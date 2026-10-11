@@ -1,0 +1,36 @@
+/* Understanding Health · Lesson 19: five-paper synthesis and the state x question.
+   All styling is page-scoped and the source lesson remains readable without JavaScript. */
+.ulh-page .ulh19-hero .ulh-hero__mark{opacity:.24}
+.ulh-page .ulh19-definition{margin:30px 0}
+.ulh-page .ulh19-papers{display:grid;gap:0;margin:32px 0 27px;border-block:1px solid #cbd5c9}
+.ulh-page .ulh19-paper{display:grid;grid-template-columns:65px minmax(0,1fr);gap:23px;padding:27px 0;border-bottom:1px solid #d0d9ce;align-items:start}
+.ulh-page .ulh19-paper:last-child{border:0}
+.ulh-page .ulh19-paper__number{font:400 clamp(2.4rem,4vw,3.5rem)/1 Georgia,serif;color:#a5865b;display:block;padding-top:3px}
+.ulh-page .ulh19-paper .ulh-kicker{font-size:.7rem;margin:0 0 10px;color:#8b7453;letter-spacing:.1em}
+.ulh-page .ulh19-paper h3{font:400 clamp(1.32rem,2.2vw,1.86rem)/1.23 var(--serif,Georgia,serif);color:#244f5a;margin:0 0 10px}
+.ulh-page .ulh19-paper p:not(.ulh-kicker){margin:0;color:#566d66;font-size:.95rem;line-height:1.75}
+.ulh-page .ulh19-paper a{font-size:.8rem;font-weight:650;display:inline-flex;gap:8px;align-items:center;margin-top:12px;color:#82663f;text-decoration:underline;text-underline-offset:4px}
+.ulh-page .ulh19-paper a:hover{color:#315f63}
+.ulh-page .ulh19-evidence-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:32px 0 27px}
+.ulh-page .ulh19-evidence-pair>div{background:#edf3e9;border:1px solid #c0d0be;padding:clamp(23px,3vw,35px)}
+.ulh-page .ulh19-evidence-pair>div+div{background:#f4eee4;border-color:#d2c3ac}
+.ulh-page .ulh19-evidence-pair span{color:#8b7352;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:18px}
+.ulh-page .ulh19-evidence-pair strong{font:400 clamp(1.65rem,3.1vw,2.8rem)/1.22 Georgia,serif;display:block;color:#245360;letter-spacing:-.025em}
+.ulh-page .ulh19-evidence-pair strong small{font:400 .46em Georgia,serif;color:#657a72}
+.ulh-page .ulh19-evidence-pair p{font-size:.87rem;line-height:1.7;color:#5b736b;margin:18px 0 0}
+.ulh-page .ulh19-elephant{background:#132d3c;color:#ebf1e7;padding:clamp(80px,11vw,143px) 0;position:relative;overflow:hidden}
+.ulh-page .ulh19-elephant:before{position:absolute;inset:0;content:"";pointer-events:none;background:radial-gradient(circle at 11% 52%,rgba(176,204,186,.13),transparent 43%),repeating-linear-gradient(0deg,transparent 0 39px,rgba(239,232,202,.025) 40px 41px)}
+.ulh-page .ulh19-elephant>.ulh-container{position:relative}
+.ulh-page .ulh19-elephant .ulh-kicker{color:#dabb83;letter-spacing:.13em}
+.ulh-page .ulh19-elephant__layout{display:grid;grid-template-columns:minmax(170px,.56fr) minmax(0,1.44fr);align-items:center;gap:clamp(28px,5vw,90px)}
+.ulh-page .ulh19-elephant__symbol{font:italic 400 clamp(13rem,29vw,29rem)/.85 Georgia,serif;letter-spacing:-.15em;color:#7da394;text-shadow:0 14px 70px rgba(124,187,164,.1);user-select:none;text-align:center}
+.ulh-page .ulh19-elephant h2{color:#f2eedf;font:400 clamp(2.5rem,4.8vw,4.6rem)/1.1 var(--serif,Georgia,serif);letter-spacing:-.05em;margin:15px 0 32px}
+.ulh-page .ulh19-elephant p:not(.ulh-kicker){color:#c5d5ce;line-height:1.85;font-size:clamp(1.01rem,1.28vw,1.13rem);max-width:70ch;margin:0 0 17px}
+.ulh-page .ulh19-elephant p strong{color:#f5e7c8}
+.ulh-page .ulh19-elephant__text>p:last-child{font:400 clamp(1.5rem,2.4vw,2.15rem)/1.35 var(--serif,Georgia,serif);color:#eac68d;margin:23px 0 0}
+.ulh-page .ulh19-elephant__text>p:last-child strong{color:#f3dbb1}
+.ulh-page .ulh19-afterword{padding-top:15px}
+.ulh-page .ulh19-closing__question{font:400 clamp(1.4rem,2.3vw,2rem)/1.45 var(--serif,Georgia,serif)!important;color:#f4e3c2!important;max-width:68ch!important;border-left:2px solid #d2b078;padding:10px 0 10px clamp(20px,3vw,34px);margin:27px 0 17px!important}
+@media(max-width:800px){.ulh-page .ulh19-elephant__layout{grid-template-columns:1fr;gap:0}.ulh-page .ulh19-elephant__symbol{font-size:clamp(8rem,27vw,15rem);text-align:left;line-height:.85}.ulh-page .ulh19-elephant h2{margin-top:4px}.ulh-page .ulh19-evidence-pair{grid-template-columns:1fr}}
+@media(max-width:500px){.ulh-page .ulh19-paper{grid-template-columns:39px 1fr;gap:15px}.ulh-page .ulh19-paper__number{font-size:2.25rem}.ulh-page .ulh19-elephant{padding:70px 0}.ulh-page .ulh19-elephant__symbol{font-size:9rem}.ulh-page .ulh19-closing__question{padding-left:16px}}
+@media(prefers-reduced-motion:reduce){.ulh-page .ulh19-paper a{transition:none}}
