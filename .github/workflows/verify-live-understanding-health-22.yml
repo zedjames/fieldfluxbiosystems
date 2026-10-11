@@ -1,0 +1,67 @@
+name: Independently verify live Understanding Health Lesson 22
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-22.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Check public Lesson 22, interactive assets and Paper VI
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import json,ssl,time,hashlib,pathlib
+          origin="https://fieldfluxbiosystems.com/"
+          pages={
+            "understanding-health.html":["22 lessons published",'href="understanding-health-22.html"',"How do we know when a measurement tells us enough?"],
+            "understanding-health-21.html":["Continue to Lesson 22","Next: Lesson 22",'rel="next"'],
+            "understanding-health-22.html":["By Zed James","Paper VI",'id="three-conclusions"','id="question-relative"','id="uncertainty"','id="bounded-results"','id="physical-metrology"',"Answers disagree","Answers agree","No state is compatible","4.8–5.2","4.3–5.7","assets/css/understanding-health-22.css?v=1","assets/js/understanding-health-22.js?v=1","research-constitutive-observability-prospective-health.pdf","23301732"],
+            "assets/css/understanding-health-22.css":["ulh22-explorer__controls","ulh22-boundary__range--wide","@media(max-width:720px)","[data-evidence-panel][hidden]"],
+            "assets/js/understanding-health-22.js":["data-evidence-mode","data-evidence-panel","aria-pressed",'select("mixed")'],
+            "research-constitutive-observability-prospective-health.html":["Lesson 22 · Evidence sufficiency","23301732"],
+            "sitemap.xml":["understanding-health-21.html","understanding-health-22.html"]
+          }
+          errors=[]
+          for path,markers in pages.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(origin+path,headers={"User-Agent":"FFB-L22-ProductionCheck/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=24,context=ssl.create_default_context()) as res:
+                  payload=res.read();status=res.status
+                text=payload.decode("utf-8","replace")
+                print("LIVE",path,status,len(payload),flush=True)
+                if status!=200:raise ValueError("Unexpected status "+str(status))
+                missing=[m for m in markers if m not in text]
+                if missing:raise ValueError("Missing "+repr(missing))
+                if path=="understanding-health.html":
+                  if text.count('class="ulh-lesson-card"')!=22:raise ValueError("Not 22 lesson cards")
+                  block=text.split('<script type="application/ld+json">',1)[1].split('</script>',1)[0]
+                  if len(json.loads(block).get("hasPart",[]))!=22:raise ValueError("Not 22 structured lessons")
+                if path=="understanding-health-22.html":
+                  if text.count('<math ')!=2 or text.count('</math>')!=2:raise ValueError("Native MathML invalid")
+                  if text.count('data-evidence-panel=')!=3 or text.count('data-evidence-mode=')!=3:raise ValueError("Evidence explorer incomplete")
+                  if text.count('class="ulh-chapter-section"')!=9:raise ValueError("Expected nine article sections plus evidence explorer")
+                  if "The mathematical paper demonstrates" not in text:raise ValueError("Scientific scope missing")
+                if path=="assets/js/understanding-health-22.js":
+                  pathlib.Path('/tmp/lesson22.js').write_bytes(payload)
+                break
+              except Exception as exc:
+                if attempt==11:errors.append(path+": "+repr(exc))
+                else:time.sleep(6)
+          try:
+            with urlopen(Request(origin+"research-constitutive-observability-prospective-health.pdf",headers={"Cache-Control":"no-cache"}),timeout=40,context=ssl.create_default_context()) as res:
+              pdf=res.read();status=res.status
+            digest=hashlib.sha256(pdf).hexdigest()
+            print("PAPER_VI_PDF",status,len(pdf),digest,flush=True)
+            if status!=200 or not pdf.startswith(b"%PDF-") or digest!="35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c":
+              errors.append("Source PDF not verified")
+          except Exception as exc:errors.append("PDF: "+repr(exc))
+          for e in errors:print("FAIL",e,flush=True)
+          if errors:raise SystemExit(1)
+          print("PASS: live Lesson 22, evidence explorer, 22-card index, navigation, assets and exact source PDF",flush=True)
+          PY
+          node --check /tmp/lesson22.js
