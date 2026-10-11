@@ -23,7 +23,7 @@ jobs:
             (F,"research.html"):["six published","Paper VI","research-constitutive-observability-prospective-health.pdf"],
             (F,"research-series-health-formally-defined.html"):["Papers I–VI published","Paper VI","23301732"],
             (F,"research-constitutive-observability-prospective-health.html"):["Paper VI","23301732","23301733","citation_pdf_url","research-constitutive-observability-prospective-health.pdf"],
-            (F,"research-prospective-health-declared-specifications.html"):["Next paper","Constitutive observability"],
+            (F,"research-prospective-health-declared-specifications.html"):["Next paper","research-constitutive-observability-prospective-health.html"],
             (F,"science.html"):["State observability","Paper VI"],
             (F,"understanding-health-19.html"):["New: Constitutive observability","Paper VI"],
             (F,"sitemap.xml"):["research-constitutive-observability-prospective-health.html","research-constitutive-observability-prospective-health.pdf"],
