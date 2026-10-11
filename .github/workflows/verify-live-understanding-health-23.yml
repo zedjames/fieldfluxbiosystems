@@ -1,0 +1,64 @@
+name: Independently verify live Understanding Health Lesson 23
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-23.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Check public final lesson, engineering stages, assets and source PDF
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import json,ssl,time,hashlib
+          base="https://fieldfluxbiosystems.com/"
+          tests={
+            "understanding-health.html":["23 lessons published","A complete guided journey through Papers I–VI",'href="understanding-health-23.html"',"What can happen between measurements—and when can we trust the answer?"],
+            "understanding-health-22.html":["Continue to Lesson 23","Next: Lesson 23",'rel="next" href="https://fieldfluxbiosystems.com/understanding-health-23.html"'],
+            "understanding-health-23.html":["Lesson 23","By Zed James","id=\"temporal-diagram\"","Two qualified endpoints. One unseen interruption.","Exchange magnitude ≥ 1","id=\"engineering\"","Membrane Health","Apple Watch","DRTT 2.0 is currently in alpha testing.","camera system and torch","Rev B Boundary Witness Instrument","initial engineering-prototyping stage","QPCI","patent-pending","hospital-grade","That is where the work continues.","Paper VI does not establish physical instrumentation performance","understanding-health-23.css?v=1","23301732"],
+            "assets/css/understanding-health-23.css":["ulh23-temporal__timeline","ulh23-obligations","ulh23-papers","ulh23-project","ulh23-path__steps","@media(max-width:980px)"],
+            "research-constitutive-observability-prospective-health.html":["Lesson 23 · Final synthesis","23301732"],
+            "sitemap.xml":["understanding-health-22.html","understanding-health-23.html"]
+          }
+          failures=[]
+          for path,needles in tests.items():
+            for attempt in range(12):
+              try:
+                url=base+path
+                req=Request(url,headers={"User-Agent":"FFB-L23-Independent-Live-Check/1.0","Cache-Control":"no-cache","Pragma":"no-cache"})
+                with urlopen(req,timeout=27,context=ssl.create_default_context()) as resp:
+                  payload=resp.read();code=resp.status
+                s=payload.decode("utf-8","replace")
+                missing=[v for v in needles if v not in s]
+                print("LIVE",url,"status",code,"bytes",len(payload),"missing",missing,flush=True)
+                if code!=200 or missing:raise ValueError("Unexpected HTTP/content "+str(missing))
+                if path=="understanding-health.html":
+                  if s.count('class="ulh-lesson-card"')!=23:raise ValueError("Expected exactly 23 reading-room cards")
+                  ld=json.loads(s.split('<script type="application/ld+json">',1)[1].split("</script>",1)[0])
+                  if len(ld["hasPart"])!=23:raise ValueError("Expected 23 structured lessons")
+                if path=="understanding-health-23.html":
+                  if s.count('class="ulh-chapter-section"')!=10:raise ValueError("Expected ten scientific sections")
+                  if s.count('class="ulh23-temporal__point ')!=3:raise ValueError("Incomplete temporal diagram")
+                  if s.count("<math ")!=1 or s.count("</math>")!=1:raise ValueError("MathML missing")
+                  if s.count('class="ulh23-project"')!=4:raise ValueError("Expected four development-context sections")
+                  if s.count('<h1 ')!=1:raise ValueError("Unexpected main heading")
+                break
+              except Exception as exc:
+                if attempt==11:failures.append(path+": "+repr(exc))
+                else:time.sleep(6)
+          try:
+            with urlopen(Request(base+"research-constitutive-observability-prospective-health.pdf",headers={"Cache-Control":"no-cache"}),timeout=40,context=ssl.create_default_context()) as resp:
+              data=resp.read();code=resp.status
+            actual=hashlib.sha256(data).hexdigest()
+            print("PAPER_VI_PDF",code,len(data),actual,flush=True)
+            if code!=200 or not data.startswith(b"%PDF-") or actual!="35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c":raise ValueError("Source PDF checksum mismatch")
+          except Exception as exc:failures.append("Paper VI PDF: "+repr(exc))
+          for e in failures:print("FAIL",e,flush=True)
+          if failures:raise SystemExit(1)
+          print("PASS: live Lesson 23, DRTT 2.0 alpha testing, Rev B and QPCI scope, 23-lesson index, navigation, illustrations and Paper VI original",flush=True)
+          PY
