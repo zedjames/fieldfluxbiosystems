@@ -1,0 +1,56 @@
+/* Understanding Health · Lesson 22 — query-relative measurement sufficiency.
+   Source-first with native HTML fallback: paper/sage evidence illustrations,
+   accessible MathML and the established editorial reading-room proportions. */
+.ulh-page .ulh22-hero .ulh-hero__mark{opacity:.24}
+.ulh-page .ulh22-state-table{min-width:560px}
+.ulh-page .ulh22-state-table caption{text-align:left;font:.8rem/1.6 var(--body,system-ui,sans-serif);color:#697e76;padding:0 0 13px}
+.ulh-page .ulh22-evidence{padding:clamp(78px,10vw,123px) 0;background:#e7eee5;border-block:1px solid #bfcec0}
+.ulh-page .ulh22-evidence>.ulh-container>.ulh-kicker{color:#8e744e}
+.ulh-page .ulh22-evidence h2{font:400 clamp(2.25rem,4.4vw,4.1rem)/1.13 var(--serif,Georgia,serif);letter-spacing:-.042em;max-width:24ch;color:#214b59;margin:17px 0 24px}
+.ulh-page .ulh22-evidence>.ulh-container>p:not(.ulh-kicker){max-width:82ch;color:#526d65;font-size:1.05rem;line-height:1.78}
+.ulh-page .ulh22-explorer{background:#fcfaf4;border:1px solid #bfcebe;margin:31px 0 0;padding:clamp(20px,3.5vw,41px)}
+.ulh-page .ulh22-explorer__controls{border:0;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:9px}
+.ulh-page .ulh22-explorer__controls legend{font-size:.73rem;color:#94764e;text-transform:uppercase;letter-spacing:.12em;font-weight:750;margin-bottom:16px;width:100%}
+.ulh-page .ulh22-explorer__controls button{border:1px solid #b5c7b9;color:#25535b;background:#f3f4eb;padding:11px 17px;cursor:pointer;min-height:44px;font:650 .85rem var(--body,system-ui,sans-serif);transition:background .16s}
+.ulh-page .ulh22-explorer__controls button[aria-pressed=true]{background:#234955;border-color:#234955;color:white}
+.ulh-page .ulh22-explorer__controls button:hover:not([aria-pressed=true]){background:#e6eee6}
+.ulh-page .ulh22-explorer__controls button:focus-visible{outline:3px solid #c7a46b;outline-offset:2px}
+.ulh-page [data-evidence-panel][hidden]{display:none!important}
+.ulh-page .ulh22-explorer__states{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:11px}
+.ulh-page .ulh22-explorer__state{padding:clamp(18px,2.8vw,29px);border:1px solid #c2d1c1;background:#ebf1e8;min-height:158px}
+.ulh-page .ulh22-explorer__state:nth-child(2){background:#f5eee2;border-color:#d7c6ac}
+.ulh-page .ulh22-explorer__state:nth-child(3){background:#e2eee6}
+.ulh-page .ulh22-explorer__state>span,.ulh-page .ulh22-explorer__answer>span{font-size:.71rem;letter-spacing:.11em;text-transform:uppercase;font-weight:750;color:#8d724a;display:block;margin-bottom:18px}
+.ulh-page .ulh22-explorer__state>strong{font:400 clamp(1.25rem,2vw,1.58rem)/1.25 var(--serif,Georgia,serif);color:#275360;display:block;margin-bottom:14px}
+.ulh-page .ulh22-status{display:block;font-size:.8rem;line-height:1.6;font-weight:700;color:#627168}
+.ulh-page .ulh22-status--negative{color:#986046}
+.ulh-page .ulh22-status--positive{color:#327056}
+.ulh-page .ulh22-explorer__state--empty{background:#f2ebe1}
+.ulh-page .ulh22-explorer__state--empty small{color:#62756f;font-size:.82rem;line-height:1.5}
+.ulh-page .ulh22-explorer__answer{border-left:2px solid #ac8857;padding:6px 0 6px 22px;margin:26px 0 0}
+.ulh-page .ulh22-explorer__answer strong{display:block;font:400 clamp(1.35rem,2.2vw,1.9rem)/1.25 var(--serif,Georgia,serif);color:#26515a;margin:0 0 12px}
+.ulh-page .ulh22-explorer__answer p{color:#60746b;font-size:.91rem;line-height:1.75;max-width:70ch;margin:0}
+.ulh-page .ulh22-explorer__foot{font-size:.78rem!important;line-height:1.7!important;color:#63776c!important;margin:24px 0 0!important}
+.ulh-page .ulh22-boundary{background:#edf2e9;border:1px solid #c3d0c0;padding:clamp(19px,3.3vw,35px);margin:34px 0 27px}
+.ulh-page .ulh22-boundary__heading{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:9px 17px;border-bottom:1px solid #cbd7c8;padding-bottom:20px}
+.ulh-page .ulh22-boundary__heading span{font-size:.74rem;color:#96734a;text-transform:uppercase;letter-spacing:.11em;font-weight:750}
+.ulh-page .ulh22-boundary__heading strong{font:400 clamp(2.2rem,3.5vw,3.3rem)/1 Georgia,serif;color:#2b5b64;grid-row:span 2}
+.ulh-page .ulh22-boundary__heading small{font-size:.81rem;color:#69796c}
+.ulh-page .ulh22-boundary__rows{display:grid;gap:24px;padding:24px 0 10px}
+.ulh-page .ulh22-boundary__row-title{font-size:.77rem;color:#526c64;font-weight:700;display:block;margin-bottom:12px}
+.ulh-page .ulh22-boundary__scale{height:38px;position:relative;background:linear-gradient(90deg,#e1ede4 0%,#e1ede4 75%,#f0e1d5 75%,#f0e1d5 100%);border:1px solid #becbbe;overflow:visible}
+.ulh-page .ulh22-boundary__range{display:block;position:absolute;top:10px;height:16px;background:rgba(40,105,114,.46);border:1px solid #2c6871;z-index:1}
+.ulh-page .ulh22-boundary__range--narrow{left:40%;width:20%}
+.ulh-page .ulh22-boundary__range--wide{left:15%;width:70%}
+.ulh-page .ulh22-boundary__cut{position:absolute;top:-6px;bottom:-6px;left:75%;width:2px;background:#a15f49;z-index:2}
+.ulh-page .ulh22-boundary__point{position:absolute;left:50%;top:6px;height:24px;width:3px;background:#143b4d;z-index:3}
+.ulh-page .ulh22-boundary__rows small{font-size:.78rem;color:#5e746e;display:block;line-height:1.55;margin-top:10px}
+.ulh-page .ulh22-boundary>p{font-size:.8rem;line-height:1.68;margin:16px 0 0;color:#687970}
+.ulh-page .ulh22-takeaway .ulh22-next{padding:18px 0 18px clamp(18px,2.8vw,28px);border-left:2px solid #c29d63;color:#d9e7de;font-size:1rem;line-height:1.8;margin:28px 0}
+.ulh-page .ulh22-takeaway .ulh22-next strong{color:#f1ddba}
+@media(max-width:720px){
+ .ulh-page .ulh22-explorer__controls button{flex:1 1 100%;text-align:left}
+ .ulh-page .ulh22-evidence h2{font-size:2.25rem}
+ .ulh-page .ulh22-boundary__heading{grid-template-columns:1fr auto}
+}
+@media(prefers-reduced-motion:reduce){.ulh-page .ulh22-explorer__controls button{transition:none}}

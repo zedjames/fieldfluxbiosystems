@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 22: How do we know when a measurement tells us enough? | Understanding Health</title>
+<meta name="description" content="When is evidence sufficient for a Health conclusion? Explore compatible states, unresolved and inconsistent observations, bounded uncertainty, and the conditions that license a prospective answer.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#102938">
+<link rel="canonical" href="https://fieldfluxbiosystems.com/understanding-health-22.html">
+<link rel="prev" href="https://fieldfluxbiosystems.com/understanding-health-21.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Fieldflux Biosystems">
+<meta property="og:title" content="How do we know when a measurement tells us enough?">
+<meta property="og:description" content="A measurement can reveal enough for a specified Health question without reconstructing every detail of the state—but only when all compatible states support the same answer.">
+<meta property="og:url" content="https://fieldfluxbiosystems.com/understanding-health-22.html">
+<meta property="og:image" content="https://fieldfluxbiosystems.com/assets/img/og-card.png">
+<link rel="icon" href="assets/img/ffbio-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/fieldflux.css?v=3">
+<link rel="stylesheet" href="assets/css/understanding-health.css?v=4">
+<link rel="stylesheet" href="assets/css/understanding-health-22.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"How do we know when a measurement tells us enough?","url":"https://fieldfluxbiosystems.com/understanding-health-22.html","description":"An accessible study of query-relative evidence sufficiency, model-compatible state families, decision ambiguity, measurement uncertainty and physically justified prospective Health conclusions, based on Paper VI.","author":{"@type":"Person","name":"Zed James"},"datePublished":"2026-10-11","inLanguage":"en","learningResourceType":"Lesson","isPartOf":{"@type":"CollectionPage","name":"Understanding Health","url":"https://fieldfluxbiosystems.com/understanding-health.html"},"isBasedOn":{"@type":"ScholarlyArticle","name":"Constitutive Observability and the Measurement of Prospective Health","identifier":"https://doi.org/10.5281/zenodo.23301732"}}</script></head>
+<body class="ulh-page"><a class="ulh-skip" href="#main">Skip to lesson content</a>
+<header class="nav"><div class="wrap nav__inner">
+<a class="brand" href="index.html" aria-label="Fieldflux Biosystems — home"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a>
+<nav class="nav__links" aria-label="Primary"><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="about.html">About</a><a href="investors.html">Investors</a></nav>
+<div class="nav__actions"><a class="btn btn--ghost btn--sm" href="contact.html">Get in touch</a></div>
+<details class="ffx-mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><nav class="ffx-mobile-nav__links" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="platform.html">Technology</a><a href="products.html">Products</a><a href="research.html">Publications</a><a href="understanding-health.html">Understanding Health</a><a href="about.html">About</a><a href="investors.html">Investors</a><a href="contact.html">Contact</a></nav></details>
+</div></header>
+<main id="main">
+<section class="ulh-hero ulh-hero--lesson ulh22-hero" aria-labelledby="lesson-title"><div class="ulh-hero__ring" aria-hidden="true"></div><div class="ulh-hero__mark" aria-hidden="true">22</div><div class="ulh-container">
+<nav class="ulh-crumbs" aria-label="Breadcrumb"><a href="understanding-health.html">Understanding Health</a><span aria-hidden="true">/</span><a href="understanding-health-21.html">Lesson 21</a><span aria-hidden="true">/</span><span>Lesson 22</span></nav>
+<p class="ulh-kicker" style="margin-top:40px">Lesson 22 · When the evidence is sufficient</p>
+<h1 id="lesson-title" class="ulh-serif">How do we know when a measurement tells us enough?</h1>
+<p class="ulh-lede">A measurement can tell us enough to answer a scientific question without revealing everything about the system. But when the evidence still permits different Health answers, that uncertainty must remain part of our conclusion.</p>
+<div class="ulh-hero__meta"><span>By Zed James</span><span>Paper VI · Sections 2, 5, 7–10</span><span>Observation, evidence, and decision authority</span></div>
+<div class="ulh-actions" style="margin-top:24px"><a href="understanding-health-21.html" class="ulh-button ulh-button--quiet">← Revisit Lesson 21</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons</a></div>
+</div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="In this lesson"><strong>On this page</strong><nav aria-label="Lesson sections">
+<a href="#evidence">What does a reading tell us?</a>
+<a href="#compatible-states">Several possible states</a>
+<a href="#question-relative">A question without full reconstruction</a>
+<a href="#three-conclusions">Three kinds of evidence</a>
+<a href="#uncertainty">Measurement uncertainty</a>
+<a href="#bounded-results">Paper VI's bounded results</a>
+<a href="#alternative-observations">Different observations</a>
+<a href="#preserving-verdict">Preserving an answer</a>
+<a href="#physical-metrology">What a real instrument requires</a>
+<a href="#between-measurements">One last question</a>
+<a href="#takeaway">Carry it forward</a>
+</nav><small>Lesson 22<br>Health, Formally Defined<br>Paper VI</small></aside>
+<article class="ulh-prose">
+
+<section class="ulh-chapter-section" id="evidence"><p class="ulh-kicker">01 / What does the observation tell us?</p>
+<h2 class="ulh-serif">A measurement gives us information about something we cannot completely see.</h2>
+<p class="ulh-lead">Imagine you're standing outside a room with the door closed. You want to know whether someone is inside.</p>
+<p>You listen and hear a sound. Perhaps someone is moving. But the sound could come from a machine, an open window, or something falling. Your observation narrows the possibilities without necessarily answering the question.</p>
+<p>Now imagine hearing someone speak and recognizing their voice. The additional observation may give you much stronger evidence for what you wanted to know.</p>
+<p>Scientific measurement involves a similar relationship between observations and possible underlying states. We begin with the states compatible with the evidence. Further observations may narrow those possibilities until we can answer the specified question.</p>
+<p><strong>We don't always need every detail about the system. We need enough justified information to answer the question we actually asked.</strong></p>
+<p>We began exploring this principle in Paper III. Paper VI brings it directly into the study of measurement.</p>
+</section>
+
+<section class="ulh-chapter-section" id="compatible-states"><p class="ulh-kicker">02 / The first reading leaves two possibilities</p>
+<h2 class="ulh-serif">What if several states remain compatible with our observation?</h2>
+<p>Remember our two mathematical systems from Lesson 20? They presently satisfied the same organizational requirements and produced identical initial readings. Yet their prospective Health answers differed under the same specified future conditions.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh22-state-table"><caption>Two initially indistinguishable states in Paper VI's mathematical example</caption><thead><tr><th scope="col">Possible state</th><th scope="col">Compatible with first reading?</th><th scope="col">Prospective Health requirement</th></tr></thead><tbody>
+<tr><th scope="row">State A</th><td>Yes</td><td>Fails</td></tr>
+<tr><th scope="row">State B</th><td>Yes</td><td>Succeeds</td></tr>
+</tbody></table></div>
+<p>We know that both states remain possible under the observation model. We don't know which one the system occupies, and their answers disagree.</p>
+<p>So the initial evidence is <strong>insufficient for this particular Health question</strong>. The reading may be perfectly accurate about the quantities it records while leaving the distinction our question requires unresolved.</p>
+<p>An additional, scientifically justified measurement could separate the two possibilities. If that measurement also preserves the original prospective classification, it could tell us which answer applied before the intervention. Paper VI establishes exact examples of such procedures under its declared assumptions.</p>
+</section>
+
+<section class="ulh-chapter-section" id="question-relative"><p class="ulh-kicker">03 / How much of the state do we need?</p>
+<h2 class="ulh-serif">Sometimes we can answer the question without identifying the complete state.</h2>
+<p>Now imagine a measurement compatible with three different states. We still don't know which state the system occupies, but all three give the same prospective Health answer under our specified conditions.</p>
+<div class="ulh-status-table-wrap"><table class="ulh-status-table ulh22-state-table"><caption>An illustrative, question-sufficient observation, with three distinct compatible states</caption><thead><tr><th scope="col">Possible state</th><th scope="col">Compatible?</th><th scope="col">Prospective answer</th></tr></thead><tbody>
+<tr><th scope="row">State A</th><td>Yes</td><td>Succeeds</td></tr><tr><th scope="row">State B</th><td>Yes</td><td>Succeeds</td></tr><tr><th scope="row">State C</th><td>Yes</td><td>Succeeds</td></tr>
+</tbody></table></div>
+<p>Do we need to identify the exact state before answering our Health question? <strong>Not necessarily.</strong> If every compatible state yields the same answer, then the remaining state uncertainty does not change that particular answer.</p>
+<p>We might still need more information to answer a different question about future responses, robustness, or capacity under other scenarios. For the current question, the observation may already be sufficient.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">Fixed-query observational sufficiency</p><h3>The required information depends on the question.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="When measurements of x and y are identical, sufficient observation requires the specified Health answers H of x and H of y to agree"><mrow><mi>M</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>M</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>⇒</mo><mo>[</mo><mi>H</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>⇔</mo><mi>H</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>]</mo></mrow></math></div></div>
+<p>M denotes the observation. H denotes the particular prospective Health question. A sufficient measurement must give the same H answer whenever two states give the same M reading. It need not reveal every aspect of the state or its complete future response.</p></div>
+<p>This is <strong>query-relative observational sufficiency</strong>. Its meaning depends on the specification, scenario, horizon, and requirement we established before measuring.</p>
+</section>
+</article></div></section>
+
+<section class="ulh22-evidence" id="three-conclusions" aria-labelledby="evidence-heading"><div class="ulh-container">
+<p class="ulh-kicker">04 / Explore three possible evidentiary situations</p>
+<h2 class="ulh-serif" id="evidence-heading">When does the evidence permit an answer?</h2>
+<p>Imagine evaluating all states compatible with a declared observation model. Choose an evidence situation to see what the specified Health question permits us to conclude.</p>
+<div class="ulh22-explorer" data-ulh22-explorer>
+<fieldset class="ulh22-explorer__controls"><legend>Choose what the evidence still allows</legend>
+<button type="button" data-evidence-mode="mixed" aria-pressed="true">Answers disagree</button>
+<button type="button" data-evidence-mode="agreed" aria-pressed="false">Answers agree</button>
+<button type="button" data-evidence-mode="empty" aria-pressed="false">No state is compatible</button>
+</fieldset>
+<div class="ulh22-explorer__views">
+<section data-evidence-panel="mixed" aria-label="Unresolved observation">
+<div class="ulh22-explorer__states"><div class="ulh22-explorer__state"><span>State A</span><strong>Compatible</strong><small class="ulh22-status ulh22-status--negative">Requirement fails</small></div><div class="ulh22-explorer__state"><span>State B</span><strong>Compatible</strong><small class="ulh22-status ulh22-status--positive">Requirement succeeds</small></div></div>
+<div class="ulh22-explorer__answer"><span>Supported conclusion</span><strong>Unresolved</strong><p>The remaining states give different prospective answers. We need further evidence or a more limited interpretation.</p></div>
+</section>
+<section data-evidence-panel="agreed" aria-label="Sufficient observation" hidden>
+<div class="ulh22-explorer__states"><div class="ulh22-explorer__state"><span>State A</span><strong>Compatible</strong><small class="ulh22-status ulh22-status--positive">Requirement succeeds</small></div><div class="ulh22-explorer__state"><span>State B</span><strong>Compatible</strong><small class="ulh22-status ulh22-status--positive">Requirement succeeds</small></div><div class="ulh22-explorer__state"><span>State C</span><strong>Compatible</strong><small class="ulh22-status ulh22-status--positive">Requirement succeeds</small></div></div>
+<div class="ulh22-explorer__answer"><span>Supported conclusion</span><strong>Positive under the specification</strong><p>All remaining candidates agree. This supports that answer for the specified question, conditional on the state carrier, observation model, and evidence being justified.</p></div>
+</section>
+<section data-evidence-panel="empty" aria-label="Inconsistent observation" hidden>
+<div class="ulh22-explorer__states"><div class="ulh22-explorer__state ulh22-explorer__state--empty"><span>Compatible states</span><strong>None</strong><small>No candidate matches the observation and admitted uncertainty.</small></div></div>
+<div class="ulh22-explorer__answer"><span>Supported conclusion</span><strong>Investigate the inconsistency</strong><p>An empty compatible-state family gives no justified binary verdict. Check the observation, error bounds, model, and reference conditions.</p></div>
+</section>
+</div>
+<p class="ulh22-explorer__foot">These are illustrations of the decision principle, not readings from a physiological instrument. A positive or negative answer is licensed only relative to appropriate, nonempty, scientifically supported candidate and model families.</p>
+</div></div></section>
+
+<section class="ulh-chapter-wrap"><div class="ulh-container ulh-chapter-grid">
+<aside class="ulh-chapter-rail" aria-label="The next conditions"><strong>Beyond the exact reading</strong><nav aria-label="Later lesson sections">
+<a href="#uncertainty">Uncertainty of measurements</a>
+<a href="#bounded-results">What Paper VI establishes</a>
+<a href="#alternative-observations">Alternative observations</a>
+<a href="#preserving-verdict">Verdict versus complete capacity</a>
+<a href="#physical-metrology">Real instrumentation</a>
+<a href="#between-measurements">Between observations</a>
+<a href="#takeaway">What I hope you'll carry forward</a>
+</nav><small>Lesson 22<br>Specified evidence<br>Model-relative authority</small></aside>
+<article class="ulh-prose">
+<section class="ulh-chapter-section" id="uncertainty"><p class="ulh-kicker">05 / Real observations have uncertainty</p>
+<h2 class="ulh-serif">A precise number can still leave the answer unresolved.</h2>
+<p>So far we've imagined observations that identify exactly which possible states remain. Real measurements introduce uncertainty in their readings, reference conditions, repeated measurements, and sometimes in the intervention itself.</p>
+<p>Suppose a measuring procedure indicates a value of 5.0. A small uncertainty might leave a narrow range around that value; a larger uncertainty might permit a much wider range.</p>
+<p>If the scientific decision depends on a boundary and the admitted range crosses that boundary, we may not have enough evidence to decide. If the complete admitted range stays on one side, a decision may be justified <em>under the stated observation model and requirement</em>.</p>
+<div class="ulh22-boundary" role="group" aria-label="Illustrative measurement indication and decision uncertainty near a hypothetical boundary. A narrow interval about 5.0 lies below a boundary at 5.5, while a wider interval overlaps it. These are arbitrary example values, not biological Health thresholds.">
+<div class="ulh22-boundary__heading"><span>An illustrative indication</span><strong>5.0</strong><small>Hypothetical decision boundary: 5.5</small></div>
+<div class="ulh22-boundary__rows">
+<div><span class="ulh22-boundary__row-title">Narrower uncertainty</span><div class="ulh22-boundary__scale"><i class="ulh22-boundary__range ulh22-boundary__range--narrow"></i><i class="ulh22-boundary__cut"></i><i class="ulh22-boundary__point"></i></div><small>4.8–5.2 · below the declared boundary</small></div>
+<div><span class="ulh22-boundary__row-title">Wider uncertainty</span><div class="ulh22-boundary__scale"><i class="ulh22-boundary__range ulh22-boundary__range--wide"></i><i class="ulh22-boundary__cut"></i><i class="ulh22-boundary__point"></i></div><small>4.3–5.7 · crosses the declared boundary</small></div>
+</div>
+<p>These numbers are purely illustrative. Real decisions must use calibrated quantities, justified uncertainty, an appropriate scientific model and the actual adequacy criterion.</p></div>
+<p><strong>A justified decision must remain valid across the uncertainty that the measurement admits.</strong> That's the principle at work in Paper VI's bounded-error results.</p>
+</section>
+
+<section class="ulh-chapter-section" id="bounded-results"><p class="ulh-kicker">06 / What Paper VI proves under uncertainty</p>
+<h2 class="ulh-serif">A conclusion should survive more than one idealized calculation.</h2>
+<p>Paper VI starts with observations that leave two possible present-state interpretations, then allows bounded uncertainty in initial observations, the identifying experiment, its readout and the specified future conditions.</p>
+<p>The mathematical question is whether the relevant states can still be distinguished and their original prospective classifications preserved throughout these declared ranges.</p>
+<p>For the constructed experiments and their respective registered uncertainty families, the paper establishes that they can. Baseline error limits constrain the complete compatible-state family. The specified interventions preserve the respective Health answers, and their resulting observations remain distinguishable across the admitted local variations.</p>
+<p>The proof therefore concerns <strong>every admitted candidate and parameter value in the stated region</strong>, rather than just the nominal example.</p>
+<div class="ulh-math-panel"><p class="ulh-kicker">What an observation leaves possible</p><h3>The remaining states depend on the measurement and its uncertainty.</h3><div class="ulh-math-scroll"><div class="ulh-equation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="The compatible-state family X sub y is the set of all candidate states z in X consistent with the observed indication y, scientific specification S and uncertainty epsilon"><mrow><msub><mi mathvariant="script">X</mi><mi>y</mi></msub><mo>=</mo><mo>{</mo><mi>z</mi><mo>∈</mo><mi>X</mi><mo>:</mo><mi mathvariant="normal">Compatible</mi><mo>(</mo><mi>z</mi><mo>,</mo><mi>y</mi><mo>;</mo><mi mathvariant="script">S</mi><mo>,</mo><mi>ε</mi><mo>)</mo><mo>}</mo></mrow></math></div></div>
+<p>This is a general form for a model-compatible state family. The observation y, scientific specification and admitted uncertainty ε determine which candidate states remain. Its adequacy as a physical state image depends on the model carrier and calibration, not simply on how small the compatible set is.</p></div>
+<p>These are mathematical guarantees expressed in the two-site model's quantities. An actual instrument would need independent evidence that its physical observation channels, timing, response models and uncertainties meet the assumed conditions.</p>
+</section>
+
+<section class="ulh-chapter-section" id="alternative-observations"><p class="ulh-kicker">07 / Different observations can answer the same question</p>
+<h2 class="ulh-serif">The information matters as much as the way it is obtained.</h2>
+<p>Paper VI also establishes two different measurement approaches in its declared mathematical model. Both use an interaction, maintain the specified organization under the relevant sampled-time conditions, and preserve the prospective Health classification for the identified states.</p>
+<p>They distinguish the initially ambiguous states through different kinds of observations. This shows that an appropriate scientific question may be answerable by more than one measurement route.</p>
+<p>Imagine assessing a bridge. One procedure might observe its movement under a controlled load. Another might use a different structural response. Either could be informative for an intended engineering question—provided its physical meaning and uncertainty are understood.</p>
+<p>Similarly, the merit of a living-system measurement comes from what its observations establish about the specified state or property. Practical comparison requires calibration, repeatability, uncertainty analysis, impact on the organization, and evidence of scientific relevance.</p>
+<p>The mathematical paper demonstrates that alternative identifying observations can exist. It does not establish that either approach is superior as a physical instrument.</p>
+</section>
+
+<section class="ulh-chapter-section" id="preserving-verdict"><p class="ulh-kicker">08 / Preservation is relative to the property</p>
+<h2 class="ulh-serif">The Health answer can stay the same even when the state changes.</h2>
+<p>Remember Lesson 21. We measure a system, and the interaction changes its state. Its answer to the same specified Health question may still be preserved.</p>
+<p>That doesn't mean the state or every future possibility remains identical. Detailed responses and continuation capacities can change while the chosen adequacy requirement continues to be satisfied—or continues to fail.</p>
+<p>We encountered this idea near the beginning of the series: systems can have different capacities while receiving the same Health answer under the declared requirement.</p>
+<p>Now it reappears in measurement science. <strong>Preserving a Health classification does not, by itself, establish preservation of the entire organizational state or full continuation capacity.</strong> The level of preservation must match the question we wish to answer.</p>
+</section>
+
+<section class="ulh-chapter-section" id="physical-metrology"><p class="ulh-kicker">09 / What physical instrumentation must establish</p>
+<h2 class="ulh-serif">From a mathematical information requirement to a real measurement.</h2>
+<p>We're beginning to see what physical Health metrology demands. An instrument needs a scientifically identified target, observations justified by a physical model, calibrated reference conditions and characterized uncertainty.</p>
+<p>Its interpretation must respect which states remain compatible with the evidence. If obtaining the observation involves interacting with the system, the effect of that interaction must be evaluated. Prospective Health evaluation adds a further obligation: determine whether the observation is sufficient for the specified question and whether the future laws are biologically supported.</p>
+<p>This is the scientific progression behind the metrology that <strong>Fieldflux Biosystems is developing</strong>. The work begins with a formally defined property and investigates what information about a living organization is needed to determine it.</p>
+<p>Actual observation channels, calibration, reproducibility, biological relevance and independent prospective validation require separate engineering and experimental evidence. Mathematical sufficiency within a theoretical system establishes a clear test of information, while the empirical application must establish that the physical assumptions hold.</p>
+<p>For any proposed measurement, we can ask: What is its target? Which states remain compatible? Could the uncertainty change the answer? And has the act of measurement preserved the property under investigation?</p>
+<p>A scientifically responsible measurement program must address those questions with evidence.</p>
+</section>
+
+<section class="ulh-chapter-section" id="between-measurements"><p class="ulh-kicker">10 / One last problem before we conclude</p>
+<h2 class="ulh-serif">What can happen between two apparently satisfactory observations?</h2>
+<p>We've learned that compatible states can disagree on Health. We've learned when agreement can support a query-specific conclusion. And we've seen how bounded uncertainty can be incorporated into the mathematics.</p>
+<p>But what if the property we're investigating concerns what happens <em>throughout</em> a period of time?</p>
+<p>Imagine observing a system when its required organization is intact. We measure it again later. It still satisfies the requirement. Does that establish the organization was maintained between the observations?</p>
+<p>Not necessarily. The system might undergo an important interruption and return to an acceptable condition before the next measurement. If maintenance is required at every instant, satisfactory endpoints alone may not be sufficient.</p>
+<p>Paper VI gives an exact mathematical example of this problem. It brings us to another obligation of physical metrology: <strong>the temporal resolution of an observation must be appropriate to the property we are trying to measure.</strong></p>
+</section>
+</article></div></section>
+
+<section class="ulh-takeaway ulh22-takeaway" id="takeaway"><div class="ulh-container">
+<p class="ulh-kicker">What I want you to carry forward</p>
+<h2 class="ulh-serif">A measurement is sufficient when the evidence justifies the answer to the specified question.</h2>
+<p>Sometimes that requires identifying the system's complete state. Sometimes it requires only enough information to ensure that every compatible state gives the same answer. And sometimes the evidence remains insufficient even when the instrument produces a precise numerical reading.</p>
+<p>Paper VI establishes how these distinctions can be examined mathematically with specified uncertainties and prospective preservation conditions. The physical challenge is to establish the observation models, calibration and biological validity needed to apply such reasoning to living systems.</p>
+<p>We're learning what it would take for a Health measurement to carry genuine scientific authority.</p>
+<p class="ulh22-next"><strong>Next · Lesson 23: What can happen between measurements—and when can we trust the answer?</strong> If a system satisfies its organizational requirements at two measured times, can we conclude those requirements held throughout the interval? Our final lesson will bring the journey from definition through observation to reliable physical metrology.</p>
+<div class="ulh-takeaway__actions"><a href="understanding-health-21.html" class="ulh-button">← Previous: Lesson 21</a><a href="understanding-health.html" class="ulh-button ulh-button--quiet">All lessons ↗</a><a href="research-constitutive-observability-prospective-health.pdf" class="ulh-button ulh-button--quiet" target="_blank" rel="noopener">Read Paper VI (PDF) ↗</a></div>
+</div></section>
+<div class="ulh-container ulh-fineprint"><p><strong>Source:</strong> Zed James, <em>Constitutive Observability and the Measurement of Prospective Health: State Identification and Prospective Health under Maintenance Constraints</em>, Paper VI in <em>Health, Formally Defined</em> (2026), especially Sections 2.1–2.3, 5.2–5.3 and 7–10. <a href="research-constitutive-observability-prospective-health.html">Publication record</a> · <a href="https://doi.org/10.5281/zenodo.23301732" target="_blank" rel="noopener">Zenodo DOI</a>. The uncertainty intervals and intervention theorems belong to the stated mathematical model; a calibrated physiological state-imaging instrument and independent prospective Health validation are not established by this paper.</p></div>
+</main><footer class="footer"><div class="wrap"><div class="footer__top">
+<div class="footer__brand"><a class="brand" href="index.html"><span class="brand__word">FIELDFLUX&nbsp;BIOSYSTEMS</span></a><p>Scientific foundations, physical measurement, and instruments built to learn what can be known.</p></div>
+<div class="footer__col"><h4>Learn</h4><ul><li><a href="understanding-health.html">Understanding Health</a></li><li><a href="understanding-health-01.html">Lesson 1</a></li><li><a href="understanding-health-02.html">Lesson 2</a></li><li><a href="understanding-health-03.html">Lesson 3</a></li><li><a href="understanding-health-04.html">Lesson 4</a></li><li><a href="understanding-health-05.html">Lesson 5</a></li><li><a href="understanding-health-06.html">Lesson 6</a></li><li><a href="understanding-health-07.html">Lesson 7</a></li><li><a href="understanding-health-08.html">Lesson 8</a></li><li><a href="understanding-health-09.html">Lesson 9</a></li><li><a href="understanding-health-10.html">Lesson 10</a></li><li><a href="understanding-health-11.html">Lesson 11</a></li><li><a href="understanding-health-12.html">Lesson 12</a></li><li><a href="understanding-health-13.html">Lesson 13</a></li><li><a href="understanding-health-14.html">Lesson 14</a></li><li><a href="understanding-health-15.html">Lesson 15</a></li><li><a href="understanding-health-16.html">Lesson 16</a></li><li><a href="understanding-health-17.html">Lesson 17</a></li><li><a href="understanding-health-18.html">Lesson 18</a></li><li><a href="understanding-health-19.html">Lesson 19</a></li><li><a href="understanding-health-20.html">Lesson 20</a></li><li><a href="understanding-health-21.html">Lesson 21</a></li><li><a href="understanding-health-22.html">Lesson 22</a></li><li><a href="research-series-health-formally-defined.html">The full paper series</a></li></ul></div>
+<div class="footer__col"><h4>Research</h4><ul><li><a href="research.html">Publications</a></li><li><a href="science.html">Scientific process</a></li><li><a href="platform.html">Measurement technology</a></li></ul></div>
+<div class="footer__col"><h4>Fieldflux</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</div><div class="footer__bottom"><p>© 2026 Fieldflux Biosystems, Inc.</p><p>Read the science. Explore the idea.</p></div></div></footer>
+
+
+<script src="assets/js/understanding-health-22.js?v=1" defer></script>
+</body></html>
