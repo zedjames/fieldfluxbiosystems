@@ -1,0 +1,62 @@
+name: Independently verify public Understanding Health Lesson 19
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-19.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check public synthesis, navigation, sources, style, sitemap, and publication boundaries
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,time,json,re
+          from urllib.request import Request,urlopen
+          origin="https://fieldfluxbiosystems.com/"
+          pages={
+           "understanding-health.html":["19 lessons published",'href="understanding-health-19.html"',"So, what have we actually learned about health?"],
+           "understanding-health-18.html":["Next: Lesson 19","Continue to Lesson 19",'rel="next"'],
+           "understanding-health-19.html":["By Zed James","Papers I–V","But where does <em>x</em> come from?","ulh19-paper","What I hope you'll take away","research-series-health-formally-defined.html","assets/css/understanding-health-19.css?v=1"],
+           "assets/css/understanding-health-19.css":["ulh19-paper","ulh19-elephant","ulh19-closing"],
+           "sitemap.xml":["understanding-health-18.html","understanding-health-19.html"]
+          }
+          errors=[]
+          for path,needles in pages.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(origin+path,headers={"User-Agent":"FFB-L19-PublicVerify/1.0","Cache-Control":"no-cache","Pragma":"no-cache"}),timeout=24,context=ssl.create_default_context()) as r:
+                  body=r.read()
+                  code=r.status
+                text=body.decode("utf-8","replace")
+                print("PUBLIC",path,code,len(body),flush=True)
+                if code!=200:raise ValueError("Unexpected HTTP "+str(code))
+                missing=[x for x in needles if x not in text]
+                if missing:raise ValueError("Missing markers "+repr(missing))
+                if path=="understanding-health-19.html":
+                  if text.count('class="ulh19-paper"')!=5:raise ValueError("Expected five paper links")
+                  if "Paper VI" in text or "unpublished paper" in text:raise ValueError("Unpublished work referenced")
+                  if text.count('<math ')!=1 or text.count('</math>')!=1:raise ValueError("MathML formula missing")
+                if path=="understanding-health.html":
+                  m=re.search(r'<script type="application/ld\\+json">(.*?)</script>',text,re.S)
+                  if not m:raise ValueError("Structured data missing")
+                  if len(json.loads(m.group(1)).get("hasPart",[]))!=19:raise ValueError("Expected nineteen structured lesson refs")
+                break
+              except Exception as exc:
+                if attempt==11:errors.append(path+": "+repr(exc))
+                else:time.sleep(6)
+          for path in ["research-constitutive-continuation-capacity.html","research-prospective-health-across-contexts.html","research-representation-sufficiency-prospective-health.html","research-information-provenance-conservative-enrichment-prospective-health.html","research-prospective-health-declared-specifications.html"]:
+            try:
+              with urlopen(Request(origin+path,headers={"Cache-Control":"no-cache"}),timeout=25,context=ssl.create_default_context()) as response:
+                status=response.status
+                size=len(response.read())
+              print("PUBLISHED_PAPER",path,status,size,flush=True)
+              if status!=200 or size<1000:errors.append("Unavailable paper record "+path)
+            except Exception as exc:errors.append("Paper "+path+": "+repr(exc))
+          for e in errors:print("FAIL",e,flush=True)
+          if errors:raise SystemExit(1)
+          print("PASS public Lesson 19 synthesis, 19-card reading room, links, CSS, sitemap and five published paper records",flush=True)
+          PY
