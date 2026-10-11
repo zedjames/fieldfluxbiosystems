@@ -1,0 +1,59 @@
+name: Independently verify live Understanding Health Lesson 20
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-live-understanding-health-20.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check public Lesson 20 content, navigation, style and scholarly source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import hashlib,ssl,time
+          origin="https://fieldfluxbiosystems.com/"
+          files={
+            "understanding-health.html":["20 lessons published",'href="understanding-health-20.html"',"Before we can measure Health, what exactly are we measuring?"],
+            "understanding-health-19.html":["Continue to Lesson 20","Next: Lesson 20",'rel="next"'],
+            "understanding-health-20.html":["Lesson 20","By Zed James","id=\"definition-first\"","id=\"two-systems\"","id=\"state-identification\"","Paper VI","where the engineering problem begins","research-constitutive-observability-prospective-health.pdf","assets/css/understanding-health-20.css?v=1","23301732"],
+            "assets/css/understanding-health-20.css":["ulh20-measurand","ulh20-twin__future--positive","ulh20-fiber","@media(max-width:760px)"],
+            "research-constitutive-observability-prospective-health.html":["Understanding Health · Lesson 20","23301732"],
+            "sitemap.xml":["understanding-health-19.html","understanding-health-20.html"]
+          }
+          errors=[]
+          for path,needles in files.items():
+            for attempt in range(12):
+              try:
+                with urlopen(Request(origin+path,headers={"Cache-Control":"no-cache","Pragma":"no-cache","User-Agent":"FFB-Lesson20-PublicProof/1.0"}),timeout=22,context=ssl.create_default_context()) as response:
+                  data=response.read()
+                  status=response.status
+                text=data.decode("utf-8","replace")
+                print("LIVE",path,status,len(data),flush=True)
+                if status!=200:raise ValueError("HTTP "+str(status))
+                missing=[x for x in needles if x not in text]
+                if missing:raise ValueError("Missing "+repr(missing))
+                if path=="understanding-health-20.html":
+                  if text.count("<math ")!=2 or text.count("</math>")!=2:raise ValueError("Native MathML not paired")
+                  if text.count('class="ulh-chapter-section"')!=7:raise ValueError("Lesson sections missing")
+                if path=="understanding-health.html":
+                  if text.count('class="ulh-lesson-card"')!=20:raise ValueError("Reading room does not have 20 lessons")
+                break
+              except Exception as exc:
+                if attempt==11:errors.append(path+": "+repr(exc))
+                else:time.sleep(6)
+          try:
+            with urlopen(Request(origin+"research-constitutive-observability-prospective-health.pdf",headers={"Cache-Control":"no-cache"}),timeout=35,context=ssl.create_default_context()) as response:
+              pdf=response.read()
+            actual=hashlib.sha256(pdf).hexdigest()
+            print("PUBLISHED_PAPER_VI",len(pdf),actual,flush=True)
+            if not pdf.startswith(b"%PDF-") or actual!="35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c":errors.append("PDF not matching the author published Paper VI")
+          except Exception as exc:errors.append("Paper VI PDF: "+repr(exc))
+          for err in errors:print("FAIL",err,flush=True)
+          if errors:raise SystemExit(1)
+          print("PASS: Lesson 20 publicly served with 20-lesson index, native MathML, style, navigation, Paper VI links and exact source PDF",flush=True)
+          PY
