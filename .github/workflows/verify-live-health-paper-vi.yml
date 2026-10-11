@@ -1,0 +1,74 @@
+name: Independently verify published Health Paper VI across FFB and ILC
+on:
+  pull_request:
+    paths: [.github/workflows/verify-live-health-paper-vi.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch both public sites and verify PDF bytes, references, and six-paper catalogs
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import ssl,hashlib,json,time,urllib.request
+          expected='35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c'
+          F="https://fieldfluxbiosystems.com/"
+          I="https://instituteluxconsilio.org/"
+          tests={
+            (F,"index.html"):["Six published papers","Paper VI","Constitutive Observability and the Measurement of Prospective Health"],
+            (F,"homepage-fresh-20261010.html"):["Six published papers","Paper VI"],
+            (F,"research.html"):["six published","Paper VI","research-constitutive-observability-prospective-health.pdf"],
+            (F,"research-series-health-formally-defined.html"):["Papers I–VI published","Paper VI","23301732"],
+            (F,"research-constitutive-observability-prospective-health.html"):["Paper VI","23301732","23301733","citation_pdf_url","Complete PDF"],
+            (F,"research-prospective-health-declared-specifications.html"):["Next paper","Constitutive observability"],
+            (F,"science.html"):["State observability","Paper VI"],
+            (F,"understanding-health-19.html"):["New: Constitutive observability","Paper VI"],
+            (F,"sitemap.xml"):["research-constitutive-observability-prospective-health.html","research-constitutive-observability-prospective-health.pdf"],
+            (F,"research/preprint-pdfs.json"):["23301732",expected],
+            (I,"index.html"):["publication-hfd6.html","Paper VI"],
+            (I,"publications.html"):["publication-hfd6.html","Paper VI"],
+            (I,"research-health-formally-defined.html"):["Published papers I–VI","publication-hfd6.html"],
+            (I,"publication-hfd6.html"):["Paper VI","23301732","23301733","citation_pdf_url"],
+            (I,"publication-hfd5.html"):["Next in the series: Paper VI"],
+            (I,"assets/data/research.js"):["hfd6","23301732","publishedCount"],
+            (I,"research/catalog.json"):["hfd6","23301732"],
+            (I,"sitemap.xml"):["publication-hfd6.html","health-formally-defined-paper-vi.pdf"]
+          }
+          for theme in ["health-foundations","boundary-measurement","formalization-proof","evidence-validation","continuation-stability","representation-reconstruction"]:
+            tests[(F,"research-theme-"+theme+".html")]=["Constitutive Observability and the Measurement of Prospective Health","23301732"]
+          failures=[]
+          for (base,path),needles in tests.items():
+            for attempt in range(15):
+              try:
+                url=base+path
+                request=urllib.request.Request(url,headers={"User-Agent":"FFB-ILC-ScientificArchive-Verification/1.0","Cache-Control":"no-cache","Pragma":"no-cache"})
+                with urllib.request.urlopen(request,timeout=22,context=ssl.create_default_context()) as resp:
+                  data=resp.read(); code=resp.status
+                text=data.decode('utf-8','replace')
+                missing=[x for x in needles if x not in text]
+                print("PAGE",url,code,len(data),"missing",missing,flush=True)
+                if code!=200 or missing:raise ValueError("HTTP "+str(code)+" missing "+repr(missing))
+                break
+              except Exception as exc:
+                if attempt==14:failures.append(path+": "+repr(exc))
+                else:time.sleep(7)
+          for url in [F+"research-constitutive-observability-prospective-health.pdf",I+"papers/health-formally-defined-paper-vi.pdf"]:
+            for attempt in range(12):
+              try:
+                with urllib.request.urlopen(url,timeout=45,context=ssl.create_default_context()) as resp:
+                  data=resp.read();code=resp.status
+                actual=hashlib.sha256(data).hexdigest()
+                print("PDF",url,code,len(data),actual,flush=True)
+                if code!=200 or not data.startswith(b'%PDF-') or actual!=expected:raise ValueError("PDF checksum mismatch")
+                break
+              except Exception as exc:
+                if attempt==11:failures.append(url+": "+repr(exc))
+                else:time.sleep(7)
+          if failures:
+            for x in failures:print("FAIL",x,flush=True)
+            raise SystemExit(1)
+          print("PASS: six published Health papers visible on FFB and ILC, complete references, exact PDF bytes on both sites",flush=True)
+          PY
