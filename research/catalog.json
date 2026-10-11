@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-09",
+  "updated": "2026-10-11",
   "purpose": "Historical publication and note metadata retained for original Fieldflux URLs, citation continuity, and links to the canonical ILC scholarly index.",
   "collections": [
     {
@@ -142,10 +142,10 @@
       "id": "health-formally-defined",
       "label": "Health, Formally Defined",
       "domain": "Foundations of health",
-      "description": "A formal and measurement-science program that defines prospective Health, establishes contextual transport and representation sufficiency, then applies the framework to an exact finite forest provenance benchmark and an auditable empirical-synthetic forest measurement study.",
+      "description": "A formal and measurement-science program progressing from prospective Health and contextual transport through information sufficiency, finite provenance, an empirical-synthetic forest study, and exact mathematical conditions for identifying a present state without altering its specified prospective verdict.",
       "landing_page": "research-series-health-formally-defined.html",
-      "published_count": 5,
-      "current_status": "Ongoing series; Papers I–V published; empirical validation and measurement work continue"
+      "published_count": 6,
+      "current_status": "Ongoing series; Papers I–VI published; physical calibration and prospective validation remain future work"
     }
   ],
   "routes": [
@@ -226,7 +226,7 @@
     {
       "id": "formal-health",
       "title": "How can health be stated as a prospective mathematical property?",
-      "description": "From the health question through formal definition, contextual transport, representation sufficiency, exact finite semantic provenance, and empirical-synthetic measurement.",
+      "description": "From formal Health to contextual transport, information sufficiency, finite forest provenance, data-anchored testing, and constitutive observability under maintained measurement.",
       "items": [
         "note-question",
         "note-fixedness",
@@ -235,6 +235,7 @@
         "hfd3",
         "hfd4",
         "hfd5",
+        "hfd6",
         "note-observable"
       ]
     }
@@ -1072,6 +1073,37 @@
       "pdf": "research-information-provenance-conservative-enrichment-prospective-health.pdf"
     },
     {
+      "id": "hfd6",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 6,
+      "date": "2026-10-11",
+      "title": "Constitutive Observability and the Measurement of Prospective Health",
+      "subtitle": "State Identification and Prospective Health under Maintenance Constraints.",
+      "href": "research-constitutive-observability-prospective-health.html",
+      "doi": "10.5281/zenodo.23301732",
+      "concept_doi": "10.5281/zenodo.23301733",
+      "summary": "Paper VI studies the measurement of present organizational state and the preservation of prospective Health under intervention in a fully defined two-site exchange system. Two presently indistinguishable states have different common-future viability. Exact observation fibers, a heterogeneous flux-readout probe and a fixed-drive repeated-cost alternative give model-relative maintaining and verdict-preserving identification, with quantified local uncertainty bounds. Continuous-time counterexamples show why sampled measurements can miss intermediate maintenance failures. Physical calibration and prospective physiological validation remain open.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations",
+        "boundary-measurement",
+        "representation-reconstruction",
+        "continuation-stability",
+        "evidence-validation",
+        "formalization-proof"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Measurement science",
+        "Observability",
+        "Dynamical systems",
+        "Formal methods"
+      ],
+      "pdf": "research-constitutive-observability-prospective-health.pdf"
+    },
+    {
       "id": "hfd5",
       "collection": "publications",
       "subtype": "preprint",
@@ -1391,6 +1423,11 @@
     {
       "from": "hfd4",
       "to": "hfd5",
+      "type": "continues"
+    },
+    {
+      "from": "hfd5",
+      "to": "hfd6",
       "type": "continues"
     }
   ],
