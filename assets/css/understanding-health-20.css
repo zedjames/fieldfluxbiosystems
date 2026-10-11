@@ -1,0 +1,49 @@
+/* Understanding Health · Lesson 20
+   Extends the established quiet editorial reading-room system, with accessible dark
+   mathematics, sage-and-paper diagrams, and mobile-first stacked explanation cards. */
+.ulh-page .ulh20-hero .ulh-hero__mark{opacity:.24}
+.ulh-page .ulh20-measurand{display:grid;grid-template-columns:1fr;gap:9px;margin:34px 0 31px;padding:clamp(20px,3vw,33px);border:1px solid #c4d2c4;background:#ebf1e9}
+.ulh-page .ulh20-measurand>div{padding:clamp(20px,3vw,30px);background:#fbfaf3;border:1px solid #c8d4c5}
+.ulh-page .ulh20-measurand>div:nth-of-type(2){background:#f5eee4;border-color:#d5c6b1}
+.ulh-page .ulh20-measurand>div:nth-of-type(3){background:#e2efe6}
+.ulh-page .ulh20-measurand>div span{display:block;font-size:.73rem;font-weight:750;text-transform:uppercase;letter-spacing:.12em;color:#967447;margin-bottom:15px}
+.ulh-page .ulh20-measurand>div strong{display:block;font:400 clamp(1.35rem,2.1vw,1.9rem)/1.24 var(--serif,Georgia,serif);color:#245361}
+.ulh-page .ulh20-measurand>div p{margin:11px 0 0;color:#597168;font-size:.86rem;line-height:1.7}
+.ulh-page .ulh20-measurand>b{text-align:center;font:400 1.6rem Georgia,serif;color:#9c825b}
+.ulh-page .ulh20-twin{padding:clamp(70px,9vw,112px) 0;background:#e5ede6;border-block:1px solid #c0d0c3}
+.ulh-page .ulh20-twin .ulh-kicker{color:#8e734e}
+.ulh-page .ulh20-twin h2{font:400 clamp(2.3rem,4.3vw,4.05rem)/1.13 var(--serif,Georgia,serif);letter-spacing:-.041em;color:#204c59;max-width:23ch;margin:19px 0 25px}
+.ulh-page .ulh20-twin>.ulh-container>p:not(.ulh-kicker){font-size:1.07rem;color:#506d64;line-height:1.76;max-width:78ch}
+.ulh-page .ulh20-twin__diagram{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 24px}
+.ulh-page .ulh20-twin__state{background:#fcfaf4;border:1px solid #bfcec0;padding:clamp(20px,3vw,31px);display:grid;grid-template-rows:auto auto auto;gap:14px}
+.ulh-page .ulh20-twin__node,.ulh-page .ulh20-twin__readings,.ulh-page .ulh20-twin__future{padding:clamp(19px,2.4vw,27px);border:1px solid #c9d5c7;background:#f1f4eb;position:relative}
+.ulh-page .ulh20-twin__node:after,.ulh-page .ulh20-twin__readings:after{content:"↓";display:block;position:absolute;bottom:-23px;left:50%;transform:translateX(-50%);color:#9b8054;font:400 1.2rem Georgia,serif;z-index:2}
+.ulh-page .ulh20-twin__node span,.ulh-page .ulh20-twin__readings small,.ulh-page .ulh20-twin__future small{font-size:.72rem;color:#906f4a;letter-spacing:.095em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:14px}
+.ulh-page .ulh20-twin__node strong,.ulh-page .ulh20-twin__readings strong,.ulh-page .ulh20-twin__future strong{font:400 clamp(1.14rem,1.95vw,1.6rem)/1.27 var(--serif,Georgia,serif);color:#265360;display:block}
+.ulh-page .ulh20-twin__readings{background:#eeeade;border:1px solid #d5c6a9}
+.ulh-page .ulh20-twin__readings strong{color:#725937}
+.ulh-page .ulh20-twin__future--negative{background:#f4e9e0;border-color:#d2bdad}
+.ulh-page .ulh20-twin__future--negative strong{color:#85593f}
+.ulh-page .ulh20-twin__future--positive{background:#e2eee5;border-color:#b5cdbb}
+.ulh-page .ulh20-twin__future--positive strong{color:#286950}
+.ulh-page .ulh20-twin .ulh-small{font-size:.84rem!important;color:#5f766d!important;line-height:1.72!important}
+.ulh-page .ulh20-fiber{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);align-items:center;gap:10px;margin:33px 0;padding:19px;background:#edf2e9;border:1px solid #c4d2c4}
+.ulh-page .ulh20-fiber__item{background:#fcfaf4;border:1px solid #ccd4c6;padding:clamp(19px,2.5vw,28px);min-height:188px}
+.ulh-page .ulh20-fiber__item:last-child{background:#f2ede3;border-color:#d5c9b6}
+.ulh-page .ulh20-fiber__item span{display:block;font-size:.73rem;text-transform:uppercase;letter-spacing:.1em;color:#907348;font-weight:750;margin-bottom:15px}
+.ulh-page .ulh20-fiber__item strong{font:400 clamp(1.3rem,2.1vw,1.8rem)/1.22 var(--serif,Georgia,serif);color:#255360;display:block}
+.ulh-page .ulh20-fiber__item p{font-size:.84rem;color:#62786b;line-height:1.65;margin:13px 0 0}
+.ulh-page .ulh20-fiber__arrow{text-align:center;font:400 1.7rem Georgia,serif;color:#9a7c51}
+.ulh-page .ulh20-takeaway .ulh20-next{padding:19px 0 19px clamp(18px,2.8vw,29px);border-left:2px solid #bd9863;font-size:1.03rem;line-height:1.8;color:#d9e6dd;margin:28px 0}
+.ulh-page .ulh20-next strong{color:#f0dfbd}
+@media(max-width:760px){
+ .ulh-page .ulh20-twin__diagram{grid-template-columns:1fr}
+ .ulh-page .ulh20-fiber{grid-template-columns:1fr}
+ .ulh-page .ulh20-fiber__item{min-height:0}
+ .ulh-page .ulh20-fiber__arrow{transform:rotate(90deg)}
+}
+@media(max-width:520px){
+ .ulh-page .ulh20-twin__state{padding:15px}
+ .ulh-page .ulh20-twin h2{font-size:2.25rem}
+ .ulh-page .ulh20-fiber{padding:12px}
+}
