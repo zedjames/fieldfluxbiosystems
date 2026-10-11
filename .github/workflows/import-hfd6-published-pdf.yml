@@ -1,0 +1,56 @@
+name: Import published Paper VI PDF from Zenodo
+on:
+  push:
+    branches: [publish-hfd6-20261011]
+    paths: [.github/workflows/import-hfd6-published-pdf.yml]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download and verify the published Zenodo artifact
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,urllib.request,pathlib,time
+          record='https://zenodo.org/api/records/23301732'
+          for attempt in range(4):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(record,headers={'User-Agent':'FFB-ILC-Research-Archive/1.0'}),timeout=30) as resp:
+                      payload=json.loads(resp.read().decode('utf-8'))
+                  break
+              except Exception:
+                  if attempt==3:raise
+                  time.sleep(4)
+          print('Zenodo record title',payload.get('metadata',{}).get('title'),flush=True)
+          files=payload.get('files',[])
+          if not files:raise RuntimeError('No files attached to Zenodo record')
+          pdfs=[f for f in files if f.get('key','').lower().endswith('.pdf')]
+          if len(pdfs)!=1:raise RuntimeError('Expected one PDF in published record: '+repr([x.get('key') for x in files]))
+          f=pdfs[0]
+          url=(f.get('links') or {}).get('self') or (f.get('links') or {}).get('content')
+          if not url:raise RuntimeError('Zenodo file has no download URL')
+          with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'FFB-ILC-Research-Archive/1.0'}),timeout=70) as resp:pdf=resp.read()
+          sha=hashlib.sha256(pdf).hexdigest()
+          print('Published PDF',f.get('key'),'bytes',len(pdf),'sha256',sha,flush=True)
+          if not pdf.startswith(b'%PDF-') or len(pdf)<100000:raise RuntimeError('File is not a substantial PDF')
+          expected='35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c'
+          if sha!=expected:raise RuntimeError('Zenodo publication differs from user-supplied PDF; manual verification required')
+          out=pathlib.Path('research-constitutive-observability-prospective-health.pdf')
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_bytes(pdf)
+          PY
+      - name: Commit matching original PDF on publication branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 'research-constitutive-observability-prospective-health.pdf'
+          git diff --cached --quiet && exit 0
+          git commit -m "Archive published Health Paper VI PDF from Zenodo [skip ci]"
+          git push
