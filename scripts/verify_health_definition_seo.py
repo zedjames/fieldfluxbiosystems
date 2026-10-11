@@ -71,6 +71,7 @@ def main() -> None:
     must(article.get("mainEntityOfPage",{}).get("@id") == page.anchors[0], "Schema canonical differs")
     must("2026-10-11" <= article.get("dateModified",""), "Schema modification date stale")
     must(article.get("author",{}).get("name") == "Zed James", "Authorship missing")
+    must(article.get("image",{}).get("url") == ORIGIN + "/assets/img/og-card.png", "Article illustration metadata missing")
 
     for path in LINK_FROM:
         src = (ROOT / path).read_text(encoding="utf-8")
