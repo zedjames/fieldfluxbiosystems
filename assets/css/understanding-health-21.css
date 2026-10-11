@@ -1,0 +1,46 @@
+/* Understanding Health · Lesson 21 — measurement disturbance.
+   The page extends the shared lesson system; its native MathML remains on
+   the established dark contrast panel and the diagrams remain readable without JS. */
+.ulh-page .ulh21-hero .ulh-hero__mark{opacity:.24}
+.ulh-page .ulh21-two-questions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:31px 0 29px}
+.ulh-page .ulh21-two-questions>div{background:#e9f2e8;border:1px solid #bacebf;padding:clamp(22px,3.3vw,34px)}
+.ulh-page .ulh21-two-questions>div+div{background:#f4eee3;border-color:#d3c4b0}
+.ulh-page .ulh21-two-questions span{display:block;color:#8c714e;text-transform:uppercase;letter-spacing:.11em;font-size:.73rem;font-weight:750;margin-bottom:17px}
+.ulh-page .ulh21-two-questions strong{display:block;color:#235462;font:400 clamp(1.35rem,2.25vw,1.85rem)/1.3 var(--serif,Georgia,serif)}
+.ulh-page .ulh21-comparison{min-width:560px}
+.ulh-page .ulh21-reversal{padding:clamp(80px,10vw,126px) 0;background:#e7eee6;border-block:1px solid #bccfc0}
+.ulh-page .ulh21-reversal .ulh-kicker{color:#8f734a}
+.ulh-page .ulh21-reversal h2{font:400 clamp(2.3rem,4.4vw,4.15rem)/1.13 var(--serif,Georgia,serif);letter-spacing:-.042em;color:#204a58;max-width:23ch;margin:17px 0 21px}
+.ulh-page .ulh21-reversal>.ulh-container>p:not(.ulh-kicker){color:#587167;line-height:1.78;font-size:1.04rem;max-width:82ch}
+.ulh-page .ulh21-reversal__diagram{display:grid;grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr);gap:10px;align-items:stretch;margin:36px 0 23px}
+.ulh-page .ulh21-reversal__state,.ulh-page .ulh21-reversal__intervention{padding:clamp(20px,2.6vw,31px);background:#fcfaf4;border:1px solid #c2d2c4;min-height:255px}
+.ulh-page .ulh21-reversal__state--before{background:#f5eee3;border-color:#d4c3ac}
+.ulh-page .ulh21-reversal__state--after{background:#e5efe6;border-color:#b5cabb}
+.ulh-page .ulh21-reversal__state span,.ulh-page .ulh21-reversal__intervention span{display:block;font-size:.73rem;letter-spacing:.11em;text-transform:uppercase;color:#8b744f;font-weight:750;margin-bottom:17px}
+.ulh-page .ulh21-reversal__state>strong,.ulh-page .ulh21-reversal__intervention>strong{font:400 clamp(1.2rem,2vw,1.55rem)/1.26 var(--serif,Georgia,serif);display:block;color:#245360;min-height:55px}
+.ulh-page .ulh21-reversal__state>p,.ulh-page .ulh21-reversal__intervention>p{margin:14px 0 0;font-size:.8rem;line-height:1.64;color:#63776d}
+.ulh-page .ulh21-reversal__state>div{border-top:1px solid #c8d2c5;margin-top:22px;padding-top:17px}
+.ulh-page .ulh21-reversal__state>div small{display:block;color:#877655;text-transform:uppercase;letter-spacing:.09em;font-size:.68rem;margin-bottom:8px}
+.ulh-page .ulh21-reversal__state>div b{display:block;color:#935f43;font:400 clamp(1.1rem,1.75vw,1.45rem)/1.35 var(--serif,Georgia,serif)}
+.ulh-page .ulh21-reversal__state--after>div b{color:#2d765a}
+.ulh-page .ulh21-reversal__intervention{background:#e7e9de;border-color:#c4ccb9}
+.ulh-page .ulh21-reversal__arrow{align-self:center;text-align:center;color:#9c7c53;font:400 1.55rem Georgia,serif}
+.ulh-page .ulh21-reversal__note{max-width:84ch;color:#647a6f!important;font-size:.86rem!important;line-height:1.7!important}
+.ulh-page .ulh21-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:33px 0}
+.ulh-page .ulh21-three>div{background:#edf3ea;border:1px solid #bbcfbf;padding:clamp(19px,2.65vw,30px)}
+.ulh-page .ulh21-three>div:nth-child(2){background:#f2eee4;border-color:#d5c4b0}
+.ulh-page .ulh21-three>div:nth-child(3){background:#e3efe7}
+.ulh-page .ulh21-three span{display:block;font-size:.71rem;text-transform:uppercase;letter-spacing:.1em;color:#8b714a;font-weight:750}
+.ulh-page .ulh21-three strong{display:block;color:#245461;font:400 clamp(1.1rem,1.75vw,1.5rem)/1.26 var(--serif,Georgia,serif);margin:20px 0 14px}
+.ulh-page .ulh21-three p{font-size:.81rem;line-height:1.67;color:#62766e;margin:0}
+.ulh-page .ulh21-takeaway .ulh21-next{padding:18px 0 18px clamp(18px,2.8vw,29px);border-left:2px solid #bf9c6b;color:#dce9e0;margin:27px 0;font-size:1.03rem;line-height:1.8}
+.ulh-page .ulh21-takeaway .ulh21-next strong{color:#f1e0bd}
+@media(max-width:1000px){
+ .ulh-page .ulh21-reversal__diagram{grid-template-columns:1fr;gap:11px}
+ .ulh-page .ulh21-reversal__arrow{transform:rotate(90deg)}
+ .ulh-page .ulh21-reversal__state,.ulh-page .ulh21-reversal__intervention{min-height:0}
+ .ulh-page .ulh21-reversal__state>strong,.ulh-page .ulh21-reversal__intervention>strong{min-height:0}
+}
+@media(max-width:790px){.ulh-page .ulh21-three{grid-template-columns:1fr}}
+@media(max-width:660px){.ulh-page .ulh21-two-questions{grid-template-columns:1fr}}
+@media(max-width:520px){.ulh-page .ulh21-reversal h2{font-size:2.25rem}.ulh-page .ulh21-reversal__diagram{margin-top:28px}}
