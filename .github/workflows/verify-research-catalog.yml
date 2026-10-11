@@ -6,6 +6,10 @@ on:
     paths:
       - "research/catalog.json"
       - "research.html"
+      - "definition-of-health.html"
+      - "assets/css/definition-of-health.css"
+      - "sitemap.xml"
+      - "scripts/verify_health_definition_seo.py"
       - "index.html"
       - "understanding-health*.html"
       - "learning/**"
@@ -88,6 +92,10 @@ jobs:
       - name: Validate catalog, relations, and static projections
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
         run: python3 scripts/verify_research_catalog.py
+
+      - name: Verify definition-of-Health SEO gateway and discovery sitemap
+        if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
+        run: python3 scripts/verify_health_definition_seo.py
 
       - name: Validate guided Understanding Health lesson library
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
