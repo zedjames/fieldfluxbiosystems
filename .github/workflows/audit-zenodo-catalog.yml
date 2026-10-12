@@ -1,0 +1,17 @@
+name: Audit public Zenodo DOI families (ffb)
+on:
+  pull_request:
+    paths:
+      - scripts/audit_zenodo_concepts.py
+      - .github/workflows/audit-zenodo-catalog.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect every published Zenodo family and PDF
+        run: python3 scripts/audit_zenodo_concepts.py ffb
