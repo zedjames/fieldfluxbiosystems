@@ -1,0 +1,69 @@
+name: Independently verify full-catalog Zenodo publication updates
+on:
+  pull_request:
+    paths:
+      - .github/workflows/diagnostic-zenodo-all-series-live.yml
+permissions:
+  contents: read
+jobs:
+  public-sites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Validate published FFB and ILC records plus real PDF bytes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import json,hashlib,ssl,time
+          def get(u):
+              error=None
+              for attempt in range(8):
+                  try:
+                      with urlopen(Request(u,headers={"Cache-Control":"no-cache","Pragma":"no-cache","User-Agent":"FFB-ILC-Independent-Public-Sync/1.0"}),timeout=45,context=ssl.create_default_context()) as response:
+                          if response.status!=200:raise ValueError("HTTP "+str(response.status))
+                          data=response.read()
+                      print("PUBLIC",u,len(data),flush=True)
+                      return data
+                  except Exception as exc:
+                      error=exc
+                      if attempt!=7:time.sleep(5)
+              raise RuntimeError(f"Public fetch failed: {u}: {error}")
+          ffb="https://fieldfluxbiosystems.com/"
+          ilc="https://instituteluxconsilio.org/"
+          fc=json.loads(get(ffb+"research/catalog.json"))
+          ic=json.loads(get(ilc+"research/catalog.json"))
+          frame=get(ilc+"assets/data/research.js").decode("utf8").strip()
+          assert frame.startswith("window.ILC_DATA=")
+          ij=json.loads(frame[len("window.ILC_DATA="):].rstrip(";"))
+          fp={p["id"]:p for p in fc["items"] if p.get("collection")=="publications"}
+          ip={p["id"]:p for p in ic["publications"]}
+          assert len(fp)==26 and len(ip)==28
+          assert len({p["concept_doi"] for p in fp.values()})==26
+          assert len({p["conceptDoi"] for p in ip.values()})==28
+          doi="10.5281/zenodo.23322948"
+          for p in (fp["ns3"],ip["ns3"]):
+              assert p["doi"]==doi
+          assert fp["ns3"]["concept_doi"]=="10.5281/zenodo.22943387"
+          assert ip["ns3"]["conceptDoi"]=="10.5281/zenodo.22943387"
+          assert ip["gps7"]["doi"]=="10.5281/zenodo.23246260"
+          assert ip["bio4"]["doi"]=="10.5281/zenodo.23225035"
+          for ident in ("gps7","bio4"):
+              p=ip[ident]
+              assert p.get("pdf","").startswith("https://zenodo.org/api/records/")
+              assert len(p.get("pdfSha256",""))==64
+          for ident in ("ns3","gps7","bio4"):
+              a=next(p for p in ij["publications"] if p["id"]==ident)
+              assert a==ip[ident]
+          page=get(ffb+"research-endpoint-rigidity-periodic-navier-stokes-flow.html").decode("utf8")
+          assert doi in page
+          pdf=get(ffb+"research-endpoint-rigidity-periodic-navier-stokes-flow.pdf")
+          digest=hashlib.sha256(pdf).hexdigest()
+          assert pdf.startswith(b"%PDF-")
+          assert digest=="9edd5e20ed38073cf07c830a3d7f8a0c720af7efb606f7b704ec6ac03c226375",(len(pdf),digest)
+          manifest=json.loads(get(ffb+"research/preprint-pdfs.json"))
+          entry=next(p for p in manifest["papers"] if p["pdf"]=="research-endpoint-rigidity-periodic-navier-stokes-flow.pdf")
+          assert entry["sha256"]==digest
+          assert entry["doi"]==doi
+          print("PASS: 26 FFB and 28 ILC published records, genuine new Navier-Stokes III PDF checksum, Celestial VII and RMMO IV latest PDF links and concordant version/concept DOIs",flush=True)
+          PY
