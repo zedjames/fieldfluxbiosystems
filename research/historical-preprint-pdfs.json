@@ -1,0 +1,213 @@
+{
+  "schema": "fieldflux-historical-pdf-checksums/v1",
+  "purpose": "Original publication PDFs and their verified SHA-256 checksums retained for archival citation continuity; newest Zenodo versions are synchronized by ILC.",
+  "papers": [
+    {
+      "record_page": "research-continuation-anatomy-navier-stokes.html",
+      "pdf": "research-continuation-anatomy-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22737978",
+      "sha256": "faec272f294106fd8a380152cb45c5d8c7275df4eda9d58a66b313965f8b3ce1",
+      "pages": 20,
+      "concept_doi": "10.5281/zenodo.22737977",
+      "publication_date": "2026-09-13",
+      "source": "https://zenodo.org/api/records/22737978/files/Continuation%20Anatomy%20for%20Periodic%20Navier%20Stokes%20Breakdown.pdf/content"
+    },
+    {
+      "record_page": "research-critical-regularity-navier-stokes.html",
+      "pdf": "research-critical-regularity-navier-stokes.pdf",
+      "doi": "10.5281/zenodo.22754459",
+      "sha256": "6cc3ce7a02af413c175c6db0785c843b8aa980f40c9abb0dd85aa7264d7ac113",
+      "pages": 25,
+      "concept_doi": "10.5281/zenodo.22754458",
+      "publication_date": "2026-09-14",
+      "source": "https://zenodo.org/api/records/22754459/files/Critical%20Regularity%20Anatomy.pdf/content"
+    },
+    {
+      "record_page": "research-endpoint-rigidity-periodic-navier-stokes-flow.html",
+      "pdf": "research-endpoint-rigidity-periodic-navier-stokes-flow.pdf",
+      "doi": "10.5281/zenodo.23322948",
+      "sha256": "9edd5e20ed38073cf07c830a3d7f8a0c720af7efb606f7b704ec6ac03c226375",
+      "pages": 32,
+      "concept_doi": "10.5281/zenodo.22943387",
+      "publication_date": "2026-10-12",
+      "source": "https://zenodo.org/api/records/23322948/files/Endpoint%20Rigidity%20in%20Periodic%20Navier-Stokes%20Flow%20v1.1.pdf/content"
+    },
+    {
+      "record_page": "research-critical-schwarzschild-scalar-dynamics.html",
+      "pdf": "research-critical-schwarzschild-scalar-dynamics.pdf",
+      "doi": "10.5281/zenodo.22800860",
+      "sha256": "c437bbaffd13b5837afbb5967c3945969b5b142e1d4253fbcaddc8051e27755c",
+      "pages": 22,
+      "concept_doi": "10.5281/zenodo.22800859",
+      "publication_date": "2026-09-16",
+      "source": "https://zenodo.org/api/records/22800860/files/Critical%20Schwarzschild%20Scalar%20Dynamics.pdf/content"
+    },
+    {
+      "record_page": "research-friedrichs-selected-schwarzschild-quantum-dynamics.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-dynamics.pdf",
+      "doi": "10.5281/zenodo.22805014",
+      "sha256": "481d3c293a4e8077018d7e752dba7de8f5710fd97e60122ed066794bb30dfd0a",
+      "pages": 24,
+      "concept_doi": "10.5281/zenodo.22804350",
+      "publication_date": "2026-09-17",
+      "source": "https://zenodo.org/api/records/22805014/files/Friedrichs-Selected%20Schwarzschild%20Quantum%20Dynamicsv2.0.pdf/content"
+    },
+    {
+      "record_page": "research-friedrichs-selected-schwarzschild-quantum-matter.html",
+      "pdf": "research-friedrichs-selected-schwarzschild-quantum-matter.pdf",
+      "doi": "10.5281/zenodo.22819417",
+      "sha256": "dd315fe771525f86a803836d5046a72989e239081a371bcbcc8947734875486a",
+      "pages": 23,
+      "concept_doi": "10.5281/zenodo.22819416",
+      "publication_date": "2026-09-17",
+      "source": "https://zenodo.org/api/records/22819417/files/%20Schwarzschild%20Quantum%20Matter.pdf/content"
+    },
+    {
+      "record_page": "research-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22834305",
+      "sha256": "5c821faef1706e4d7e1cabaedbe8f42e09511aa842bfc53fbf689ecf6e9a68a7",
+      "pages": 21,
+      "concept_doi": "10.5281/zenodo.22834304",
+      "publication_date": "2026-09-18",
+      "source": "https://zenodo.org/api/records/22834305/files/Self%20Consistent%20Einstein%20Scalar%20Quantum%20Sector.pdf/content"
+    },
+    {
+      "record_page": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.html",
+      "pdf": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.pdf",
+      "doi": "10.5281/zenodo.22846743",
+      "sha256": "e5b17a569f7c130ab1ee69aaec3ab0a40ef9eb8527aea60691e588c6a3d7531c",
+      "pages": 28,
+      "concept_doi": "10.5281/zenodo.22846742",
+      "publication_date": "2026-09-19",
+      "source": "https://zenodo.org/api/records/22846743/files/Master%20Action%20Ownership.pdf/content"
+    },
+    {
+      "record_page": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-quantum-gauge-structure-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22859436",
+      "sha256": "78a3fd9981720618ebbf33d6433e1d73fb263641c998b52dba1b12f87a0c2701",
+      "pages": 27,
+      "concept_doi": "10.5281/zenodo.22859435",
+      "publication_date": "2026-09-20",
+      "source": "https://zenodo.org/api/records/22859436/files/Quantum%20Gauge%20Structure.pdf/content"
+    },
+    {
+      "record_page": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-regulated-palatini-bv-quantization-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22904031",
+      "sha256": "2b6e63dca65d57dfb70d9ea85e884be8df3e663880326b1ca6448eccbe32a742",
+      "pages": 42,
+      "concept_doi": "10.5281/zenodo.22904030",
+      "publication_date": "2026-09-22",
+      "source": "https://zenodo.org/api/records/22904031/files/Regulated%20Palatini%20BV%20Quantization.pdf/content"
+    },
+    {
+      "record_page": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.html",
+      "pdf": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.pdf",
+      "doi": "10.5281/zenodo.22939782",
+      "sha256": "a37d459aeb56143579cad20ece7fa63f1bde211266a8961d0d67274445fd7321",
+      "pages": 29,
+      "concept_doi": "10.5281/zenodo.22939781",
+      "publication_date": "2026-09-24",
+      "source": "https://zenodo.org/api/records/22939782/files/Relational%20Quantum%20Gravity%20v1.0.pdf/content"
+    },
+    {
+      "record_page": "research-closed-matter-current-gaussian-physical-moduli.html",
+      "pdf": "research-closed-matter-current-gaussian-physical-moduli.pdf",
+      "doi": "10.5281/zenodo.22818292",
+      "sha256": "2a630d1a4bde9fdf0968d798a4f58697aa680393d2bb1659f8d8167089f48167",
+      "pages": 14,
+      "concept_doi": "10.5281/zenodo.22818291",
+      "publication_date": "2026-09-17",
+      "source": "https://zenodo.org/api/records/22818292/files/Closed%20Matter-Current%20Constraint.pdf/content"
+    },
+    {
+      "record_page": "research-pair-generated-completion-gaussian-physical-states.html",
+      "pdf": "research-pair-generated-completion-gaussian-physical-states.pdf",
+      "doi": "10.5281/zenodo.22818924",
+      "sha256": "c4e243e844abb9abf3007e247f74e9c332bbd2f3bede1b6c8b060f58ed3673c9",
+      "pages": 15,
+      "concept_doi": "10.5281/zenodo.22818923",
+      "publication_date": "2026-09-17",
+      "source": "https://zenodo.org/api/records/22818924/files/Pair-Generated%20Completion%20.pdf/content"
+    },
+    {
+      "record_page": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.html",
+      "pdf": "research-from-pair-generated-fock-structure-to-physical-particle-semantics.pdf",
+      "doi": "10.5281/zenodo.22820148",
+      "sha256": "2b105b309c33b6e9dd3484a48a2377852a2baa74eb93b13d4ab302467934d641",
+      "pages": 13,
+      "concept_doi": "10.5281/zenodo.22820147",
+      "publication_date": "2026-09-17",
+      "source": "https://zenodo.org/api/records/22820148/files/Fock%20to%20Physical%20particle%20semantics.pdf/content"
+    },
+    {
+      "record_page": "research-relational-anatomy-cell-fate.html",
+      "pdf": "research-relational-anatomy-cell-fate.pdf",
+      "doi": "10.5281/zenodo.23004119",
+      "sha256": "a1a7ed631fab234bbc5c20792df6fae154f017c81440b4fdfd8b1879ca5a1339",
+      "pages": 39,
+      "publication_date": "2026-09-28",
+      "manuscript_date": "2026-09-27",
+      "version": "1.1",
+      "concept_doi": "10.5281/zenodo.22969065",
+      "source": "https://zenodo.org/api/records/23004119/files/Relational%20Anatomy%20of%20Cell%20Fate%20Across%20Lineage%20Resolved%20Perturbation%20Experiments.pdf/content"
+    },
+    {
+      "record_page": "research-gaussian-pair-geometry-physical-radiative-response.html",
+      "pdf": "research-gaussian-pair-geometry-physical-radiative-response.pdf",
+      "doi": "10.5281/zenodo.23001930",
+      "concept_doi": "10.5281/zenodo.23001929",
+      "sha256": "66ace20a60ccad47d0e4995ad3ec0e95eeea6d425e68696eb1708ee9c8c1b1a1",
+      "pages": 19,
+      "publication_date": "2026-09-27",
+      "manuscript_date": "2026-09-26",
+      "source": "https://zenodo.org/api/records/23001930/files/Gaussian%20Pair%20Geometry%20and%20Physical%20Radiative%20Response%20.pdf/content"
+    },
+    {
+      "record_page": "research-source-aware-weyl-reduced-celestial-representation.html",
+      "pdf": "research-source-aware-weyl-reduced-celestial-representation.pdf",
+      "doi": "10.5281/zenodo.23029057",
+      "concept_doi": "10.5281/zenodo.23029056",
+      "sha256": "4bf27950d394b9a19ae996e040ff3b8ac39626630cbfd832ba77bcb0642e8e85",
+      "pages": 40,
+      "publication_date": "2026-09-29",
+      "manuscript_date": "2026-09-28",
+      "source": "https://zenodo.org/api/records/23029057/files/Source%20Aware%20Weyl%20Reduced%20Celestial%20Representation.pdf/content"
+    },
+    {
+      "record_page": "research-relational-organization-directional-stability-mouse-organogenesis.html",
+      "pdf": "research-relational-organization-directional-stability-mouse-organogenesis.pdf",
+      "doi": "10.5281/zenodo.23090479",
+      "concept_doi": "10.5281/zenodo.23090478",
+      "sha256": "ae56f6af9280e13a3851b6e5d31339619176764d03b9b400dbe12805eaf15c19",
+      "pages": 39,
+      "publication_date": "2026-10-01",
+      "manuscript_date": "2026-10-01",
+      "source": "https://zenodo.org/api/records/23090479/files/Relational%20Organization%20and%20Directional%20Stability%20Across%20Mouse%20Organogenesis.pdf/content"
+    },
+    {
+      "record_page": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.html",
+      "pdf": "research-physical-celestial-clebsch-gordan-transform-radiative-bose-pair.pdf",
+      "doi": "10.5281/zenodo.23108946",
+      "sha256": "e83ecbe03ff17c924ffd2f6ac0017dcbfed713f255a4c10138e7a2445adc3c1e",
+      "pages": 47,
+      "publication_date": "2026-10-02",
+      "manuscript_date": "2026-10-02",
+      "concept_doi": "10.5281/zenodo.23108945",
+      "source": "https://zenodo.org/api/records/23108946/files/Physical%20Celestial%20Clebsch-Gordan%20Transform%20of%20a%20Radiative%20Bose%20Pair.pdf/content"
+    },
+    {
+      "record_page": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.html",
+      "pdf": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.pdf",
+      "doi": "10.5281/zenodo.23125763",
+      "concept_doi": "10.5281/zenodo.23125762",
+      "sha256": "216707a03c0abde7bf9e6f3cfd12598830b2d2d2fd0ec07d40c66a194bc33b92",
+      "pages": 35,
+      "publication_date": "2026-10-03",
+      "manuscript_date": "2026-10-03",
+      "source": "https://zenodo.org/api/records/23125763/files/Present%20State%20Resolution%20and%20Lineage%20History%20in%20%20Early%20Mouse%20Embryogenesis.pdf/content"
+    }
+  ]
+}
