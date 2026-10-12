@@ -23,12 +23,12 @@ DOI = re.compile(r"^10\.5281/zenodo\.(\d+)$")
 HFD_IDS = {"hfd1", "hfd2", "hfd3", "hfd4", "hfd5", "hfd6"}
 # The all-versions DOIs are stable even when every version DOI changes.
 CONCEPTS = {
-    "hfd1": "10.5281/zenodo.23131158",
-    "hfd2": "10.5281/zenodo.23146281",
+    "hfd1": "10.5281/zenodo.23131157",
+    "hfd2": "10.5281/zenodo.23146280",
     "hfd3": "10.5281/zenodo.23219587",
-    "hfd4": "10.5281/zenodo.23268803",
+    "hfd4": "10.5281/zenodo.23268802",
     "hfd5": "10.5281/zenodo.23268986",
-    "hfd6": "10.5281/zenodo.23301733",
+    "hfd6": "10.5281/zenodo.23301732",
 }
 
 def request(url: str, *, binary=False):
@@ -130,14 +130,20 @@ def download_verified(record):
 def serialize(value):
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
 
-def replace_doi_pages(paths, old_doi, new_doi, old_date, new_date):
+def replace_doi_pages(paths, old_doi, new_doi, old_date, new_date, legacy_companion=None, concept=None):
     for path in paths:
         if not path.is_file() or path.suffix.lower() != ".html":
             continue
         original = path.read_text(encoding="utf-8")
         if old_doi not in original:
             continue
-        updated = original.replace(old_doi, new_doi)
+        if legacy_companion:
+            token = "__ZENODO_VERSION_DOI_TEMP__"
+            if token in original:
+                raise ValueError("Reserved DOI substitution marker already in page")
+            updated = original.replace(old_doi, token).replace(legacy_companion, concept).replace(token, new_doi)
+        else:
+            updated = original.replace(old_doi, new_doi)
         # Machine-readable citation date identifies the cited published version.
         if old_date and new_date and old_date != new_date:
             updated = updated.replace('name="citation_publication_date" content="' + old_date.replace("-", "/") + '"',
@@ -163,31 +169,27 @@ def run(site, *, probe=False):
         mirror = {p.get("recordPage"): p for p in manifest["papers"]}
     if set(selected) != HFD_IDS:
         raise ValueError("The complete six-paper Health series is missing from catalog")
-    if probe:
-        for paper_id in sorted(HFD_IDS):
-            p = selected[paper_id]
-            for candidate in (p["doi"], CONCEPTS[paper_id]):
-                try:
-                    rec = request(BASE + "/records/" + record_id(candidate))
-                    print(f"{paper_id}: lookup={candidate} id={rec.get('id')} actual_doi={rec.get('doi')} conceptrecid={family_id(rec)} conceptdoi={family_doi(rec)} title={(rec.get('metadata') or {}).get('title')!r}",flush=True)
-                except Exception as exc:
-                    print(f"{paper_id}: lookup={candidate} error={type(exc).__name__}: {exc}",flush=True)
-        return False
     changes = []
     # Preflight every paper before mutating any site file.
     pending = []
     for paper_id in sorted(HFD_IDS):
         pub = selected[paper_id]
         concept = CONCEPTS[paper_id]
-        if pub.get("concept_doi", pub.get("conceptDoi", concept)) != concept:
-            raise ValueError(f"{paper_id}: configured concept DOI has changed unexpectedly")
         old = pub["doi"]
+        former_companion = pub.get("concept_doi", pub.get("conceptDoi"))
+        # Reconcile historical reversals only when Zenodo confirms the family.
+        legacy_swap = old == concept
+        if not legacy_swap and former_companion and former_companion != concept:
+            raise ValueError(f"{paper_id}: concept DOI conflicts with Zenodo")
         latest = latest_published(old, concept)
         new = latest["doi"]
+        if legacy_swap and former_companion and former_companion != new:
+            raise ValueError(f"{paper_id}: legacy DOI partner does not match Zenodo's published version")
         if probe:
-            print(f"{paper_id}: current={old}; latest={new}; family={concept}", flush=True)
+            primary, _ = paper_file(latest)
+            print(f"{paper_id}: stored={old}; published_version={new}; stable_concept={concept}; primary_pdf={primary.get('key')}", flush=True)
             continue
-        if new == old:
+        if new == old and not legacy_swap:
             print(f"{paper_id}: already current ({old})", flush=True)
             continue
         date = (latest.get("metadata") or {}).get("publication_date") or pub.get("date")
@@ -202,11 +204,11 @@ def run(site, *, probe=False):
             data, source = download_verified(latest)
         else:
             data, source = None, None
-        pending.append((paper_id, pub, old, new, concept, date, local_pdf, data, source))
+        pending.append((paper_id, pub, old, new, concept, date, local_pdf, data, source, former_companion if legacy_swap else None))
     if probe:
         print("Zenodo published-record lookup verified", flush=True)
         return False
-    for paper_id, pub, old, new, concept, date, local_pdf, payload, source in pending:
+    for paper_id, pub, old, new, concept, date, local_pdf, payload, source, legacy_companion in pending:
         old_date = pub.get("date", "")
         pub["doi"] = new
         if ffb:
@@ -229,7 +231,7 @@ def run(site, *, probe=False):
                     entry["source"] = source
                     entry["publication_date"] = date
                     break
-        changes.append((paper_id, old, new, old_date, date))
+        changes.append((paper_id, old, new, old_date, date, legacy_companion, concept))
         print(f"{paper_id}: published {new} ({date})" + (f"; SHA-256 {hashlib.sha256(payload).hexdigest()}" if payload else "; external PDF resolves through FFB"), flush=True)
     if not changes:
         return False
@@ -253,8 +255,8 @@ def run(site, *, probe=False):
         html = [ROOT / "research.html", ROOT / "research-series-health-formally-defined.html"] + list(ROOT.glob("research-*.html"))
     else:
         html = [ROOT / "index.html", ROOT / "publications.html", ROOT / "research-health-formally-defined.html"] + list(ROOT.glob("publication-*.html"))
-    for _, old, new, old_date, new_date in changes:
-        replace_doi_pages(html, old, new, old_date, new_date)
+    for _, old, new, old_date, new_date, legacy_companion, concept in changes:
+        replace_doi_pages(html, old, new, old_date, new_date, legacy_companion, concept)
     return True
 
 def main():
