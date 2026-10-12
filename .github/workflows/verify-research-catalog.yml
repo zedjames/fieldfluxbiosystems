@@ -51,6 +51,12 @@ on:
       - "making-of-an-observable.html"
       - "make-the-signal-fail.html"
       - "scripts/verify_research_catalog.py"
+      - "scripts/verify_ffb_publication_scope.py"
+      - "research/historical-publications.json"
+      - "research/historical-preprint-pdfs.json"
+      - "research/historical-zenodo-concepts.json"
+      - "research/zenodo-concepts.json"
+      - "research/preprint-pdfs.json"
       - ".github/workflows/verify-research-catalog.yml"
   pull_request:
   workflow_dispatch:
@@ -96,6 +102,10 @@ jobs:
       - name: Verify definition-of-Health SEO gateway and discovery sitemap
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
         run: python3 scripts/verify_health_definition_seo.py
+
+      - name: Enforce six active Health papers and preserved historical URLs
+        if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'
+        run: python3 scripts/verify_ffb_publication_scope.py
 
       - name: Validate guided Understanding Health lesson library
         if: github.event_name != 'push' || steps.freshness.outputs.run_verify == 'true'

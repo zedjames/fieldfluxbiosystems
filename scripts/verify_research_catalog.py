@@ -108,10 +108,10 @@ def main()->int:
         if orders and orders!=list(range(1,len(orders)+1)):
             fail(f"series {sid} has noncontiguous orders {orders}",errors)
 
-    # The FFB catalog remains a frozen, complete provenance and file-integrity
-    # record. The public presentation was reorganized in October 2026:
-    # Institute Lux Consilio holds the full scholarly index, while the FFB
-    # Research / Atlas / Notebook pages now curate measurement-related paths.
+    # The active FFB catalog covers six Health papers and measurement-related
+    # notebook paths. Historical non-Health publication records, original PDFs
+    # and checksums are preserved separately. ILC owns the comprehensive
+    # cross-disciplinary scholarly catalog and latest-version synchronization.
     research=RESEARCH.read_text(encoding="utf-8")
     notebook=NOTEBOOK.read_text(encoding="utf-8")
     atlas=ATLAS.read_text(encoding="utf-8")
@@ -125,8 +125,8 @@ def main()->int:
     if scholarly_catalog!=institute.rstrip("/")+"/research/catalog.json":
         fail("canonical ILC scholarly catalog URL does not match institute base",errors)
 
-    # Full historical coverage stays at original, stable URLs (checked above);
-    # theme/series landing pages must continue to resolve their own members.
+    # Active Health and measurement-theme landing pages must resolve their
+    # current FFB members. Historical routes are checked separately.
     for t in c.get("themes",[]):
         landing=t.get("landing_page")
         if not landing:
@@ -154,10 +154,8 @@ def main()->int:
             if i.get("series")==sid and i["href"] not in page:
                 fail(f"series {sid} landing missing published paper {i['href']}",errors)
 
-    # The FFB public pages now present focused measurement work; the full
-    # scholarly catalog and original publication assets remain intact.
-    # Keep the local research-to-technology navigation functional without
-    # requiring a cross-site promotional link.
+    # FFB presents focused measurement work and points to ILC for the
+    # complete scientific corpus. Preserve local technology navigation.
     curated=[
         ("research.html", research, ["research-constitutive-continuation-capacity.html", "platform.html"]),
         ("notebook.html", notebook, ["research.html", "platform.html"]),
