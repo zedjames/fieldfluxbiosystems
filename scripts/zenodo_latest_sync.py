@@ -163,6 +163,16 @@ def run(site, *, probe=False):
         mirror = {p.get("recordPage"): p for p in manifest["papers"]}
     if set(selected) != HFD_IDS:
         raise ValueError("The complete six-paper Health series is missing from catalog")
+    if probe:
+        for paper_id in sorted(HFD_IDS):
+            p = selected[paper_id]
+            for candidate in (p["doi"], CONCEPTS[paper_id]):
+                try:
+                    rec = request(BASE + "/records/" + record_id(candidate))
+                    print(f"{paper_id}: lookup={candidate} id={rec.get('id')} actual_doi={rec.get('doi')} conceptrecid={family_id(rec)} conceptdoi={family_doi(rec)} title={(rec.get('metadata') or {}).get('title')!r}",flush=True)
+                except Exception as exc:
+                    print(f"{paper_id}: lookup={candidate} error={type(exc).__name__}: {exc}",flush=True)
+        return False
     changes = []
     # Preflight every paper before mutating any site file.
     pending = []
