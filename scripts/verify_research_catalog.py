@@ -164,8 +164,8 @@ def main()->int:
     # changes after publication. Check current DOI/PDF against our manifest,
     # without hard-coding the DOI of the initially published version.
     concept_pins={
-        "hfd1":"23131158","hfd2":"23146281","hfd3":"23219587",
-        "hfd4":"23268803","hfd5":"23268986","hfd6":"23301733",
+        "hfd1":"23131157","hfd2":"23146280","hfd3":"23219587",
+        "hfd4":"23268802","hfd5":"23268986","hfd6":"23301732",
     }
     for name,concept in concept_pins.items():
         work=by_id.get(name,{})
