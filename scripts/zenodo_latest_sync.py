@@ -74,7 +74,7 @@ def latest_published(current_doi, concept_doi):
     concept_id = record_id(concept_doi)
     current = request(BASE + "/records/" + record_id(current_doi))
     if family_id(current) != concept_id:
-        raise ValueError(f"Version DOI {current_doi} is not in pinned concept family {concept_doi}")
+        raise ValueError(f"Version DOI {current_doi}: expected family {concept_id}, Zenodo returned family id {family_id(current)!r}, concept DOI {family_doi(current)!r}, raw conceptrecid {current.get('conceptrecid')!r}, parent keys {list((current.get('parent') or {}).keys())}")
     if family_doi(current) and family_doi(current) != concept_doi:
         raise ValueError("Concept DOI metadata mismatch")
     q = urllib.parse.urlencode({"q": "conceptrecid:" + concept_id, "all_versions": "true", "sort": "mostrecent", "size": "25"})
