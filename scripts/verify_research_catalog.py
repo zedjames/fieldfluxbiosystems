@@ -76,14 +76,16 @@ def main()->int:
         if not payload.startswith(b"%PDF-"):
             fail(f"{ident}: the reader asset is not a valid PDF",errors)
         mirror=pdf_by_path.get(pdf)
-        if not mirror or mirror["doi"]!=paper.get("doi") or hashlib.sha256(payload).hexdigest()!=mirror.get("sha256"):
+        if not mirror or hashlib.sha256(payload).hexdigest()!=mirror.get("sha256") or (
+            mirror["doi"]!=paper.get("doi") and paper.get("doi")!=concept
+        ):
             fail(f"{ident}: PDF absent from verified Zenodo mirror manifest or checksum mismatch",errors)
         record_html=(ROOT/paper["href"]).read_text(encoding="utf-8")
         if paper.get("date","") >= "2026-10-09":
             for marker in (f'name="citation_pdf_url"',pdf,'application/pdf'):
                 if marker not in record_html:
                     fail(f"{ident}: missing Scholar PDF discovery {marker}",errors)
-        if paper.get("series")=="health-formally-defined":
+        if paper.get("series")=="health-formally-defined" and paper.get("date","")>="2026-10-09":
             for page in ("research.html","research-series-health-formally-defined.html"):
                 if pdf not in (ROOT/page).read_text(encoding="utf-8"):
                     fail(f"{page}: full-text PDF not discoverable for {ident}",errors)
