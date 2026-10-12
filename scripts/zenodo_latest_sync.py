@@ -204,7 +204,7 @@ def run(site, *, probe=False):
             data, source = download_verified(latest)
         else:
             data, source = None, None
-        pending.append((paper_id, pub, old, new, concept, date, local_pdf, data, source, former_companion if legacy_swap else None))
+        pending.append((paper_id, pub, old, new, concept, date, local_pdf, data, source, (former_companion or new) if legacy_swap else None))
     if probe:
         print("Zenodo published-record lookup verified", flush=True)
         return False
