@@ -1,4 +1,4 @@
-name: Keep all published scholarly papers current with Zenodo
+name: Keep six Fieldflux Health papers current with Zenodo
 on:
   schedule:
     - cron: '35 05 * * *'
@@ -24,17 +24,17 @@ permissions:
   contents: write
 
 concurrency:
-  group: zenodo-published-all-series-${{ github.ref }}
+  group: zenodo-published-ffb-health-only-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   probe:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Preview published Zenodo PDF and citation updates for all indexed series without committing
+      - name: Preview published Health PDF and citation updates without committing
         run: python3 scripts/zenodo_latest_sync.py --site ffb
       - name: Validate complete updated scholarly preview
         run: |
@@ -44,12 +44,12 @@ jobs:
   update:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Detect new Zenodo versions across all series and verify published PDF bytes
+      - name: Detect new published Health paper versions and verify published PDF bytes
         run: python3 scripts/zenodo_latest_sync.py --site ffb
       - name: Validate complete updated scholarly state
         run: |
@@ -67,7 +67,7 @@ jobs:
             echo "No newly published Zenodo versions."
             exit 0
           fi
-          git commit -m "Sync latest published scholarly paper versions from Zenodo"
+          git commit -m "Sync latest published Health paper versions from Zenodo"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main
