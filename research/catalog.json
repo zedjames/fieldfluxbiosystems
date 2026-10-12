@@ -486,7 +486,8 @@
       "domains": [
         "Fluid dynamics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22737977"
     },
     {
       "id": "ns2",
@@ -509,7 +510,8 @@
       "domains": [
         "Fluid dynamics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22754458"
     },
     {
       "id": "ns3",
@@ -517,12 +519,12 @@
       "subtype": "preprint",
       "series": "navier-stokes",
       "order": 3,
-      "date": "2026-09-24",
+      "date": "2026-10-12",
       "title": "Endpoint Rigidity in Periodic Navier–Stokes Flow",
       "subtitle": "Terminal magnification, intrinsic restart, and analytic rigidity at the L∞t L³x boundary.",
       "href": "research-endpoint-rigidity-periodic-navier-stokes-flow.html",
       "pdf": "research-endpoint-rigidity-periodic-navier-stokes-flow.pdf",
-      "doi": "10.5281/zenodo.22943388",
+      "doi": "10.5281/zenodo.23322948",
       "summary": "Bounded terminal L³ forces global continuation, while finite maximal time forces infinite terminal L³ limsup through magnification, restart, backward identification, and rigidity.",
       "primary_theme": "continuation-stability",
       "themes": [
@@ -533,7 +535,8 @@
       "domains": [
         "Fluid dynamics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22943387"
     },
     {
       "id": "sqg1",
@@ -558,7 +561,8 @@
         "Quantum gravity",
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22800859"
     },
     {
       "id": "sqg2",
@@ -583,7 +587,8 @@
         "Quantum gravity",
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22804350"
     },
     {
       "id": "sqg3",
@@ -608,7 +613,8 @@
         "Quantum gravity",
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22819416"
     },
     {
       "id": "sqg4",
@@ -633,7 +639,8 @@
         "Quantum gravity",
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22834304"
     },
     {
       "id": "sqg5",
@@ -641,7 +648,7 @@
       "subtype": "preprint",
       "series": "schwarzschild-qg",
       "order": 5,
-      "date": "2026-09-18",
+      "date": "2026-09-19",
       "title": "Master-Action Ownership of a Self-Consistent Einstein–Scalar Quantum Sector",
       "subtitle": "Symmetric-projective BV closure, Palatini descent, and quantum Ward/source exchange.",
       "href": "research-master-action-ownership-self-consistent-einstein-scalar-quantum-sector.html",
@@ -657,7 +664,8 @@
       "domains": [
         "Quantum gravity",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22846742"
     },
     {
       "id": "sqg6",
@@ -681,7 +689,8 @@
       "domains": [
         "Quantum gravity",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22859435"
     },
     {
       "id": "sqg7",
@@ -705,7 +714,8 @@
       "domains": [
         "Quantum gravity",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22904030"
     },
     {
       "id": "sqg8",
@@ -713,7 +723,7 @@
       "subtype": "preprint",
       "series": "schwarzschild-qg",
       "order": 8,
-      "date": "2026-09-23",
+      "date": "2026-09-24",
       "title": "Relational Quantum Gravity in a Self-Consistent Einstein–Scalar Sector",
       "subtitle": "Independent physical and gravitational quotients, nonlinear Einstein realization, and intrinsic gauge rigidity.",
       "href": "research-relational-quantum-gravity-self-consistent-einstein-scalar-sector.html",
@@ -729,7 +739,8 @@
       "domains": [
         "Quantum gravity",
         "Mathematical physics"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22939781"
     },
     {
       "id": "gps1",
@@ -753,7 +764,8 @@
       "domains": [
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22818291"
     },
     {
       "id": "gps2",
@@ -777,7 +789,8 @@
       "domains": [
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22818923"
     },
     {
       "id": "gps3",
@@ -800,7 +813,8 @@
       "domains": [
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22820147"
     },
     {
       "id": "gps4",
@@ -808,12 +822,12 @@
       "subtype": "preprint",
       "series": "gaussian",
       "order": 4,
-      "date": "2026-09-26",
+      "date": "2026-09-27",
       "title": "Gaussian Pair Geometry and Physical Radiative Response",
       "subtitle": "Quadratic-sector variational stress, physical-helicity response, and exact information compression in a machine-checked gauge-field model.",
       "href": "research-gaussian-pair-geometry-physical-radiative-response.html",
       "pdf": "research-gaussian-pair-geometry-physical-radiative-response.pdf",
-      "doi": "10.5281/zenodo.23001929",
+      "doi": "10.5281/zenodo.23001930",
       "summary": "A faithful three-parameter covariance passes through response maps that retain less information: zero variational stress, one-parameter radiative response, and finally a scale-independent normalized Bose pair.",
       "primary_theme": "representation-reconstruction",
       "themes": [
@@ -824,7 +838,8 @@
       "domains": [
         "Mathematical physics",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23001929"
     },
     {
       "id": "gps5",
@@ -837,7 +852,7 @@
       "subtitle": "Joint source-output symmetry and positive-measure obstruction to fixed-source isometry for radiative two-particle Clebsch–Gordan kernels.",
       "href": "research-source-aware-weyl-reduced-celestial-representation.html",
       "pdf": "research-source-aware-weyl-reduced-celestial-representation.pdf",
-      "doi": "10.5281/zenodo.23029056",
+      "doi": "10.5281/zenodo.23029057",
       "summary": "Source-aware Weyl reflection admits an exact joint Hilbert reduction, while a positive-measure Gram defect rules out almost-everywhere fixed-source isometric realization of the normalized physical kernel.",
       "primary_theme": "representation-reconstruction",
       "themes": [
@@ -850,7 +865,8 @@
         "Mathematical physics",
         "Celestial holography",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23029056"
     },
     {
       "id": "gps6",
@@ -875,7 +891,8 @@
         "Mathematical physics",
         "Celestial holography",
         "Formal methods"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23108945"
     },
     {
       "id": "bio1",
@@ -899,7 +916,8 @@
       "domains": [
         "Systems biology",
         "Single-cell biology"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.22969065"
     },
     {
       "id": "bio2",
@@ -925,7 +943,8 @@
         "Systems biology",
         "Developmental biology",
         "Spatial transcriptomics"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23090478"
     },
     {
       "id": "bio3",
@@ -938,7 +957,7 @@
       "subtitle": "Matched-control lineage analysis, fully inductive molecular prediction, and representation-aware history tests in E7.5 mouse embryos.",
       "href": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.html",
       "pdf": "research-present-state-resolution-lineage-history-early-mouse-embryogenesis.pdf",
-      "doi": "10.5281/zenodo.23125762",
+      "doi": "10.5281/zenodo.23125763",
       "summary": "Across three E7.5 MELA embryos, the fully inductive molecular present predicts a disjoint contemporaneous molecular target beyond coarse annotations, while matched controls and family-wise calibration do not establish an additional predictive contribution from the tested reconstructed-lineage summaries.",
       "primary_theme": "representation-reconstruction",
       "themes": [
@@ -952,7 +971,8 @@
         "Developmental biology",
         "Single-cell transcriptomics",
         "Lineage tracing"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23125762"
     },
     {
       "id": "hfd1",
