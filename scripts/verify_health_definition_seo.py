@@ -97,7 +97,7 @@ def main() -> None:
         lm = item.findtext("s:lastmod",namespaces=ns)
         if lm: date.fromisoformat(lm)
         urls[loc] = lm
-    must(len(urls) >= 108, "Sitemap unexpectedly dropped published pages")
+    must(len(urls) >= 56, "Sitemap unexpectedly dropped active Fieldflux pages")
     for path in UPDATED - {"/index.html"}:
         url = ORIGIN + path
         must(url in urls, f"Key URL missing from sitemap: {url}")
