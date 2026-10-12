@@ -171,7 +171,14 @@ def main()->int:
         work=by_id.get(name,{})
         mirror=pdf_by_path.get(work.get("pdf",""),{})
         expected_concept="10.5281/zenodo."+concept
-        if work.get("concept_doi",expected_concept)!=expected_concept:
+        # Historical records for I, II, IV, VI swapped version and concept.
+        # Permit the exact pre-migration pair until the first verified sync.
+        old_versions={"hfd1":"23131158","hfd2":"23146281",
+                      "hfd4":"23268803","hfd6":"23301733"}
+        legacy=work.get("doi")==expected_concept and work.get("concept_doi")==(
+            "10.5281/zenodo."+old_versions.get(name,"")
+        )
+        if work.get("concept_doi",expected_concept)!=expected_concept and not legacy:
             fail(f"{name}: concept DOI changed or is incorrect",errors)
         if not work.get("doi","").startswith("10.5281/zenodo."):
             fail(f"{name}: invalid version DOI",errors)
