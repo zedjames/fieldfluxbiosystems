@@ -36,7 +36,7 @@ def request(url: str, *, binary=False):
     if u.scheme != "https" or u.hostname not in {"zenodo.org", "www.zenodo.org"}:
         raise ValueError("Unexpected Zenodo host: " + url)
     error = None
-    for retry in range(4):
+    for retry in range(5):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "ILC-FFB-Scholarly-Version-Mirror/1.0", "Accept": "*/*" if binary else "application/json"})
             with urllib.request.urlopen(req, timeout=50) as response:
@@ -48,8 +48,11 @@ def request(url: str, *, binary=False):
             return data if binary else json.loads(data)
         except (OSError, TimeoutError, ValueError) as exc:
             error = exc
-            if retry < 3:
-                time.sleep(2 ** retry)
+            if retry < 4:
+                status = getattr(exc, 'code', None)
+                wait = min(12 * (2 ** retry), 90) if status in (403, 429, 500, 502, 503, 504) else 2 ** retry
+                print(f'Zenodo request will retry after HTTP/network failure ({status or type(exc).__name__}); waiting {wait}s', flush=True)
+                time.sleep(wait)
     raise RuntimeError(f"Unable to retrieve {url}: {error}")
 
 def record_id(doi):
@@ -112,20 +115,27 @@ def paper_file(record):
 
 def download_verified(record):
     f, source = paper_file(record)
-    payload = request(source, binary=True)
-    if not payload.startswith(b"%PDF-") or b"%%EOF" not in payload[-2048:]:
-        raise ValueError("Downloaded PDF failed format checks")
     declared = f.get("checksum") or ""
-    if declared:
-        algo, sep, digest = declared.partition(":")
-        if not sep or algo not in ("md5", "sha256"):
-            raise ValueError("Unexpected Zenodo file checksum: " + declared)
-        if hashlib.new(algo, payload).hexdigest().lower() != digest.lower():
-            raise ValueError("Published Zenodo PDF checksum mismatch")
-    expected_size = f.get("size")
-    if expected_size is not None and int(expected_size) != len(payload):
-        raise ValueError("Published Zenodo PDF size mismatch")
-    return payload, source
+    for attempt in range(3):
+        payload = request(source, binary=True)
+        try:
+            if not payload.startswith(b"%PDF-") or b"%%EOF" not in payload[-2048:]:
+                raise ValueError(f"Zenodo did not provide a complete PDF (bytes={len(payload)})")
+            if declared:
+                algo, sep, digest = declared.partition(":")
+                if not sep or algo not in ("md5", "sha256"):
+                    raise ValueError("Unexpected Zenodo file checksum: " + declared)
+                if hashlib.new(algo, payload).hexdigest().lower() != digest.lower():
+                    raise ValueError("Published Zenodo PDF checksum mismatch")
+            expected_size = f.get("size")
+            if expected_size is not None and int(expected_size) != len(payload):
+                raise ValueError("Published Zenodo PDF size mismatch")
+            return payload, source
+        except ValueError:
+            if attempt == 2:
+                raise
+            time.sleep(5 * (attempt + 1))
+    raise RuntimeError("Zenodo PDF could not be verified")
 
 def serialize(value):
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
