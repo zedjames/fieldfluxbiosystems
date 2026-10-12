@@ -1,0 +1,162 @@
+{
+  "schema": "scholarly-zenodo-concepts/v1",
+  "provenance": "Pinned to published Zenodo API conceptrecid after full authority audit on 2026-10-12",
+  "papers": {
+    "ns1": {
+      "concept_doi": "10.5281/zenodo.22737977",
+      "author": "James, Zed",
+      "title": "Continuation Anatomy of Periodic Navier–Stokes Breakdown",
+      "record_title": "Continuation Anatomy for Periodic Navier Stokes Breakdown"
+    },
+    "ns2": {
+      "concept_doi": "10.5281/zenodo.22754458",
+      "author": "James, Zed",
+      "title": "Critical Regularity Anatomy of Periodic Navier–Stokes Breakdown",
+      "record_title": "Critical Regularity Anatomy of Periodic Navier–Stokes Breakdown"
+    },
+    "ns3": {
+      "concept_doi": "10.5281/zenodo.22943387",
+      "author": "James, Zed",
+      "title": "Endpoint Rigidity in Periodic Navier–Stokes Flow",
+      "record_title": "Endpoint Rigidity in Periodic Navier–Stokes Flow"
+    },
+    "sqg1": {
+      "concept_doi": "10.5281/zenodo.22800859",
+      "author": "James, Zed",
+      "title": "Critical Schwarzschild Scalar Dynamics",
+      "record_title": "Critical Schwarzschild Scalar Dynamics"
+    },
+    "sqg2": {
+      "concept_doi": "10.5281/zenodo.22804350",
+      "author": "James, Zed",
+      "title": "Friedrichs-Selected Schwarzschild Quantum Dynamics",
+      "record_title": "Friedrichs-Selected Schwarzschild Quantum Dynamics"
+    },
+    "sqg3": {
+      "concept_doi": "10.5281/zenodo.22819416",
+      "author": "James, Zed",
+      "title": "Friedrichs-Selected Schwarzschild Quantum Matter",
+      "record_title": "Friedrichs-Selected Schwarzschild Quantum Matter"
+    },
+    "sqg4": {
+      "concept_doi": "10.5281/zenodo.22834304",
+      "author": "James, Zed",
+      "title": "A Self-Consistent Einstein–Scalar Quantum Sector",
+      "record_title": "A Self-Consistent Einstein–Scalar Quantum Sector"
+    },
+    "sqg5": {
+      "concept_doi": "10.5281/zenodo.22846742",
+      "author": "James, Zed",
+      "title": "Master-Action Ownership of a Self-Consistent Einstein–Scalar Quantum Sector",
+      "record_title": "Master-Action Ownership of a Self-Consistent Einstein–Scalar Quantum Sector"
+    },
+    "sqg6": {
+      "concept_doi": "10.5281/zenodo.22859435",
+      "author": "James, Zed",
+      "title": "Quantum Gauge Structure of a Self-Consistent Einstein–Scalar Sector",
+      "record_title": "Quantum Gauge Structure of a Self-Consistent Einstein–Scalar Sector"
+    },
+    "sqg7": {
+      "concept_doi": "10.5281/zenodo.22904030",
+      "author": "James, Zed",
+      "title": "Regulated Palatini BV Quantization of a Self-Consistent Einstein–Scalar Sector",
+      "record_title": "Regulated Palatini BV Quantization of a Self-Consistent Einstein–Scalar Sector"
+    },
+    "sqg8": {
+      "concept_doi": "10.5281/zenodo.22939781",
+      "author": "James, Zed",
+      "title": "Relational Quantum Gravity in a Self-Consistent Einstein–Scalar Sector",
+      "record_title": "Relational Quantum Gravity in a Self-Consistent Einstein–Scalar Sector"
+    },
+    "gps1": {
+      "concept_doi": "10.5281/zenodo.22818291",
+      "author": "James, Zed",
+      "title": "Closed Matter-Current Constraints and Gaussian Physical Moduli",
+      "record_title": "Closed Matter-Current Constraints and Gaussian Physical Moduli"
+    },
+    "gps2": {
+      "concept_doi": "10.5281/zenodo.22818923",
+      "author": "James, Zed",
+      "title": "Pair-Generated Completion of Gaussian Physical States",
+      "record_title": "Pair-Generated Completion of Gaussian Physical States"
+    },
+    "gps3": {
+      "concept_doi": "10.5281/zenodo.22820147",
+      "author": "James, Zed",
+      "title": "From Pair-Generated Fock Structure to Physical Particle Semantics",
+      "record_title": "From Pair-Generated Fock Structure to Physical Particle Semantics"
+    },
+    "gps4": {
+      "concept_doi": "10.5281/zenodo.23001929",
+      "author": "James, Zed",
+      "title": "Gaussian Pair Geometry and Physical Radiative Response",
+      "record_title": "Gaussian Pair Geometry and Physical Radiative Response"
+    },
+    "gps5": {
+      "concept_doi": "10.5281/zenodo.23029056",
+      "author": "James, Zed",
+      "title": "Source-Aware Weyl-Reduced Celestial Representation",
+      "record_title": "Source-Aware Weyl-Reduced Celestial Representation"
+    },
+    "gps6": {
+      "concept_doi": "10.5281/zenodo.23108945",
+      "author": "James, Zed",
+      "title": "The Physical Celestial Clebsch–Gordan Transform of a Radiative Bose Pair",
+      "record_title": "The Physical Celestial Clebsch–Gordan Transform of a Radiative Bose Pair"
+    },
+    "bio1": {
+      "concept_doi": "10.5281/zenodo.22969065",
+      "author": "James, Zed",
+      "title": "Relational Anatomy of Cell Fate Across Lineage-Resolved Perturbation Experiments",
+      "record_title": "Relational Anatomy of Cell Fate Across Lineage-Resolved Perturbation Experiments"
+    },
+    "bio2": {
+      "concept_doi": "10.5281/zenodo.23090478",
+      "author": "James, Zed",
+      "title": "Relational Organization and Directional Stability Across Mouse Organogenesis",
+      "record_title": "Relational Organization and Directional Stability Across Mouse Organogenesis"
+    },
+    "bio3": {
+      "concept_doi": "10.5281/zenodo.23125762",
+      "author": "James, Zed",
+      "title": "Present-State Resolution and Lineage History in Early Mouse Embryogenesis",
+      "record_title": "Present-State Resolution and Lineage History in Early Mouse Embryogenesis"
+    },
+    "hfd1": {
+      "concept_doi": "10.5281/zenodo.23131157",
+      "author": "James, Zed",
+      "title": "Constitutive Continuation Capacity",
+      "record_title": "Constitutive Continuation Capacity"
+    },
+    "hfd2": {
+      "concept_doi": "10.5281/zenodo.23146280",
+      "author": "James, Zed",
+      "title": "Prospective Health Across Contexts",
+      "record_title": "Prospective Health Across Contexts"
+    },
+    "hfd3": {
+      "concept_doi": "10.5281/zenodo.23219587",
+      "author": "James, Zed",
+      "title": "Representation Sufficiency in Prospective Health",
+      "record_title": "Representation Sufficiency in Prospective Health"
+    },
+    "hfd4": {
+      "concept_doi": "10.5281/zenodo.23268802",
+      "author": "James, Zed",
+      "title": "Information Provenance and Conservative Enrichment in Prospective Health",
+      "record_title": "Information Provenance and Conservative Enrichment in Prospective Health"
+    },
+    "hfd6": {
+      "concept_doi": "10.5281/zenodo.23301732",
+      "author": "James, Zed",
+      "title": "Constitutive Observability and the Measurement of Prospective Health",
+      "record_title": "Constitutive Observability and the Measurement of Prospective Health"
+    },
+    "hfd5": {
+      "concept_doi": "10.5281/zenodo.23268986",
+      "author": "James, Zed",
+      "title": "Prospective Health under Declared Specifications",
+      "record_title": "Prospective Health under Declared Specifications"
+    }
+  }
+}
