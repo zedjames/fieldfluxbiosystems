@@ -226,8 +226,10 @@ def main():
     if paper3.exists():
         import hashlib
         digest=hashlib.sha256(paper3.read_bytes()).hexdigest()
-        check(digest=="ba193ff119434c26c2047ab0de20fbd36258fc7c65eb7b363c22584d26b3b650",
-              "Paper III PDF does not match published Zenodo SHA-256",errors)
+        records=json.loads((ROOT/"research/preprint-pdfs.json").read_text(encoding="utf8"))["papers"]
+        mirror=next((p for p in records if p.get("pdf")==paper3.name),None)
+        check(mirror is not None and digest==mirror.get("sha256"),
+              "Paper III PDF does not match the exact registered Zenodo-version SHA-256",errors)
     source3=(ROOT/"research-representation-sufficiency-prospective-health.html").read_text(encoding="utf8")
     check("citation_pdf_url" in source3 and
           "research-representation-sufficiency-prospective-health.pdf" in source3,

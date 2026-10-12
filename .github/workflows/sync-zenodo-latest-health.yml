@@ -1,0 +1,79 @@
+name: Keep Health papers current with published Zenodo versions
+on:
+  schedule:
+    - cron: '35 05 * * *'
+  workflow_dispatch:
+  # Run once when the synchronizer is first installed or updated, and
+  # every day thereafter. Generated manuscript commits do not retrigger it.
+  push:
+    branches: [main]
+    paths:
+      - scripts/zenodo_latest_sync.py
+      - .github/workflows/sync-zenodo-latest-health.yml
+  pull_request:
+    paths:
+      - scripts/zenodo_latest_sync.py
+      - research/catalog.json
+      - research/site-pdfs.json
+      - research/preprint-pdfs.json
+      - .github/workflows/sync-zenodo-latest-health.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zenodo-published-health-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preview published Zenodo PDF and citation updates without committing
+        run: python3 scripts/zenodo_latest_sync.py --site ffb
+      - name: Validate complete updated scholarly preview
+        run: |
+          python3 scripts/verify_research_catalog.py
+                    python3 scripts/verify_understanding_health.py
+
+  update:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect new Zenodo versions and verify published PDF bytes
+        run: python3 scripts/zenodo_latest_sync.py --site ffb
+      - name: Validate complete updated scholarly state
+        run: |
+          python3 scripts/verify_research_catalog.py
+                    python3 scripts/verify_understanding_health.py
+      - name: Commit and push an atomic scholarly mirror update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "scholarly-zenodo-version-bot"
+          git config user.email "contact@instituteluxconsilio.org"
+          git add -- research/catalog.json research/preprint-pdfs.json
+                    git add -- 'research-*.html' 'research-*.pdf' research.html research-series-health-formally-defined.html
+          if git diff --cached --quiet; then
+            echo "No newly published Zenodo versions."
+            exit 0
+          fi
+          git commit -m "Sync latest published Health paper versions from Zenodo"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo "Published verified Zenodo versions on main."
+              exit 0
+            fi
+            sleep 4
+          done
+          echo "Could not push the scholarly version update after three attempts."
+          exit 1
