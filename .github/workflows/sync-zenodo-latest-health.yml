@@ -3,6 +3,13 @@ on:
   schedule:
     - cron: '35 05 * * *'
   workflow_dispatch:
+  # Run once when the synchronizer is first installed or updated, and
+  # every day thereafter. Generated manuscript commits do not retrigger it.
+  push:
+    branches: [main]
+    paths:
+      - scripts/zenodo_latest_sync.py
+      - .github/workflows/sync-zenodo-latest-health.yml
   pull_request:
     paths:
       - scripts/zenodo_latest_sync.py
