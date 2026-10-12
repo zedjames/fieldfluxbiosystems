@@ -160,10 +160,23 @@ def main()->int:
     health=[i for i in pubs if i.get("series")=="health-formally-defined"]
     if sorted(i["order"] for i in health)!=[1,2,3,4,5,6]:
         fail("Health series must include all six published papers",errors)
-    for name,version,concept in (("hfd4","23268802","23268803"),("hfd5","23268987","23268986"),("hfd6","23301732","23301733")):
+    # The all-versions concept DOI is stable; a valid new Zenodo version DOI
+    # changes after publication. Check current DOI/PDF against our manifest,
+    # without hard-coding the DOI of the initially published version.
+    concept_pins={
+        "hfd1":"23131158","hfd2":"23146281","hfd3":"23219587",
+        "hfd4":"23268803","hfd5":"23268986","hfd6":"23301733",
+    }
+    for name,concept in concept_pins.items():
         work=by_id.get(name,{})
-        if work.get("doi")!="10.5281/zenodo."+version or work.get("concept_doi")!="10.5281/zenodo."+concept:
-            fail(f"{name}: incorrect Zenodo DOI pairing",errors)
+        mirror=pdf_by_path.get(work.get("pdf",""),{})
+        expected_concept="10.5281/zenodo."+concept
+        if work.get("concept_doi",expected_concept)!=expected_concept:
+            fail(f"{name}: concept DOI changed or is incorrect",errors)
+        if not work.get("doi","").startswith("10.5281/zenodo."):
+            fail(f"{name}: invalid version DOI",errors)
+        if mirror.get("doi")!=work.get("doi"):
+            fail(f"{name}: manifest and publication version DOI disagree",errors)
         if not work.get("pdf") or not (ROOT/work["pdf"]).is_file():
             fail(f"{name}: required indexed PDF not found",errors)
     for slug in ("research-information-provenance-conservative-enrichment-prospective-health.html",
