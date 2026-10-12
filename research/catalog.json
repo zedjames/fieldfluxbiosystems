@@ -965,7 +965,7 @@
       "subtitle": "A machine-checked framework for prospective health.",
       "href": "research-constitutive-continuation-capacity.html",
       "pdf": "research-constitutive-continuation-capacity.pdf",
-      "doi": "10.5281/zenodo.23131157",
+      "doi": "10.5281/zenodo.23131158",
       "summary": "Prospective health is formalized as present realization together with requirement-adequate continuation capacity, with exact lawful/viable response semantics, a requirement-visible capacity quotient and universal property, explicit query relativity, qualified presentation invariance, and robustness and measurement-sufficiency boundaries.",
       "primary_theme": "health-foundations",
       "themes": [
@@ -980,7 +980,8 @@
         "Formal methods",
         "Measurement science",
         "Dynamical systems"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23131157"
     },
     {
       "id": "hfd2",
@@ -993,7 +994,7 @@
       "subtitle": "Contextual Licensing, Developmental Transport, and Open-System Support.",
       "href": "research-prospective-health-across-contexts.html",
       "pdf": "research-prospective-health-across-contexts.pdf",
-      "doi": "10.5281/zenodo.23146280",
+      "doi": "10.5281/zenodo.23146281",
       "summary": "Paper II transports the prospective-health architecture across changing contexts, developmental stages, and open-system support by separating raw capacity transport, health-visible quotient transport, and full health truth, with exact determinacy, obstruction, branching, coalescence, and support-dependence results.",
       "primary_theme": "health-foundations",
       "themes": [
@@ -1010,7 +1011,8 @@
         "Measurement science",
         "Developmental systems",
         "Dynamical systems"
-      ]
+      ],
+      "concept_doi": "10.5281/zenodo.23146280"
     },
     {
       "id": "hfd3",
@@ -1053,8 +1055,8 @@
       "title": "Information Provenance and Conservative Enrichment in Prospective Health",
       "subtitle": "A Machine-Checked Finite Forest Benchmark.",
       "href": "research-information-provenance-conservative-enrichment-prospective-health.html",
-      "doi": "10.5281/zenodo.23268802",
-      "concept_doi": "10.5281/zenodo.23268803",
+      "doi": "10.5281/zenodo.23268803",
+      "concept_doi": "10.5281/zenodo.23268802",
       "summary": "Paper IV establishes a five-state, machine-checked forest benchmark with two equivalent history encodings, an exact candidate-to-lawful-to-viable response census, and a complete distinction-loss classification across detailed capacity, coarse capacity, and declared Health. A generic conservative-refinement lemma and a strict forest example demonstrate preservation of established Health judgments under exact projection.",
       "primary_theme": "health-foundations",
       "themes": [
@@ -1083,8 +1085,8 @@
       "title": "Constitutive Observability and the Measurement of Prospective Health",
       "subtitle": "State Identification and Prospective Health under Maintenance Constraints.",
       "href": "research-constitutive-observability-prospective-health.html",
-      "doi": "10.5281/zenodo.23301732",
-      "concept_doi": "10.5281/zenodo.23301733",
+      "doi": "10.5281/zenodo.23301733",
+      "concept_doi": "10.5281/zenodo.23301732",
       "summary": "Paper VI studies the measurement of present organizational state and the preservation of prospective Health under intervention in a fully defined two-site exchange system. Two presently indistinguishable states have different common-future viability. Exact observation fibers, a heterogeneous flux-readout probe and a fixed-drive repeated-cost alternative give model-relative maintaining and verdict-preserving identification, with quantified local uncertainty bounds. Continuous-time counterexamples show why sampled measurements can miss intermediate maintenance failures. Physical calibration and prospective physiological validation remain open.",
       "primary_theme": "health-foundations",
       "themes": [

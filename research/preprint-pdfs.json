@@ -162,22 +162,24 @@
     {
       "record_page": "research-constitutive-continuation-capacity.html",
       "pdf": "research-constitutive-continuation-capacity.pdf",
-      "doi": "10.5281/zenodo.23131157",
-      "concept_doi": "10.5281/zenodo.23131158",
+      "doi": "10.5281/zenodo.23131158",
+      "concept_doi": "10.5281/zenodo.23131157",
       "sha256": "722e86abef69526843aa50d806f042cd8d67aa098a4cc137e7777eb97fcbde37",
       "pages": 20,
       "publication_date": "2026-10-04",
-      "manuscript_date": "2026-10-04"
+      "manuscript_date": "2026-10-04",
+      "source": "https://zenodo.org/api/records/23131158/files/Constitutive%20Continuation%20Capacity.pdf/content"
     },
     {
       "record_page": "research-prospective-health-across-contexts.html",
       "pdf": "research-prospective-health-across-contexts.pdf",
-      "doi": "10.5281/zenodo.23146280",
-      "concept_doi": "10.5281/zenodo.23146281",
+      "doi": "10.5281/zenodo.23146281",
+      "concept_doi": "10.5281/zenodo.23146280",
       "sha256": "a96c305e6ab9af6147e34fb941b444f24251c57e63edbdaff5e5e5a638f3bf2f",
       "pages": 26,
       "publication_date": "2026-10-05",
-      "manuscript_date": "2026-10-04"
+      "manuscript_date": "2026-10-04",
+      "source": "https://zenodo.org/api/records/23146281/files/Prospective%20Health%20Across%20Contexts.pdf/content"
     },
     {
       "record_page": "research-representation-sufficiency-prospective-health.html",
@@ -190,12 +192,13 @@
     {
       "record_page": "research-information-provenance-conservative-enrichment-prospective-health.html",
       "pdf": "research-information-provenance-conservative-enrichment-prospective-health.pdf",
-      "doi": "10.5281/zenodo.23268802",
-      "concept_doi": "10.5281/zenodo.23268803",
+      "doi": "10.5281/zenodo.23268803",
+      "concept_doi": "10.5281/zenodo.23268802",
       "sha256": "81153d49ccd804de4c49ce9372891bf6896207c32d6abf40649c69431b44f033",
       "pages": 27,
       "publication_date": "2026-10-09",
-      "manuscript_date": "2026-10-09"
+      "manuscript_date": "2026-10-09",
+      "source": "https://zenodo.org/api/records/23268803/files/Information%20Provenance%20and%20Conservative%20Enrichment%20in%20Prospective%20Health.pdf/content"
     },
     {
       "record_page": "research-prospective-health-declared-specifications.html",
@@ -210,12 +213,13 @@
     {
       "record_page": "research-constitutive-observability-prospective-health.html",
       "pdf": "research-constitutive-observability-prospective-health.pdf",
-      "doi": "10.5281/zenodo.23301732",
-      "concept_doi": "10.5281/zenodo.23301733",
+      "doi": "10.5281/zenodo.23301733",
+      "concept_doi": "10.5281/zenodo.23301732",
       "sha256": "35fef03e386aa2813da56e93bdb8b31c264dd2de8f81a85156a1cd250117f40c",
       "pages": 37,
       "publication_date": "2026-10-11",
-      "manuscript_date": "2026-10-11"
+      "manuscript_date": "2026-10-11",
+      "source": "https://zenodo.org/api/records/23301733/files/Constitutive%20Observability%20and%20the%20Measurement%20of%20Prospective%20Health.pdf/content"
     }
   ]
 }
