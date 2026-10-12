@@ -1,4 +1,4 @@
-name: Keep Health papers current with published Zenodo versions
+name: Keep all published scholarly papers current with Zenodo
 on:
   schedule:
     - cron: '35 05 * * *'
@@ -9,11 +9,13 @@ on:
     branches: [main]
     paths:
       - scripts/zenodo_latest_sync.py
+      - research/zenodo-concepts.json
       - .github/workflows/sync-zenodo-latest-health.yml
   pull_request:
     paths:
       - scripts/zenodo_latest_sync.py
       - research/catalog.json
+      - research/zenodo-concepts.json
       - research/site-pdfs.json
       - research/preprint-pdfs.json
       - .github/workflows/sync-zenodo-latest-health.yml
@@ -22,17 +24,17 @@ permissions:
   contents: write
 
 concurrency:
-  group: zenodo-published-health-${{ github.ref }}
+  group: zenodo-published-all-series-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   probe:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
-      - name: Preview published Zenodo PDF and citation updates without committing
+      - name: Preview published Zenodo PDF and citation updates for all indexed series without committing
         run: python3 scripts/zenodo_latest_sync.py --site ffb
       - name: Validate complete updated scholarly preview
         run: |
@@ -42,12 +44,12 @@ jobs:
   update:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Detect new Zenodo versions and verify published PDF bytes
+      - name: Detect new Zenodo versions across all series and verify published PDF bytes
         run: python3 scripts/zenodo_latest_sync.py --site ffb
       - name: Validate complete updated scholarly state
         run: |
@@ -65,7 +67,7 @@ jobs:
             echo "No newly published Zenodo versions."
             exit 0
           fi
-          git commit -m "Sync latest published Health paper versions from Zenodo"
+          git commit -m "Sync latest published scholarly paper versions from Zenodo"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main

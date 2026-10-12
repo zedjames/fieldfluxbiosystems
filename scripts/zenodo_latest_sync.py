@@ -1,284 +1,251 @@
 #!/usr/bin/env python3
-"""Update site-hosted Health paper PDFs from the latest *published* Zenodo versions.
+"""Follow Zenodo's latest published version for every pinned public scholarly paper.
 
-The concept DOI identifies the version family; the version DOI and SHA-256
-identify the exact local PDF. No GitHub or Zenodo credentials are required.
-This script changes no state outside its working tree, and the workflow commits
-the complete verified transaction only after repository validation.
+A stable, audited Zenodo concept DOI owns a publication's version history.
+The latest published record owns its exact version DOI, PDF and file checksum.
+An unexpected creator/title, duplicate primary PDF or malformed download
+fails the whole transaction before any changes are committed.
 """
 from __future__ import annotations
 import argparse
+from difflib import SequenceMatcher
 import hashlib
 import json
 import re
-import sys
 import time
+import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://zenodo.org/api"
-DOI = re.compile(r"^10\.5281/zenodo\.(\d+)$")
-HFD_IDS = {"hfd1", "hfd2", "hfd3", "hfd4", "hfd5", "hfd6"}
-# The all-versions DOIs are stable even when every version DOI changes.
-CONCEPTS = {
-    "hfd1": "10.5281/zenodo.23131157",
-    "hfd2": "10.5281/zenodo.23146280",
-    "hfd3": "10.5281/zenodo.23219587",
-    "hfd4": "10.5281/zenodo.23268802",
-    "hfd5": "10.5281/zenodo.23268986",
-    "hfd6": "10.5281/zenodo.23301732",
-}
+ROOT=Path(__file__).resolve().parents[1]
+API="https://zenodo.org/api/records/"
+DOI=re.compile(r"^10\.5281/zenodo\.(\d+)$")
 
-def request(url: str, *, binary=False):
-    u = urllib.parse.urlparse(url)
-    if u.scheme != "https" or u.hostname not in {"zenodo.org", "www.zenodo.org"}:
-        raise ValueError("Unexpected Zenodo host: " + url)
-    error = None
-    for retry in range(5):
+def identifier(doi):
+    m=DOI.fullmatch(doi or "")
+    if not m:
+        raise ValueError("Expected Zenodo version/concept DOI, got "+str(doi))
+    return m.group(1)
+
+def get(url, binary=False):
+    parsed=urllib.parse.urlparse(url)
+    if parsed.scheme!="https" or parsed.hostname not in ("zenodo.org","www.zenodo.org"):
+        raise ValueError("Untrusted file source: "+url)
+    last=None
+    for n in range(5):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "ILC-FFB-Scholarly-Version-Mirror/1.0", "Accept": "*/*" if binary else "application/json"})
-            with urllib.request.urlopen(req, timeout=50) as response:
-                if response.status != 200:
-                    raise RuntimeError("Unexpected HTTP response: " + str(response.status))
-                data = response.read(45_000_001)
-                if len(data) > 45_000_000:
-                    raise ValueError("Zenodo response exceeds the maximum size")
+            req=urllib.request.Request(url,headers={
+                "User-Agent":"Fieldflux-ILC-PublishedZenodoMirrors/1.2",
+                "Accept":"*/*" if binary else "application/json"})
+            with urllib.request.urlopen(req,timeout=60) as resp:
+                if resp.status!=200:
+                    raise OSError("HTTP "+str(resp.status))
+                data=resp.read(60_000_001)
+            if len(data)>60_000_000:
+                raise ValueError("Zenodo payload exceeds 60 MB")
             return data if binary else json.loads(data)
-        except (OSError, TimeoutError, ValueError) as exc:
-            error = exc
-            if retry < 4:
-                status = getattr(exc, 'code', None)
-                wait = min(12 * (2 ** retry), 90) if status in (403, 429, 500, 502, 503, 504) else 2 ** retry
-                print(f'Zenodo request will retry after HTTP/network failure ({status or type(exc).__name__}); waiting {wait}s', flush=True)
+        except (OSError,TimeoutError,ValueError) as exc:
+            last=exc
+            if n<4:
+                status=getattr(exc,"code",None)
+                wait=min(10*2**n,70) if status in (403,429,500,502,503,504) else 2**n
+                print(f"Retrying Zenodo request after {type(exc).__name__} ({status}): waiting {wait}s",flush=True)
                 time.sleep(wait)
-    raise RuntimeError(f"Unable to retrieve {url}: {error}")
+    raise RuntimeError(f"Zenodo retrieval failed for {url}: {last}")
 
-def record_id(doi):
-    match = DOI.fullmatch(doi or "")
-    if not match:
-        raise ValueError("Expected a Zenodo version/concept DOI: " + str(doi))
-    return match.group(1)
+def normalize(s):
+    s=unicodedata.normalize("NFKD",str(s or "")).casefold()
+    return " ".join(re.findall(r"[a-z0-9]+",s))
 
-def family_id(record):
-    parent = record.get("parent") or {}
-    return str(record.get("conceptrecid") or parent.get("id") or "")
-
-def family_doi(record):
-    parent = record.get("parent") or {}
-    return record.get("conceptdoi") or (parent.get("pids") or {}).get("doi", {}).get("identifier")
+def family(record):
+    return str(record.get("conceptrecid") or (record.get("parent") or {}).get("id") or "")
 
 def authors(record):
-    return sorted(re.sub(r"\s+", " ", str(a.get("name", "")).strip()).casefold()
-                  for a in (record.get("metadata") or {}).get("creators", []))
+    return {normalize(a.get("name")) for a in (record.get("metadata") or {}).get("creators",[])}
 
-def latest_published(current_doi, concept_doi):
-    concept_id = record_id(concept_doi)
-    current = request(BASE + "/records/" + record_id(current_doi))
-    if family_id(current) != concept_id:
-        raise ValueError(f"Version DOI {current_doi}: expected family {concept_id}, Zenodo returned family id {family_id(current)!r}, concept DOI {family_doi(current)!r}, raw conceptrecid {current.get('conceptrecid')!r}, record DOI {current.get('doi')!r}, title {(current.get('metadata') or {}).get('title')!r}, parent keys {list((current.get('parent') or {}).keys())}")
-    if family_doi(current) and family_doi(current) != concept_doi:
-        raise ValueError("Concept DOI metadata mismatch")
-    q = urllib.parse.urlencode({"q": "conceptrecid:" + concept_id, "all_versions": "true", "sort": "mostrecent", "size": "25"})
-    result = request(BASE + "/records?" + q)
-    candidates = (result.get("hits") or {}).get("hits") or []
-    candidates = [v for v in candidates if family_id(v) == concept_id and str(v.get("id", "")).isdigit()]
-    if not candidates:
-        # Do not infer a latest version from a concept-DOI redirect or a search failure.
-        raise ValueError(f"Zenodo did not return published versions for {concept_doi}")
-    # Zenodo IDs increase when new version records are published. Use created timestamp
-    # and numeric record ID, not a guessed semantic version string.
-    newest = max(candidates, key=lambda v: (v.get("created") or "", int(v["id"])))
-    newest_doi = newest.get("doi")
-    if not DOI.fullmatch(newest_doi or ""):
-        raise ValueError("Latest published record has no Zenodo version DOI")
-    if authors(current) != authors(newest) or not authors(newest):
-        raise ValueError("Creator attribution changed; requires scholarly review")
-    if int(newest["id"]) < int(current["id"]):
-        raise ValueError("Latest search result older than current cited version")
-    return newest
+def published_record(entry,pin):
+    concept=pin["concept_doi"]
+    doc=get(API+identifier(concept))
+    if family(doc)!=identifier(concept):
+        raise ValueError(f"{entry['id']}: Zenodo family does not match pinned concept DOI")
+    if doc.get("conceptdoi") and doc["conceptdoi"]!=concept:
+        raise ValueError(f"{entry['id']}: Zenodo concept DOI conflicts with audited pin")
+    version=doc.get("doi")
+    if not DOI.fullmatch(version or "") or str(doc.get("id"))!=identifier(version):
+        raise ValueError(f"{entry['id']}: malformed published version DOI")
+    if doc.get("status") not in ("published",None):
+        raise ValueError(f"{entry['id']}: Zenodo record is not published")
+    if normalize(pin["author"]) not in authors(doc):
+        raise ValueError(f"{entry['id']}: creator does not match verified author")
+    if SequenceMatcher(None,normalize(pin["record_title"]),normalize((doc.get("metadata") or {}).get("title"))).ratio()<0.78:
+        raise ValueError(f"{entry['id']}: changed manuscript identity/title requires review")
+    if int(identifier(entry["doi"]))>int(identifier(version)) and entry["doi"]!=concept:
+        raise ValueError(f"{entry['id']}: Zenodo seems older than stored version")
+    return doc
 
-def paper_file(record):
-    files = record.get("files", [])
-    if isinstance(files, dict):
-        files = list(files.values())
-    pdfs = [f for f in files if str(f.get("key") or f.get("filename") or "").lower().endswith(".pdf")]
-    if len(pdfs) != 1:
-        raise ValueError(f"Expected exactly one primary PDF for {record.get('doi')}; found {len(pdfs)}. Multiple-PDF records require explicit curation.")
-    f = pdfs[0]
-    links = f.get("links") or {}
-    source = links.get("content") or links.get("self")
-    if not source:
-        raise ValueError("Zenodo PDF does not have a download URL")
-    return f, source
+def pdf_file(doc):
+    files=doc.get("files") or []
+    if isinstance(files,dict):
+        files=list(files.values())
+    pdfs=[f for f in files if str(f.get("key") or f.get("filename") or "").lower().endswith(".pdf")]
+    if len(pdfs)!=1:
+        raise ValueError(f"{doc.get('doi')}: expected one PDF, found {len(pdfs)}")
+    f=pdfs[0]
+    links=f.get("links") or {}
+    url=links.get("content") or links.get("self")
+    if not url:
+        raise ValueError("Published PDF has no content URL")
+    return f,url
 
-def download_verified(record):
-    f, source = paper_file(record)
-    declared = f.get("checksum") or ""
-    for attempt in range(3):
-        payload = request(source, binary=True)
+def verified_pdf(doc):
+    entry,link=pdf_file(doc)
+    last=None
+    for n in range(3):
+        payload=get(link,binary=True)
         try:
             if not payload.startswith(b"%PDF-") or b"%%EOF" not in payload[-2048:]:
-                raise ValueError(f"Zenodo did not provide a complete PDF (bytes={len(payload)})")
-            if declared:
-                algo, sep, digest = declared.partition(":")
-                if not sep or algo not in ("md5", "sha256"):
-                    raise ValueError("Unexpected Zenodo file checksum: " + declared)
-                if hashlib.new(algo, payload).hexdigest().lower() != digest.lower():
-                    raise ValueError("Published Zenodo PDF checksum mismatch")
-            expected_size = f.get("size")
-            if expected_size is not None and int(expected_size) != len(payload):
-                raise ValueError("Published Zenodo PDF size mismatch")
-            return payload, source
-        except ValueError:
-            if attempt == 2:
-                raise
-            time.sleep(5 * (attempt + 1))
-    raise RuntimeError("Zenodo PDF could not be verified")
+                raise ValueError("PDF appears incomplete")
+            if entry.get("size") is not None and int(entry["size"])!=len(payload):
+                raise ValueError("Zenodo PDF length mismatch")
+            checksum=entry.get("checksum") or ""
+            if checksum:
+                alg,sep,expected=checksum.partition(":")
+                if not sep or alg not in ("sha256","md5"):
+                    raise ValueError("Unrecognized Zenodo checksum")
+                if hashlib.new(alg,payload).hexdigest().lower()!=expected.lower():
+                    raise ValueError("Zenodo PDF checksum mismatch")
+            return payload,link
+        except ValueError as exc:
+            last=exc
+            if n<2:
+                time.sleep(6*(n+1))
+    raise ValueError(f"Could not verify published PDF: {last}")
 
-def serialize(value):
-    return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
+def jsonwrite(file,data):
+    file.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
-def replace_doi_pages(paths, old_doi, new_doi, old_date, new_date, legacy_companion=None, concept=None):
-    for path in paths:
-        if not path.is_file() or path.suffix.lower() != ".html":
+def update_pages(files,old,new,concept,legacy_partner,old_date,new_date):
+    for path in files:
+        if not path.is_file(): continue
+        original=path.read_text(encoding="utf-8")
+        if old not in original:
             continue
-        original = path.read_text(encoding="utf-8")
-        if old_doi not in original:
-            continue
-        if legacy_companion:
-            token = "__ZENODO_VERSION_DOI_TEMP__"
-            if token in original:
-                raise ValueError("Reserved DOI substitution marker already in page")
-            updated = original.replace(old_doi, token).replace(legacy_companion, concept).replace(token, new_doi)
+        if legacy_partner:
+            marker="__VERIFIED_ZENODO_DOI_REORDER__"
+            if marker in original: raise ValueError("Reserved DOI substitution token in HTML")
+            updated=original.replace(old,marker).replace(legacy_partner,concept).replace(marker,new)
         else:
-            updated = original.replace(old_doi, new_doi)
-        # Machine-readable citation date identifies the cited published version.
-        if old_date and new_date and old_date != new_date:
-            updated = updated.replace('name="citation_publication_date" content="' + old_date.replace("-", "/") + '"',
-                                      'name="citation_publication_date" content="' + new_date.replace("-", "/") + '"')
-            updated = updated.replace('name="citation_online_date" content="' + old_date.replace("-", "/") + '"',
-                                      'name="citation_online_date" content="' + new_date.replace("-", "/") + '"')
-        if updated != original:
-            path.write_text(updated, encoding="utf-8")
+            updated=original.replace(old,new)
+        if old_date and new_date and old_date!=new_date:
+            for key in ("citation_publication_date","citation_online_date"):
+                updated=updated.replace(
+                    f'name="{key}" content="{old_date.replace("-", "/")}"',
+                    f'name="{key}" content="{new_date.replace("-", "/")}"')
+        if updated!=original:
+            path.write_text(updated,encoding="utf-8")
 
-def run(site, *, probe=False):
-    ffb = site == "ffb"
-    catalog_file = ROOT / "research/catalog.json"
-    catalog = json.loads(catalog_file.read_text(encoding="utf-8"))
-    manifest_file = ROOT / ("research/preprint-pdfs.json" if ffb else "research/site-pdfs.json")
-    manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
-    if ffb:
-        collection = catalog["items"]
-        selected = {x["id"]: x for x in collection if x.get("id") in HFD_IDS}
-        mirror = {p.get("record_page"): p for p in manifest["papers"]}
-    else:
-        collection = catalog["publications"]
-        selected = {x["id"]: x for x in collection if x.get("id") in HFD_IDS}
-        mirror = {p.get("recordPage"): p for p in manifest["papers"]}
-    if set(selected) != HFD_IDS:
-        raise ValueError("The complete six-paper Health series is missing from catalog")
-    changes = []
-    # Preflight every paper before mutating any site file.
-    pending = []
-    for paper_id in sorted(HFD_IDS):
-        pub = selected[paper_id]
-        concept = CONCEPTS[paper_id]
-        old = pub["doi"]
-        former_companion = pub.get("concept_doi", pub.get("conceptDoi"))
-        # Reconcile historical reversals only when Zenodo confirms the family.
-        legacy_swap = old == concept
-        if not legacy_swap and former_companion and former_companion != concept:
-            raise ValueError(f"{paper_id}: concept DOI conflicts with Zenodo")
-        latest = latest_published(old, concept)
-        new = latest["doi"]
-        if legacy_swap and former_companion and former_companion != new:
-            raise ValueError(f"{paper_id}: legacy DOI partner does not match Zenodo's published version")
+def sync(site,probe=False):
+    ffb=site=="ffb"
+    catalogfile=ROOT/"research/catalog.json"
+    catalog=json.loads(catalogfile.read_text(encoding="utf-8"))
+    pins=json.loads((ROOT/"research/zenodo-concepts.json").read_text(encoding="utf-8"))["papers"]
+    manifestfile=ROOT/("research/preprint-pdfs.json" if ffb else "research/site-pdfs.json")
+    manifest=json.loads(manifestfile.read_text(encoding="utf-8"))
+    records=catalog["items"] if ffb else catalog["publications"]
+    pubs={x["id"]:x for x in records if (x.get("collection")=="publications" if ffb else True)}
+    if set(pubs)!=set(pins):
+        raise ValueError("Publication registry and audited Zenodo families differ; reconcile before syncing")
+    mirrors={e["pdf"]:e for e in manifest["papers"]}
+    changes=[]
+    # Preflight the whole catalog and all pending new PDFs before mutating files.
+    for ident in sorted(pins):
+        p=pubs[ident]
+        pin=pins[ident]
+        concept=pin["concept_doi"]
+        doc=published_record(p,pin)
+        new=doc["doi"]
+        old=p["doi"]
+        prior=p.get("concept_doi") if ffb else p.get("conceptDoi")
+        legacy=old==concept and new!=old
+        if prior and prior!=concept and (not legacy or prior!=new):
+            raise ValueError(f"{ident}: mismatched historical DOI partner")
+        local=p.get("pdf") or (next((x["pdf"] for x in manifest["papers"] if x.get("doi")==old),None) if ffb else None)
+        is_local=bool(local and not local.startswith(("https://","http://")))
+        lacks_pdf=not bool(local)
+        needs_change=(new!=old or prior!=concept or (not ffb and lacks_pdf))
         if probe:
-            primary, _ = paper_file(latest)
-            print(f"{paper_id}: stored={old}; published_version={new}; stable_concept={concept}; primary_pdf={primary.get('key')}", flush=True)
-            continue
-        if new == old and not legacy_swap:
-            print(f"{paper_id}: already current ({old})", flush=True)
-            continue
-        date = (latest.get("metadata") or {}).get("publication_date") or pub.get("date")
-        local_pdf = pub.get("pdf")
-        if local_pdf and local_pdf.startswith("https://"):
-            local_pdf = None
-        if not local_pdf and ffb:
-            local_pdf = next((p["pdf"] for p in manifest["papers"] if p.get("doi") == old), None)
-        if ffb and not local_pdf:
-            raise ValueError(f"{paper_id}: missing on-site PDF")
-        if local_pdf:
-            data, source = download_verified(latest)
-        else:
-            data, source = None, None
-        pending.append((paper_id, pub, old, new, concept, date, local_pdf, data, source, (former_companion or new) if legacy_swap else None))
+            print(f"{ident}: stored={old}, latest={new}, family={concept}, local={bool(is_local)}, needs_update={needs_change}",flush=True)
+            # The actual PR preview tests the full transaction, not this shortcut.
+        if not needs_change: continue
+        raw=None
+        source=None
+        if is_local or lacks_pdf:
+            raw,source=verified_pdf(doc)
+        if is_local:
+            if local not in mirrors:
+                raise ValueError(f"{ident}: hosted PDF has no registered checksum")
+            file=ROOT/local
+            if not file.is_file() or hashlib.sha256(file.read_bytes()).hexdigest()!=mirrors[local]["sha256"]:
+                raise ValueError(f"{ident}: old local PDF fails registered checksum")
+        changes.append(dict(id=ident,old=old,new=new,concept=concept,old_date=p.get("date",""),
+            date=(doc.get("metadata") or {}).get("publication_date") or p.get("date"),
+            local=local,is_local=is_local,needs_new_link=lacks_pdf,content=raw,
+            source=source,legacy_partner=(prior or new) if legacy else None))
     if probe:
-        print("Zenodo published-record lookup verified", flush=True)
-        return False
-    for paper_id, pub, old, new, concept, date, local_pdf, payload, source, legacy_companion in pending:
-        old_date = pub.get("date", "")
-        pub["doi"] = new
-        if ffb:
-            pub["concept_doi"] = concept
-        else:
-            pub["conceptDoi"] = concept
-        pub["date"] = date
-        if local_pdf:
-            dest = ROOT / local_pdf
-            if not dest.is_file() or hashlib.sha256(dest.read_bytes()).hexdigest() != next(
-                p["sha256"] for p in manifest["papers"] if p.get("pdf") == local_pdf
-            ):
-                raise ValueError(f"{paper_id}: current local PDF fails registered checksum; stopping")
-            dest.write_bytes(payload)
-            for entry in manifest["papers"]:
-                if entry.get("pdf") == local_pdf:
-                    entry["sha256"] = hashlib.sha256(payload).hexdigest()
-                    entry["doi"] = new
-                    entry["concept_doi"] = concept
-                    entry["source"] = source
-                    entry["publication_date"] = date
-                    break
-        changes.append((paper_id, old, new, old_date, date, legacy_companion, concept))
-        print(f"{paper_id}: published {new} ({date})" + (f"; SHA-256 {hashlib.sha256(payload).hexdigest()}" if payload else "; external PDF resolves through FFB"), flush=True)
+        print(f"Published-version inspection completed for {len(pubs)} pinned paper families",flush=True)
+        return bool(changes)
     if not changes:
+        print("All indexed publications already cite Zenodo's latest published versions",flush=True)
         return False
-    catalog_file.write_text(serialize(catalog), encoding="utf-8")
-    manifest_file.write_text(serialize(manifest), encoding="utf-8")
+    for item in changes:
+        p=pubs[item["id"]]
+        p["doi"]=item["new"]
+        p["date"]=item["date"]
+        p["concept_doi" if ffb else "conceptDoi"]=item["concept"]
+        if item["is_local"]:
+            file=ROOT/item["local"]
+            file.write_bytes(item["content"])
+            m=mirrors[item["local"]]
+            m["doi"]=item["new"]
+            m["concept_doi"]=item["concept"]
+            m["sha256"]=hashlib.sha256(item["content"]).hexdigest()
+            m["publication_date"]=item["date"]
+            m["source"]=item["source"]
+        elif item["needs_new_link"] and not ffb:
+            # ILC-only research records not yet hosted by FFB receive a live
+            # published-version PDF link, with verified bytes and provenance.
+            p["pdf"]=item["source"]
+            p["pdfSha256"]=hashlib.sha256(item["content"]).hexdigest()
+        print(f"UPDATED {item['id']} {item['old']} -> {item['new']}",flush=True)
+    jsonwrite(catalogfile,catalog)
+    jsonwrite(manifestfile,manifest)
     if not ffb:
-        datafile = ROOT / "assets/data/research.js"
-        raw = datafile.read_text(encoding="utf-8").strip()
-        prefix = "window.ILC_DATA="
-        if not raw.startswith(prefix):
-            raise ValueError("ILC structured data format changed")
-        data = json.loads(raw[len(prefix):].rstrip(";"))
-        for pub in data["publications"]:
-            if pub.get("id") in HFD_IDS:
-                current = selected[pub["id"]]
-                pub["doi"] = current["doi"]
-                pub["conceptDoi"] = current["conceptDoi"]
-                pub["date"] = current["date"]
-        datafile.write_text(prefix + serialize(data).rstrip() + ";\n", encoding="utf-8")
-    if ffb:
-        html = [ROOT / "research.html", ROOT / "research-series-health-formally-defined.html"] + list(ROOT.glob("research-*.html"))
-    else:
-        html = [ROOT / "index.html", ROOT / "publications.html", ROOT / "research-health-formally-defined.html"] + list(ROOT.glob("publication-*.html"))
-    for _, old, new, old_date, new_date, legacy_companion, concept in changes:
-        replace_doi_pages(html, old, new, old_date, new_date, legacy_companion, concept)
+        assetfile=ROOT/"assets/data/research.js"
+        raw=assetfile.read_text(encoding="utf-8").strip()
+        pre="window.ILC_DATA="
+        if not raw.startswith(pre): raise ValueError("ILC browser catalog format changed")
+        browser=json.loads(raw[len(pre):].rstrip(";"))
+        for pub in browser["publications"]:
+            if pub["id"] in pubs:
+                authoritative=pubs[pub["id"]]
+                for key in ("doi","conceptDoi","date","pdf","pdfSha256"):
+                    if key in authoritative: pub[key]=authoritative[key]
+        assetfile.write_text(pre+json.dumps(browser,ensure_ascii=False,indent=2)+";\n",encoding="utf-8")
+    pages=([ROOT/"research.html",ROOT/"research-series-health-formally-defined.html"]
+            +list(ROOT.glob("research-*.html"))) if ffb else (
+            [ROOT/"index.html",ROOT/"publications.html",ROOT/"research-health-formally-defined.html"]
+            +list(ROOT.glob("publication-*.html")))
+    for item in changes:
+        update_pages(pages,item["old"],item["new"],item["concept"],
+            item["legacy_partner"],item["old_date"],item["date"])
+    print(f"UPDATED_TOTAL={len(changes)} with verified published Zenodo metadata/PDFs",flush=True)
     return True
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--site", required=True, choices=("ffb", "ilc"))
-    parser.add_argument("--probe", action="store_true", help="Inspect published version families without updating files")
-    args = parser.parse_args()
-    changed = run(args.site, probe=args.probe)
-    if changed:
-        print("UPDATED: verified latest Zenodo versions. Run site validators before committing.")
-    elif not args.probe:
-        print("No new published versions; site PDFs and citations are already current.")
-
-if __name__ == "__main__":
-    main()
+if __name__=="__main__":
+    ap=argparse.ArgumentParser()
+    ap.add_argument("--site",choices=("ffb","ilc"),required=True)
+    ap.add_argument("--probe",action="store_true")
+    args=ap.parse_args()
+    sync(args.site,probe=args.probe)

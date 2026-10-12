@@ -54,10 +54,20 @@ def main()->int:
     import hashlib
     manifests=json.loads((ROOT/"research"/"preprint-pdfs.json").read_text(encoding="utf-8"))
     pdf_by_path={entry["pdf"]:entry for entry in manifests["papers"]}
-    for paper in [i for i in items if i.get("collection")=="publications"]:
-        if paper.get("date","") < "2026-10-09":
-            continue
+    pins=json.loads((ROOT/"research"/"zenodo-concepts.json").read_text(encoding="utf-8"))["papers"]
+    published=[i for i in items if i.get("collection")=="publications"]
+    if {p["id"] for p in published}!=set(pins):
+        fail("Audited Zenodo concept-family registry must match all published papers",errors)
+    for paper in published:
         ident=paper["id"]
+        concept=pins.get(ident,{}).get("concept_doi")
+        if not concept or not concept.startswith("10.5281/zenodo."):
+            fail(f"{ident}: Zenodo concept DOI not pinned",errors)
+        if paper.get("concept_doi",concept)!=concept:
+            old_partner=paper.get("concept_doi")
+            # Exactly the historical inverse pair may remain before first sync.
+            if paper.get("doi")!=concept or not old_partner or not old_partner.startswith("10.5281/zenodo."):
+                fail(f"{ident}: concept DOI conflicts with verified Zenodo family",errors)
         pdf=paper.get("pdf")
         if not pdf or not (ROOT/pdf).is_file():
             fail(f"{ident}: every newly published paper needs an actual on-site PDF",errors)
@@ -66,13 +76,16 @@ def main()->int:
         if not payload.startswith(b"%PDF-"):
             fail(f"{ident}: the reader asset is not a valid PDF",errors)
         mirror=pdf_by_path.get(pdf)
-        if not mirror or mirror["doi"]!=paper.get("doi") or hashlib.sha256(payload).hexdigest()!=mirror.get("sha256"):
+        if not mirror or hashlib.sha256(payload).hexdigest()!=mirror.get("sha256") or (
+            mirror["doi"]!=paper.get("doi") and paper.get("doi")!=concept
+        ):
             fail(f"{ident}: PDF absent from verified Zenodo mirror manifest or checksum mismatch",errors)
         record_html=(ROOT/paper["href"]).read_text(encoding="utf-8")
-        for marker in (f'name="citation_pdf_url"',pdf,'application/pdf'):
-            if marker not in record_html:
-                fail(f"{ident}: missing Scholar PDF discovery {marker}",errors)
-        if paper.get("series")=="health-formally-defined":
+        if paper.get("date","") >= "2026-10-09":
+            for marker in (f'name="citation_pdf_url"',pdf,'application/pdf'):
+                if marker not in record_html:
+                    fail(f"{ident}: missing Scholar PDF discovery {marker}",errors)
+        if paper.get("series")=="health-formally-defined" and paper.get("date","")>="2026-10-09":
             for page in ("research.html","research-series-health-formally-defined.html"):
                 if pdf not in (ROOT/page).read_text(encoding="utf-8"):
                     fail(f"{page}: full-text PDF not discoverable for {ident}",errors)
