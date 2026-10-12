@@ -105,7 +105,7 @@ def paper_file(record):
         raise ValueError(f"Expected exactly one primary PDF for {record.get('doi')}; found {len(pdfs)}. Multiple-PDF records require explicit curation.")
     f = pdfs[0]
     links = f.get("links") or {}
-    source = links.get("self") or links.get("content")
+    source = links.get("content") or links.get("self")
     if not source:
         raise ValueError("Zenodo PDF does not have a download URL")
     return f, source
