@@ -1,7 +1,8 @@
 # Fieldflux — continuous formal verification harness
 
 This folder is the **open verification harness** used to publish IP-safe facts
-about the private Fieldflux / Concordia Lean corpus. The source remains private;
+about the private Concordia Lean corpus now institutionally maintained by
+Institute Lux Consilio. The source remains private;
 the measurement and attestation method is public.
 
 ## Scope model
@@ -21,8 +22,11 @@ A green `lake build QpciLean` establishes that the addressed build target and
 its imported dependency closure type-check. It is **not** a claim that every file
 in the recursive source inventory was compiled.
 
-The current measured full-source inventory and its date/commit are published in
-[`/verification.txt`](../verification.txt).
+The Concordia formal research repository is owned and stewarded by Institute
+Lux Consilio. Its current institutional source-inventory declaration and dated
+provenance are available at <https://instituteluxconsilio.org/concordia/inventory/>.
+This Fieldflux directory documents an earlier open verification harness; it
+is not Concordia's current institutional source-inventory publisher.
 
 ## What the attestation records
 
