@@ -158,7 +158,8 @@ def sync(site,probe=False):
     # The DOI-indexed Paper VII has not yet had its all-versions family audited.
     # Continue checksum-protected updates for existing verified mirrors.
     pending={"hfd7": "10.5281/zenodo.24143821"} if ffb else {}
-    if set(pubs)!=set(pins)|set(pending) or any(pubs[k].get("doi")!=v for k,v in pending.items()):
+    present_pending={k:v for k,v in pending.items() if k in pubs}
+    if set(pubs)!=set(pins)|set(present_pending) or any(pubs[k].get("doi")!=v for k,v in present_pending.items()):
         raise ValueError("Publication registry and audited Zenodo families differ; reconcile before syncing")
     mirrors={e["pdf"]:e for e in manifest["papers"]}
     changes=[]
