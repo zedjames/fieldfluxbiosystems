@@ -46,7 +46,7 @@ def check():
                 "Twenty historic non-Health paper records must be preserved")
     assert_true(len({x["id"] for x in old_pubs})==20,
                 "Historical IDs must be distinct")
-    assert_true(set(concepts)==HEALTH and set(archived_concepts)=={x["id"] for x in old_pubs},
+    assert_true(set(concepts)==MIRRORED_HEALTH and set(archived_concepts)=={x["id"] for x in old_pubs},
                 "Active and historical Zenodo concept registries have wrong ownership")
     assert_true({x["id"] for x in active["series"]}=={"health-formally-defined"},
                 "Only the Health publication series may be actively listed on FFB")
