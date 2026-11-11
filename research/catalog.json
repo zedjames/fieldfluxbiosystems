@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-10-12",
+  "updated": "2026-11-11",
   "purpose": "Active Fieldflux publication and notebook metadata: six Health, Formally Defined papers and accompanying educational/measurement-science materials. Historical other-field publication metadata is preserved separately; the comprehensive scientific index belongs to Institute Lux Consilio.",
   "collections": [
     {
@@ -103,10 +103,10 @@
       "id": "health-formally-defined",
       "label": "Health, Formally Defined",
       "domain": "Foundations of health",
-      "description": "A formal and measurement-science program progressing from prospective Health and contextual transport through information sufficiency, finite provenance, an empirical-synthetic forest study, and exact mathematical conditions for identifying a present state without altering its specified prospective verdict.",
+      "description": "A formal and measurement-science program progressing from prospective Health and contextual transport through information sufficiency, finite provenance, an empirical-synthetic forest study, and exact mathematical conditions for identifying a present state without altering its specified prospective verdict. Paper VII realizes the prospective specification in a physical-time interacting kinetic population with productive transport, finite-population lifetime, and momentum-sensitive observation.",
       "landing_page": "research-series-health-formally-defined.html",
-      "published_count": 6,
-      "current_status": "Ongoing series; Papers I–VI published; physical calibration and prospective validation remain future work"
+      "published_count": 7,
+      "current_status": "Ongoing series; Papers I–VII published; empirical physical calibration and prospective validation remain future work"
     }
   ],
   "routes": [
@@ -126,7 +126,7 @@
     {
       "id": "formal-health",
       "title": "How can health be stated as a prospective mathematical property?",
-      "description": "From formal Health to contextual transport, information sufficiency, finite forest provenance, data-anchored testing, and constitutive observability under maintained measurement.",
+      "description": "From formal Health to contextual transport, information sufficiency, finite forest provenance, data-anchored testing, and constitutive observability under maintained measurement. Paper VII supplies an interacting physical-time kinetic realization.",
       "items": [
         "note-question",
         "note-fixedness",
@@ -136,6 +136,7 @@
         "hfd4",
         "hfd5",
         "hfd6",
+        "hfd7",
         "note-observable"
       ]
     }
@@ -545,6 +546,33 @@
         "Empirical validation"
       ],
       "pdf": "research-prospective-health-declared-specifications.pdf"
+    },
+    {
+      "id": "hfd7",
+      "collection": "publications",
+      "subtype": "preprint",
+      "series": "health-formally-defined",
+      "order": 7,
+      "date": "2026-11-11",
+      "title": "Prospective Health in Organized Dynamical Systems",
+      "subtitle": "Lawful stochastic continuation and constitutive maintenance in interacting kinetic populations",
+      "href": "research-prospective-health-organized-dynamical-systems.html",
+      "doi": "10.5281/zenodo.24143821",
+      "full_text_doi": "https://doi.org/10.5281/zenodo.24143821",
+      "summary": "Paper VII establishes prospective Health capacity in an interacting physical-time stochastic mechanochemical population. Reversible transporters with Langevin motion, guarded reactions and one shared inventory yield a complete future kernel. Uninterrupted charge-band survival and completed transport plus ATP regeneration are separate functional demands. At fixed finite population sizes the paper establishes positive productive continuation, a fifth-order short-time probability law, a positive finite-horizon maximum, and finite expected operating-band lifetime. A prepared-support example shows that a momentum-even instantaneous observation loses second-order future-likelihood information, while ideal continuous position history recovers direction and full transporter-label permutations preserve relevant unlabeled futures. These are mathematical model results, not calibrated clinical measurements.",
+      "primary_theme": "health-foundations",
+      "themes": [
+        "health-foundations"
+      ],
+      "domains": [
+        "Foundations of health",
+        "Kinetic stochastic systems",
+        "Mathematical biophysics",
+        "Measurement science",
+        "Dynamical systems",
+        "Formal methods"
+      ],
+      "source_pdf_sha256": "e1dae809538a1b9285feab657be7ed11ef3596df2005a20bbaef9a731c57f257"
     }
   ],
   "relations": [

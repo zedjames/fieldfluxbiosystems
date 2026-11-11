@@ -56,10 +56,21 @@ def main()->int:
     pdf_by_path={entry["pdf"]:entry for entry in manifests["papers"]}
     pins=json.loads((ROOT/"research"/"zenodo-concepts.json").read_text(encoding="utf-8"))["papers"]
     published=[i for i in items if i.get("collection")=="publications"]
-    if {p["id"] for p in published}!=set(pins):
-        fail("Audited Zenodo concept-family registry must match all published papers",errors)
+    published_ids={p["id"] for p in published}
+    if published_ids!=set(pins)|{"hfd7"}:
+        fail("Audited Zenodo concept families plus DOI-indexed Paper VII must match published papers",errors)
     for paper in published:
         ident=paper["id"]
+        if ident=="hfd7":
+            if paper.get("doi")!="10.5281/zenodo.24143821" or paper.get("pdf") or paper.get("full_text_doi")!="https://doi.org/10.5281/zenodo.24143821":
+                fail("Paper VII must link to its known published Zenodo version without asserting a local verified PDF",errors)
+            content=(ROOT/paper["href"]).read_text(encoding="utf-8")
+            if 'name="citation_doi" content="10.5281/zenodo.24143821"' not in content:
+                fail("Paper VII scholarly DOI metadata missing",errors)
+            for page in ("research.html","research-series-health-formally-defined.html"):
+                if paper["href"] not in (ROOT/page).read_text(encoding="utf-8"):
+                    fail(f"Paper VII absent from {page}",errors)
+            continue
         concept=pins.get(ident,{}).get("concept_doi")
         if not concept or not concept.startswith("10.5281/zenodo."):
             fail(f"{ident}: Zenodo concept DOI not pinned",errors)
@@ -108,7 +119,7 @@ def main()->int:
         if orders and orders!=list(range(1,len(orders)+1)):
             fail(f"series {sid} has noncontiguous orders {orders}",errors)
 
-    # The active FFB catalog covers six Health papers and measurement-related
+    # The active FFB catalog covers seven Health papers and measurement-related
     # notebook paths. Historical non-Health publication records, original PDFs
     # and checksums are preserved separately. ILC owns the comprehensive
     # cross-disciplinary scholarly catalog and latest-version synchronization.
@@ -169,8 +180,8 @@ def main()->int:
             fail(f"{name}: missing canonical page metadata",errors)
 
     health=[i for i in pubs if i.get("series")=="health-formally-defined"]
-    if sorted(i["order"] for i in health)!=[1,2,3,4,5,6]:
-        fail("Health series must include all six published papers",errors)
+    if sorted(i["order"] for i in health)!=[1,2,3,4,5,6,7]:
+        fail("Health series must include all seven published papers",errors)
     # The all-versions concept DOI is stable; a valid new Zenodo version DOI
     # changes after publication. Check current DOI/PDF against our manifest,
     # without hard-coding the DOI of the initially published version.

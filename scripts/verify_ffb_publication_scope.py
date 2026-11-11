@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify FFB's six-paper active scope and preserve old scholarly URLs.
+"""Verify FFB's seven-paper active scope and preserve old scholarly URLs.
 
 ILC is the comprehensive scholarly archive and owns ongoing Zenodo version
 tracking of every non-Health paper. FFB retains byte-identical historical
@@ -13,7 +13,8 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-HEALTH={"hfd1","hfd2","hfd3","hfd4","hfd5","hfd6"}
+HEALTH={"hfd1","hfd2","hfd3","hfd4","hfd5","hfd6","hfd7"}
+MIRRORED_HEALTH=HEALTH-{"hfd7"}
 ILC="https://instituteluxconsilio.org/"
 HISTORICAL_THEMES=[
  "health-foundations","invariance-identity","boundary-measurement",
@@ -37,15 +38,15 @@ def check():
     archived_concepts=load("research/historical-zenodo-concepts.json")["papers"]
     active_pubs=[x for x in active["items"] if x.get("collection")=="publications"]
     old_pubs=historic["publications"]
-    assert_true(len(active_pubs)==6 and {x["id"] for x in active_pubs}==HEALTH,
-                "Fieldflux must have exactly six active Health papers")
+    assert_true(len(active_pubs)==7 and {x["id"] for x in active_pubs}==HEALTH,
+                "Fieldflux must have exactly seven active Health papers")
     assert_true({x["series"] for x in active_pubs}=={"health-formally-defined"},
                 "Non-Health paper unexpectedly active on Fieldflux")
     assert_true({x["id"] for x in old_pubs}.isdisjoint(HEALTH) and len(old_pubs)==20,
                 "Twenty historic non-Health paper records must be preserved")
     assert_true(len({x["id"] for x in old_pubs})==20,
                 "Historical IDs must be distinct")
-    assert_true(set(concepts)==HEALTH and set(archived_concepts)=={x["id"] for x in old_pubs},
+    assert_true(set(concepts)==MIRRORED_HEALTH and set(archived_concepts)=={x["id"] for x in old_pubs},
                 "Active and historical Zenodo concept registries have wrong ownership")
     assert_true({x["id"] for x in active["series"]}=={"health-formally-defined"},
                 "Only the Health publication series may be actively listed on FFB")
@@ -57,11 +58,15 @@ def check():
     old_by_pdf={x["pdf"]:x for x in archived_manifest}
     assert_true(len(manifest)==6 and len(archived_manifest)==20,
                 "PDF checksum inventories must be separated into six active and twenty archived files")
-    assert_true({x["pdf"] for x in active_pubs}==set(by_pdf),
+    assert_true({x["pdf"] for x in active_pubs if x["id"] in MIRRORED_HEALTH}==set(by_pdf),
                 "Active Health PDF inventory incomplete")
     assert_true({x["pdf"] for x in old_pubs}==set(old_by_pdf),
                 "Legacy PDF provenance inventory incomplete")
     for pub in active_pubs+old_pubs:
+        if pub["id"] == "hfd7":
+            assert_true(pub["doi"] == "10.5281/zenodo.24143821" and not pub.get("pdf"),
+                        "Paper VII external Zenodo source is not correctly declared")
+            continue
         historical=pub["id"] not in HEALTH
         mirror=(old_by_pdf if historical else by_pdf)[pub["pdf"]]
         payload=(ROOT/pub["pdf"]).read_bytes()
@@ -78,7 +83,7 @@ def check():
     assert_true(len(locs)==len(root.findall("s:url",ns)),"Duplicate sitemap URLs")
     origin="https://fieldfluxbiosystems.com/"
     for pub in active_pubs:
-        for path in (pub["href"],pub["pdf"]):
+        for path in [pub["href"]] + ([pub["pdf"]] if pub.get("pdf") else []):
             assert_true(origin+path in locs,"Active Health paper absent from sitemap: "+path)
             content=(ROOT/pub["href"]).read_text(encoding="utf-8")
             assert_true('content="noindex' not in content,
@@ -100,7 +105,7 @@ def check():
                     "Historical PDF unexpectedly in FFB discovery sitemap: "+path)
     assert_true(ILC in active.get("canonical_institute",""),
                 "FFB no longer declares ILC as broader research archive")
-    print("PASS: six active Health papers, twenty integrity-pinned historic scholarly copies,"
+    print("PASS: seven active Health papers, twenty integrity-pinned historic scholarly copies,"
           " thirty-two noindex historical HTML routes and FFB-only publication discovery")
 
 if __name__=="__main__":
