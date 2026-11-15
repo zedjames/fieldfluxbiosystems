@@ -1,6 +1,6 @@
 {
   "schema": "fieldflux-research-catalog/v1",
-  "updated": "2026-11-11",
+  "updated": "2026-11-15",
   "purpose": "Active Fieldflux publication and notebook metadata: six Health, Formally Defined papers and accompanying educational/measurement-science materials. Historical other-field publication metadata is preserved separately; the comprehensive scientific index belongs to Institute Lux Consilio.",
   "collections": [
     {
@@ -724,5 +724,77 @@
   ],
   "canonical_scholarly_catalog": "https://instituteluxconsilio.org/research/catalog.json",
   "canonical_institute": "https://instituteluxconsilio.org/",
-  "archive_role": "Only Health, Formally Defined is an active Fieldflux publication series; non-Health archival citation continuity is preserved in research/historical-publications.json and ILC owns the current scholarly version index."
+  "archive_role": "Only Health, Formally Defined is an active Fieldflux publication series; non-Health archival citation continuity is preserved in research/historical-publications.json and ILC owns the current scholarly version index.",
+  "health_translations": [
+    {
+      "id": "hfd1",
+      "order": 1,
+      "language": "zh-Hans",
+      "title": "构成性延续能力",
+      "doi": "10.5281/zenodo.24226584",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd1-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd1"
+    },
+    {
+      "id": "hfd2",
+      "order": 2,
+      "language": "zh-Hans",
+      "title": "跨评估上下文的前瞻性健康",
+      "doi": "10.5281/zenodo.24227909",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd2-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd2"
+    },
+    {
+      "id": "hfd3",
+      "order": 3,
+      "language": "zh-Hans",
+      "title": "前瞻性健康中的表征充分性",
+      "doi": "10.5281/zenodo.24228916",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd3-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd3"
+    },
+    {
+      "id": "hfd4",
+      "order": 4,
+      "language": "zh-Hans",
+      "title": "前瞻性健康中的信息溯源与保守增广",
+      "doi": "10.5281/zenodo.24230002",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd4-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd4"
+    },
+    {
+      "id": "hfd5",
+      "order": 5,
+      "language": "zh-Hans",
+      "title": "已声明规约下的前瞻性健康",
+      "doi": "10.5281/zenodo.24231112",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd5-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd5"
+    },
+    {
+      "id": "hfd6",
+      "order": 6,
+      "language": "zh-Hans",
+      "title": "构成性可观测性与前瞻性健康的测量",
+      "doi": "10.5281/zenodo.24231990",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd6-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd6"
+    },
+    {
+      "id": "hfd7",
+      "order": 7,
+      "language": "zh-Hans",
+      "title": "组织化动力系统中的前瞻性健康",
+      "doi": "10.5281/zenodo.24252327",
+      "ilcPage": "https://instituteluxconsilio.org/publication-hfd7-zh.html",
+      "overview": "research-health-formally-defined-zh.html",
+      "englishId": "hfd7"
+    }
+  ]
 }
