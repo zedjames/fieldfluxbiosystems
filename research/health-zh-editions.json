@@ -5,7 +5,7 @@
   "language": "zh-Hans",
   "editionCount": 7,
   "originalPaperCount": 7,
-  "description": "Seven Simplified Chinese editions of seven numbered English papers. Chinese DOIs are version-specific IDs transcribed from author-supplied manuscripts; they are distinct edition records, not additional numbered papers.",
+  "description": "Seven Simplified Chinese editions of seven numbered English papers. Chinese DOIs are version-specific IDs transcribed from author-supplied manuscripts; they are distinct edition records, not additional numbered papers. Every Chinese v1.0 PDF SHA-256 is pinned to the author-supplied file and independently verified Zenodo bytes.",
   "source": "Author-supplied Simplified Chinese v1.0 PDFs, November 13–14, 2026",
   "records": [
     {
@@ -27,7 +27,8 @@
       "fieldfluxEnglishPage": "research-constitutive-continuation-capacity.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "860befc35872b9fe62ca72cc11dc6de1b3d90c3af9c9a3f8183fb2fe8032a939"
     },
     {
       "id": "hfd2",
@@ -48,7 +49,8 @@
       "fieldfluxEnglishPage": "research-prospective-health-across-contexts.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "d195994da415c7b6d1497a34ae8905b3baf1291b1b96fb6d1cc72aa331022fc9"
     },
     {
       "id": "hfd3",
@@ -69,7 +71,8 @@
       "fieldfluxEnglishPage": "research-representation-sufficiency-prospective-health.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "3299d132bbd3187f40c5eb7029e0c841ea671a89159e960eddf4868b5d0d4a2f"
     },
     {
       "id": "hfd4",
@@ -90,7 +93,8 @@
       "fieldfluxEnglishPage": "research-information-provenance-conservative-enrichment-prospective-health.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "bc55826a64387c79f61a6ad1761694abfe8f90bb7e9732e3c922076e182c1d12"
     },
     {
       "id": "hfd5",
@@ -111,7 +115,8 @@
       "fieldfluxEnglishPage": "research-prospective-health-declared-specifications.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "ee633ef1290bf8f0d1fdf4c28196ef14e348020e93b151ca00e8dd9a691b4735"
     },
     {
       "id": "hfd6",
@@ -132,7 +137,8 @@
       "fieldfluxEnglishPage": "research-constitutive-observability-prospective-health.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "35125e25e245cb5c334698a2830ccb25efe6054800439040f7f27b07d907743a"
     },
     {
       "id": "hfd7",
@@ -153,7 +159,8 @@
       "fieldfluxEnglishPage": "research-prospective-health-organized-dynamical-systems.html",
       "language": "zh-Hans",
       "englishLanguage": "en",
-      "license": "CC BY-NC-ND 4.0"
+      "license": "CC BY-NC-ND 4.0",
+      "pdfSha256": "ab009ff9ad1b8466da444e571b83c2dffeb26c263a5c17d87bee72f7822cefab"
     }
   ]
 }
