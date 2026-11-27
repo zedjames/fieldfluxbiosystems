@@ -13,8 +13,8 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
-HEALTH={"hfd1","hfd2","hfd3","hfd4","hfd5","hfd6","hfd7"}
-MIRRORED_HEALTH=HEALTH-{"hfd7"}
+HEALTH={"hfd1","hfd2","hfd3","hfd4","hfd5","hfd6","hfd7","hfd8"}
+MIRRORED_HEALTH=HEALTH-{"hfd7","hfd8"}
 ILC="https://instituteluxconsilio.org/"
 HISTORICAL_THEMES=[
  "health-foundations","invariance-identity","boundary-measurement",
@@ -38,8 +38,8 @@ def check():
     archived_concepts=load("research/historical-zenodo-concepts.json")["papers"]
     active_pubs=[x for x in active["items"] if x.get("collection")=="publications"]
     old_pubs=historic["publications"]
-    assert_true(len(active_pubs)==7 and {x["id"] for x in active_pubs}==HEALTH,
-                "Fieldflux must have exactly seven active Health papers")
+    assert_true(len(active_pubs)==8 and {x["id"] for x in active_pubs}==HEALTH,
+                "Fieldflux must have exactly eight active Health papers")
     assert_true({x["series"] for x in active_pubs}=={"health-formally-defined"},
                 "Non-Health paper unexpectedly active on Fieldflux")
     assert_true({x["id"] for x in old_pubs}.isdisjoint(HEALTH) and len(old_pubs)==20,
@@ -63,8 +63,8 @@ def check():
     assert_true({x["pdf"] for x in old_pubs}==set(old_by_pdf),
                 "Legacy PDF provenance inventory incomplete")
     for pub in active_pubs+old_pubs:
-        if pub["id"] == "hfd7":
-            assert_true(pub["doi"] == "10.5281/zenodo.24143821" and not pub.get("pdf"),
+        if pub["id"] in {"hfd7","hfd8"}:
+            assert_true(pub["doi"] == {"hfd7":"10.5281/zenodo.24143821","hfd8":"10.5281/zenodo.24610039"}[pub["id"]] and not pub.get("pdf"),
                         "Paper VII external Zenodo source is not correctly declared")
             continue
         historical=pub["id"] not in HEALTH
@@ -105,7 +105,7 @@ def check():
                     "Historical PDF unexpectedly in FFB discovery sitemap: "+path)
     assert_true(ILC in active.get("canonical_institute",""),
                 "FFB no longer declares ILC as broader research archive")
-    print("PASS: seven active Health papers, twenty integrity-pinned historic scholarly copies,"
+    print("PASS: eight active Health papers, twenty integrity-pinned historic scholarly copies,"
           " thirty-two noindex historical HTML routes and FFB-only publication discovery")
 
 if __name__=="__main__":
