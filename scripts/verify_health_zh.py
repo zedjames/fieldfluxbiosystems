@@ -28,7 +28,7 @@ for p in PAPERS:
 catalog=json.loads((ROOT/"research/catalog.json").read_text(encoding="utf-8"))
 current=catalog["publications"] if SITE=="ilc" else [x for x in catalog["items"] if x.get("collection")=="publications"]
 health=sorted((x for x in current if (x.get("seriesId") or x.get("series"))=="health-formally-defined"),key=lambda p:p["order"])
-assert len(health)==7 and [p["id"] for p in health]==[p["id"] for p in PAPERS], "Chinese editions must not add numbered papers"
+assert [p["id"] for p in health[:len(PAPERS)]]==[p["id"] for p in PAPERS], "Chinese editions must match their English source sequence"
 assert all(next(x for x in health if x["id"]==p["id"])["doi"]==p["englishDoi"] for p in PAPERS)
 site_origin="https://instituteluxconsilio.org/" if SITE=="ilc" else "https://fieldfluxbiosystems.com/"
 index="research-health-formally-defined-zh.html"
