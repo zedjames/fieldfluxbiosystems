@@ -57,15 +57,16 @@ def main()->int:
     pins=json.loads((ROOT/"research"/"zenodo-concepts.json").read_text(encoding="utf-8"))["papers"]
     published=[i for i in items if i.get("collection")=="publications"]
     published_ids={p["id"] for p in published}
-    if published_ids!=set(pins)|{"hfd7"}:
+    if published_ids!=set(pins)|{"hfd7","hfd8"}:
         fail("Audited Zenodo concept families plus DOI-indexed Paper VII must match published papers",errors)
     for paper in published:
         ident=paper["id"]
-        if ident=="hfd7":
-            if paper.get("doi")!="10.5281/zenodo.24143821" or paper.get("pdf") or paper.get("full_text_doi")!="https://doi.org/10.5281/zenodo.24143821":
+        if ident in {"hfd7","hfd8"}:
+            expected_doi={"hfd7":"10.5281/zenodo.24143821","hfd8":"10.5281/zenodo.24610039"}[ident]
+            if paper.get("doi")!=expected_doi or paper.get("pdf") or paper.get("full_text_doi")!="https://doi.org/"+expected_doi:
                 fail("Paper VII must link to its known published Zenodo version without asserting a local verified PDF",errors)
             content=(ROOT/paper["href"]).read_text(encoding="utf-8")
-            if 'name="citation_doi" content="10.5281/zenodo.24143821"' not in content:
+            if f'name="citation_doi" content="{expected_doi}"' not in content:
                 fail("Paper VII scholarly DOI metadata missing",errors)
             for page in ("research.html","research-series-health-formally-defined.html"):
                 if paper["href"] not in (ROOT/page).read_text(encoding="utf-8"):
@@ -180,8 +181,8 @@ def main()->int:
             fail(f"{name}: missing canonical page metadata",errors)
 
     health=[i for i in pubs if i.get("series")=="health-formally-defined"]
-    if sorted(i["order"] for i in health)!=[1,2,3,4,5,6,7]:
-        fail("Health series must include all seven published papers",errors)
+    if sorted(i["order"] for i in health)!=[1,2,3,4,5,6,7,8]:
+        fail("Health series must include all eight published papers",errors)
     # The all-versions concept DOI is stable; a valid new Zenodo version DOI
     # changes after publication. Check current DOI/PDF against our manifest,
     # without hard-coding the DOI of the initially published version.
